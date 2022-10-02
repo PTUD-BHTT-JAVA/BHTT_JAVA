@@ -30,11 +30,11 @@ import keeptoo.KGradientPanel;
  *
  * @author ACER
  */
-public class NhanVien extends javax.swing.JFrame {
+public class QuanLy extends javax.swing.JFrame {
     private static String username;
 
     /** Creates new form MainEmployee */
-    public NhanVien(String _username) {
+    public QuanLy(String _username) {
         username = _username;
         this.setUndecorated(true);
         this.setResizable(true);
@@ -50,9 +50,7 @@ public class NhanVien extends javax.swing.JFrame {
         GioiThieu frGioiThieu=new GioiThieu(username);
         openComponent(frGioiThieu);
         
-        
-        pnlTaoDonHang.setVisible(false);
-        pnlLichSuDonHang.setVisible(false);
+
     }
     
    
@@ -77,14 +75,14 @@ public class NhanVien extends javax.swing.JFrame {
         pnlSilde = new javax.swing.JPanel();
         pnlGioiThieu = new keeptoo.KGradientPanel();
         lblGioiThieu = new javax.swing.JLabel();
-        pnlKhachHang = new keeptoo.KGradientPanel();
-        lblKhachHang = new javax.swing.JLabel();
-        pnlDonHang = new keeptoo.KGradientPanel();
-        lblDonHang = new javax.swing.JLabel();
-        pnlTaoDonHang = new keeptoo.KGradientPanel();
-        lblTaoHoaDon = new javax.swing.JLabel();
-        pnlLichSuDonHang = new keeptoo.KGradientPanel();
-        lblLichSuDonHang = new javax.swing.JLabel();
+        pnlSanPham = new keeptoo.KGradientPanel();
+        lblSanPham = new javax.swing.JLabel();
+        pnlNhanVien = new keeptoo.KGradientPanel();
+        lblNhanVien = new javax.swing.JLabel();
+        pnlTaiKhoan = new keeptoo.KGradientPanel();
+        lblTaiKhoan = new javax.swing.JLabel();
+        pnlNhaCungCap = new keeptoo.KGradientPanel();
+        lblNhaCungCap = new javax.swing.JLabel();
         pnlThongKe = new keeptoo.KGradientPanel();
         lblThongKe = new javax.swing.JLabel();
         pnlTroGiup = new keeptoo.KGradientPanel();
@@ -110,7 +108,7 @@ public class NhanVien extends javax.swing.JFrame {
 
         lblChucVu.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         lblChucVu.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblChucVu.setText("Nhân viên");
+        lblChucVu.setText("Quản lý");
 
         btnDangXuat.setBackground(new java.awt.Color(233, 186, 206));
         btnDangXuat.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -126,7 +124,7 @@ public class NhanVien extends javax.swing.JFrame {
         lblImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         lblTen.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
-        lblTen.setText("Nguyễn Văn A");
+        lblTen.setText("Trần Văn B");
 
         javax.swing.GroupLayout pnlNguoiDungLayout = new javax.swing.GroupLayout(pnlNguoiDung);
         pnlNguoiDung.setLayout(pnlNguoiDungLayout);
@@ -185,88 +183,85 @@ public class NhanVien extends javax.swing.JFrame {
 
         pnlSilde.add(pnlGioiThieu);
 
-        pnlKhachHang.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        pnlKhachHang.setkEndColor(new java.awt.Color(255, 204, 204));
-        pnlKhachHang.setkStartColor(new java.awt.Color(102, 0, 153));
-        pnlKhachHang.setMaximumSize(new java.awt.Dimension(2147483647, 40));
-        pnlKhachHang.setPreferredSize(new java.awt.Dimension(270, 40));
-        pnlKhachHang.addMouseListener(new java.awt.event.MouseAdapter() {
+        pnlSanPham.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pnlSanPham.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlSanPham.setkStartColor(new java.awt.Color(102, 0, 153));
+        pnlSanPham.setMaximumSize(new java.awt.Dimension(2147483647, 40));
+        pnlSanPham.setPreferredSize(new java.awt.Dimension(270, 40));
+        pnlSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                pnlKhachHangMousePressed(evt);
+                pnlSanPhamMousePressed(evt);
             }
         });
-        pnlKhachHang.setLayout(new java.awt.BorderLayout());
+        pnlSanPham.setLayout(new java.awt.BorderLayout());
 
-        lblKhachHang.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        lblKhachHang.setForeground(new java.awt.Color(255, 255, 255));
-        lblKhachHang.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblKhachHang.setText("KHÁCH HÀNG");
-        pnlKhachHang.add(lblKhachHang, java.awt.BorderLayout.CENTER);
+        lblSanPham.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        lblSanPham.setForeground(new java.awt.Color(255, 255, 255));
+        lblSanPham.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblSanPham.setText("SẢN PHẨM");
+        pnlSanPham.add(lblSanPham, java.awt.BorderLayout.CENTER);
 
-        pnlSilde.add(pnlKhachHang);
+        pnlSilde.add(pnlSanPham);
 
-        pnlDonHang.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        pnlDonHang.setkEndColor(new java.awt.Color(255, 204, 204));
-        pnlDonHang.setkStartColor(new java.awt.Color(102, 0, 153));
-        pnlDonHang.setMaximumSize(new java.awt.Dimension(2147483647, 40));
-        pnlDonHang.setPreferredSize(new java.awt.Dimension(270, 40));
-        pnlDonHang.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pnlDonHangMouseClicked(evt);
-            }
-        });
-        pnlDonHang.setLayout(new java.awt.BorderLayout());
-
-        lblDonHang.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        lblDonHang.setForeground(new java.awt.Color(255, 255, 255));
-        lblDonHang.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblDonHang.setText("ĐƠN HÀNG");
-        pnlDonHang.add(lblDonHang, java.awt.BorderLayout.CENTER);
-
-        pnlSilde.add(pnlDonHang);
-
-        pnlTaoDonHang.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        pnlTaoDonHang.setkEndColor(new java.awt.Color(102, 0, 153));
-        pnlTaoDonHang.setkGradientFocus(50);
-        pnlTaoDonHang.setkStartColor(new java.awt.Color(102, 0, 153));
-        pnlTaoDonHang.setMaximumSize(new java.awt.Dimension(2147483647, 40));
-        pnlTaoDonHang.setPreferredSize(new java.awt.Dimension(270, 40));
-        pnlTaoDonHang.addMouseListener(new java.awt.event.MouseAdapter() {
+        pnlNhanVien.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pnlNhanVien.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlNhanVien.setkStartColor(new java.awt.Color(102, 0, 153));
+        pnlNhanVien.setMaximumSize(new java.awt.Dimension(2147483647, 40));
+        pnlNhanVien.setPreferredSize(new java.awt.Dimension(270, 40));
+        pnlNhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                pnlTaoDonHangMousePressed(evt);
+                pnlNhanVienMousePressed(evt);
             }
         });
-        pnlTaoDonHang.setLayout(new java.awt.BorderLayout());
+        pnlNhanVien.setLayout(new java.awt.BorderLayout());
 
-        lblTaoHoaDon.setBackground(new java.awt.Color(102, 0, 204));
-        lblTaoHoaDon.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        lblTaoHoaDon.setForeground(new java.awt.Color(255, 255, 255));
-        lblTaoHoaDon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTaoHoaDon.setText("TẠO ĐƠN HÀNG");
-        pnlTaoDonHang.add(lblTaoHoaDon, java.awt.BorderLayout.CENTER);
+        lblNhanVien.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        lblNhanVien.setForeground(new java.awt.Color(255, 255, 255));
+        lblNhanVien.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNhanVien.setText("NHÂN VIÊN");
+        pnlNhanVien.add(lblNhanVien, java.awt.BorderLayout.CENTER);
 
-        pnlSilde.add(pnlTaoDonHang);
+        pnlSilde.add(pnlNhanVien);
 
-        pnlLichSuDonHang.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        pnlLichSuDonHang.setkEndColor(new java.awt.Color(102, 0, 153));
-        pnlLichSuDonHang.setkGradientFocus(50);
-        pnlLichSuDonHang.setkStartColor(new java.awt.Color(102, 0, 153));
-        pnlLichSuDonHang.setMaximumSize(new java.awt.Dimension(2147483647, 40));
-        pnlLichSuDonHang.setPreferredSize(new java.awt.Dimension(270, 40));
-        pnlLichSuDonHang.addMouseListener(new java.awt.event.MouseAdapter() {
+        pnlTaiKhoan.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pnlTaiKhoan.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlTaiKhoan.setkStartColor(new java.awt.Color(102, 0, 153));
+        pnlTaiKhoan.setMaximumSize(new java.awt.Dimension(2147483647, 40));
+        pnlTaiKhoan.setPreferredSize(new java.awt.Dimension(270, 40));
+        pnlTaiKhoan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                pnlLichSuDonHangMousePressed(evt);
+                pnlTaiKhoanMousePressed(evt);
             }
         });
-        pnlLichSuDonHang.setLayout(new java.awt.BorderLayout());
+        pnlTaiKhoan.setLayout(new java.awt.BorderLayout());
 
-        lblLichSuDonHang.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        lblLichSuDonHang.setForeground(new java.awt.Color(255, 255, 255));
-        lblLichSuDonHang.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblLichSuDonHang.setText("LỊCH SỬ ĐƠN HÀNG");
-        pnlLichSuDonHang.add(lblLichSuDonHang, java.awt.BorderLayout.CENTER);
+        lblTaiKhoan.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        lblTaiKhoan.setForeground(new java.awt.Color(255, 255, 255));
+        lblTaiKhoan.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTaiKhoan.setText("TÀI KHOẢN");
+        pnlTaiKhoan.add(lblTaiKhoan, java.awt.BorderLayout.CENTER);
 
-        pnlSilde.add(pnlLichSuDonHang);
+        pnlSilde.add(pnlTaiKhoan);
+
+        pnlNhaCungCap.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pnlNhaCungCap.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlNhaCungCap.setkStartColor(new java.awt.Color(102, 0, 153));
+        pnlNhaCungCap.setMaximumSize(new java.awt.Dimension(2147483647, 40));
+        pnlNhaCungCap.setPreferredSize(new java.awt.Dimension(270, 40));
+        pnlNhaCungCap.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                pnlNhaCungCapMousePressed(evt);
+            }
+        });
+        pnlNhaCungCap.setLayout(new java.awt.BorderLayout());
+
+        lblNhaCungCap.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        lblNhaCungCap.setForeground(new java.awt.Color(255, 255, 255));
+        lblNhaCungCap.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNhaCungCap.setText("NHÀ CUNG CẤP");
+        pnlNhaCungCap.add(lblNhaCungCap, java.awt.BorderLayout.CENTER);
+
+        pnlSilde.add(pnlNhaCungCap);
 
         pnlThongKe.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         pnlThongKe.setkEndColor(new java.awt.Color(255, 204, 204));
@@ -332,12 +327,6 @@ public class NhanVien extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void pnlTaoDonHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlTaoDonHangMousePressed
-        
-        TaoDonHang frame = new TaoDonHang(username);
-        openComponent(frame);
-    }//GEN-LAST:event_pnlTaoDonHangMousePressed
-
     private void btnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatActionPerformed
         if (JOptionPane.showConfirmDialog(this, "Bạn có muốn thoát ?", "Thoát", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             System.exit(0);
@@ -349,33 +338,35 @@ public class NhanVien extends javax.swing.JFrame {
         openComponent(frGioiThieu);
     }//GEN-LAST:event_pnlGioiThieuMousePressed
 
-    private void pnlKhachHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlKhachHangMousePressed
-        KhachHang frKhachHang=new KhachHang(username);
-        openComponent(frKhachHang);
-    }//GEN-LAST:event_pnlKhachHangMousePressed
+    private void pnlSanPhamMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlSanPhamMousePressed
+        SanPham fSanPham=new SanPham(username);
+        openComponent(fSanPham);
+    }//GEN-LAST:event_pnlSanPhamMousePressed
 
-    private void pnlThongKeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlThongKeMousePressed
-        NVThongKe fNVThongKe=new NVThongKe(username);
-        openComponent(fNVThongKe);
-    }//GEN-LAST:event_pnlThongKeMousePressed
+    private void pnlTaiKhoanMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlTaiKhoanMousePressed
+        TaiKhoan fTaiKhoan=new TaiKhoan(username);
+        openComponent(fTaiKhoan);
+    }//GEN-LAST:event_pnlTaiKhoanMousePressed
 
     private void pnlTroGiupMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlTroGiupMousePressed
-        NVTroGiup fNVTroGiup=new NVTroGiup(username);
-        openComponent(fNVTroGiup);
+        QLTroGiup fQLTroGiup=new QLTroGiup(username);
+        openComponent(fQLTroGiup);
     }//GEN-LAST:event_pnlTroGiupMousePressed
 
-    private void pnlLichSuDonHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlLichSuDonHangMousePressed
-        LichSuDonHang fLichSuDonHang=new LichSuDonHang(username);
-        openComponent(fLichSuDonHang);
-    }//GEN-LAST:event_pnlLichSuDonHangMousePressed
+    private void pnlNhaCungCapMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlNhaCungCapMousePressed
+        NhaCungCap fNhaCungCap=new NhaCungCap(username);
+        openComponent(fNhaCungCap);
+    }//GEN-LAST:event_pnlNhaCungCapMousePressed
 
-    private void pnlDonHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlDonHangMouseClicked
-        boolean flag = true;
-        if ( pnlTaoDonHang.isVisible() ) 
-            flag = false;
-        pnlTaoDonHang.setVisible(flag);
-        pnlLichSuDonHang.setVisible(flag);
-    }//GEN-LAST:event_pnlDonHangMouseClicked
+    private void pnlThongKeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlThongKeMousePressed
+        QLThongKe fQLThongKe=new QLThongKe(username);
+        openComponent(fQLThongKe);
+    }//GEN-LAST:event_pnlThongKeMousePressed
+
+    private void pnlNhanVienMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlNhanVienMousePressed
+        QLNhanVien fLNhanVien=new QLNhanVien(username);
+        openComponent(fLNhanVien);
+    }//GEN-LAST:event_pnlNhanVienMousePressed
     // open frame when click panel
     void openComponent(JInternalFrame frame) {
         Component[] components = pnlForm.getComponents();
@@ -409,7 +400,7 @@ public class NhanVien extends javax.swing.JFrame {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NhanVien(username);
+                new QuanLy(username);
             }
         });
     }
@@ -419,25 +410,25 @@ public class NhanVien extends javax.swing.JFrame {
     private javax.swing.JButton btnDangXuat;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel lblChucVu;
-    private javax.swing.JLabel lblDonHang;
     private javax.swing.JLabel lblGioiThieu;
     private javax.swing.JLabel lblImage;
-    private javax.swing.JLabel lblKhachHang;
-    private javax.swing.JLabel lblLichSuDonHang;
-    private javax.swing.JLabel lblTaoHoaDon;
+    private javax.swing.JLabel lblNhaCungCap;
+    private javax.swing.JLabel lblNhanVien;
+    private javax.swing.JLabel lblSanPham;
+    private javax.swing.JLabel lblTaiKhoan;
     private javax.swing.JLabel lblTen;
     private javax.swing.JLabel lblThongKe;
     private javax.swing.JLabel lblTroGiup;
-    private keeptoo.KGradientPanel pnlDonHang;
     private javax.swing.JPanel pnlForm;
     private keeptoo.KGradientPanel pnlGioiThieu;
-    private keeptoo.KGradientPanel pnlKhachHang;
-    private keeptoo.KGradientPanel pnlLichSuDonHang;
     private javax.swing.JPanel pnlMain;
     private javax.swing.JPanel pnlMenu;
     private javax.swing.JPanel pnlNguoiDung;
+    private keeptoo.KGradientPanel pnlNhaCungCap;
+    private keeptoo.KGradientPanel pnlNhanVien;
+    private keeptoo.KGradientPanel pnlSanPham;
     private javax.swing.JPanel pnlSilde;
-    private keeptoo.KGradientPanel pnlTaoDonHang;
+    private keeptoo.KGradientPanel pnlTaiKhoan;
     private keeptoo.KGradientPanel pnlThongKe;
     private javax.swing.JPanel pnlTitle;
     private keeptoo.KGradientPanel pnlTroGiup;
