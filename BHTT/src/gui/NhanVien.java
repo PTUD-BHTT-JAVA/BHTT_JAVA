@@ -51,8 +51,8 @@ public class NhanVien extends javax.swing.JFrame {
         openComponent(frGioiThieu);
         
         
-        pnlTaoDonHang.setVisible(false);
-        pnlLichSuDonHang.setVisible(false);
+        pnlTitleTaoDonHang.setVisible(false);
+        pnlTitleLichSuDonHang.setVisible(false);
     }
     
    
@@ -81,8 +81,10 @@ public class NhanVien extends javax.swing.JFrame {
         lblKhachHang = new javax.swing.JLabel();
         pnlDonHang = new keeptoo.KGradientPanel();
         lblDonHang = new javax.swing.JLabel();
+        pnlTitleTaoDonHang = new javax.swing.JPanel();
         pnlTaoDonHang = new keeptoo.KGradientPanel();
         lblTaoHoaDon = new javax.swing.JLabel();
+        pnlTitleLichSuDonHang = new javax.swing.JPanel();
         pnlLichSuDonHang = new keeptoo.KGradientPanel();
         lblLichSuDonHang = new javax.swing.JLabel();
         pnlThongKe = new keeptoo.KGradientPanel();
@@ -99,7 +101,8 @@ public class NhanVien extends javax.swing.JFrame {
         pnlMain.setLayout(new java.awt.BorderLayout());
 
         pnlForm.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        pnlForm.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
+        pnlForm.setMaximumSize(new java.awt.Dimension(200, 2147483647));
+        pnlForm.setPreferredSize(new java.awt.Dimension(200, 2));
         pnlForm.setLayout(new java.awt.BorderLayout());
         pnlMain.add(pnlForm, java.awt.BorderLayout.CENTER);
 
@@ -225,12 +228,15 @@ public class NhanVien extends javax.swing.JFrame {
 
         pnlSilde.add(pnlDonHang);
 
+        pnlTitleTaoDonHang.setMaximumSize(new java.awt.Dimension(32767, 40));
+        pnlTitleTaoDonHang.setLayout(new java.awt.BorderLayout());
+
         pnlTaoDonHang.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         pnlTaoDonHang.setkEndColor(new java.awt.Color(102, 0, 153));
         pnlTaoDonHang.setkGradientFocus(50);
         pnlTaoDonHang.setkStartColor(new java.awt.Color(102, 0, 153));
-        pnlTaoDonHang.setMaximumSize(new java.awt.Dimension(2147483647, 40));
-        pnlTaoDonHang.setPreferredSize(new java.awt.Dimension(270, 40));
+        pnlTaoDonHang.setMaximumSize(new java.awt.Dimension(200, 40));
+        pnlTaoDonHang.setPreferredSize(new java.awt.Dimension(220, 40));
         pnlTaoDonHang.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 pnlTaoDonHangMousePressed(evt);
@@ -245,14 +251,19 @@ public class NhanVien extends javax.swing.JFrame {
         lblTaoHoaDon.setText("TẠO ĐƠN HÀNG");
         pnlTaoDonHang.add(lblTaoHoaDon, java.awt.BorderLayout.CENTER);
 
-        pnlSilde.add(pnlTaoDonHang);
+        pnlTitleTaoDonHang.add(pnlTaoDonHang, java.awt.BorderLayout.EAST);
+
+        pnlSilde.add(pnlTitleTaoDonHang);
+
+        pnlTitleLichSuDonHang.setMaximumSize(new java.awt.Dimension(32767, 40));
+        pnlTitleLichSuDonHang.setLayout(new java.awt.BorderLayout());
 
         pnlLichSuDonHang.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         pnlLichSuDonHang.setkEndColor(new java.awt.Color(102, 0, 153));
         pnlLichSuDonHang.setkGradientFocus(50);
         pnlLichSuDonHang.setkStartColor(new java.awt.Color(102, 0, 153));
         pnlLichSuDonHang.setMaximumSize(new java.awt.Dimension(2147483647, 40));
-        pnlLichSuDonHang.setPreferredSize(new java.awt.Dimension(270, 40));
+        pnlLichSuDonHang.setPreferredSize(new java.awt.Dimension(220, 40));
         pnlLichSuDonHang.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 pnlLichSuDonHangMousePressed(evt);
@@ -266,7 +277,9 @@ public class NhanVien extends javax.swing.JFrame {
         lblLichSuDonHang.setText("LỊCH SỬ ĐƠN HÀNG");
         pnlLichSuDonHang.add(lblLichSuDonHang, java.awt.BorderLayout.CENTER);
 
-        pnlSilde.add(pnlLichSuDonHang);
+        pnlTitleLichSuDonHang.add(pnlLichSuDonHang, java.awt.BorderLayout.EAST);
+
+        pnlSilde.add(pnlTitleLichSuDonHang);
 
         pnlThongKe.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         pnlThongKe.setkEndColor(new java.awt.Color(255, 204, 204));
@@ -371,10 +384,10 @@ public class NhanVien extends javax.swing.JFrame {
 
     private void pnlDonHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlDonHangMouseClicked
         boolean flag = true;
-        if ( pnlTaoDonHang.isVisible() ) 
+        if ( pnlTitleTaoDonHang.isVisible() ) 
             flag = false;
-        pnlTaoDonHang.setVisible(flag);
-        pnlLichSuDonHang.setVisible(flag);
+        pnlTitleTaoDonHang.setVisible(flag);
+        pnlTitleLichSuDonHang.setVisible(flag);
     }//GEN-LAST:event_pnlDonHangMouseClicked
     // open frame when click panel
     void openComponent(JInternalFrame frame) {
@@ -440,6 +453,8 @@ public class NhanVien extends javax.swing.JFrame {
     private keeptoo.KGradientPanel pnlTaoDonHang;
     private keeptoo.KGradientPanel pnlThongKe;
     private javax.swing.JPanel pnlTitle;
+    private javax.swing.JPanel pnlTitleLichSuDonHang;
+    private javax.swing.JPanel pnlTitleTaoDonHang;
     private keeptoo.KGradientPanel pnlTroGiup;
     // End of variables declaration//GEN-END:variables
 
