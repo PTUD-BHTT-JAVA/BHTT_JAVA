@@ -22,6 +22,9 @@ public class KhachHang extends javax.swing.JInternalFrame {
         this.setFocusable(true);
         username=_username;
     }
+    public  KhachHang(){
+        
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
