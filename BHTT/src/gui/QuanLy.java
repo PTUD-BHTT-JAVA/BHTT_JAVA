@@ -323,7 +323,7 @@ public class QuanLy extends javax.swing.JFrame {
 
         pnlMenu.add(pnlSilde, java.awt.BorderLayout.CENTER);
 
-        btnDangXuat.setBackground(new java.awt.Color(252, 246, 248));
+        btnDangXuat.setBackground(new java.awt.Color(252, 249, 250));
         btnDangXuat.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnDangXuat.setForeground(new java.awt.Color(102, 0, 102));
         btnDangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/dangXuat.png"))); // NOI18N
