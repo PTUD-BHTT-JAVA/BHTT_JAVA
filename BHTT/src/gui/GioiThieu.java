@@ -40,6 +40,8 @@ public class GioiThieu extends javax.swing.JInternalFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setFrameIcon(null);
 
+        pnlMain.setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel2.setText("CHÀO MỪNG ĐẾN VỚI PHẦN MỀM QUẢN LÝ BÁN HÀNG");
 

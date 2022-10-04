@@ -98,7 +98,7 @@ public class NhanVien extends javax.swing.JFrame {
         lblTroGiup = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         btnDangXuat = new javax.swing.JButton();
-        pnlTitle = new javax.swing.JPanel();
+        kGradientPanel1 = new keeptoo.KGradientPanel();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -107,6 +107,7 @@ public class NhanVien extends javax.swing.JFrame {
         pnlMain.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
         pnlMain.setLayout(new java.awt.BorderLayout());
 
+        pnlForm.setBackground(new java.awt.Color(255, 255, 255));
         pnlForm.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         pnlForm.setMaximumSize(new java.awt.Dimension(200, 2147483647));
         pnlForm.setPreferredSize(new java.awt.Dimension(200, 2));
@@ -164,7 +165,7 @@ public class NhanVien extends javax.swing.JFrame {
         pnlSilde.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlSilde.setLayout(new javax.swing.BoxLayout(pnlSilde, javax.swing.BoxLayout.PAGE_AXIS));
 
-        pnlGioiThieu.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pnlGioiThieu.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
         pnlGioiThieu.setkEndColor(new java.awt.Color(255, 204, 204));
         pnlGioiThieu.setkStartColor(new java.awt.Color(102, 0, 153));
         pnlGioiThieu.setMaximumSize(new java.awt.Dimension(2147483647, 40));
@@ -187,7 +188,7 @@ public class NhanVien extends javax.swing.JFrame {
 
         pnlSilde.add(pnlGioiThieu);
 
-        pnlKhachHang.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pnlKhachHang.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
         pnlKhachHang.setkEndColor(new java.awt.Color(255, 204, 204));
         pnlKhachHang.setkStartColor(new java.awt.Color(102, 0, 153));
         pnlKhachHang.setMaximumSize(new java.awt.Dimension(2147483647, 40));
@@ -210,7 +211,7 @@ public class NhanVien extends javax.swing.JFrame {
 
         pnlSilde.add(pnlKhachHang);
 
-        pnlDonHang.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pnlDonHang.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
         pnlDonHang.setkEndColor(new java.awt.Color(255, 204, 204));
         pnlDonHang.setkStartColor(new java.awt.Color(102, 0, 153));
         pnlDonHang.setMaximumSize(new java.awt.Dimension(2147483647, 40));
@@ -236,7 +237,7 @@ public class NhanVien extends javax.swing.JFrame {
         pnlTitleTaoDonHang.setMaximumSize(new java.awt.Dimension(32767, 40));
         pnlTitleTaoDonHang.setLayout(new java.awt.BorderLayout());
 
-        pnlTaoDonHang.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pnlTaoDonHang.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
         pnlTaoDonHang.setkEndColor(new java.awt.Color(102, 0, 153));
         pnlTaoDonHang.setkGradientFocus(50);
         pnlTaoDonHang.setkStartColor(new java.awt.Color(102, 0, 153));
@@ -266,7 +267,7 @@ public class NhanVien extends javax.swing.JFrame {
         pnlTitleLichSuDonHang.setMaximumSize(new java.awt.Dimension(32767, 40));
         pnlTitleLichSuDonHang.setLayout(new java.awt.BorderLayout());
 
-        pnlLichSuDonHang.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pnlLichSuDonHang.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
         pnlLichSuDonHang.setkEndColor(new java.awt.Color(102, 0, 153));
         pnlLichSuDonHang.setkGradientFocus(50);
         pnlLichSuDonHang.setkStartColor(new java.awt.Color(102, 0, 153));
@@ -292,7 +293,7 @@ public class NhanVien extends javax.swing.JFrame {
 
         pnlSilde.add(pnlTitleLichSuDonHang);
 
-        pnlThongKe.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pnlThongKe.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
         pnlThongKe.setkEndColor(new java.awt.Color(255, 204, 204));
         pnlThongKe.setkStartColor(new java.awt.Color(102, 0, 153));
         pnlThongKe.setMaximumSize(new java.awt.Dimension(2147483647, 40));
@@ -315,7 +316,7 @@ public class NhanVien extends javax.swing.JFrame {
 
         pnlSilde.add(pnlThongKe);
 
-        pnlTroGiup.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pnlTroGiup.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
         pnlTroGiup.setkEndColor(new java.awt.Color(255, 204, 204));
         pnlTroGiup.setkStartColor(new java.awt.Color(102, 0, 153));
         pnlTroGiup.setMaximumSize(new java.awt.Dimension(2147483647, 40));
@@ -340,12 +341,12 @@ public class NhanVien extends javax.swing.JFrame {
 
         pnlMenu.add(pnlSilde, java.awt.BorderLayout.CENTER);
 
-        btnDangXuat.setBackground(new java.awt.Color(246, 233, 238));
+        btnDangXuat.setBackground(new java.awt.Color(252, 246, 248));
         btnDangXuat.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnDangXuat.setForeground(new java.awt.Color(102, 0, 102));
         btnDangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/dangXuat.png"))); // NOI18N
         btnDangXuat.setText("Đăng xuất");
-        btnDangXuat.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
+        btnDangXuat.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 0, 153), 3, true));
         btnDangXuat.setPreferredSize(new java.awt.Dimension(76, 40));
         btnDangXuat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -357,9 +358,10 @@ public class NhanVien extends javax.swing.JFrame {
         pnlMain.add(pnlMenu, java.awt.BorderLayout.WEST);
         pnlMenu.getAccessibleContext().setAccessibleParent(this);
 
-        pnlTitle.setBackground(new java.awt.Color(102, 0, 102));
-        pnlTitle.setMinimumSize(new java.awt.Dimension(166, 70));
-        pnlTitle.setPreferredSize(new java.awt.Dimension(745, 45));
+        kGradientPanel1.setkEndColor(new java.awt.Color(255, 204, 204));
+        kGradientPanel1.setkGradientFocus(2600);
+        kGradientPanel1.setkStartColor(new java.awt.Color(102, 0, 153));
+        kGradientPanel1.setPreferredSize(new java.awt.Dimension(1155, 45));
 
         jLabel3.setFont(new java.awt.Font("MV Boli", 1, 22)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -367,9 +369,9 @@ public class NhanVien extends javax.swing.JFrame {
         jLabel3.setText("BHTT Store");
         jLabel3.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabel3.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        pnlTitle.add(jLabel3);
+        kGradientPanel1.add(jLabel3);
 
-        pnlMain.add(pnlTitle, java.awt.BorderLayout.NORTH);
+        pnlMain.add(kGradientPanel1, java.awt.BorderLayout.NORTH);
 
         getContentPane().add(pnlMain, java.awt.BorderLayout.CENTER);
 
@@ -381,12 +383,6 @@ public class NhanVien extends javax.swing.JFrame {
         TaoDonHang frame = new TaoDonHang(username);
         openComponent(frame);
     }//GEN-LAST:event_pnlTaoDonHangMousePressed
-
-    private void btnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatActionPerformed
-        if (JOptionPane.showConfirmDialog(this, "Bạn có muốn thoát ?", "Thoát", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-            System.exit(0);
-        }
-    }//GEN-LAST:event_btnDangXuatActionPerformed
 
     private void pnlGioiThieuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlGioiThieuMousePressed
         GioiThieu frGioiThieu=new GioiThieu(username);
@@ -420,6 +416,12 @@ public class NhanVien extends javax.swing.JFrame {
         pnlTitleTaoDonHang.setVisible(flag);
         pnlTitleLichSuDonHang.setVisible(flag);
     }//GEN-LAST:event_pnlDonHangMouseClicked
+
+    private void btnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatActionPerformed
+        if (JOptionPane.showConfirmDialog(this, "Bạn có muốn thoát ?", "Thoát", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        }
+    }//GEN-LAST:event_btnDangXuatActionPerformed
     // open frame when click panel
     void openComponent(JInternalFrame frame) {
         Component[] components = pnlForm.getComponents();
@@ -469,6 +471,7 @@ public class NhanVien extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private keeptoo.KGradientPanel kGradientPanel1;
     private javax.swing.JLabel lblChucVu;
     private javax.swing.JLabel lblDonHang;
     private javax.swing.JLabel lblGioiThieu;
@@ -490,7 +493,6 @@ public class NhanVien extends javax.swing.JFrame {
     private javax.swing.JPanel pnlSilde;
     private keeptoo.KGradientPanel pnlTaoDonHang;
     private keeptoo.KGradientPanel pnlThongKe;
-    private javax.swing.JPanel pnlTitle;
     private javax.swing.JPanel pnlTitleLichSuDonHang;
     private javax.swing.JPanel pnlTitleTaoDonHang;
     private keeptoo.KGradientPanel pnlTroGiup;

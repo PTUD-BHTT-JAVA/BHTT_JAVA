@@ -94,7 +94,7 @@ public class QuanLy extends javax.swing.JFrame {
         lblTroGiup = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         btnDangXuat = new javax.swing.JButton();
-        pnlTitle = new javax.swing.JPanel();
+        kGradientPanel1 = new keeptoo.KGradientPanel();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -103,13 +103,14 @@ public class QuanLy extends javax.swing.JFrame {
         pnlMain.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
         pnlMain.setLayout(new java.awt.BorderLayout());
 
-        pnlForm.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        pnlForm.setBackground(new java.awt.Color(255, 255, 255));
+        pnlForm.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(204, 204, 204), null, new java.awt.Color(227, 227, 227)));
         pnlForm.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
         pnlForm.setLayout(new java.awt.BorderLayout());
         pnlMain.add(pnlForm, java.awt.BorderLayout.CENTER);
 
         pnlMenu.setBackground(new java.awt.Color(249, 234, 249));
-        pnlMenu.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 0, 0), null));
+        pnlMenu.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         pnlMenu.setPreferredSize(new java.awt.Dimension(250, 200));
         pnlMenu.setLayout(new java.awt.BorderLayout());
 
@@ -134,7 +135,7 @@ public class QuanLy extends javax.swing.JFrame {
                 .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlNguoiDungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTen, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                    .addComponent(lblTen, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
                     .addGroup(pnlNguoiDungLayout.createSequentialGroup()
                         .addComponent(lblChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
@@ -159,7 +160,7 @@ public class QuanLy extends javax.swing.JFrame {
         pnlSilde.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlSilde.setLayout(new javax.swing.BoxLayout(pnlSilde, javax.swing.BoxLayout.PAGE_AXIS));
 
-        pnlGioiThieu.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pnlGioiThieu.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
         pnlGioiThieu.setkEndColor(new java.awt.Color(255, 204, 204));
         pnlGioiThieu.setkStartColor(new java.awt.Color(102, 0, 153));
         pnlGioiThieu.setMaximumSize(new java.awt.Dimension(2147483647, 40));
@@ -182,7 +183,7 @@ public class QuanLy extends javax.swing.JFrame {
 
         pnlSilde.add(pnlGioiThieu);
 
-        pnlSanPham.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pnlSanPham.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
         pnlSanPham.setkEndColor(new java.awt.Color(255, 204, 204));
         pnlSanPham.setkStartColor(new java.awt.Color(102, 0, 153));
         pnlSanPham.setMaximumSize(new java.awt.Dimension(2147483647, 40));
@@ -205,7 +206,7 @@ public class QuanLy extends javax.swing.JFrame {
 
         pnlSilde.add(pnlSanPham);
 
-        pnlNhanVien.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pnlNhanVien.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
         pnlNhanVien.setkEndColor(new java.awt.Color(255, 204, 204));
         pnlNhanVien.setkStartColor(new java.awt.Color(102, 0, 153));
         pnlNhanVien.setMaximumSize(new java.awt.Dimension(2147483647, 40));
@@ -228,7 +229,7 @@ public class QuanLy extends javax.swing.JFrame {
 
         pnlSilde.add(pnlNhanVien);
 
-        pnlTaiKhoan.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pnlTaiKhoan.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
         pnlTaiKhoan.setkEndColor(new java.awt.Color(255, 204, 204));
         pnlTaiKhoan.setkStartColor(new java.awt.Color(102, 0, 153));
         pnlTaiKhoan.setMaximumSize(new java.awt.Dimension(2147483647, 40));
@@ -251,7 +252,7 @@ public class QuanLy extends javax.swing.JFrame {
 
         pnlSilde.add(pnlTaiKhoan);
 
-        pnlNhaCungCap.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pnlNhaCungCap.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
         pnlNhaCungCap.setkEndColor(new java.awt.Color(255, 204, 204));
         pnlNhaCungCap.setkStartColor(new java.awt.Color(102, 0, 153));
         pnlNhaCungCap.setMaximumSize(new java.awt.Dimension(2147483647, 40));
@@ -274,7 +275,7 @@ public class QuanLy extends javax.swing.JFrame {
 
         pnlSilde.add(pnlNhaCungCap);
 
-        pnlThongKe.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pnlThongKe.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
         pnlThongKe.setkEndColor(new java.awt.Color(255, 204, 204));
         pnlThongKe.setkStartColor(new java.awt.Color(102, 0, 153));
         pnlThongKe.setMaximumSize(new java.awt.Dimension(2147483647, 40));
@@ -297,7 +298,7 @@ public class QuanLy extends javax.swing.JFrame {
 
         pnlSilde.add(pnlThongKe);
 
-        pnlTroGiup.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pnlTroGiup.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
         pnlTroGiup.setkEndColor(new java.awt.Color(255, 204, 204));
         pnlTroGiup.setkStartColor(new java.awt.Color(102, 0, 153));
         pnlTroGiup.setMaximumSize(new java.awt.Dimension(2147483647, 40));
@@ -322,12 +323,12 @@ public class QuanLy extends javax.swing.JFrame {
 
         pnlMenu.add(pnlSilde, java.awt.BorderLayout.CENTER);
 
-        btnDangXuat.setBackground(new java.awt.Color(246, 233, 238));
+        btnDangXuat.setBackground(new java.awt.Color(252, 246, 248));
         btnDangXuat.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnDangXuat.setForeground(new java.awt.Color(102, 0, 102));
         btnDangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/dangXuat.png"))); // NOI18N
         btnDangXuat.setText("Đăng xuất");
-        btnDangXuat.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
+        btnDangXuat.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 0, 153), 3, true));
         btnDangXuat.setPreferredSize(new java.awt.Dimension(76, 40));
         btnDangXuat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -339,9 +340,10 @@ public class QuanLy extends javax.swing.JFrame {
         pnlMain.add(pnlMenu, java.awt.BorderLayout.WEST);
         pnlMenu.getAccessibleContext().setAccessibleParent(this);
 
-        pnlTitle.setBackground(new java.awt.Color(102, 0, 102));
-        pnlTitle.setMinimumSize(new java.awt.Dimension(166, 70));
-        pnlTitle.setPreferredSize(new java.awt.Dimension(745, 45));
+        kGradientPanel1.setkEndColor(new java.awt.Color(255, 204, 204));
+        kGradientPanel1.setkGradientFocus(2600);
+        kGradientPanel1.setkStartColor(new java.awt.Color(102, 0, 153));
+        kGradientPanel1.setPreferredSize(new java.awt.Dimension(1155, 45));
 
         jLabel3.setFont(new java.awt.Font("MV Boli", 1, 22)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -349,9 +351,9 @@ public class QuanLy extends javax.swing.JFrame {
         jLabel3.setText("BHTT Store");
         jLabel3.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabel3.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        pnlTitle.add(jLabel3);
+        kGradientPanel1.add(jLabel3);
 
-        pnlMain.add(pnlTitle, java.awt.BorderLayout.NORTH);
+        pnlMain.add(kGradientPanel1, java.awt.BorderLayout.NORTH);
 
         getContentPane().add(pnlMain, java.awt.BorderLayout.CENTER);
 
@@ -447,6 +449,7 @@ public class QuanLy extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private keeptoo.KGradientPanel kGradientPanel1;
     private javax.swing.JLabel lblChucVu;
     private javax.swing.JLabel lblGioiThieu;
     private javax.swing.JLabel lblImage;
@@ -468,7 +471,6 @@ public class QuanLy extends javax.swing.JFrame {
     private javax.swing.JPanel pnlSilde;
     private keeptoo.KGradientPanel pnlTaiKhoan;
     private keeptoo.KGradientPanel pnlThongKe;
-    private javax.swing.JPanel pnlTitle;
     private keeptoo.KGradientPanel pnlTroGiup;
     // End of variables declaration//GEN-END:variables
 
