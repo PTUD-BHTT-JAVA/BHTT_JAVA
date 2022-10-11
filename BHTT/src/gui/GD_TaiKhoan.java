@@ -8,12 +8,12 @@ package gui;
  *
  * @author ACER
  */
-public class LichSuDonHang extends javax.swing.JInternalFrame {
+public class GD_TaiKhoan extends javax.swing.JInternalFrame {
     private String username;
     /**
      * Creates new form QuanLyHoaDon
      */
-    public LichSuDonHang(String _username) {
+    public GD_TaiKhoan(String _username) {
         this.setRootPaneCheckingEnabled(false);
         javax.swing.plaf.InternalFrameUI ui
                 = this.getUI();
@@ -40,7 +40,7 @@ public class LichSuDonHang extends javax.swing.JInternalFrame {
         setFrameIcon(null);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel2.setText("Lịch sử đơn hàng");
+        jLabel2.setText("Quản lý tài khoản");
 
         javax.swing.GroupLayout pnlMainLayout = new javax.swing.GroupLayout(pnlMain);
         pnlMain.setLayout(pnlMainLayout);
@@ -49,7 +49,7 @@ public class LichSuDonHang extends javax.swing.JInternalFrame {
             .addGroup(pnlMainLayout.createSequentialGroup()
                 .addGap(122, 122, 122)
                 .addComponent(jLabel2)
-                .addContainerGap(922, Short.MAX_VALUE))
+                .addContainerGap(915, Short.MAX_VALUE))
         );
         pnlMainLayout.setVerticalGroup(
             pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

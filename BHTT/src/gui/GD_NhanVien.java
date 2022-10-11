@@ -30,11 +30,11 @@ import keeptoo.KGradientPanel;
  *
  * @author ACER
  */
-public class QuanLy extends javax.swing.JFrame {
+public class GD_NhanVien extends javax.swing.JFrame {
     private static String username;
 
     /** Creates new form MainEmployee */
-    public QuanLy(String _username) {
+    public GD_NhanVien(String _username) {
         username = _username;
         this.setUndecorated(true);
         this.setResizable(true);
@@ -47,10 +47,12 @@ public class QuanLy extends javax.swing.JFrame {
         int xsize = (int) tk.getScreenSize().getWidth();
         int ysize = (int) tk.getScreenSize().getHeight();
         this.setSize(xsize, ysize);
-        GioiThieu frGioiThieu=new GioiThieu(username);
+        GD_GioiThieu frGioiThieu=new GD_GioiThieu(username);
         openComponent(frGioiThieu);
         
-
+        
+        pnlTitleTaoDonHang.setVisible(false);
+        pnlTitleLichSuDonHang.setVisible(false);
     }
     
    
@@ -74,25 +76,20 @@ public class QuanLy extends javax.swing.JFrame {
         pnlSilde = new javax.swing.JPanel();
         pnlGioiThieu = new keeptoo.KGradientPanel();
         lblGioiThieu = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        pnlSanPham = new keeptoo.KGradientPanel();
-        lblSanPham = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        pnlNhanVien = new keeptoo.KGradientPanel();
-        lblNhanVien = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        pnlTaiKhoan = new keeptoo.KGradientPanel();
-        lblTaiKhoan = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        pnlNhaCungCap = new keeptoo.KGradientPanel();
-        lblNhaCungCap = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
+        pnlKhachHang = new keeptoo.KGradientPanel();
+        lblKhachHang = new javax.swing.JLabel();
+        pnlDonHang = new keeptoo.KGradientPanel();
+        lblDonHang = new javax.swing.JLabel();
+        pnlTitleTaoDonHang = new javax.swing.JPanel();
+        pnlTaoDonHang = new keeptoo.KGradientPanel();
+        lblTaoHoaDon = new javax.swing.JLabel();
+        pnlTitleLichSuDonHang = new javax.swing.JPanel();
+        pnlLichSuDonHang = new keeptoo.KGradientPanel();
+        lblLichSuDonHang = new javax.swing.JLabel();
         pnlThongKe = new keeptoo.KGradientPanel();
         lblThongKe = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         pnlTroGiup = new keeptoo.KGradientPanel();
         lblTroGiup = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         btnDangXuat = new javax.swing.JButton();
         kGradientPanel1 = new keeptoo.KGradientPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -104,13 +101,14 @@ public class QuanLy extends javax.swing.JFrame {
         pnlMain.setLayout(new java.awt.BorderLayout());
 
         pnlForm.setBackground(new java.awt.Color(255, 255, 255));
-        pnlForm.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(204, 204, 204), null, new java.awt.Color(227, 227, 227)));
-        pnlForm.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
+        pnlForm.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        pnlForm.setMaximumSize(new java.awt.Dimension(200, 2147483647));
+        pnlForm.setPreferredSize(new java.awt.Dimension(200, 2));
         pnlForm.setLayout(new java.awt.BorderLayout());
         pnlMain.add(pnlForm, java.awt.BorderLayout.CENTER);
 
         pnlMenu.setBackground(new java.awt.Color(249, 234, 249));
-        pnlMenu.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pnlMenu.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 0, 0), null));
         pnlMenu.setPreferredSize(new java.awt.Dimension(250, 200));
         pnlMenu.setLayout(new java.awt.BorderLayout());
 
@@ -118,13 +116,13 @@ public class QuanLy extends javax.swing.JFrame {
 
         lblChucVu.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         lblChucVu.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblChucVu.setText("Quản lý");
+        lblChucVu.setText("Nhân viên");
 
         lblImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblImage.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         lblTen.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
-        lblTen.setText("Trần Văn B");
+        lblTen.setText("Nguyễn Văn A");
 
         javax.swing.GroupLayout pnlNguoiDungLayout = new javax.swing.GroupLayout(pnlNguoiDung);
         pnlNguoiDung.setLayout(pnlNguoiDungLayout);
@@ -135,7 +133,7 @@ public class QuanLy extends javax.swing.JFrame {
                 .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlNguoiDungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTen, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                    .addComponent(lblTen, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
                     .addGroup(pnlNguoiDungLayout.createSequentialGroup()
                         .addComponent(lblChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
@@ -147,9 +145,9 @@ public class QuanLy extends javax.swing.JFrame {
                 .addGroup(pnlNguoiDungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnlNguoiDungLayout.createSequentialGroup()
                         .addComponent(lblChucVu)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(lblTen)
-                        .addGap(30, 30, 30))
+                        .addGap(23, 23, 23))
                     .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -175,105 +173,110 @@ public class QuanLy extends javax.swing.JFrame {
         lblGioiThieu.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         lblGioiThieu.setForeground(new java.awt.Color(255, 255, 255));
         lblGioiThieu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblGioiThieu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/trangChu.png"))); // NOI18N
         lblGioiThieu.setText("GIỚI THIỆU");
         pnlGioiThieu.add(lblGioiThieu, java.awt.BorderLayout.CENTER);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/trangChu.png"))); // NOI18N
-        pnlGioiThieu.add(jLabel1, java.awt.BorderLayout.LINE_START);
-
         pnlSilde.add(pnlGioiThieu);
 
-        pnlSanPham.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
-        pnlSanPham.setkEndColor(new java.awt.Color(255, 204, 204));
-        pnlSanPham.setkStartColor(new java.awt.Color(102, 0, 153));
-        pnlSanPham.setMaximumSize(new java.awt.Dimension(2147483647, 40));
-        pnlSanPham.setPreferredSize(new java.awt.Dimension(270, 40));
-        pnlSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
+        pnlKhachHang.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
+        pnlKhachHang.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlKhachHang.setkStartColor(new java.awt.Color(102, 0, 153));
+        pnlKhachHang.setMaximumSize(new java.awt.Dimension(2147483647, 40));
+        pnlKhachHang.setPreferredSize(new java.awt.Dimension(270, 40));
+        pnlKhachHang.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                pnlSanPhamMousePressed(evt);
+                pnlKhachHangMousePressed(evt);
             }
         });
-        pnlSanPham.setLayout(new java.awt.BorderLayout());
+        pnlKhachHang.setLayout(new java.awt.BorderLayout());
 
-        lblSanPham.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        lblSanPham.setForeground(new java.awt.Color(255, 255, 255));
-        lblSanPham.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblSanPham.setText("SẢN PHẨM");
-        pnlSanPham.add(lblSanPham, java.awt.BorderLayout.CENTER);
+        lblKhachHang.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        lblKhachHang.setForeground(new java.awt.Color(255, 255, 255));
+        lblKhachHang.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblKhachHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/khachHang.png"))); // NOI18N
+        lblKhachHang.setText("KHÁCH HÀNG");
+        pnlKhachHang.add(lblKhachHang, java.awt.BorderLayout.CENTER);
 
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sanPham.png"))); // NOI18N
-        pnlSanPham.add(jLabel9, java.awt.BorderLayout.LINE_START);
+        pnlSilde.add(pnlKhachHang);
 
-        pnlSilde.add(pnlSanPham);
-
-        pnlNhanVien.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
-        pnlNhanVien.setkEndColor(new java.awt.Color(255, 204, 204));
-        pnlNhanVien.setkStartColor(new java.awt.Color(102, 0, 153));
-        pnlNhanVien.setMaximumSize(new java.awt.Dimension(2147483647, 40));
-        pnlNhanVien.setPreferredSize(new java.awt.Dimension(270, 40));
-        pnlNhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                pnlNhanVienMousePressed(evt);
+        pnlDonHang.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
+        pnlDonHang.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlDonHang.setkStartColor(new java.awt.Color(102, 0, 153));
+        pnlDonHang.setMaximumSize(new java.awt.Dimension(2147483647, 40));
+        pnlDonHang.setPreferredSize(new java.awt.Dimension(270, 40));
+        pnlDonHang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pnlDonHangMouseClicked(evt);
             }
         });
-        pnlNhanVien.setLayout(new java.awt.BorderLayout());
+        pnlDonHang.setLayout(new java.awt.BorderLayout());
 
-        lblNhanVien.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        lblNhanVien.setForeground(new java.awt.Color(255, 255, 255));
-        lblNhanVien.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblNhanVien.setText("NHÂN VIÊN");
-        pnlNhanVien.add(lblNhanVien, java.awt.BorderLayout.CENTER);
+        lblDonHang.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        lblDonHang.setForeground(new java.awt.Color(255, 255, 255));
+        lblDonHang.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblDonHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/donHang.png"))); // NOI18N
+        lblDonHang.setText("ĐƠN HÀNG");
+        pnlDonHang.add(lblDonHang, java.awt.BorderLayout.CENTER);
+        lblDonHang.getAccessibleContext().setAccessibleDescription("");
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/nhanVien.png"))); // NOI18N
-        pnlNhanVien.add(jLabel10, java.awt.BorderLayout.LINE_START);
+        pnlSilde.add(pnlDonHang);
 
-        pnlSilde.add(pnlNhanVien);
+        pnlTitleTaoDonHang.setMaximumSize(new java.awt.Dimension(32767, 40));
+        pnlTitleTaoDonHang.setLayout(new java.awt.BorderLayout());
 
-        pnlTaiKhoan.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
-        pnlTaiKhoan.setkEndColor(new java.awt.Color(255, 204, 204));
-        pnlTaiKhoan.setkStartColor(new java.awt.Color(102, 0, 153));
-        pnlTaiKhoan.setMaximumSize(new java.awt.Dimension(2147483647, 40));
-        pnlTaiKhoan.setPreferredSize(new java.awt.Dimension(270, 40));
-        pnlTaiKhoan.addMouseListener(new java.awt.event.MouseAdapter() {
+        pnlTaoDonHang.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
+        pnlTaoDonHang.setkEndColor(new java.awt.Color(102, 0, 153));
+        pnlTaoDonHang.setkGradientFocus(50);
+        pnlTaoDonHang.setkStartColor(new java.awt.Color(102, 0, 153));
+        pnlTaoDonHang.setMaximumSize(new java.awt.Dimension(200, 40));
+        pnlTaoDonHang.setPreferredSize(new java.awt.Dimension(220, 40));
+        pnlTaoDonHang.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                pnlTaiKhoanMousePressed(evt);
+                pnlTaoDonHangMousePressed(evt);
             }
         });
-        pnlTaiKhoan.setLayout(new java.awt.BorderLayout());
+        pnlTaoDonHang.setLayout(new java.awt.BorderLayout());
 
-        lblTaiKhoan.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        lblTaiKhoan.setForeground(new java.awt.Color(255, 255, 255));
-        lblTaiKhoan.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTaiKhoan.setText("TÀI KHOẢN");
-        pnlTaiKhoan.add(lblTaiKhoan, java.awt.BorderLayout.CENTER);
+        lblTaoHoaDon.setBackground(new java.awt.Color(102, 0, 204));
+        lblTaoHoaDon.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        lblTaoHoaDon.setForeground(new java.awt.Color(255, 255, 255));
+        lblTaoHoaDon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTaoHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/taoDonHangMoi.png"))); // NOI18N
+        lblTaoHoaDon.setText("TẠO ĐƠN HÀNG");
+        lblTaoHoaDon.setVerifyInputWhenFocusTarget(false);
+        pnlTaoDonHang.add(lblTaoHoaDon, java.awt.BorderLayout.WEST);
 
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/taiKhoan.png"))); // NOI18N
-        pnlTaiKhoan.add(jLabel11, java.awt.BorderLayout.LINE_START);
+        pnlTitleTaoDonHang.add(pnlTaoDonHang, java.awt.BorderLayout.EAST);
 
-        pnlSilde.add(pnlTaiKhoan);
+        pnlSilde.add(pnlTitleTaoDonHang);
 
-        pnlNhaCungCap.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
-        pnlNhaCungCap.setkEndColor(new java.awt.Color(255, 204, 204));
-        pnlNhaCungCap.setkStartColor(new java.awt.Color(102, 0, 153));
-        pnlNhaCungCap.setMaximumSize(new java.awt.Dimension(2147483647, 40));
-        pnlNhaCungCap.setPreferredSize(new java.awt.Dimension(270, 40));
-        pnlNhaCungCap.addMouseListener(new java.awt.event.MouseAdapter() {
+        pnlTitleLichSuDonHang.setMaximumSize(new java.awt.Dimension(32767, 40));
+        pnlTitleLichSuDonHang.setLayout(new java.awt.BorderLayout());
+
+        pnlLichSuDonHang.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
+        pnlLichSuDonHang.setkEndColor(new java.awt.Color(102, 0, 153));
+        pnlLichSuDonHang.setkGradientFocus(50);
+        pnlLichSuDonHang.setkStartColor(new java.awt.Color(102, 0, 153));
+        pnlLichSuDonHang.setMaximumSize(new java.awt.Dimension(2147483647, 40));
+        pnlLichSuDonHang.setPreferredSize(new java.awt.Dimension(220, 40));
+        pnlLichSuDonHang.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                pnlNhaCungCapMousePressed(evt);
+                pnlLichSuDonHangMousePressed(evt);
             }
         });
-        pnlNhaCungCap.setLayout(new java.awt.BorderLayout());
+        pnlLichSuDonHang.setLayout(new java.awt.BorderLayout());
 
-        lblNhaCungCap.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        lblNhaCungCap.setForeground(new java.awt.Color(255, 255, 255));
-        lblNhaCungCap.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblNhaCungCap.setText("NHÀ CUNG CẤP");
-        pnlNhaCungCap.add(lblNhaCungCap, java.awt.BorderLayout.CENTER);
+        lblLichSuDonHang.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        lblLichSuDonHang.setForeground(new java.awt.Color(255, 255, 255));
+        lblLichSuDonHang.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblLichSuDonHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/lichSuDonHang.png"))); // NOI18N
+        lblLichSuDonHang.setText("TẠO ĐƠN HÀNG HOÀN");
+        pnlLichSuDonHang.add(lblLichSuDonHang, java.awt.BorderLayout.CENTER);
 
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/nhaCungCap.png"))); // NOI18N
-        pnlNhaCungCap.add(jLabel12, java.awt.BorderLayout.LINE_START);
+        pnlTitleLichSuDonHang.add(pnlLichSuDonHang, java.awt.BorderLayout.EAST);
 
-        pnlSilde.add(pnlNhaCungCap);
+        pnlSilde.add(pnlTitleLichSuDonHang);
 
         pnlThongKe.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
         pnlThongKe.setkEndColor(new java.awt.Color(255, 204, 204));
@@ -290,11 +293,9 @@ public class QuanLy extends javax.swing.JFrame {
         lblThongKe.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         lblThongKe.setForeground(new java.awt.Color(255, 255, 255));
         lblThongKe.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/thongKe.png"))); // NOI18N
         lblThongKe.setText("THỐNG KÊ");
         pnlThongKe.add(lblThongKe, java.awt.BorderLayout.CENTER);
-
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/thongKe.png"))); // NOI18N
-        pnlThongKe.add(jLabel7, java.awt.BorderLayout.LINE_START);
 
         pnlSilde.add(pnlThongKe);
 
@@ -313,11 +314,9 @@ public class QuanLy extends javax.swing.JFrame {
         lblTroGiup.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         lblTroGiup.setForeground(new java.awt.Color(255, 255, 255));
         lblTroGiup.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTroGiup.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/troGiup.png"))); // NOI18N
         lblTroGiup.setText("TRỢ GIÚP");
         pnlTroGiup.add(lblTroGiup, java.awt.BorderLayout.CENTER);
-
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/troGiup.png"))); // NOI18N
-        pnlTroGiup.add(jLabel8, java.awt.BorderLayout.LINE_START);
 
         pnlSilde.add(pnlTroGiup);
 
@@ -360,40 +359,44 @@ public class QuanLy extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void pnlTaoDonHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlTaoDonHangMousePressed
+        
+        GD_TaoDonHang frame = new GD_TaoDonHang(username);
+        openComponent(frame);
+    }//GEN-LAST:event_pnlTaoDonHangMousePressed
+
     private void pnlGioiThieuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlGioiThieuMousePressed
-        GioiThieu frGioiThieu=new GioiThieu(username);
+        GD_GioiThieu frGioiThieu=new GD_GioiThieu(username);
         openComponent(frGioiThieu);
     }//GEN-LAST:event_pnlGioiThieuMousePressed
 
-    private void pnlSanPhamMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlSanPhamMousePressed
-        SanPham fSanPham=new SanPham(username);
-        openComponent(fSanPham);
-    }//GEN-LAST:event_pnlSanPhamMousePressed
-
-    private void pnlTaiKhoanMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlTaiKhoanMousePressed
-        TaiKhoan fTaiKhoan=new TaiKhoan(username);
-        openComponent(fTaiKhoan);
-    }//GEN-LAST:event_pnlTaiKhoanMousePressed
-
-    private void pnlTroGiupMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlTroGiupMousePressed
-        QLTroGiup fQLTroGiup=new QLTroGiup(username);
-        openComponent(fQLTroGiup);
-    }//GEN-LAST:event_pnlTroGiupMousePressed
-
-    private void pnlNhaCungCapMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlNhaCungCapMousePressed
-        NhaCungCap fNhaCungCap=new NhaCungCap(username);
-        openComponent(fNhaCungCap);
-    }//GEN-LAST:event_pnlNhaCungCapMousePressed
+    private void pnlKhachHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlKhachHangMousePressed
+        GD_KhachHang frKhachHang=new GD_KhachHang(username);
+        openComponent(frKhachHang);
+    }//GEN-LAST:event_pnlKhachHangMousePressed
 
     private void pnlThongKeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlThongKeMousePressed
-        QLThongKe fQLThongKe=new QLThongKe(username);
-        openComponent(fQLThongKe);
+        GD_NVThongKe fNVThongKe=new GD_NVThongKe(username);
+        openComponent(fNVThongKe);
     }//GEN-LAST:event_pnlThongKeMousePressed
 
-    private void pnlNhanVienMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlNhanVienMousePressed
-        QLNhanVien fLNhanVien=new QLNhanVien(username);
-        openComponent(fLNhanVien);
-    }//GEN-LAST:event_pnlNhanVienMousePressed
+    private void pnlTroGiupMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlTroGiupMousePressed
+        GD_NVTroGiup fNVTroGiup=new GD_NVTroGiup(username);
+        openComponent(fNVTroGiup);
+    }//GEN-LAST:event_pnlTroGiupMousePressed
+
+    private void pnlLichSuDonHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlLichSuDonHangMousePressed
+        GD_TaoDonHangHoan fLichSuDonHang=new GD_TaoDonHangHoan(username);
+        openComponent(fLichSuDonHang);
+    }//GEN-LAST:event_pnlLichSuDonHangMousePressed
+
+    private void pnlDonHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlDonHangMouseClicked
+        boolean flag = true;
+        if ( pnlTitleTaoDonHang.isVisible() ) 
+            flag = false;
+        pnlTitleTaoDonHang.setVisible(flag);
+        pnlTitleLichSuDonHang.setVisible(flag);
+    }//GEN-LAST:event_pnlDonHangMouseClicked
 
     private void btnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatActionPerformed
         if (JOptionPane.showConfirmDialog(this, "Bạn có muốn thoát ?", "Thoát", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
@@ -433,7 +436,7 @@ public class QuanLy extends javax.swing.JFrame {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new QuanLy(username);
+                new GD_NhanVien(username);
             }
         });
     }
@@ -441,36 +444,31 @@ public class QuanLy extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDangXuat;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private keeptoo.KGradientPanel kGradientPanel1;
     private javax.swing.JLabel lblChucVu;
+    private javax.swing.JLabel lblDonHang;
     private javax.swing.JLabel lblGioiThieu;
     private javax.swing.JLabel lblImage;
-    private javax.swing.JLabel lblNhaCungCap;
-    private javax.swing.JLabel lblNhanVien;
-    private javax.swing.JLabel lblSanPham;
-    private javax.swing.JLabel lblTaiKhoan;
+    private javax.swing.JLabel lblKhachHang;
+    private javax.swing.JLabel lblLichSuDonHang;
+    private javax.swing.JLabel lblTaoHoaDon;
     private javax.swing.JLabel lblTen;
     private javax.swing.JLabel lblThongKe;
     private javax.swing.JLabel lblTroGiup;
+    private keeptoo.KGradientPanel pnlDonHang;
     private javax.swing.JPanel pnlForm;
     private keeptoo.KGradientPanel pnlGioiThieu;
+    private keeptoo.KGradientPanel pnlKhachHang;
+    private keeptoo.KGradientPanel pnlLichSuDonHang;
     private javax.swing.JPanel pnlMain;
     private javax.swing.JPanel pnlMenu;
     private javax.swing.JPanel pnlNguoiDung;
-    private keeptoo.KGradientPanel pnlNhaCungCap;
-    private keeptoo.KGradientPanel pnlNhanVien;
-    private keeptoo.KGradientPanel pnlSanPham;
     private javax.swing.JPanel pnlSilde;
-    private keeptoo.KGradientPanel pnlTaiKhoan;
+    private keeptoo.KGradientPanel pnlTaoDonHang;
     private keeptoo.KGradientPanel pnlThongKe;
+    private javax.swing.JPanel pnlTitleLichSuDonHang;
+    private javax.swing.JPanel pnlTitleTaoDonHang;
     private keeptoo.KGradientPanel pnlTroGiup;
     // End of variables declaration//GEN-END:variables
 

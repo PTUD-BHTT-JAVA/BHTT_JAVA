@@ -8,12 +8,12 @@ package gui;
  *
  * @author ACER
  */
-public class TaiKhoan extends javax.swing.JInternalFrame {
+public class GD_SanPham extends javax.swing.JInternalFrame {
     private String username;
     /**
      * Creates new form QuanLyHoaDon
      */
-    public TaiKhoan(String _username) {
+    public GD_SanPham(String _username) {
         this.setRootPaneCheckingEnabled(false);
         javax.swing.plaf.InternalFrameUI ui
                 = this.getUI();
@@ -40,7 +40,7 @@ public class TaiKhoan extends javax.swing.JInternalFrame {
         setFrameIcon(null);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel2.setText("Quản lý tài khoản");
+        jLabel2.setText("Quản lý sản phẩm");
 
         javax.swing.GroupLayout pnlMainLayout = new javax.swing.GroupLayout(pnlMain);
         pnlMain.setLayout(pnlMainLayout);
@@ -49,7 +49,7 @@ public class TaiKhoan extends javax.swing.JInternalFrame {
             .addGroup(pnlMainLayout.createSequentialGroup()
                 .addGap(122, 122, 122)
                 .addComponent(jLabel2)
-                .addContainerGap(915, Short.MAX_VALUE))
+                .addContainerGap(907, Short.MAX_VALUE))
         );
         pnlMainLayout.setVerticalGroup(
             pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

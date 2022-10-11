@@ -8,12 +8,12 @@ package gui;
  *
  * @author ACER
  */
-public class NhaCungCap extends javax.swing.JInternalFrame {
+public class GD_NhaCungCap extends javax.swing.JInternalFrame {
     private String username;
     /**
      * Creates new form QuanLyHoaDon
      */
-    public NhaCungCap(String _username) {
+    public GD_NhaCungCap(String _username) {
         this.setRootPaneCheckingEnabled(false);
         javax.swing.plaf.InternalFrameUI ui
                 = this.getUI();

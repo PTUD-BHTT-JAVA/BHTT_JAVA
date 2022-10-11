@@ -8,12 +8,12 @@ package gui;
  *
  * @author ACER
  */
-public class SanPham extends javax.swing.JInternalFrame {
+public class GD_GioiThieu extends javax.swing.JInternalFrame {
     private String username;
     /**
      * Creates new form QuanLyHoaDon
      */
-    public SanPham(String _username) {
+    public GD_GioiThieu(String _username) {
         this.setRootPaneCheckingEnabled(false);
         javax.swing.plaf.InternalFrameUI ui
                 = this.getUI();
@@ -34,29 +34,42 @@ public class SanPham extends javax.swing.JInternalFrame {
 
         pnlMain = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setBorder(null);
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setFrameIcon(null);
 
+        pnlMain.setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel2.setText("Quản lý sản phẩm");
+        jLabel2.setText("CHÀO MỪNG ĐẾN VỚI PHẦN MỀM QUẢN LÝ BÁN HÀNG");
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        jLabel1.setText("BHTT");
 
         javax.swing.GroupLayout pnlMainLayout = new javax.swing.GroupLayout(pnlMain);
         pnlMain.setLayout(pnlMainLayout);
         pnlMainLayout.setHorizontalGroup(
             pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlMainLayout.createSequentialGroup()
-                .addGap(122, 122, 122)
-                .addComponent(jLabel2)
-                .addContainerGap(907, Short.MAX_VALUE))
+                .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlMainLayout.createSequentialGroup()
+                        .addGap(541, 541, 541)
+                        .addComponent(jLabel1))
+                    .addGroup(pnlMainLayout.createSequentialGroup()
+                        .addGap(122, 122, 122)
+                        .addComponent(jLabel2)))
+                .addContainerGap(278, Short.MAX_VALUE))
         );
         pnlMainLayout.setVerticalGroup(
             pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlMainLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addComponent(jLabel2)
-                .addContainerGap(672, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addComponent(jLabel1)
+                .addContainerGap(582, Short.MAX_VALUE))
         );
 
         getContentPane().add(pnlMain, java.awt.BorderLayout.CENTER);
@@ -66,6 +79,7 @@ public class SanPham extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel pnlMain;
     // End of variables declaration//GEN-END:variables
