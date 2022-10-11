@@ -74,25 +74,18 @@ public class GD_QuanLy extends javax.swing.JFrame {
         pnlSilde = new javax.swing.JPanel();
         pnlGioiThieu = new keeptoo.KGradientPanel();
         lblGioiThieu = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         pnlSanPham = new keeptoo.KGradientPanel();
         lblSanPham = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         pnlNhanVien = new keeptoo.KGradientPanel();
         lblNhanVien = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
         pnlTaiKhoan = new keeptoo.KGradientPanel();
         lblTaiKhoan = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         pnlNhaCungCap = new keeptoo.KGradientPanel();
         lblNhaCungCap = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
         pnlThongKe = new keeptoo.KGradientPanel();
         lblThongKe = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         pnlTroGiup = new keeptoo.KGradientPanel();
         lblTroGiup = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         btnDangXuat = new javax.swing.JButton();
         kGradientPanel1 = new keeptoo.KGradientPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -178,9 +171,6 @@ public class GD_QuanLy extends javax.swing.JFrame {
         lblGioiThieu.setText("GIỚI THIỆU");
         pnlGioiThieu.add(lblGioiThieu, java.awt.BorderLayout.CENTER);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/trangChu.png"))); // NOI18N
-        pnlGioiThieu.add(jLabel1, java.awt.BorderLayout.LINE_START);
-
         pnlSilde.add(pnlGioiThieu);
 
         pnlSanPham.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
@@ -200,9 +190,6 @@ public class GD_QuanLy extends javax.swing.JFrame {
         lblSanPham.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblSanPham.setText("SẢN PHẨM");
         pnlSanPham.add(lblSanPham, java.awt.BorderLayout.CENTER);
-
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sanPham.png"))); // NOI18N
-        pnlSanPham.add(jLabel9, java.awt.BorderLayout.LINE_START);
 
         pnlSilde.add(pnlSanPham);
 
@@ -224,9 +211,6 @@ public class GD_QuanLy extends javax.swing.JFrame {
         lblNhanVien.setText("NHÂN VIÊN");
         pnlNhanVien.add(lblNhanVien, java.awt.BorderLayout.CENTER);
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/nhanVien.png"))); // NOI18N
-        pnlNhanVien.add(jLabel10, java.awt.BorderLayout.LINE_START);
-
         pnlSilde.add(pnlNhanVien);
 
         pnlTaiKhoan.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
@@ -246,9 +230,6 @@ public class GD_QuanLy extends javax.swing.JFrame {
         lblTaiKhoan.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTaiKhoan.setText("TÀI KHOẢN");
         pnlTaiKhoan.add(lblTaiKhoan, java.awt.BorderLayout.CENTER);
-
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/taiKhoan.png"))); // NOI18N
-        pnlTaiKhoan.add(jLabel11, java.awt.BorderLayout.LINE_START);
 
         pnlSilde.add(pnlTaiKhoan);
 
@@ -270,9 +251,6 @@ public class GD_QuanLy extends javax.swing.JFrame {
         lblNhaCungCap.setText("NHÀ CUNG CẤP");
         pnlNhaCungCap.add(lblNhaCungCap, java.awt.BorderLayout.CENTER);
 
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/nhaCungCap.png"))); // NOI18N
-        pnlNhaCungCap.add(jLabel12, java.awt.BorderLayout.LINE_START);
-
         pnlSilde.add(pnlNhaCungCap);
 
         pnlThongKe.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
@@ -292,9 +270,6 @@ public class GD_QuanLy extends javax.swing.JFrame {
         lblThongKe.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblThongKe.setText("THỐNG KÊ");
         pnlThongKe.add(lblThongKe, java.awt.BorderLayout.CENTER);
-
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/thongKe.png"))); // NOI18N
-        pnlThongKe.add(jLabel7, java.awt.BorderLayout.LINE_START);
 
         pnlSilde.add(pnlThongKe);
 
@@ -316,9 +291,6 @@ public class GD_QuanLy extends javax.swing.JFrame {
         lblTroGiup.setText("TRỢ GIÚP");
         pnlTroGiup.add(lblTroGiup, java.awt.BorderLayout.CENTER);
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/troGiup.png"))); // NOI18N
-        pnlTroGiup.add(jLabel8, java.awt.BorderLayout.LINE_START);
-
         pnlSilde.add(pnlTroGiup);
 
         pnlMenu.add(pnlSilde, java.awt.BorderLayout.CENTER);
@@ -326,7 +298,6 @@ public class GD_QuanLy extends javax.swing.JFrame {
         btnDangXuat.setBackground(new java.awt.Color(252, 249, 250));
         btnDangXuat.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnDangXuat.setForeground(new java.awt.Color(102, 0, 102));
-        btnDangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/dangXuat.png"))); // NOI18N
         btnDangXuat.setText("Đăng xuất");
         btnDangXuat.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 0, 153), 3, true));
         btnDangXuat.setPreferredSize(new java.awt.Dimension(76, 40));
@@ -441,14 +412,7 @@ public class GD_QuanLy extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDangXuat;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private keeptoo.KGradientPanel kGradientPanel1;
     private javax.swing.JLabel lblChucVu;
     private javax.swing.JLabel lblGioiThieu;

@@ -229,9 +229,6 @@
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
                         <Property name="horizontalAlignment" type="int" value="0"/>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/icon/trangChu.png"/>
-                        </Property>
                         <Property name="text" type="java.lang.String" value="GI&#x1eda;I THI&#x1ec6;U"/>
                       </Properties>
                       <Constraints>
@@ -279,9 +276,6 @@
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
                         <Property name="horizontalAlignment" type="int" value="0"/>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/icon/khachHang.png"/>
-                        </Property>
                         <Property name="text" type="java.lang.String" value="KH&#xc1;CH H&#xc0;NG"/>
                       </Properties>
                       <Constraints>
@@ -329,9 +323,6 @@
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
                         <Property name="horizontalAlignment" type="int" value="0"/>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/icon/donHang.png"/>
-                        </Property>
                         <Property name="text" type="java.lang.String" value="&#x110;&#x1a0;N H&#xc0;NG"/>
                       </Properties>
                       <AccessibilityProperties>
@@ -400,9 +391,6 @@
                               <Color blue="ff" green="ff" red="ff" type="rgb"/>
                             </Property>
                             <Property name="horizontalAlignment" type="int" value="0"/>
-                            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                              <Image iconType="3" name="/icon/taoDonHangMoi.png"/>
-                            </Property>
                             <Property name="text" type="java.lang.String" value="T&#x1ea0;O &#x110;&#x1a0;N H&#xc0;NG"/>
                             <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
                           </Properties>
@@ -468,9 +456,6 @@
                               <Color blue="ff" green="ff" red="ff" type="rgb"/>
                             </Property>
                             <Property name="horizontalAlignment" type="int" value="0"/>
-                            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                              <Image iconType="3" name="/icon/lichSuDonHang.png"/>
-                            </Property>
                             <Property name="text" type="java.lang.String" value="T&#x1ea0;O &#x110;&#x1a0;N H&#xc0;NG HO&#xc0;N"/>
                           </Properties>
                           <Constraints>
@@ -520,9 +505,6 @@
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
                         <Property name="horizontalAlignment" type="int" value="0"/>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/icon/thongKe.png"/>
-                        </Property>
                         <Property name="text" type="java.lang.String" value="TH&#x1ed0;NG K&#xca;"/>
                       </Properties>
                       <Constraints>
@@ -570,9 +552,6 @@
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
                         <Property name="horizontalAlignment" type="int" value="0"/>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/icon/troGiup.png"/>
-                        </Property>
                         <Property name="text" type="java.lang.String" value="TR&#x1ee2; GI&#xda;P"/>
                       </Properties>
                       <Constraints>
@@ -595,9 +574,6 @@
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="66" green="0" red="66" type="rgb"/>
-                </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/icon/dangXuat.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="&#x110;&#x103;ng xu&#x1ea5;t"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
