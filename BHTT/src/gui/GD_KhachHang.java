@@ -8,12 +8,12 @@ package gui;
  *
  * @author ACER
  */
-public class KhachHang extends javax.swing.JInternalFrame {
+public class GD_KhachHang extends javax.swing.JInternalFrame {
     private String username;
     /**
      * Creates new form QuanLyHoaDon
      */
-    public KhachHang(String _username) {
+    public GD_KhachHang(String _username) {
         this.setRootPaneCheckingEnabled(false);
         javax.swing.plaf.InternalFrameUI ui
                 = this.getUI();
@@ -22,7 +22,7 @@ public class KhachHang extends javax.swing.JInternalFrame {
         this.setFocusable(true);
         username=_username;
     }
-    public  KhachHang(){
+    public  GD_KhachHang(){
         initComponents();
         setVisible(true);
         

@@ -8,12 +8,12 @@ package gui;
  *
  * @author ACER
  */
-public class NVTroGiup extends javax.swing.JInternalFrame {
+public class GD_NVThongKe extends javax.swing.JInternalFrame {
     private String username;
     /**
      * Creates new form QuanLyHoaDon
      */
-    public NVTroGiup(String _username) {
+    public GD_NVThongKe(String _username) {
         this.setRootPaneCheckingEnabled(false);
         javax.swing.plaf.InternalFrameUI ui
                 = this.getUI();
@@ -40,7 +40,7 @@ public class NVTroGiup extends javax.swing.JInternalFrame {
         setFrameIcon(null);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel2.setText("Trợ giúp nhân viên");
+        jLabel2.setText("Thống kê");
 
         javax.swing.GroupLayout pnlMainLayout = new javax.swing.GroupLayout(pnlMain);
         pnlMain.setLayout(pnlMainLayout);
@@ -49,7 +49,7 @@ public class NVTroGiup extends javax.swing.JInternalFrame {
             .addGroup(pnlMainLayout.createSequentialGroup()
                 .addGap(122, 122, 122)
                 .addComponent(jLabel2)
-                .addContainerGap(894, Short.MAX_VALUE))
+                .addContainerGap(1044, Short.MAX_VALUE))
         );
         pnlMainLayout.setVerticalGroup(
             pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
