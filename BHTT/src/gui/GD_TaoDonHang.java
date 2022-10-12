@@ -37,7 +37,7 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame {
         pnlDongHo1 = new javax.swing.JPanel();
         jTextField9 = new javax.swing.JTextField();
         jTextField10 = new javax.swing.JTextField();
-        pnlKhachHang1 = new javax.swing.JPanel();
+        pnlThongTinCuaHang = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -127,7 +127,7 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame {
 
         pnlDau.add(pnlDongHo1);
 
-        pnlKhachHang1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlThongTinCuaHang.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -146,41 +146,41 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame {
 
         jLabel12.setText("thành phố Hồ Chí Minh");
 
-        javax.swing.GroupLayout pnlKhachHang1Layout = new javax.swing.GroupLayout(pnlKhachHang1);
-        pnlKhachHang1.setLayout(pnlKhachHang1Layout);
-        pnlKhachHang1Layout.setHorizontalGroup(
-            pnlKhachHang1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnlThongTinCuaHangLayout = new javax.swing.GroupLayout(pnlThongTinCuaHang);
+        pnlThongTinCuaHang.setLayout(pnlThongTinCuaHangLayout);
+        pnlThongTinCuaHangLayout.setHorizontalGroup(
+            pnlThongTinCuaHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(pnlKhachHang1Layout.createSequentialGroup()
+            .addGroup(pnlThongTinCuaHangLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addGroup(pnlKhachHang1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlThongTinCuaHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pnlKhachHang1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlThongTinCuaHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel12)
                     .addComponent(jLabel11)
                     .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26))
         );
-        pnlKhachHang1Layout.setVerticalGroup(
-            pnlKhachHang1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlKhachHang1Layout.createSequentialGroup()
+        pnlThongTinCuaHangLayout.setVerticalGroup(
+            pnlThongTinCuaHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlThongTinCuaHangLayout.createSequentialGroup()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlKhachHang1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlThongTinCuaHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlKhachHang1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlThongTinCuaHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(7, Short.MAX_VALUE))
         );
 
-        pnlDau.add(pnlKhachHang1);
+        pnlDau.add(pnlThongTinCuaHang);
 
         pnlKhachHang2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Thông tin khách hàng"));
 
@@ -473,7 +473,7 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame {
         pnlLastLayout.setHorizontalGroup(
             pnlLastLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlLastLayout.createSequentialGroup()
-                .addComponent(pnlDonHang, javax.swing.GroupLayout.DEFAULT_SIZE, 2848, Short.MAX_VALUE)
+                .addComponent(pnlDonHang, javax.swing.GroupLayout.DEFAULT_SIZE, 1023, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(pnlLastLayout.createSequentialGroup()
@@ -567,11 +567,11 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame {
     private javax.swing.JPanel pnlDau;
     private javax.swing.JPanel pnlDonHang;
     private javax.swing.JPanel pnlDongHo1;
-    private javax.swing.JPanel pnlKhachHang1;
     private javax.swing.JPanel pnlKhachHang2;
     private javax.swing.JPanel pnlLast;
     private javax.swing.JPanel pnlMain;
     private javax.swing.JPanel pnlTKnSL;
+    private javax.swing.JPanel pnlThongTinCuaHang;
     private javax.swing.JScrollPane tblDonHang;
     // End of variables declaration//GEN-END:variables
 }
