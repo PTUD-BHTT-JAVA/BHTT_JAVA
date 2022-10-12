@@ -241,7 +241,7 @@ public class GD_NhanVien extends javax.swing.JFrame {
         lblTaoHoaDon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTaoHoaDon.setText("TẠO ĐƠN HÀNG");
         lblTaoHoaDon.setVerifyInputWhenFocusTarget(false);
-        pnlTaoDonHang.add(lblTaoHoaDon, java.awt.BorderLayout.WEST);
+        pnlTaoDonHang.add(lblTaoHoaDon, java.awt.BorderLayout.CENTER);
 
         pnlTitleTaoDonHang.add(pnlTaoDonHang, java.awt.BorderLayout.EAST);
 
