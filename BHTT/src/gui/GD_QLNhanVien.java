@@ -4,6 +4,8 @@
  */
 package gui;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ACER
@@ -53,7 +55,7 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
         jButton8 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
+        btnTaoTaiKhoan = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
         pnlGiua = new javax.swing.JPanel();
         jTextField2 = new javax.swing.JTextField();
@@ -244,15 +246,20 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton9.setBackground(new java.awt.Color(97, 226, 106));
-        jButton9.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
-        jButton9.setForeground(new java.awt.Color(255, 255, 255));
-        jButton9.setText("Tạo tài khoản");
-        jButton9.setActionCommand("");
-        jButton9.setBorder(null);
-        jButton9.setBorderPainted(false);
-        jButton9.setDefaultCapable(false);
-        jButton9.setFocusPainted(false);
+        btnTaoTaiKhoan.setBackground(new java.awt.Color(97, 226, 106));
+        btnTaoTaiKhoan.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
+        btnTaoTaiKhoan.setForeground(new java.awt.Color(255, 255, 255));
+        btnTaoTaiKhoan.setText("Tạo tài khoản");
+        btnTaoTaiKhoan.setActionCommand("");
+        btnTaoTaiKhoan.setBorder(null);
+        btnTaoTaiKhoan.setBorderPainted(false);
+        btnTaoTaiKhoan.setDefaultCapable(false);
+        btnTaoTaiKhoan.setFocusPainted(false);
+        btnTaoTaiKhoan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTaoTaiKhoanActionPerformed(evt);
+            }
+        });
 
         jButton10.setBackground(new java.awt.Color(133, 103, 229));
         jButton10.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
@@ -270,7 +277,7 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
             .addGroup(pnlNutLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlNutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
+                    .addComponent(btnTaoTaiKhoan, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
                     .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -289,7 +296,7 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnTaoTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -411,14 +418,19 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField5ActionPerformed
 
+    private void btnTaoTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoTaiKhoanActionPerformed
+        String maNhanVien="NV002";
+        JOptionPane.showMessageDialog(this, "Bạn đã tạo tài khoản thành công. \n\n Tên đăng nhập : "+maNhanVien+"\n      Mật khẩu: 123456");
+    }//GEN-LAST:event_btnTaoTaiKhoanActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnTaoTaiKhoan;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBox4;

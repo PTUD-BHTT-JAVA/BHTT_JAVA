@@ -313,7 +313,7 @@
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jButton9" alignment="0" pref="318" max="32767" attributes="0"/>
+                              <Component id="btnTaoTaiKhoan" alignment="0" pref="318" max="32767" attributes="0"/>
                               <Component id="jButton5" alignment="0" max="32767" attributes="0"/>
                               <Component id="jButton6" alignment="1" max="32767" attributes="0"/>
                               <Component id="jButton8" alignment="0" max="32767" attributes="0"/>
@@ -335,7 +335,7 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jButton10" min="-2" pref="38" max="-2" attributes="0"/>
                           <EmptySpace pref="48" max="32767" attributes="0"/>
-                          <Component id="jButton9" min="-2" pref="38" max="-2" attributes="0"/>
+                          <Component id="btnTaoTaiKhoan" min="-2" pref="38" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -405,7 +405,7 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton9">
+                <Component class="javax.swing.JButton" name="btnTaoTaiKhoan">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="6a" green="e2" red="61" type="rgb"/>
@@ -425,6 +425,9 @@
                     <Property name="defaultCapable" type="boolean" value="false"/>
                     <Property name="focusPainted" type="boolean" value="false"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTaoTaiKhoanActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="jButton10">
                   <Properties>
