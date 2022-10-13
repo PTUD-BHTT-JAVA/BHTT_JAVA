@@ -1,20 +1,35 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package connectDB;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-//Huy 
+
 public class ConnectDB {
-    public static Connection opConnection() throws ClassNotFoundException, SQLException{
-        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        String connectionUrl = "jdbc:sqlserver://localhost;database=BHTT"; 
-        String user = "sa";
-        String pass = "123456";
-        Connection con = DriverManager.getConnection(connectionUrl,user,pass);
+
+    public static Connection con = null;
+    private static ConnectDB instance = new ConnectDB();
+
+    public static ConnectDB getInstance() {
+        return instance;
+    }
+
+    public void connect() throws SQLException {
+        String url = "jdbc:sqlserver://localhost:1433;databasename=BHTT";
+        String user = "bac";
+        String password = "123";
+        con = DriverManager.getConnection(url, user, password);
+    }
+
+    public void disconnect() {
+        if (con != null)
+	try {
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static Connection getConnection() {
         return con;
     }
 }
