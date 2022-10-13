@@ -32,7 +32,6 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        utilCalendarModel1 = new org.jdatepicker.impl.UtilCalendarModel();
         pnlMain = new javax.swing.JPanel();
         pnlDau = new javax.swing.JPanel();
         pnlDongHo = new javax.swing.JPanel();
@@ -205,6 +204,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame {
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Tìm");
+        jButton1.setFocusPainted(false);
 
         javax.swing.GroupLayout pnlLocLayout = new javax.swing.GroupLayout(pnlLoc);
         pnlLoc.setLayout(pnlLocLayout);
@@ -256,6 +256,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame {
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Xem chi tiết đơn hàng");
+        jButton2.setFocusPainted(false);
 
         javax.swing.GroupLayout pnlTimXemLayout = new javax.swing.GroupLayout(pnlTimXem);
         pnlTimXem.setLayout(pnlTimXemLayout);
@@ -334,6 +335,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame {
         jButton5.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jButton5.setForeground(new java.awt.Color(255, 255, 255));
         jButton5.setText("Hoàn");
+        jButton5.setFocusPainted(false);
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -344,6 +346,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame {
         jButton6.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jButton6.setForeground(new java.awt.Color(255, 255, 255));
         jButton6.setText("Sửa số lượng hoàn");
+        jButton6.setFocusPainted(false);
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
@@ -354,6 +357,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame {
         jButton8.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jButton8.setForeground(new java.awt.Color(255, 255, 255));
         jButton8.setText("Hủy");
+        jButton8.setFocusPainted(false);
 
         jSpinner1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
@@ -428,7 +432,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame {
         jButton7.setForeground(new java.awt.Color(255, 255, 255));
         jButton7.setText("Tạo hóa đơn hoàn trả");
         jButton7.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(251, 255, 235), 4, true));
-        jButton7.setBorderPainted(false);
+        jButton7.setFocusPainted(false);
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
@@ -526,6 +530,5 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame {
     private javax.swing.JPanel pnlNutTao;
     private javax.swing.JPanel pnlThongTinCuaHang;
     private javax.swing.JPanel pnlTimXem;
-    private org.jdatepicker.impl.UtilCalendarModel utilCalendarModel1;
     // End of variables declaration//GEN-END:variables
 }
