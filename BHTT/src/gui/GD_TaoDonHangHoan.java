@@ -332,7 +332,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame {
         pnlNut.setPreferredSize(new java.awt.Dimension(200, 300));
 
         jButton5.setBackground(new java.awt.Color(94, 153, 94));
-        jButton5.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        jButton5.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
         jButton5.setForeground(new java.awt.Color(255, 255, 255));
         jButton5.setText("Hoàn");
         jButton5.setFocusPainted(false);
@@ -343,7 +343,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame {
         });
 
         jButton6.setBackground(new java.awt.Color(94, 153, 94));
-        jButton6.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        jButton6.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
         jButton6.setForeground(new java.awt.Color(255, 255, 255));
         jButton6.setText("Sửa số lượng hoàn");
         jButton6.setFocusPainted(false);
@@ -354,14 +354,14 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame {
         });
 
         jButton8.setBackground(new java.awt.Color(224, 83, 83));
-        jButton8.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        jButton8.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
         jButton8.setForeground(new java.awt.Color(255, 255, 255));
         jButton8.setText("Hủy");
         jButton8.setFocusPainted(false);
 
-        jSpinner1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jSpinner1.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
 
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel10.setText("Số lượng:");
 
         javax.swing.GroupLayout pnlNutLayout = new javax.swing.GroupLayout(pnlNut);
@@ -395,7 +395,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame {
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(169, Short.MAX_VALUE))
+                .addContainerGap(167, Short.MAX_VALUE))
         );
 
         pnlHoan.add(pnlNut);
