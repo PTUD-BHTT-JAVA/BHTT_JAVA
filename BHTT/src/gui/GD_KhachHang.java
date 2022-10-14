@@ -4,16 +4,35 @@
  */
 package gui;
 
+import connectDB.ConnectDB;
+import dao.DAO_KhachHang;
+import dao.DAO_LoaiKhachHang;
+import dao.DAO_NhaCungCap;
+import entity.KhachHang;
+import entity.LoaiKhachHang;
+import entity.NhaCungCap;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author ACER
  */
 public class GD_KhachHang extends javax.swing.JInternalFrame {
+    private DefaultTableModel modelKhachHang;
     private String username;
+    private DAO_KhachHang kh;
+    private final DAO_LoaiKhachHang lkh;
     /**
      * Creates new form QuanLyHoaDon
      */
     public GD_KhachHang(String _username) {
+        try {
+             ConnectDB.getInstance().connect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         this.setRootPaneCheckingEnabled(false);
         javax.swing.plaf.InternalFrameUI ui
                 = this.getUI();
@@ -21,11 +40,24 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
         initComponents();
         this.setFocusable(true);
         username=_username;
-    }
-    public  GD_KhachHang(){
-        initComponents();
-        setVisible(true);
+        lkh = new DAO_LoaiKhachHang();
+        ArrayList<LoaiKhachHang> listLKH = lkh.getalltbLoaiKhachHang();
+        for (LoaiKhachHang loaiKH : listLKH) {
+            cboLoaiKH.addItem(loaiKH.getMaLoaiKH());
+        }
+        modelKhachHang = (DefaultTableModel) tableKhachHang.getModel();
+        DocDuLieuLenTable();
         
+    }
+    
+    private void DocDuLieuLenTable(){
+        kh = new DAO_KhachHang();
+        List<KhachHang> list = kh.getalltbKhachHnag();
+        for (KhachHang kh : list) {
+            modelKhachHang.addRow(new Object[]{
+                kh.getMaKH(),kh.getTenKH(),kh.getSoDienThoai(),kh.getEmail(),kh.isGioiTinh(),kh.getLoaiKhachHang().getMaLoaiKH(),kh.getDiemTichLuy()
+            });
+        }
     }
 
     /**
@@ -62,11 +94,11 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
         btnGuiMail = new javax.swing.JButton();
         pnlCenter = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableKhachHang = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cboLoaiKH = new javax.swing.JComboBox<>();
         txtTimKH = new javax.swing.JTextField();
-        btnTimKH = new javax.swing.JButton();
+        btnTim = new javax.swing.JButton();
 
         setBorder(null);
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -236,26 +268,22 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
 
         getContentPane().add(pnlTop, java.awt.BorderLayout.PAGE_START);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableKhachHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Mã", "Tên khách hàng", "Số điện thoại", "Email", "Giới tính", "Phân loại", "Điểm tích lũy"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tableKhachHang);
 
         jLabel8.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel8.setText("Phân loại");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả" }));
+        cboLoaiKH.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả" }));
 
-        btnTimKH.setText("Tìm");
-        btnTimKH.setBorder(null);
+        btnTim.setText("Tìm");
 
         javax.swing.GroupLayout pnlCenterLayout = new javax.swing.GroupLayout(pnlCenter);
         pnlCenter.setLayout(pnlCenterLayout);
@@ -266,29 +294,26 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
                 .addGap(34, 34, 34)
                 .addComponent(jLabel8)
                 .addGap(70, 70, 70)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(293, 293, 293)
-                .addComponent(btnTimKH, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(cboLoaiKH, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(231, 231, 231)
+                .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
                 .addComponent(txtTimKH, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(405, Short.MAX_VALUE))
         );
         pnlCenterLayout.setVerticalGroup(
             pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCenterLayout.createSequentialGroup()
+                .addContainerGap(28, Short.MAX_VALUE)
                 .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlCenterLayout.createSequentialGroup()
-                        .addContainerGap(28, Short.MAX_VALUE)
-                        .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCenterLayout.createSequentialGroup()
-                                .addGap(0, 15, Short.MAX_VALUE)
-                                .addComponent(txtTimKH, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel8)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(pnlCenterLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnTimKH, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCenterLayout.createSequentialGroup()
+                        .addGap(0, 15, Short.MAX_VALUE)
+                        .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtTimKH, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel8)
+                        .addComponent(cboLoaiKH, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(47, 47, 47)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -304,10 +329,10 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnCapNhat;
     private javax.swing.JButton btnGuiMail;
     private javax.swing.JButton btnThemKH;
-    private javax.swing.JButton btnTimKH;
+    private javax.swing.JButton btnTim;
     private javax.swing.JButton btnXoaKH;
     private javax.swing.JButton btnXoaTrang;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cboLoaiKH;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -317,13 +342,13 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JPanel pnlButton;
     private javax.swing.JPanel pnlCenter;
     private javax.swing.JPanel pnlThongTin;
     private javax.swing.JPanel pnlTop;
     private javax.swing.JRadioButton radNam;
     private javax.swing.JRadioButton radNu;
+    private javax.swing.JTable tableKhachHang;
     private javax.swing.JTextField txtDiemTichLuy;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtPhanLoai;

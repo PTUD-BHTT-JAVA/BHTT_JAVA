@@ -12,14 +12,14 @@ import java.util.Objects;
  */
 public class LoaiKhachHang {
     private String maLoaiKH;
-    private String tenLoai;
+    private String tenLoaiKH;
 
     public LoaiKhachHang() {
     }
 
-    public LoaiKhachHang(String maLoaiKH, String tenLoai) {
+    public LoaiKhachHang(String maLoaiKH, String tenLoaiKH) {
         this.maLoaiKH = maLoaiKH;
-        this.tenLoai = tenLoai;
+        this.tenLoaiKH = tenLoaiKH;
     }
 
     public LoaiKhachHang(String maLoaiKH) {
@@ -35,16 +35,16 @@ public class LoaiKhachHang {
     }
 
     public String getTenLoai() {
-        return tenLoai;
+        return tenLoaiKH;
     }
 
     public void setTenLoai(String tenLoai) {
-        this.tenLoai = tenLoai;
+        this.tenLoaiKH = tenLoai;
     }
 
     @Override
     public String toString() {
-        return "LoaiKhachHang{" + "maLoaiKH=" + maLoaiKH + ", tenLoai=" + tenLoai + '}';
+        return "LoaiKhachHang{" + "maLoaiKH=" + maLoaiKH + ", tenLoai=" + tenLoaiKH + '}';
     }
 
     @Override
