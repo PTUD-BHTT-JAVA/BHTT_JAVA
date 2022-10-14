@@ -3,7 +3,9 @@ package dao;
 import connectDB.ConnectDB;
 import entity.KhachHang;
 import entity.LoaiKhachHang;
+import entity.NhanVien;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -11,7 +13,7 @@ import java.util.ArrayList;
 public class DAO_KhachHang {
     private ArrayList<KhachHang> dsKH;
 
-    public ArrayList<KhachHang> getalltbKhachHnag() {
+    public ArrayList<KhachHang> getalltbKhachHang() {
         dsKH = new ArrayList<KhachHang>();
         try {
             ConnectDB.getInstance();
@@ -35,4 +37,5 @@ public class DAO_KhachHang {
         }
         return dsKH;
     }
+        //    Thêm khách hàng trên database
 }
