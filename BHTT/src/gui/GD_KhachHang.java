@@ -52,7 +52,7 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
     
     private void DocDuLieuLenTable(){
         kh = new DAO_KhachHang();
-        List<KhachHang> list = kh.getalltbKhachHnag();
+        List<KhachHang> list = kh.getalltbKhachHang();
         for (KhachHang kh : list) {
             modelKhachHang.addRow(new Object[]{
                 kh.getMaKH(),kh.getTenKH(),kh.getSoDienThoai(),kh.getEmail(),kh.isGioiTinh(),kh.getLoaiKhachHang().getMaLoaiKH(),kh.getDiemTichLuy()
