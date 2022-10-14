@@ -23,6 +23,8 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.tools.DocumentationTool;
 import keeptoo.KGradientPanel;
 
@@ -401,7 +403,9 @@ public class GD_QuanLy extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
+        com.jtattoo.plaf.mcwin.McWinLookAndFeel.setTheme("Green", "INSERT YOUR LICENSE KEY HERE", "my company");
+        UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel"); 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new GD_QuanLy(username);

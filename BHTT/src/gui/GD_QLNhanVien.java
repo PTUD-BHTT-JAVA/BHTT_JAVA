@@ -52,11 +52,11 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         pnlNut = new javax.swing.JPanel();
-        jButton8 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        btnTaoTaiKhoan = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
         pnlGiua = new javax.swing.JPanel();
         jTextField2 = new javax.swing.JTextField();
         jComboBox3 = new javax.swing.JComboBox<>();
@@ -161,7 +161,7 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
                 .addGroup(pnlThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlThongTinLayout.createSequentialGroup()
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                         .addComponent(jLabel10)
                         .addGap(31, 31, 31)
                         .addComponent(jRadioButton1)
@@ -200,75 +200,53 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
                         .addComponent(jRadioButton1)
                         .addComponent(jRadioButton2)
                         .addComponent(jLabel10)))
-                .addGap(18, 18, 18)
+                .addGap(58, 58, 58)
                 .addGroup(pnlThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pnlTren.add(pnlThongTin, java.awt.BorderLayout.WEST);
-        pnlThongTin.getAccessibleContext().setAccessibleName("Thông tin nhân viên");
 
         pnlNut.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         pnlNut.setMaximumSize(new java.awt.Dimension(300, 32767));
         pnlNut.setPreferredSize(new java.awt.Dimension(300, 300));
 
-        jButton8.setBackground(new java.awt.Color(133, 103, 229));
-        jButton8.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
-        jButton8.setForeground(new java.awt.Color(255, 255, 255));
-        jButton8.setText("Sửa thông tin nhân viên");
-        jButton8.setBorder(null);
-        jButton8.setBorderPainted(false);
-        jButton8.setDefaultCapable(false);
-        jButton8.setFocusPainted(false);
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
+        jButton2.setText("Tạo tài khoản");
 
-        jButton6.setBackground(new java.awt.Color(133, 103, 229));
-        jButton6.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(255, 255, 255));
-        jButton6.setText("Xóa nhân viên");
-        jButton6.setBorder(null);
-        jButton6.setBorderPainted(false);
-        jButton6.setDefaultCapable(false);
-        jButton6.setFocusPainted(false);
-
-        jButton5.setBackground(new java.awt.Color(133, 103, 229));
-        jButton5.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setText("Thêm nhân viên");
-        jButton5.setBorder(null);
-        jButton5.setBorderPainted(false);
-        jButton5.setDefaultCapable(false);
-        jButton5.setFocusPainted(false);
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
+        jButton1.setText("Thêm nhân viên");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
-        btnTaoTaiKhoan.setBackground(new java.awt.Color(97, 226, 106));
-        btnTaoTaiKhoan.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
-        btnTaoTaiKhoan.setForeground(new java.awt.Color(255, 255, 255));
-        btnTaoTaiKhoan.setText("Tạo tài khoản");
-        btnTaoTaiKhoan.setActionCommand("");
-        btnTaoTaiKhoan.setBorder(null);
-        btnTaoTaiKhoan.setBorderPainted(false);
-        btnTaoTaiKhoan.setDefaultCapable(false);
-        btnTaoTaiKhoan.setFocusPainted(false);
-        btnTaoTaiKhoan.addActionListener(new java.awt.event.ActionListener() {
+        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
+        jButton3.setText("Xóa trắng");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTaoTaiKhoanActionPerformed(evt);
+                jButton3ActionPerformed(evt);
             }
         });
 
-        jButton10.setBackground(new java.awt.Color(133, 103, 229));
-        jButton10.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
-        jButton10.setForeground(new java.awt.Color(255, 255, 255));
-        jButton10.setText("Xóa trắng");
-        jButton10.setBorder(null);
-        jButton10.setBorderPainted(false);
-        jButton10.setDefaultCapable(false);
-        jButton10.setFocusPainted(false);
+        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
+        jButton4.setText("Cập nhật thông tin nhân viên");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jButton7.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
+        jButton7.setText("Xóa nhân viên");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlNutLayout = new javax.swing.GroupLayout(pnlNut);
         pnlNut.setLayout(pnlNutLayout);
@@ -277,27 +255,27 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
             .addGroup(pnlNutLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlNutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnTaoTaiKhoan, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE))
+                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pnlNutLayout.setVerticalGroup(
             pnlNutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlNutLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                .addComponent(btnTaoTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
         );
 
         pnlTren.add(pnlNut, java.awt.BorderLayout.CENTER);
@@ -348,14 +326,15 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
             pnlGiuaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlGiuaLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addGroup(pnlGiuaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlGiuaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlGiuaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel11)
                         .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel13)))
+                        .addComponent(jLabel13))
+                    .addGroup(pnlGiuaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel12)
+                        .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -406,10 +385,6 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
-
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField4ActionPerformed
@@ -418,19 +393,30 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField5ActionPerformed
 
-    private void btnTaoTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoTaiKhoanActionPerformed
-        String maNhanVien="NV002";
-        JOptionPane.showMessageDialog(this, "Bạn đã tạo tài khoản thành công. \n\n Tên đăng nhập : "+maNhanVien+"\n      Mật khẩu: 123456");
-    }//GEN-LAST:event_btnTaoTaiKhoanActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton7ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnTaoTaiKhoan;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton7;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBox4;
