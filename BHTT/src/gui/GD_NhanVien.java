@@ -407,7 +407,7 @@ public class GD_NhanVien extends javax.swing.JFrame {
     }//GEN-LAST:event_pnlDonHangMouseClicked
 
     private void btnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatActionPerformed
-        if (JOptionPane.showConfirmDialog(this, "Bạn có muốn thoát ?", "Thoát", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+        if (JOptionPane.showConfirmDialog(this, "Bạn có muốn đăng xuất ?", "Đăng xuất", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             this.setVisible(false);
             try {
                 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -431,7 +431,7 @@ public class GD_NhanVien extends javax.swing.JFrame {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         int confirmed = JOptionPane.showConfirmDialog(null,
-                "Bạn có chắc muốn tắt chương trình ?", "Tắt chương trình",
+                "Bạn có chắc muốn thoát chương trình ?", "Thoát chương trình",
                 JOptionPane.YES_NO_OPTION);
 
         if (confirmed == JOptionPane.YES_OPTION) {

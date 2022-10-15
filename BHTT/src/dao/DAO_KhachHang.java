@@ -3,7 +3,6 @@ package dao;
 import connectDB.ConnectDB;
 import entity.KhachHang;
 import entity.LoaiKhachHang;
-import entity.NhanVien;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -66,8 +65,24 @@ public class DAO_KhachHang {
         }
         return n > 0;
     }
-    
-    
-          
-      
+//    Xóa khách hàng
+      public void xoaKhachHang(String maKH) {
+        Connection con = ConnectDB.getConnection();
+        PreparedStatement stmt = null;
+        String sql = "delete from KhachHang where maKH = ?";
+        try {
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1,maKH);
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+      public KhachHang getElement(int index) {
+        if (index < 0 || index > dsKH.size()) {
+            return null;
+        }
+        return dsKH.get(index);
+    }
+         
 }
