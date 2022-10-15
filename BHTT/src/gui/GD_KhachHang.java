@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package gui;
 
 import connectDB.ConnectDB;
@@ -13,6 +10,7 @@ import entity.LoaiKhachHang;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -166,12 +164,22 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
 
         btnXoaKH.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
         btnXoaKH.setText("Xóa khách hàng");
+        btnXoaKH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaKHActionPerformed(evt);
+            }
+        });
 
         btnCapNhat.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
         btnCapNhat.setText("Cật nhập thông tin");
 
         btnXoaTrang.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
         btnXoaTrang.setText("Xóa trắng");
+        btnXoaTrang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaTrangActionPerformed(evt);
+            }
+        });
 
         btnGuiMail.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
         btnGuiMail.setText("Gửi mail");
@@ -319,7 +327,18 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
 
         cboLoaiKH.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả" }));
 
+        txtTimKH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTimKHActionPerformed(evt);
+            }
+        });
+
         btnTim.setText("Tìm");
+        btnTim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlCenterLayout = new javax.swing.GroupLayout(pnlCenter);
         pnlCenter.setLayout(pnlCenterLayout);
@@ -327,30 +346,26 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
             pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1)
             .addGroup(pnlCenterLayout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addGap(40, 40, 40)
                 .addComponent(jLabel8)
-                .addGap(70, 70, 70)
+                .addGap(52, 52, 52)
                 .addComponent(cboLoaiKH, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(231, 231, 231)
+                .addGap(212, 212, 212)
                 .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
+                .addGap(44, 44, 44)
                 .addComponent(txtTimKH, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(405, Short.MAX_VALUE))
+                .addContainerGap(430, Short.MAX_VALUE))
         );
         pnlCenterLayout.setVerticalGroup(
             pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCenterLayout.createSequentialGroup()
-                .addContainerGap(28, Short.MAX_VALUE)
-                .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCenterLayout.createSequentialGroup()
-                        .addGap(0, 15, Short.MAX_VALUE)
-                        .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtTimKH, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel8)
-                        .addComponent(cboLoaiKH, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(47, 47, 47)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(cboLoaiKH, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTimKH, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -384,6 +399,32 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
             e2.printStackTrace();
         }
     }//GEN-LAST:event_btnThemKHActionPerformed
+
+    private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnTimActionPerformed
+
+    private void txtTimKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimKHActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTimKHActionPerformed
+
+    private void btnXoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrangActionPerformed
+       txtTenKH.setText("");
+       txtEmail.setText("");
+       txtSoDienThoai.setText("");
+       txtDiemTichLuy.setText("");
+       txtPhanLoai.setText("");
+    }//GEN-LAST:event_btnXoaTrangActionPerformed
+
+    private void btnXoaKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaKHActionPerformed
+      if (JOptionPane.showConfirmDialog(this, "Bạn có muốn thoát ?", "Thoát", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            int r = tableKhachHang.getSelectedRow();
+            modelKhachHang.removeRow(r); // xóa trong table model
+            KhachHang kh1 = kh.getElement(r);
+            kh.xoaKhachHang(kh1.getMaKH());
+            JOptionPane.showMessageDialog(rootPane,"Xóa thành công");
+        }
+    }//GEN-LAST:event_btnXoaKHActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
