@@ -34,8 +34,7 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
             e.printStackTrace();
         }
         this.setRootPaneCheckingEnabled(false);
-        javax.swing.plaf.InternalFrameUI ui
-                = this.getUI();
+        javax.swing.plaf.InternalFrameUI ui = this.getUI();
         ((javax.swing.plaf.basic.BasicInternalFrameUI) ui).setNorthPane(null);
         initComponents();
         this.setFocusable(true);
@@ -47,15 +46,23 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
         }
         modelKhachHang = (DefaultTableModel) tableKhachHang.getModel();
         DocDuLieuLenTable();
-        
     }
-    
+    private String setMaNV(){
+        String s = "KH";
+        int ma= kh.getalltbKhachHang().size();
+        if (ma<9)
+            s=s+ "00"+ (ma+1);
+        else
+            s=s+"0"+(ma+1);
+        return s;
+    }
+
     private void DocDuLieuLenTable(){
         kh = new DAO_KhachHang();
         List<KhachHang> list = kh.getalltbKhachHang();
         for (KhachHang kh : list) {
             modelKhachHang.addRow(new Object[]{
-                kh.getMaKH(),kh.getTenKH(),kh.getSoDienThoai(),kh.getEmail(),kh.isGioiTinh(),kh.getLoaiKhachHang().getMaLoaiKH(),kh.getDiemTichLuy()
+                kh.getMaKH(),kh.getTenKH(),kh.getSoDienThoai(),kh.getEmail(),kh.isGioiTinh()== true ? "Nam" : "Nữ",kh.getLoaiKhachHang().getMaLoaiKH(),kh.getDiemTichLuy()
             });
         }
     }
@@ -126,6 +133,8 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
 
         txtPhanLoai.setEditable(false);
 
+        txtDiemTichLuy.setEditable(false);
+
         jLabel7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel7.setText("Giới tính");
 
@@ -149,6 +158,11 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
 
         btnThemKH.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
         btnThemKH.setText("Thêm khách hàng");
+        btnThemKH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemKHActionPerformed(evt);
+            }
+        });
 
         btnXoaKH.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
         btnXoaKH.setText("Xóa khách hàng");
@@ -353,6 +367,23 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
     private void radNamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radNamActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_radNamActionPerformed
+
+    private void btnThemKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemKHActionPerformed
+        String tenKH = txtTenKH.getText();
+        String soDienThoai = txtSoDienThoai.getText();
+        String email = txtEmail.getText();
+        boolean gioiTinh = radNam.isSelected();
+        String phanloai = "LKH002";
+        int diemTichLuy = 0;
+        KhachHang khachhang = new KhachHang(setMaNV(), tenKH, soDienThoai, diemTichLuy, email, gioiTinh,new LoaiKhachHang(phanloai));
+        try{
+            kh.themKhachHang(khachhang);
+            modelKhachHang.addRow(new Object[]{khachhang.getMaKH(), khachhang.getTenKH(), khachhang.getSoDienThoai(),
+                khachhang.getEmail(),khachhang.isGioiTinh()== true ? "Nam": "Nữ", khachhang.getLoaiKhachHang().getMaLoaiKH(),khachhang.getDiemTichLuy()});
+        } catch (Exception e2) {
+            e2.printStackTrace();
+        }
+    }//GEN-LAST:event_btnThemKHActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

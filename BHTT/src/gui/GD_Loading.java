@@ -24,6 +24,7 @@ public class GD_Loading extends javax.swing.JFrame {
         lplTitle = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         lplPhanTram.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lplPhanTram.setForeground(new java.awt.Color(0, 51, 255));

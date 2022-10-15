@@ -5,7 +5,7 @@
 package dao;
 
 import connectDB.ConnectDB;
-import entity.KhachHang;
+
 import entity.LoaiKhachHang;
 import java.sql.Connection;
 import java.sql.ResultSet;
