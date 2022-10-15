@@ -17,6 +17,7 @@ public class GD_DangNhap extends javax.swing.JFrame {
      */
     public GD_DangNhap() {
         initComponents();
+        
     }
 
     /**
