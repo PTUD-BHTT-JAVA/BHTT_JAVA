@@ -50,8 +50,7 @@ public class MauSac {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 47 * hash + Objects.hashCode(this.maMau);
-        hash = 47 * hash + Objects.hashCode(this.tenMau);
+        hash = 59 * hash + Objects.hashCode(this.maMau);
         return hash;
     }
 
@@ -67,11 +66,8 @@ public class MauSac {
             return false;
         }
         final MauSac other = (MauSac) obj;
-        if (!Objects.equals(this.maMau, other.maMau)) {
-            return false;
-        }
-        return Objects.equals(this.tenMau, other.tenMau);
+        return Objects.equals(this.maMau, other.maMau);
     }
-    
+
     
 }

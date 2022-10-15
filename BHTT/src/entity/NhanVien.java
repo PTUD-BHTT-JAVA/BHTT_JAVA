@@ -26,7 +26,6 @@ public class NhanVien {
         this.maNV = maNV;
     }
     
-
     public NhanVien(String maNV, String tenNV, String CMND, String soDienThoai, boolean gioiTinh, double luongCoBan, LoaiNhanVien loaiNhanVien) {
         this.maNV = maNV;
         this.tenNV = tenNV;
@@ -100,14 +99,8 @@ public class NhanVien {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 83 * hash + Objects.hashCode(this.maNV);
-        hash = 83 * hash + Objects.hashCode(this.tenNV);
-        hash = 83 * hash + Objects.hashCode(this.CMND);
-        hash = 83 * hash + Objects.hashCode(this.soDienThoai);
-        hash = 83 * hash + (this.gioiTinh ? 1 : 0);
-        hash = 83 * hash + (int) (Double.doubleToLongBits(this.luongCoBan) ^ (Double.doubleToLongBits(this.luongCoBan) >>> 32));
-        hash = 83 * hash + Objects.hashCode(this.loaiNhanVien);
+        int hash = 7;
+        hash = 79 * hash + Objects.hashCode(this.maNV);
         return hash;
     }
 
@@ -123,27 +116,10 @@ public class NhanVien {
             return false;
         }
         final NhanVien other = (NhanVien) obj;
-        if (this.gioiTinh != other.gioiTinh) {
-            return false;
-        }
-        if (Double.doubleToLongBits(this.luongCoBan) != Double.doubleToLongBits(other.luongCoBan)) {
-            return false;
-        }
-        if (!Objects.equals(this.maNV, other.maNV)) {
-            return false;
-        }
-        if (!Objects.equals(this.tenNV, other.tenNV)) {
-            return false;
-        }
-        if (!Objects.equals(this.CMND, other.CMND)) {
-            return false;
-        }
-        if (!Objects.equals(this.soDienThoai, other.soDienThoai)) {
-            return false;
-        }
-        return Objects.equals(this.loaiNhanVien, other.loaiNhanVien);
+        return Objects.equals(this.maNV, other.maNV);
     }
-    
+
+   
     
     
 }

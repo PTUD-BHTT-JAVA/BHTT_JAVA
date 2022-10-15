@@ -49,9 +49,8 @@ public class LoaiSanPham {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 31 * hash + Objects.hashCode(this.maLoaiSP);
-        hash = 31 * hash + Objects.hashCode(this.tenLoaiSP);
+        int hash = 5;
+        hash = 37 * hash + Objects.hashCode(this.maLoaiSP);
         return hash;
     }
 
@@ -67,11 +66,10 @@ public class LoaiSanPham {
             return false;
         }
         final LoaiSanPham other = (LoaiSanPham) obj;
-        if (!Objects.equals(this.maLoaiSP, other.maLoaiSP)) {
-            return false;
-        }
-        return Objects.equals(this.tenLoaiSP, other.tenLoaiSP);
+        return Objects.equals(this.maLoaiSP, other.maLoaiSP);
     }
+
+    
     
     
 }
