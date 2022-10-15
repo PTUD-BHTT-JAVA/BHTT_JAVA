@@ -8,6 +8,7 @@ import connectDB.ConnectDB;
 import entity.NhanVien;
 import entity.LoaiNhanVien;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -18,6 +19,8 @@ import java.util.List;
  * @author Trinh Cui Bap
  */
 public class DAO_NhanVien {
+
+    DAO_LoaiNhanVien lnvDAO;
     public List<NhanVien> layTatCaNhanVienVaoBang() {
         List<NhanVien> ds = new ArrayList<>();
         try{
@@ -42,4 +45,25 @@ public class DAO_NhanVien {
         return ds;
     }
     
+    public NhanVien layNhanVienBangMa(String maNV) {
+        lnvDAO=new DAO_LoaiNhanVien();
+        try(
+            Connection con = ConnectDB.opConnection();
+            PreparedStatement pts = con.prepareStatement("Select * from NhanVien where maNV =? ")){
+            pts.setString(1,maNV );
+                try(ResultSet rs = pts.executeQuery()){
+                    if (rs.next()){
+                        LoaiNhanVien lnv= lnvDAO.timLoaiNVBangMa(rs.getString("maLoaiNV"));
+                        NhanVien nv=new NhanVien(rs.getString("maNV"),rs.getString("tenNV"),rs.getString("CMND"),rs.getString("soDienThoai"),rs.getBoolean("gioiTinh"),rs.getDouble("luongCoBan"),lnv);
+                        return nv;
+                    }
+                }
+            }catch(Exception e){
+           
+       }
+       return null;
+   
+    }
+    
 }
+

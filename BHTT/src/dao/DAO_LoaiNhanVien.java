@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import entity.LoaiNhanVien;
 import connectDB.ConnectDB;
+import entity.NhanVien;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 /**
  *
@@ -33,5 +35,22 @@ public class DAO_LoaiNhanVien {
         }catch (SQLException e) {
         }
         return ds;
+    }
+
+    public LoaiNhanVien timLoaiNVBangMa(String ma) {
+        try(
+            Connection con = ConnectDB.opConnection();
+            PreparedStatement pts = con.prepareStatement("Select * from LoaiNhanVien where maLoaiNV = ? ")){
+            pts.setString(1,ma );
+                try(ResultSet rs = pts.executeQuery()){
+                    if (rs.next()){
+                        LoaiNhanVien lnv=new LoaiNhanVien(rs.getString("maLoaiNV"),rs.getString("tenLoaiNV"));
+                        return lnv;
+                    }
+                }
+        }catch(Exception e){
+           e.printStackTrace();
+       }
+       return null;
     }
 }

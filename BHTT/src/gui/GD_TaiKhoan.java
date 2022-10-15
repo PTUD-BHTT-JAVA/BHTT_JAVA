@@ -4,7 +4,14 @@
  */
 package gui;
 
+import connectDB.ConnectDB;
+import dao.DAO_NhanVien;
+import dao.DAO_TaiKhoan;
+import entity.NhanVien;
+import entity.TaiKhoan;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -12,6 +19,8 @@ import javax.swing.JOptionPane;
  */
 public class GD_TaiKhoan extends javax.swing.JInternalFrame {
     private String username;
+    private DAO_TaiKhoan tk;
+    private DefaultTableModel modelTaiKhoan;
     /**
      * Creates new form QuanLyHoaDon
      */
@@ -23,6 +32,21 @@ public class GD_TaiKhoan extends javax.swing.JInternalFrame {
         initComponents();
         this.setFocusable(true);
         username=_username;
+        try {
+             ConnectDB.getInstance().connect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        modelTaiKhoan=(DefaultTableModel)tblTaiKhoan.getModel();
+        DocDuLieuLenTable();
+    }
+    private void DocDuLieuLenTable(){
+        tk = new DAO_TaiKhoan();
+        List<TaiKhoan> list =tk.layTatCaTaiKhoanVaoBang();
+        for (TaiKhoan tk : list) {
+            modelTaiKhoan.addRow(new Object[]{
+                tk.getTenDN(),tk.getMatKhau()});
+        }
     }
 
     /**
@@ -50,7 +74,7 @@ public class GD_TaiKhoan extends javax.swing.JInternalFrame {
         jLabel13 = new javax.swing.JLabel();
         pnlDuoi = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblTaiKhoan = new javax.swing.JTable();
 
         setBorder(null);
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -200,19 +224,16 @@ public class GD_TaiKhoan extends javax.swing.JInternalFrame {
 
         jScrollPane1.setPreferredSize(new java.awt.Dimension(452, 200));
 
-        jTable1.setAutoCreateRowSorter(true);
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblTaiKhoan.setAutoCreateRowSorter(true);
+        tblTaiKhoan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Tên đăng nhập", "Mật khẩu", "Tên nhân viên", "Chức vụ"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblTaiKhoan);
 
         pnlDuoi.add(jScrollPane1);
 
@@ -244,7 +265,6 @@ public class GD_TaiKhoan extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
@@ -254,5 +274,6 @@ public class GD_TaiKhoan extends javax.swing.JInternalFrame {
     private javax.swing.JPanel pnlNut;
     private javax.swing.JPanel pnlThongTin;
     private javax.swing.JPanel pnlTren;
+    private javax.swing.JTable tblTaiKhoan;
     // End of variables declaration//GEN-END:variables
 }

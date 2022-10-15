@@ -18,6 +18,10 @@ import java.util.List;
  * @author Trinh Cui Bap
  */
 public class DAO_TaiKhoan {
+
+    private String SELECT_USERNAME= "select tenDN from TaiKhoan where tenDN = ?";
+    private String SELECT_PASSWORD ="select matKhau from TaiKhoan where tenDN = ?";
+
     public List<TaiKhoan> layTatCaTaiKhoanVaoBang() {
         List<TaiKhoan> ds = new ArrayList<>();
         try{
@@ -37,38 +41,26 @@ public class DAO_TaiKhoan {
         }
         return ds;
     }
-    public String timTenDangNhap(String tenDN){
-       String tenDangNhap = null;
-       try (Connection con = ConnectDB.getConnection();
-               PreparedStatement pts = con.prepareStatement("Select tenDN from TaiKhoan where tenDN = ?")){
-           pts.setString(1,tenDN );
-           ResultSet rs = pts.executeQuery();
-           
-           while(rs.next()){
-               tenDangNhap = rs.getString("tenDN");
-           }
-           return tenDangNhap;
-       } catch (Exception e) {
-           
-       }
-       return null;
+
+   
+   public TaiKhoan timTaiKhoan(String ID) {
+        try (Connection conn = ConnectDB.opConnection();
+                PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM TAIKHOAN WHERE TENDN like ?")) {
+            pstmt.setString(1, ID);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    TaiKhoan taiKhoan=new TaiKhoan(rs.getString("tendn"), rs.getString("matkhau"));
+                    return taiKhoan;
+                }
+            } catch (Exception e) {
+                System.err.println("timTaiKhoan(): get data fail");
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            System.err.println("timTaiKhoan(): connect db fail");
+        }
+        return null;
     }
-    
-    public String timMatKhau(String tenDN){
-       String mk = null;
-       try (Connection con = ConnectDB.getConnection();
-               PreparedStatement pts = con.prepareStatement("Select matKhau from TaiKhoan where tenDN = ?")){
-           pts.setString(1,tenDN );
-           ResultSet rs = pts.executeQuery();
-           
-           while(rs.next()){
-               mk = rs.getString("matKhau");
-           }
-           return mk;
-       } catch (Exception e) {
-           
-       }
-       return null;
-   }
-    
+   
+
 }

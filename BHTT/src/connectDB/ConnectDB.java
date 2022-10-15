@@ -32,4 +32,15 @@ public class ConnectDB {
     public static Connection getConnection() {
         return con;
     }
+    
+    
+    // Thư xài cái này
+    public static Connection opConnection() throws ClassNotFoundException, SQLException{
+        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        String connectionUrl = "jdbc:sqlserver://localhost;database=BHTT"; 
+        String user = "sa";
+        String pass = "123456";
+        Connection con = DriverManager.getConnection(connectionUrl,user,pass);
+        return con;
+    }
 }

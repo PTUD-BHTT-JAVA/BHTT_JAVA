@@ -4,25 +4,33 @@
  */
 package gui;
 
+import connectDB.ConnectDB;
 import javax.swing.JOptionPane;
 import dao.DAO_TaiKhoan;
 import dao.DAO_NhanVien;
-
+import entity.TaiKhoan;
+import entity.NhanVien;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 /**
  *
  * @author ACER
  */
 public class GD_DangNhap extends javax.swing.JFrame {
 
-    private DAO_TaiKhoan taiKhoanDAO;
-    private DAO_NhanVien nhanVienDAO;
+     DAO_TaiKhoan taiKhoanDAO;
+     DAO_NhanVien nhanVienDAO;
 
     /**
      * Creates new form GiaoDienDangNhap
      */
     public GD_DangNhap() {
         initComponents();
-        
+        taiKhoanDAO = new DAO_TaiKhoan();
+        nhanVienDAO =new DAO_NhanVien();
+
     }
 
     /**
@@ -239,22 +247,40 @@ public class GD_DangNhap extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
-        taiKhoanDAO = new DAO_TaiKhoan();
-        nhanVienDAO =new DAO_NhanVien();
+        String tkNhap=txtTenDN.getText();
+        String mkNhap = String.valueOf(txtMatKhau.getPassword());
         
-        String tenDangNhap=taiKhoanDAO.timTenDangNhap(txtTenDN.getText().toUpperCase());
-        String mk = taiKhoanDAO.timMatKhau(tenDangNhap);
+        if (txtTenDN.getText().equals("")|| mkNhap.equals("")){
+            JOptionPane.showMessageDialog(this, "Hãy nhập đầy đủ tên đăng nhập và mật khẩu !");
+        } else{
+            if (taiKhoanDAO.timTaiKhoan(tkNhap)!=null ){
+                if(taiKhoanDAO.timTaiKhoan(tkNhap).getMatKhau().equals(mkNhap)){
+                if (nhanVienDAO.layNhanVienBangMa(tkNhap).getLoaiNhanVien().getMaLoaiNV().equals("LNV001")){
+                    this.setVisible(false);
+                    GD_QuanLy gD_QuanLy=new GD_QuanLy(tkNhap);
+                    gD_QuanLy.setLocationRelativeTo(this);
+                    gD_QuanLy.setVisible(true);
+                    dispose();
+                }else {
+                        this.setVisible(false);
+                        GD_NhanVien gD_NhanVien=new GD_NhanVien(tkNhap);
+                        gD_NhanVien.setVisible(true);
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(this, "Mật khẩu không chính xác, vui lòng nhập lại !");
+                }
+                
+            }else{
+             JOptionPane.showMessageDialog(this, "Tài khoản này không tồn tại, vui lòng kiểm tra lại!");
+                    }
+            }
+        
     }//GEN-LAST:event_btnDangNhapActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -273,10 +299,14 @@ public class GD_DangNhap extends javax.swing.JFrame {
         }
 
 
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GD_DangNhap().setVisible(true);
+                GD_DangNhap gd= new GD_DangNhap();
+                gd.setDefaultCloseOperation(HIDE_ON_CLOSE);
+                gd.setLocationRelativeTo(null);
+                gd.setVisible(true);
             }
         });
     }

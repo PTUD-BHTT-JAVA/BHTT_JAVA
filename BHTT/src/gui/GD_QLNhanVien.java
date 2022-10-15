@@ -35,12 +35,12 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
         this.setFocusable(true);
         username=_username;
         lnv = new DAO_LoaiNhanVien();
-        
         try {
              ConnectDB.getInstance().connect();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
         modelNhanVien=(DefaultTableModel) tblNhanVien.getModel();
         
         DocDuLieuLenTable();
