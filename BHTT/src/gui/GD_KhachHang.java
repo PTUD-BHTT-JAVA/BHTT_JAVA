@@ -7,10 +7,10 @@ package gui;
 import connectDB.ConnectDB;
 import dao.DAO_KhachHang;
 import dao.DAO_LoaiKhachHang;
-import dao.DAO_NhaCungCap;
+
 import entity.KhachHang;
 import entity.LoaiKhachHang;
-import entity.NhaCungCap;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -20,8 +20,8 @@ import javax.swing.table.DefaultTableModel;
  * @author ACER
  */
 public class GD_KhachHang extends javax.swing.JInternalFrame {
-    private DefaultTableModel modelKhachHang;
-    private String username;
+    private final DefaultTableModel modelKhachHang;
+    private  String username;
     private DAO_KhachHang kh;
     private final DAO_LoaiKhachHang lkh;
     /**
@@ -70,6 +70,7 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         pnlTop = new javax.swing.JPanel();
         pnlThongTin = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -128,18 +129,37 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
         jLabel7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel7.setText("Giới tính");
 
+        buttonGroup1.add(radNam);
+        radNam.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         radNam.setText("Nam");
+        radNam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radNamActionPerformed(evt);
+            }
+        });
 
+        buttonGroup1.add(radNu);
+        radNu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         radNu.setText("Nữ");
+        radNu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radNuActionPerformed(evt);
+            }
+        });
 
+        btnThemKH.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
         btnThemKH.setText("Thêm khách hàng");
 
+        btnXoaKH.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
         btnXoaKH.setText("Xóa khách hàng");
 
+        btnCapNhat.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
         btnCapNhat.setText("Cật nhập thông tin");
 
+        btnXoaTrang.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
         btnXoaTrang.setText("Xóa trắng");
 
+        btnGuiMail.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
         btnGuiMail.setText("Gửi mail");
 
         javax.swing.GroupLayout pnlButtonLayout = new javax.swing.GroupLayout(pnlButton);
@@ -157,8 +177,8 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
                         .addGap(0, 45, Short.MAX_VALUE)
                         .addGroup(pnlButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(btnXoaKH, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnCapNhat, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnThemKH, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(btnThemKH, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnCapNhat, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(55, 55, 55))
         );
         pnlButtonLayout.setVerticalGroup(
@@ -207,10 +227,10 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
                                         .addComponent(txtPhanLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(48, 48, 48)
                                         .addComponent(jLabel7)
-                                        .addGap(60, 60, 60)
-                                        .addComponent(radNam)
-                                        .addGap(55, 55, 55)
-                                        .addComponent(radNu)))))))
+                                        .addGap(39, 39, 39)
+                                        .addComponent(radNu)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(radNam)))))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(46, Short.MAX_VALUE))
@@ -234,12 +254,14 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
                             .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtPhanLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel7)
-                            .addComponent(radNam)
-                            .addComponent(radNu))
+                        .addGroup(pnlThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtPhanLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel7))
+                            .addGroup(pnlThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(radNu)
+                                .addComponent(radNam)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtDiemTichLuy, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -256,7 +278,7 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
             .addGroup(pnlTopLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnlThongTin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(420, Short.MAX_VALUE))
+                .addContainerGap(368, Short.MAX_VALUE))
         );
         pnlTopLayout.setVerticalGroup(
             pnlTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -324,6 +346,14 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void radNuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radNuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_radNuActionPerformed
+
+    private void radNamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radNamActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_radNamActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCapNhat;
@@ -332,6 +362,7 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnTim;
     private javax.swing.JButton btnXoaKH;
     private javax.swing.JButton btnXoaTrang;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cboLoaiKH;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

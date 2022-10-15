@@ -138,10 +138,12 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel10.setText("Giới tính :");
 
+        buttonGroup1.add(jRadioButton1);
         jRadioButton1.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jRadioButton1.setSelected(true);
         jRadioButton1.setText("Nam");
 
+        buttonGroup1.add(jRadioButton2);
         jRadioButton2.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jRadioButton2.setText("Nữ");
 

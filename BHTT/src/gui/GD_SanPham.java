@@ -155,7 +155,7 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
                     .addComponent(lblMoTa, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTenSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(lblNhaCungCap, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+                        .addComponent(lblNhaCungCap, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblSoLuong, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -186,7 +186,7 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
                                             .addGap(52, 52, 52)
                                             .addComponent(cmbPhanLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addComponent(txtTenSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 687, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(21, Short.MAX_VALUE))))
+                        .addContainerGap(24, Short.MAX_VALUE))))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(66, 66, 66)
@@ -458,10 +458,6 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cmbSoLuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSoLuongActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbSoLuongActionPerformed
-
     private void cmbMauSac1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMauSac1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbMauSac1ActionPerformed
@@ -485,6 +481,10 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnThemActionPerformed
+
+    private void cmbSoLuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSoLuongActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbSoLuongActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
