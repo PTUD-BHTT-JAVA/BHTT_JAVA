@@ -51,7 +51,6 @@ public class ChatLieu {
     public int hashCode() {
         int hash = 3;
         hash = 89 * hash + Objects.hashCode(this.maChatLieu);
-        hash = 89 * hash + Objects.hashCode(this.tenChatLieu);
         return hash;
     }
 
@@ -67,11 +66,10 @@ public class ChatLieu {
             return false;
         }
         final ChatLieu other = (ChatLieu) obj;
-        if (!Objects.equals(this.maChatLieu, other.maChatLieu)) {
-            return false;
-        }
-        return Objects.equals(this.tenChatLieu, other.tenChatLieu);
+        return Objects.equals(this.maChatLieu, other.maChatLieu);
     }
+
+   
 
     
     

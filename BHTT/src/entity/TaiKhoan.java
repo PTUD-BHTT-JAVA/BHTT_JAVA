@@ -50,8 +50,7 @@ public class TaiKhoan {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 59 * hash + Objects.hashCode(this.tenDN);
-        hash = 59 * hash + Objects.hashCode(this.matKhau);
+        hash = 29 * hash + Objects.hashCode(this.tenDN);
         return hash;
     }
 
@@ -67,11 +66,10 @@ public class TaiKhoan {
             return false;
         }
         final TaiKhoan other = (TaiKhoan) obj;
-        if (!Objects.equals(this.tenDN, other.tenDN)) {
-            return false;
-        }
-        return Objects.equals(this.matKhau, other.matKhau);
+        return Objects.equals(this.tenDN, other.tenDN);
     }
+
+    
     
     
     

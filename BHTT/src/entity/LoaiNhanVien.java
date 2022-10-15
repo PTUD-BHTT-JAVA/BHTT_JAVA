@@ -22,7 +22,6 @@ public class LoaiNhanVien {
     }
     
     
-    
     public LoaiNhanVien(String maLoaiNV, String tenLoaiNV) {
         this.maLoaiNV = maLoaiNV;
         this.tenLoaiNV = tenLoaiNV;
@@ -51,9 +50,8 @@ public class LoaiNhanVien {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 89 * hash + Objects.hashCode(this.maLoaiNV);
-        hash = 89 * hash + Objects.hashCode(this.tenLoaiNV);
+        int hash = 5;
+        hash = 67 * hash + Objects.hashCode(this.maLoaiNV);
         return hash;
     }
 
@@ -69,11 +67,10 @@ public class LoaiNhanVien {
             return false;
         }
         final LoaiNhanVien other = (LoaiNhanVien) obj;
-        if (!Objects.equals(this.maLoaiNV, other.maLoaiNV)) {
-            return false;
-        }
-        return Objects.equals(this.tenLoaiNV, other.tenLoaiNV);
+        return Objects.equals(this.maLoaiNV, other.maLoaiNV);
     }
+
+   
 
     
     

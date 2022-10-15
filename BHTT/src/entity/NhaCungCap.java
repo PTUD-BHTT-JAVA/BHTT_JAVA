@@ -13,19 +13,20 @@ import java.util.Objects;
 public class NhaCungCap {
     private String maNCC;
     private String tenNCC;
+     private String diaChi;
+     private String soDienThoai;
     private String email;
-    private String soDienThoai;
-    private String diaChi;
+    
     public NhaCungCap() {
         
     }
 
-    public NhaCungCap(String maNCC, String tenNCC, String email, String soDienThoai, String diaChi) {
+    public NhaCungCap(String maNCC, String tenNCC, String diaChi, String soDienThoai, String email) {
         this.maNCC = maNCC;
         this.tenNCC = tenNCC;
-        this.email = email;
-        this.soDienThoai = soDienThoai;
         this.diaChi = diaChi;
+        this.soDienThoai = soDienThoai;
+        this.email = email;
     }
 
     public NhaCungCap(String maNCC) {

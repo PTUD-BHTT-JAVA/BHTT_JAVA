@@ -13,18 +13,18 @@ import java.util.Objects;
 public class KichThuoc {
     private String maKichThuoc;
     private String tenKichThuoc;
-
+    private String moTa;
     public KichThuoc() {
     }
 
     public KichThuoc(String maKichThuoc) {
         this.maKichThuoc = maKichThuoc;
     }
-    
-     
-    public KichThuoc(String maKichThuoc, String tenKichThuoc) {
+
+    public KichThuoc(String maKichThuoc, String tenKichThuoc, String moTa) {
         this.maKichThuoc = maKichThuoc;
         this.tenKichThuoc = tenKichThuoc;
+        this.moTa = moTa;
     }
 
     public String getMaKichThuoc() {
@@ -43,16 +43,18 @@ public class KichThuoc {
         this.tenKichThuoc = tenKichThuoc;
     }
 
-    @Override
-    public String toString() {
-        return "KichThuoc{" + "maKichThuoc=" + maKichThuoc + ", tenKichThuoc=" + tenKichThuoc + '}';
+    public String getMoTa() {
+        return moTa;
+    }
+
+    public void setMoTa(String moTa) {
+        this.moTa = moTa;
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 89 * hash + Objects.hashCode(this.maKichThuoc);
-        hash = 89 * hash + Objects.hashCode(this.tenKichThuoc);
+        int hash = 7;
+        hash = 29 * hash + Objects.hashCode(this.maKichThuoc);
         return hash;
     }
 
@@ -68,11 +70,14 @@ public class KichThuoc {
             return false;
         }
         final KichThuoc other = (KichThuoc) obj;
-        if (!Objects.equals(this.maKichThuoc, other.maKichThuoc)) {
-            return false;
-        }
-        return Objects.equals(this.tenKichThuoc, other.tenKichThuoc);
+        return Objects.equals(this.maKichThuoc, other.maKichThuoc);
     }
+
+    @Override
+    public String toString() {
+        return "KichThuoc{" + "maKichThuoc=" + maKichThuoc + ", tenKichThuoc=" + tenKichThuoc + ", moTa=" + moTa + '}';
+    }
+    
     
     
 }
