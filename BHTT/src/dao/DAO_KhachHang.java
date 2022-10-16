@@ -112,5 +112,39 @@ public class DAO_KhachHang {
         }
         return n > 0;
     }
+    
+    public ArrayList<KhachHang> getKhachHangTheoTen(String tenKH) {
+        ArrayList<KhachHang> dsnv = new ArrayList<KhachHang>();
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        PreparedStatement statement = null;
+        try {
+            String sql = "select * from KhachHang where tenKH = ? ";
+            statement = con.prepareStatement(sql);
+            statement.setString(1,tenKH);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                String maNV = rs.getString("maKH");
+                String ten = rs.getString("tenKH");
+                String soDienThoai  = rs.getString("soDienThoai");
+                int diemTichLuy = rs.getInt("diemTichLuy");
+                String email = rs.getString("email");
+                boolean gioiTinh = rs.getBoolean("gioiTinh");
+                LoaiKhachHang loaiKhachHang = new LoaiKhachHang(rs.getString("maLoaiKH"));
+                KhachHang kh = new KhachHang(maNV, ten, soDienThoai, diemTichLuy, email, gioiTinh, loaiKhachHang);
+                dsnv.add(kh);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                statement.close();
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+        return dsnv;
+    }
+     
          
 }

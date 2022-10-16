@@ -1,4 +1,3 @@
-
 package gui;
 
 import connectDB.ConnectDB;
@@ -18,16 +17,18 @@ import javax.swing.table.DefaultTableModel;
  * @author ACER
  */
 public class GD_KhachHang extends javax.swing.JInternalFrame {
+
     private final DefaultTableModel modelKhachHang;
-    private  String username;
+    private String username;
     private DAO_KhachHang kh;
     private final DAO_LoaiKhachHang lkh;
+
     /**
      * Creates new form QuanLyHoaDon
      */
     public GD_KhachHang(String _username) {
         try {
-             ConnectDB.getInstance().connect();
+            ConnectDB.getInstance().connect();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -36,7 +37,7 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
         ((javax.swing.plaf.basic.BasicInternalFrameUI) ui).setNorthPane(null);
         initComponents();
         this.setFocusable(true);
-        username=_username;
+        username = _username;
         lkh = new DAO_LoaiKhachHang();
         ArrayList<LoaiKhachHang> listLKH = lkh.getalltbLoaiKhachHang();
         for (LoaiKhachHang loaiKH : listLKH) {
@@ -45,24 +46,81 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
         modelKhachHang = (DefaultTableModel) tableKhachHang.getModel();
         DocDuLieuLenTable();
     }
-    private String setMaNV(){
+
+    private String setMaNV() {
         String s = "KH";
-        int ma= kh.getalltbKhachHang().size();
-        if (ma<9)
-            s=s+ "00"+ (ma+1);
-        else
-            s=s+"0"+(ma+1);
+        int ma = kh.getalltbKhachHang().size();
+        if (ma < 9) {
+            s = s + "00" + (ma + 1);
+        } else {
+            s = s + "0" + (ma + 1);
+        }
         return s;
     }
 
-    private void DocDuLieuLenTable(){
+    public void XoaHetDuLieuTrenTableModel() {
+        DefaultTableModel dm = (DefaultTableModel) tableKhachHang.getModel();
+        dm.getDataVector().removeAllElements();
+    }
+
+    public void timKiemSinhVien() {
+        String ten = txtTimKH.getText();
+        if (ten != null && ten.trim().length() > 0) {
+            try {
+//				SinhVien sv = listSV.timSinhVien(ma);
+                List<KhachHang> khCanTim = kh.getKhachHangTheoTen(ten);
+                if (khCanTim != null) {
+                    XoaHetDuLieuTrenTableModel();
+                    for (KhachHang khachhang : khCanTim) {
+                        modelKhachHang.addRow(new Object[]{
+                            khachhang.getMaKH(), khachhang.getTenKH(), khachhang.getSoDienThoai(), khachhang.getEmail(), khachhang.isGioiTinh() == true ? "Nam" : "Nữ",
+                            khachhang.getLoaiKhachHang().getMaLoaiKH(), khachhang.getDiemTichLuy()
+                        });
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Không tìm thấy sinh viên");
+                    return;
+                }
+            } catch (Exception e) {
+                txtTimKH.selectAll();
+                txtTimKH.requestFocus();
+            }
+        } else {
+            XoaHetDuLieuTrenTableModel();
+            DocDuLieuLenTable();
+            tableKhachHang.setModel(modelKhachHang);
+        }
+    }
+
+    private void DocDuLieuLenTable() {
         kh = new DAO_KhachHang();
         List<KhachHang> list = kh.getalltbKhachHang();
         for (KhachHang kh : list) {
             modelKhachHang.addRow(new Object[]{
-                kh.getMaKH(),kh.getTenKH(),kh.getSoDienThoai(),kh.getEmail(),kh.isGioiTinh()== true ? "Nam" : "Nữ",kh.getLoaiKhachHang().getMaLoaiKH(),kh.getDiemTichLuy()
+                kh.getMaKH(), kh.getTenKH(), kh.getSoDienThoai(), kh.getEmail(), kh.isGioiTinh() == true ? "Nam" : "Nữ", !"LKH002".equals(kh.getLoaiKhachHang().getMaLoaiKH()) ? "VIP" : "Thường", kh.getDiemTichLuy()
             });
         }
+    }
+
+    private boolean kiemTraThongTin() {
+        String tenKH = txtTenKH.getText();
+        String soDienThoai = txtSoDienThoai.getText();
+        String email = txtEmail.getText();
+        if (tenKH.equals("") || !tenKH.matches("^[AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬBCDĐEÈẺẼÉẸÊỀỂỄẾỆFGHIÌỈĨÍỊJKLMNOÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢPQRSTUÙỦŨÚỤƯỪỬỮỨỰVWXYỲỶỸÝỴZ][aàảãáạăằẳẵắặâầẩẫấậbcdđeèẻẽéẹêềểễếệfghiìỉĩíịjklmnoòỏõóọôồổỗốộơờởỡớợpqrstuùủũúụưừửữứựvwxyỳỷỹýỵz]+ [AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬBCDĐEÈẺẼÉẸÊỀỂỄẾỆFGHIÌỈĨÍỊJKLMNOÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢPQRSTUÙỦŨÚỤƯỪỬỮỨỰVWXYỲỶỸÝỴZ][aàảãáạăằẳẵắặâầẩẫấậbcdđeèẻẽéẹêềểễếệfghiìỉĩíịjklmnoòỏõóọôồổỗốộơờởỡớợpqrstuùủũúụưừửữứựvwxyỳỷỹýỵz]+(?: [AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬBCDĐEÈẺẼÉẸÊỀỂỄẾỆFGHIÌỈĨÍỊJKLMNOÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢPQRSTUÙỦŨÚỤƯỪỬỮỨỰVWXYỲỶỸÝỴZ][aàảãáạăằẳẵắặâầẩẫấậbcdđeèẻẽéẹêềểễếệfghiìỉĩíịjklmnoòỏõóọôồổỗốộơờởỡớợpqrstuùủũúụưừửữứựvwxyỳỷỹýỵz]*)*")) {
+            JOptionPane.showMessageDialog(this, "Tên khách hàng không chứa số và ký tự đặt biệt");
+            return false;
+        }
+        if (soDienThoai.equals("") || !soDienThoai.matches("^0{1}[1-9]{9}")) {
+            JOptionPane.showMessageDialog(null, "Số điện thoại chỉ chứa 10 ký số");
+            return false;
+        }
+        if (email.equals("") || !email.matches("^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$")) {
+            JOptionPane.showMessageDialog(null, "Email không đúng định dạng");
+            return false;
+        }
+        return true;
+
     }
 
     /**
@@ -70,7 +128,6 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
      * WARNING: Do NOT modify this code. The content of this method is always
      * regenerated by the Form Editor.
      */
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -384,15 +441,7 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    public KhachHang getModel(){
-         String tenKH = txtTenKH.getText();
-        String soDienThoai = txtSoDienThoai.getText();
-        String email = txtEmail.getText();
-        boolean gioiTinh = radNam.isSelected();
-        String phanloai = "LKH002";
-        int diemTichLuy = 0;
-        return new KhachHang(setMaNV(), tenKH, soDienThoai, diemTichLuy, email, gioiTinh,new LoaiKhachHang(phanloai));
-    }
+
     private void radNuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radNuActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_radNuActionPerformed
@@ -402,25 +451,28 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_radNamActionPerformed
 
     private void btnThemKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemKHActionPerformed
-//        String tenKH = txtTenKH.getText();
-//        String soDienThoai = txtSoDienThoai.getText();
-//        String email = txtEmail.getText();
-//        boolean gioiTinh = radNam.isSelected();
-//        String phanloai = "LKH002";
-//        int diemTichLuy = 0;
-//        KhachHang khachhang = new KhachHang(setMaNV(), tenKH, soDienThoai, diemTichLuy, email, gioiTinh,new LoaiKhachHang(phanloai));
-        KhachHang khachhang = getModel();
-        try{
+        String tenKH = txtTenKH.getText();
+        String soDienThoai = txtSoDienThoai.getText();
+        String email = txtEmail.getText();
+        boolean gioiTinh = radNam.isSelected();
+        String phanloai = "LKH002";
+        int diemTichLuy = 0;
+        if (!kiemTraThongTin()) {
+            JOptionPane.showMessageDialog(null, "Nhập đầy đủ thông tin");
+        } else {
+            KhachHang khachhang = new KhachHang(setMaNV(), tenKH, soDienThoai, diemTichLuy, email, gioiTinh, new LoaiKhachHang(phanloai));
             kh.themKhachHang(khachhang);
-            modelKhachHang.addRow(new Object[]{khachhang.getMaKH(), khachhang.getTenKH(), khachhang.getSoDienThoai(),
-                khachhang.getEmail(),khachhang.isGioiTinh()== true ? "Nam": "Nữ", khachhang.getLoaiKhachHang().getMaLoaiKH(),khachhang.getDiemTichLuy()});
-        } catch (Exception e2) {
-            e2.printStackTrace();
+            modelKhachHang.addRow(new Object[]{
+                khachhang.getMaKH(), khachhang.getTenKH(), khachhang.getSoDienThoai(), khachhang.getEmail(), khachhang.isGioiTinh() == true ? "Nam" : "Nữ",
+                khachhang.getLoaiKhachHang().getMaLoaiKH(), khachhang.getDiemTichLuy()
+            });
         }
+
+
     }//GEN-LAST:event_btnThemKHActionPerformed
 
     private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
-        // TODO add your handling code here:
+        timKiemSinhVien();
     }//GEN-LAST:event_btnTimActionPerformed
 
     private void txtTimKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimKHActionPerformed
@@ -428,20 +480,22 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtTimKHActionPerformed
 
     private void btnXoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrangActionPerformed
-       txtTenKH.setText("");
-       txtEmail.setText("");
-       txtSoDienThoai.setText("");
-       txtDiemTichLuy.setText("");
-       txtPhanLoai.setText("");
+        txtTenKH.setText("");
+        txtEmail.setText("");
+        txtSoDienThoai.setText("");
+        txtDiemTichLuy.setText("");
+        txtPhanLoai.setText("");
+        radNam.setSelected(false);
+        radNu.setSelected(false);
     }//GEN-LAST:event_btnXoaTrangActionPerformed
 
     private void btnXoaKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaKHActionPerformed
-      if (JOptionPane.showConfirmDialog(this, "Bạn có muốn thoát ?", "Thoát", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+        if (JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn xóa khách hàng này ?", "Xóa khách hàng", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             int r = tableKhachHang.getSelectedRow();
             modelKhachHang.removeRow(r); // xóa trong table model
             KhachHang kh1 = kh.getElement(r);
             kh.xoaKhachHang(kh1.getMaKH());
-            JOptionPane.showMessageDialog(rootPane,"Xóa thành công");
+            JOptionPane.showMessageDialog(rootPane, "Xóa thành công");
         }
     }//GEN-LAST:event_btnXoaKHActionPerformed
 
@@ -453,34 +507,41 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
             txtEmail.setText(modelKhachHang.getValueAt(r, 3).toString());
             txtPhanLoai.setText(modelKhachHang.getValueAt(r, 5).toString());
             txtDiemTichLuy.setText(modelKhachHang.getValueAt(r, 6).toString());
-            if(modelKhachHang.getValueAt(r, 4).toString().equals("Nam")){
+            if (modelKhachHang.getValueAt(r, 4).toString().equals("Nam")) {
                 radNam.setSelected(true);
-            }else{
+            } else {
                 radNu.setSelected(true);
             }
-        
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }//GEN-LAST:event_tableKhachHangMouseClicked
-   
-    
+
+
     private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
-        int row = tableKhachHang.getSelectedRow();
-        String tenKH = txtTenKH.getText();
-        String soDienThoai = txtSoDienThoai.getText();
-        String email = txtEmail.getText();
-        boolean gioiTinh = radNam.isSelected();
-        String phanloai = "LKH002";
-        int diemTichLuy = 0;
-        KhachHang khNew = new KhachHang(modelKhachHang.getValueAt(row, 0).toString(), tenKH, soDienThoai, diemTichLuy, email, gioiTinh,new LoaiKhachHang(phanloai));
-        kh.capNhatKhachHang(khNew);
-        modelKhachHang.setValueAt(txtTenKH.getText(), row, 1);
-        modelKhachHang.setValueAt(txtSoDienThoai.getText(), row,2);
-        modelKhachHang.setValueAt(txtEmail.getText(), row, 3);
-        JOptionPane.showMessageDialog(this,"Cập nhật thành công");
-       
-        
+
+        if (JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn cập nhật khách hàng này ?", "Cập nhật khách hàng", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            int row = tableKhachHang.getSelectedRow();
+            String tenKH = txtTenKH.getText();
+            String soDienThoai = txtSoDienThoai.getText();
+            String email = txtEmail.getText();
+            boolean gioiTinh = radNam.isSelected();
+            String phanloai = "LKH002";
+            int diemTichLuy = 0;
+            if (!kiemTraThongTin()) {
+                JOptionPane.showMessageDialog(this, "Cập nhật không thành công");
+            } else {
+                KhachHang khNew = new KhachHang(modelKhachHang.getValueAt(row, 0).toString(), tenKH, soDienThoai, diemTichLuy, email, gioiTinh, new LoaiKhachHang(phanloai));
+                kh.capNhatKhachHang(khNew);
+                modelKhachHang.setValueAt(txtTenKH.getText(), row, 1);
+                modelKhachHang.setValueAt(txtSoDienThoai.getText(), row, 2);
+                modelKhachHang.setValueAt(txtEmail.getText(), row, 3);
+                JOptionPane.showMessageDialog(this, "Cập nhật thành công");
+            }
+        }
+
+
     }//GEN-LAST:event_btnCapNhatActionPerformed
 
 
