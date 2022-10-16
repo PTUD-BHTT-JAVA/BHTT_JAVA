@@ -262,10 +262,34 @@ public class GD_DangNhap extends javax.swing.JFrame {
                     gD_QuanLy.setLocationRelativeTo(this);
                     gD_QuanLy.setVisible(true);
                     dispose();
+                    try {
+                        UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(GD_DangNhap.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (InstantiationException ex) {
+                        Logger.getLogger(GD_DangNhap.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IllegalAccessException ex) {
+                        Logger.getLogger(GD_DangNhap.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (UnsupportedLookAndFeelException ex) {
+                        Logger.getLogger(GD_DangNhap.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
                 }else {
                         this.setVisible(false);
                         GD_NhanVien gD_NhanVien=new GD_NhanVien(tkNhap);
                         gD_NhanVien.setVisible(true);
+                    try {
+                        UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(GD_DangNhap.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (InstantiationException ex) {
+                        Logger.getLogger(GD_DangNhap.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IllegalAccessException ex) {
+                        Logger.getLogger(GD_DangNhap.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (UnsupportedLookAndFeelException ex) {
+                        Logger.getLogger(GD_DangNhap.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
                     }
                 }else{
                     JOptionPane.showMessageDialog(this, "Mật khẩu không chính xác, vui lòng nhập lại !");
@@ -308,6 +332,17 @@ public class GD_DangNhap extends javax.swing.JFrame {
                 gd.setDefaultCloseOperation(HIDE_ON_CLOSE);
                 gd.setLocationRelativeTo(null);
                 gd.setVisible(true);
+                try {
+                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(GD_Loading.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InstantiationException ex) {
+                    Logger.getLogger(GD_Loading.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalAccessException ex) {
+                    Logger.getLogger(GD_Loading.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (UnsupportedLookAndFeelException ex) {
+                    Logger.getLogger(GD_Loading.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

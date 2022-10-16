@@ -11,6 +11,7 @@ import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import static javax.swing.WindowConstants.HIDE_ON_CLOSE;
 
 /**
  *
@@ -18,7 +19,6 @@ import javax.swing.UnsupportedLookAndFeelException;
  */
 public class App {
     public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
-        UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
         GD_Loading ld = new GD_Loading();
         ld.setVisible(true);
         ld.setLocationRelativeTo(null);
@@ -31,10 +31,12 @@ public class App {
                 if(i==100){
                     ld.setVisible(false);
                     dn.setVisible(true);
+                    dn.setDefaultCloseOperation(HIDE_ON_CLOSE);
                     dn.setLocationRelativeTo(null);
                 }
             } catch (Exception e) {
             }
         }
+        
     }
 }

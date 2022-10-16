@@ -393,17 +393,17 @@ public class GD_QuanLy extends javax.swing.JFrame {
     private void btnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatActionPerformed
         if (JOptionPane.showConfirmDialog(this, "Bạn có muốn thoát ?", "Thoát", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             this.setVisible(false);
-//            try {
-//                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-//            } catch (ClassNotFoundException ex) {
-//                Logger.getLogger(GD_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
-//            } catch (InstantiationException ex) {
-//                Logger.getLogger(GD_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
-//            } catch (IllegalAccessException ex) {
-//                Logger.getLogger(GD_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
-//            } catch (UnsupportedLookAndFeelException ex) {
-//                Logger.getLogger(GD_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
-//            }
+            try {
+                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(GD_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InstantiationException ex) {
+                Logger.getLogger(GD_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                Logger.getLogger(GD_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (UnsupportedLookAndFeelException ex) {
+                Logger.getLogger(GD_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
+            }
             GD_DangNhap dn =new GD_DangNhap();
             dn.setVisible(true);
         }
