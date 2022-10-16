@@ -1,5 +1,9 @@
 
 package gui;
+
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
 public class GD_Loading extends javax.swing.JFrame {
 
     /**
@@ -76,7 +80,7 @@ public class GD_Loading extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -101,7 +105,9 @@ public class GD_Loading extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         java.awt.EventQueue.invokeLater(new Runnable() {
+          
             public void run() {
                 new GD_Loading().setVisible(true);
                 
