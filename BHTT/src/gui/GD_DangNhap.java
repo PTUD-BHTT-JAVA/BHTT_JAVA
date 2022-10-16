@@ -27,6 +27,7 @@ public class GD_DangNhap extends javax.swing.JFrame {
      * Creates new form GiaoDienDangNhap
      */
     public GD_DangNhap() {
+      
         initComponents();
         taiKhoanDAO = new DAO_TaiKhoan();
         nhanVienDAO =new DAO_NhanVien();

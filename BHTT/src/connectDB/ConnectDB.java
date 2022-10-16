@@ -15,8 +15,8 @@ public class ConnectDB {
 
     public void connect() throws SQLException {
         String url = "jdbc:sqlserver://localhost:1433;databasename=BHTT";
-        String user = "sa";
-        String password = "123456";
+        String user = "bac";
+        String password = "123";
         con = DriverManager.getConnection(url, user, password);
     }
 
@@ -38,8 +38,8 @@ public class ConnectDB {
     public static Connection opConnection() throws ClassNotFoundException, SQLException{
         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         String connectionUrl = "jdbc:sqlserver://localhost;database=BHTT"; 
-        String user = "sa";
-        String pass = "123456";
+        String user = "bac";
+        String pass = "123";
         Connection con = DriverManager.getConnection(connectionUrl,user,pass);
         return con;
     }

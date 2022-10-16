@@ -45,11 +45,11 @@ public class DAO_TaiKhoan {
    
    public TaiKhoan timTaiKhoan(String ID) {
         try (Connection conn = ConnectDB.opConnection();
-                PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM TAIKHOAN WHERE TENDN like ?")) {
-            pstmt.setString(1, ID);
+                PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM TaiKhoan WHERE tenDN like ?")) {
+                pstmt.setString(1, ID);
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    TaiKhoan taiKhoan=new TaiKhoan(rs.getString("tendn"), rs.getString("matkhau"));
+                    TaiKhoan taiKhoan=new TaiKhoan(rs.getString("tenDN"), rs.getString("matKhau"));
                     return taiKhoan;
                 }
             } catch (Exception e) {

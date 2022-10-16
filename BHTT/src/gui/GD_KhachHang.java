@@ -172,6 +172,11 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
 
         btnCapNhat.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
         btnCapNhat.setText("Cật nhập thông tin");
+        btnCapNhat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCapNhatActionPerformed(evt);
+            }
+        });
 
         btnXoaTrang.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
         btnXoaTrang.setText("Xóa trắng");
@@ -320,6 +325,11 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
                 "Mã", "Tên khách hàng", "Số điện thoại", "Email", "Giới tính", "Phân loại", "Điểm tích lũy"
             }
         ));
+        tableKhachHang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableKhachHangMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tableKhachHang);
 
         jLabel8.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -374,7 +384,15 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    public KhachHang getModel(){
+         String tenKH = txtTenKH.getText();
+        String soDienThoai = txtSoDienThoai.getText();
+        String email = txtEmail.getText();
+        boolean gioiTinh = radNam.isSelected();
+        String phanloai = "LKH002";
+        int diemTichLuy = 0;
+        return new KhachHang(setMaNV(), tenKH, soDienThoai, diemTichLuy, email, gioiTinh,new LoaiKhachHang(phanloai));
+    }
     private void radNuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radNuActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_radNuActionPerformed
@@ -384,13 +402,14 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_radNamActionPerformed
 
     private void btnThemKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemKHActionPerformed
-        String tenKH = txtTenKH.getText();
-        String soDienThoai = txtSoDienThoai.getText();
-        String email = txtEmail.getText();
-        boolean gioiTinh = radNam.isSelected();
-        String phanloai = "LKH002";
-        int diemTichLuy = 0;
-        KhachHang khachhang = new KhachHang(setMaNV(), tenKH, soDienThoai, diemTichLuy, email, gioiTinh,new LoaiKhachHang(phanloai));
+//        String tenKH = txtTenKH.getText();
+//        String soDienThoai = txtSoDienThoai.getText();
+//        String email = txtEmail.getText();
+//        boolean gioiTinh = radNam.isSelected();
+//        String phanloai = "LKH002";
+//        int diemTichLuy = 0;
+//        KhachHang khachhang = new KhachHang(setMaNV(), tenKH, soDienThoai, diemTichLuy, email, gioiTinh,new LoaiKhachHang(phanloai));
+        KhachHang khachhang = getModel();
         try{
             kh.themKhachHang(khachhang);
             modelKhachHang.addRow(new Object[]{khachhang.getMaKH(), khachhang.getTenKH(), khachhang.getSoDienThoai(),
@@ -425,6 +444,44 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(rootPane,"Xóa thành công");
         }
     }//GEN-LAST:event_btnXoaKHActionPerformed
+
+    private void tableKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableKhachHangMouseClicked
+        try {
+            int r = tableKhachHang.getSelectedRow();
+            txtTenKH.setText(modelKhachHang.getValueAt(r, 1).toString());
+            txtSoDienThoai.setText(modelKhachHang.getValueAt(r, 2).toString());
+            txtEmail.setText(modelKhachHang.getValueAt(r, 3).toString());
+            txtPhanLoai.setText(modelKhachHang.getValueAt(r, 5).toString());
+            txtDiemTichLuy.setText(modelKhachHang.getValueAt(r, 6).toString());
+            if(modelKhachHang.getValueAt(r, 4).toString().equals("Nam")){
+                radNam.setSelected(true);
+            }else{
+                radNu.setSelected(true);
+            }
+        
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_tableKhachHangMouseClicked
+   
+    
+    private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
+        int row = tableKhachHang.getSelectedRow();
+        String tenKH = txtTenKH.getText();
+        String soDienThoai = txtSoDienThoai.getText();
+        String email = txtEmail.getText();
+        boolean gioiTinh = radNam.isSelected();
+        String phanloai = "LKH002";
+        int diemTichLuy = 0;
+        KhachHang khNew = new KhachHang(modelKhachHang.getValueAt(row, 0).toString(), tenKH, soDienThoai, diemTichLuy, email, gioiTinh,new LoaiKhachHang(phanloai));
+        kh.capNhatKhachHang(khNew);
+        modelKhachHang.setValueAt(txtTenKH.getText(), row, 1);
+        modelKhachHang.setValueAt(txtSoDienThoai.getText(), row,2);
+        modelKhachHang.setValueAt(txtEmail.getText(), row, 3);
+        JOptionPane.showMessageDialog(this,"Cập nhật thành công");
+       
+        
+    }//GEN-LAST:event_btnCapNhatActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

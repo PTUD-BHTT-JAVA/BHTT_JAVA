@@ -84,5 +84,33 @@ public class DAO_KhachHang {
         }
         return dsKH.get(index);
     }
+    
+      
+     public boolean capNhatKhachHang(KhachHang kh) {
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        PreparedStatement stmt = null;
+        int n = 0;
+        try {
+            stmt = con.prepareStatement("update KhachHang set tenKH=?,soDienThoai=?,diemTichLuy=?,email=?,gioiTinh=?,maLoaiKH=? where maKH = ?");
+            stmt.setString(1, kh.getTenKH());
+            stmt.setString(2, kh.getSoDienThoai());
+            stmt.setInt(3, kh.getDiemTichLuy());
+            stmt.setString(4,kh.getEmail());
+            stmt.setBoolean(5,kh.isGioiTinh());
+            stmt.setString(6,kh.getLoaiKhachHang().getMaLoaiKH());
+            stmt.setString(7,kh.getMaKH());
+            n = stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                stmt.close();
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+        return n > 0;
+    }
          
 }
