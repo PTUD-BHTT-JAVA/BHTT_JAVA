@@ -535,24 +535,22 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
             tachMa=Integer.parseInt(id.substring(2, 5));
             dem[i] =tachMa;
             i++;
-       }
+        }
         i=0;
         while (j<999){
             
             if (dem[i]== j){
                 i++;
                 j++;
-
             }else{
-                if (j < 9) {
+                if (j <= 9) {
                     ma +=  "00" + (j);
                 } else {
                     ma += "0" + (j);
                 }
                 break;
-            }
-        }
-     
+            } 
+        }    
         return ma;
     }
     private void clearInput(){
