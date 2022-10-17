@@ -6,6 +6,7 @@ import dao.DAO_LoaiKhachHang;
 
 import entity.KhachHang;
 import entity.LoaiKhachHang;
+import java.awt.event.ItemEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +51,7 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
     private String setMaNV() {
         String s = "KH";
         int ma = kh.getalltbKhachHang().size();
+//        Integer maMoi = new Integer(ma);
         if (ma < 9) {
             s = s + "00" + (ma + 1);
         } else {
@@ -57,7 +59,15 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
         }
         return s;
     }
-
+    private String maCapNhat(){
+        String ma = setMaNV();
+        String chuoiCuoi = modelKhachHang.getValueAt(tableKhachHang.getModel().getRowCount()-1, 0).toString();
+        if(ma.charAt(ma.length()-1) == kh.getalltbKhachHang().size()){
+            JOptionPane.showMessageDialog(this,"Mã bị trùng");
+        }
+        return ma;
+    }
+    
     public void XoaHetDuLieuTrenTableModel() {
         DefaultTableModel dm = (DefaultTableModel) tableKhachHang.getModel();
         dm.getDataVector().removeAllElements();
@@ -77,6 +87,7 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
                             khachhang.getLoaiKhachHang().getMaLoaiKH(), khachhang.getDiemTichLuy()
                         });
                     }
+                    txtTimKH.setText("");
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Không tìm thấy sinh viên");
@@ -393,10 +404,9 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
         jLabel8.setText("Phân loại");
 
         cboLoaiKH.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả" }));
-
-        txtTimKH.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTimKHActionPerformed(evt);
+        cboLoaiKH.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cboLoaiKHItemStateChanged(evt);
             }
         });
 
@@ -475,10 +485,6 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
         timKiemSinhVien();
     }//GEN-LAST:event_btnTimActionPerformed
 
-    private void txtTimKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimKHActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTimKHActionPerformed
-
     private void btnXoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrangActionPerformed
         txtTenKH.setText("");
         txtEmail.setText("");
@@ -512,7 +518,6 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
             } else {
                 radNu.setSelected(true);
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -543,6 +548,27 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
 
 
     }//GEN-LAST:event_btnCapNhatActionPerformed
+
+    private void cboLoaiKHItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboLoaiKHItemStateChanged
+        if(evt.getStateChange() == ItemEvent.SELECTED){
+            String selectItem  = cboLoaiKH.getSelectedItem().toString();
+//            kh.getKhachHangTheoMaLoai(selectItem);
+            List<KhachHang> khCanLoc = kh.getKhachHangTheoMaLoai(selectItem);
+                if (!khCanLoc.isEmpty()) {
+                    XoaHetDuLieuTrenTableModel();
+                    for (KhachHang khachhang : khCanLoc) {
+                        modelKhachHang.addRow(new Object[]{
+                            khachhang.getMaKH(), khachhang.getTenKH(), khachhang.getSoDienThoai(), khachhang.getEmail(), khachhang.isGioiTinh() == true ? "Nam" : "Nữ",
+                            "LKH001".equals(khachhang.getLoaiKhachHang().getMaLoaiKH()) ? "VIP" : "Thường", khachhang.getDiemTichLuy()
+                        });
+                    }
+                } else{
+                    XoaHetDuLieuTrenTableModel();
+                    DocDuLieuLenTable();
+                    return;
+                }
+        }
+    }//GEN-LAST:event_cboLoaiKHItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

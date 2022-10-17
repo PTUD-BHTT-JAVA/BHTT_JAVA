@@ -192,6 +192,7 @@ public class GD_QuanLy extends javax.swing.JFrame {
         lblGioiThieu.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         lblGioiThieu.setForeground(new java.awt.Color(255, 255, 255));
         lblGioiThieu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblGioiThieu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/trangChu.png"))); // NOI18N
         lblGioiThieu.setText("GIỚI THIỆU");
         pnlGioiThieu.add(lblGioiThieu, java.awt.BorderLayout.CENTER);
 
@@ -212,6 +213,7 @@ public class GD_QuanLy extends javax.swing.JFrame {
         lblSanPham.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         lblSanPham.setForeground(new java.awt.Color(255, 255, 255));
         lblSanPham.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblSanPham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sanPham.png"))); // NOI18N
         lblSanPham.setText("SẢN PHẨM");
         pnlSanPham.add(lblSanPham, java.awt.BorderLayout.CENTER);
 
@@ -232,6 +234,7 @@ public class GD_QuanLy extends javax.swing.JFrame {
         lblNhanVien.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         lblNhanVien.setForeground(new java.awt.Color(255, 255, 255));
         lblNhanVien.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/nhanVien.png"))); // NOI18N
         lblNhanVien.setText("NHÂN VIÊN");
         pnlNhanVien.add(lblNhanVien, java.awt.BorderLayout.CENTER);
 
@@ -252,6 +255,7 @@ public class GD_QuanLy extends javax.swing.JFrame {
         lblTaiKhoan.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         lblTaiKhoan.setForeground(new java.awt.Color(255, 255, 255));
         lblTaiKhoan.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTaiKhoan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/taiKhoan.png"))); // NOI18N
         lblTaiKhoan.setText("TÀI KHOẢN");
         pnlTaiKhoan.add(lblTaiKhoan, java.awt.BorderLayout.CENTER);
 
@@ -272,6 +276,7 @@ public class GD_QuanLy extends javax.swing.JFrame {
         lblNhaCungCap.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         lblNhaCungCap.setForeground(new java.awt.Color(255, 255, 255));
         lblNhaCungCap.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNhaCungCap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/nhaCungCap.png"))); // NOI18N
         lblNhaCungCap.setText("NHÀ CUNG CẤP");
         pnlNhaCungCap.add(lblNhaCungCap, java.awt.BorderLayout.CENTER);
 
@@ -292,6 +297,7 @@ public class GD_QuanLy extends javax.swing.JFrame {
         lblThongKe.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         lblThongKe.setForeground(new java.awt.Color(255, 255, 255));
         lblThongKe.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/thongKe.png"))); // NOI18N
         lblThongKe.setText("THỐNG KÊ");
         pnlThongKe.add(lblThongKe, java.awt.BorderLayout.CENTER);
 
@@ -312,6 +318,7 @@ public class GD_QuanLy extends javax.swing.JFrame {
         lblTroGiup.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         lblTroGiup.setForeground(new java.awt.Color(255, 255, 255));
         lblTroGiup.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTroGiup.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/troGiup.png"))); // NOI18N
         lblTroGiup.setText("TRỢ GIÚP");
         pnlTroGiup.add(lblTroGiup, java.awt.BorderLayout.CENTER);
 
@@ -322,6 +329,7 @@ public class GD_QuanLy extends javax.swing.JFrame {
         btnDangXuat.setBackground(new java.awt.Color(252, 249, 250));
         btnDangXuat.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnDangXuat.setForeground(new java.awt.Color(102, 0, 102));
+        btnDangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/dangXuat.png"))); // NOI18N
         btnDangXuat.setText("Đăng xuất");
         btnDangXuat.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 0, 153), 3, true));
         btnDangXuat.setPreferredSize(new java.awt.Dimension(76, 40));
@@ -377,6 +385,7 @@ public class GD_QuanLy extends javax.swing.JFrame {
 
     private void pnlNhaCungCapMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlNhaCungCapMousePressed
         GD_NhaCungCap fNhaCungCap = new GD_NhaCungCap(username);
+       
         openComponent(fNhaCungCap);
     }//GEN-LAST:event_pnlNhaCungCapMousePressed
 
@@ -388,6 +397,7 @@ public class GD_QuanLy extends javax.swing.JFrame {
     private void pnlNhanVienMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlNhanVienMousePressed
         GD_QLNhanVien fLNhanVien = new GD_QLNhanVien(username);
         openComponent(fLNhanVien);
+        
     }//GEN-LAST:event_pnlNhanVienMousePressed
 
     private void btnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatActionPerformed

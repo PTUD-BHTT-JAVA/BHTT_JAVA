@@ -4,12 +4,11 @@
  */
 package gui;
 
-import connectDB.ConnectDB;
+
 import javax.swing.JOptionPane;
 import dao.DAO_TaiKhoan;
 import dao.DAO_NhanVien;
-import entity.TaiKhoan;
-import entity.NhanVien;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
@@ -29,6 +28,8 @@ public class GD_DangNhap extends javax.swing.JFrame {
     public GD_DangNhap() {
       
         initComponents();
+        txtTenDN.setText("NV002");
+        txtMatKhau.setText("123456");
         taiKhoanDAO = new DAO_TaiKhoan();
         nhanVienDAO =new DAO_NhanVien();
 
@@ -250,7 +251,6 @@ public class GD_DangNhap extends javax.swing.JFrame {
     private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
         String tkNhap=txtTenDN.getText();
         String mkNhap = String.valueOf(txtMatKhau.getPassword());
-        
         if (txtTenDN.getText().equals("")|| mkNhap.equals("")){
             JOptionPane.showMessageDialog(this, "Hãy nhập đầy đủ tên đăng nhập và mật khẩu !");
         } else{
