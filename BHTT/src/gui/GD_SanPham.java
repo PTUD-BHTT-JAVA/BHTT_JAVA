@@ -668,6 +668,7 @@ private void DocDuLieuLenTable() {
 //        if (ds==null){
 //            show
 //        }
+//
         int i=0;
         for( SanPham sp : ds){
              modolSP.addRow(new Object[]{i++,
