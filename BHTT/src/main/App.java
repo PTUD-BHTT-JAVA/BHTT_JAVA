@@ -23,9 +23,9 @@ public class App {
         ld.setVisible(true);
         ld.setLocationRelativeTo(null);
         GD_DangNhap dn = new GD_DangNhap();
-        for (int i = 0; i <= 100; i+=25) {
+        for (int i = 0; i <= 100; i+=20) {
             try {
-                Thread.sleep(200);
+                Thread.sleep(250);
                 ld.lplPhanTram.setText(Integer.toString(i) + "%");
                 ld.prgLoading.setValue(i);
                 if(i==100){
