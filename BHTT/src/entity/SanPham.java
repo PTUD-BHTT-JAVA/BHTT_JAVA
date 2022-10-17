@@ -4,7 +4,10 @@
  */
 package entity;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -18,15 +21,15 @@ public class SanPham {
     private int soLuong;
     private byte[] hinhAnh;
     private String moTa;
-    private LocalDate ngayNhap;
-    private LocalDate hanSD;
+    private Date ngayNhap;
+    private Date hanSD;
     private NhaCungCap nhaCungCap;
     private ChatLieu chatLieu;
     private MauSac mauSac;
     private KichThuoc kichThuoc;
     private LoaiSanPham loaiSanPham;
 
-    public SanPham(String maSP, String tenSP, double giaGoc, int soLuong, byte[] hinhAnh, String moTa, LocalDate ngayNhap, LocalDate hanSD, NhaCungCap nhaCungCap, ChatLieu chatLieu, MauSac mauSac, KichThuoc kichThuoc, LoaiSanPham loaiSanPham) {
+    public SanPham(String maSP, String tenSP, double giaGoc, int soLuong, byte[] hinhAnh, String moTa, Date ngayNhap, Date hanSD, NhaCungCap nhaCungCap, ChatLieu chatLieu, MauSac mauSac, KichThuoc kichThuoc, LoaiSanPham loaiSanPham) {
         this.maSP = maSP;
         this.tenSP = tenSP;
         this.giaGoc = giaGoc;
@@ -97,19 +100,19 @@ public class SanPham {
         this.moTa = moTa;
     }
 
-    public LocalDate getNgayNhap() {
+    public Date getNgayNhap() {
         return ngayNhap;
     }
 
-    public void setNgayNhap(LocalDate ngayNhap) {
+    public void setNgayNhap(Date ngayNhap) {
         this.ngayNhap = ngayNhap;
     }
 
-    public LocalDate getHanSD() {
+    public Date getHanSD() {
         return hanSD;
     }
 
-    public void setHanSD(LocalDate hanSD) {
+    public void setHanSD(Date hanSD) {
         this.hanSD = hanSD;
     }
 
@@ -177,7 +180,8 @@ public class SanPham {
 
     @Override
     public String toString() {
-        return "SanPham{" + "maSP=" + maSP + ", tenSP=" + tenSP + ", giaGoc=" + giaGoc + ", soLuong=" + soLuong + ", hinhAnh=" + hinhAnh + ", moTa=" + moTa + ", ngayNhap=" + ngayNhap + ", hanSD=" + hanSD + ", nhaCungCap=" + nhaCungCap + ", chatLieu=" + chatLieu + ", mauSac=" + mauSac + ", kichThuoc=" + kichThuoc + ", loaiSanPham=" + loaiSanPham + '}';
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        return "SanPham{" + "maSP=" + maSP + ", tenSP=" + tenSP + ", giaGoc=" + giaGoc + ", soLuong=" + soLuong + ", hinhAnh=" + hinhAnh + ", moTa=" + moTa + ", ngayNhap=" + sdf.format(ngayNhap) + ", hanSD=" + sdf.format(hanSD) + ", nhaCungCap=" + nhaCungCap + ", chatLieu=" + chatLieu + ", mauSac=" + mauSac + ", kichThuoc=" + kichThuoc + ", loaiSanPham=" + loaiSanPham + '}';
     }
     
 }

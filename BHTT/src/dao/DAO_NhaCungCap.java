@@ -148,4 +148,22 @@ public class DAO_NhaCungCap {
         }
         return dsNCC;
     }
+    public NhaCungCap layNhaCungCapBangMa(String maTim) {
+      NhaCungCap ncc = new NhaCungCap();
+        try(
+            Connection con = ConnectDB.opConnection();
+            PreparedStatement pts = con.prepareStatement("Select * from NhaCungCap where maNCC =? ")){
+            pts.setString(1,maTim );
+                try(ResultSet rs = pts.executeQuery()){
+                    if (rs.next()){
+                        ncc=new NhaCungCap(rs.getString("maNCC"), rs.getString("tenNCC"), rs.getString("diaChi"), rs.getString("soDienThoai"), rs.getString("email"));
+                        return ncc;
+                    }
+                }
+            }catch(Exception e){
+           
+       }
+       return null;
+   
+    }
 }
