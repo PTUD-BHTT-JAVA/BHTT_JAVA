@@ -592,7 +592,7 @@ public class GD_SanPham extends javax.swing.JInternalFrame  {
          txaMoTa.setText(spp.getMoTa());
          hanSD.setDate(spp.getNgayNhap());
          ngayNhap.setDate(spp.getHanSD());
-         byte[] hinhanh = spp.getHinhAnh();
+         byte[] hinhanh = spp.getHinhAnh();///
          ImageIcon imageIcon = new ImageIcon(new ImageIcon(hinhanh).getImage().getScaledInstance(lblHinhAnh.getWidth(), lblHinhAnh.getHeight(), Image.SCALE_SMOOTH));
         lblHinhAnh.setIcon(imageIcon);
 //        lsp_dao = new DAO_LoaiSP();
