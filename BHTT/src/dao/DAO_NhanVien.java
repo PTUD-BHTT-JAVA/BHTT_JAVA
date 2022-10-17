@@ -19,8 +19,7 @@ import java.util.List;
  * @author Trinh Cui Bap
  */
 public class DAO_NhanVien {
-
-    DAO_LoaiNhanVien lnvDAO;
+    private final DAO_LoaiNhanVien lnvDAO = new DAO_LoaiNhanVien();
     public List<NhanVien> layTatCaNhanVienVaoBang() {
         List<NhanVien> ds = new ArrayList<>();
         try{
@@ -46,7 +45,6 @@ public class DAO_NhanVien {
     }
     
     public NhanVien layNhanVienBangMa(String maNV) {
-        lnvDAO=new DAO_LoaiNhanVien();
         try(
             Connection con = ConnectDB.opConnection();
             PreparedStatement pts = con.prepareStatement("Select * from NhanVien where maNV =? ")){
@@ -61,8 +59,78 @@ public class DAO_NhanVien {
             }catch(Exception e){
            
        }
-       return null;
-   
+       return null; 
+    }
+        public NhanVien layNhanVienBangCMND(String maNV) {
+        try(
+            Connection con = ConnectDB.opConnection();
+            PreparedStatement pts = con.prepareStatement("Select * from NhanVien where CMND =? ")){
+            pts.setString(1,maNV );
+                try(ResultSet rs = pts.executeQuery()){
+                    if (rs.next()){
+                        LoaiNhanVien lnv= lnvDAO.timLoaiNVBangMa(rs.getString("maLoaiNV"));
+                        NhanVien nv=new NhanVien(rs.getString("maNV"),rs.getString("tenNV"),rs.getString("CMND"),rs.getString("soDienThoai"),rs.getBoolean("gioiTinh"),rs.getDouble("luongCoBan"),lnv);
+                        return nv;
+                    }
+                }
+            }catch(Exception e){
+           
+       }
+       return null; 
+    }
+    public boolean themNV(NhanVien nv) {
+        try(
+            Connection conn = ConnectDB.opConnection();  PreparedStatement pstmt = conn.prepareStatement("INSERT INTO NHANVIEN VALUES (?,?,?,?,?,?,?)");)
+            {
+                pstmt.setString(1, nv.getMaNV());
+                pstmt.setString(2, nv.getTenNV());
+                pstmt.setString(3, nv.getCMND());
+                pstmt.setString(4, nv.getSoDienThoai());
+                pstmt.setBoolean(5, nv.isGioiTinh());               
+                pstmt.setDouble(6, nv.getLuongCoBan());
+                pstmt.setString(7, nv.getLoaiNhanVien().getMaLoaiNV());
+                return  pstmt.executeUpdate()>0;
+            } catch (Exception e) {
+            System.err.println("themNV(): connect db fail");
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+        
+        
+    
+    
+    public boolean capNhatNV(NhanVien nv) {
+        try(
+            Connection conn = ConnectDB.opConnection();  
+                PreparedStatement pstmt = conn.prepareStatement("UPDATE NHANVIEN SET CMND=?, SODIENTHOAI=?, GIOITINH=?, LUONGCOBAN=? ,MALOAINV=? WHERE MANV=?");)
+            {
+                pstmt.setString(1, nv.getTenNV());
+                pstmt.setString(3, nv.getCMND());
+                pstmt.setString(4, nv.getSoDienThoai());
+                pstmt.setInt(5, nv.isGioiTinh() ==true ? 1:0);               
+                pstmt.setFloat(6, (float)nv.getLuongCoBan());
+                pstmt.setString(7, nv.getLoaiNhanVien().getMaLoaiNV());
+                
+                pstmt.setString(8, nv.getMaNV());
+                return pstmt.executeUpdate() > 0;
+        } catch (Exception e) {
+            System.err.println("capnhatNV(): connect db fail");
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+    public boolean xoaNV(NhanVien nv) {
+        try (Connection conn = ConnectDB.opConnection();
+                PreparedStatement pstmt = conn.prepareStatement("DELETE FROM NHANVIEN WHERE MANV=?;")) {
+            pstmt.setString(1, nv.getMaNV());
+            return pstmt.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
     
 }
