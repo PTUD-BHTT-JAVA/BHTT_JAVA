@@ -38,4 +38,5 @@ public class DAO_LoaiKhachHang {
         }
         return dsLKH;
     }
+    
 }

@@ -187,6 +187,7 @@ public class GD_NhanVien extends javax.swing.JFrame {
         lblGioiThieu.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         lblGioiThieu.setForeground(new java.awt.Color(255, 255, 255));
         lblGioiThieu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblGioiThieu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/trangChu.png"))); // NOI18N
         lblGioiThieu.setText("GIỚI THIỆU");
         pnlGioiThieu.add(lblGioiThieu, java.awt.BorderLayout.CENTER);
 
@@ -207,6 +208,7 @@ public class GD_NhanVien extends javax.swing.JFrame {
         lblKhachHang.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         lblKhachHang.setForeground(new java.awt.Color(255, 255, 255));
         lblKhachHang.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblKhachHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/khachHang.png"))); // NOI18N
         lblKhachHang.setText("KHÁCH HÀNG");
         pnlKhachHang.add(lblKhachHang, java.awt.BorderLayout.CENTER);
 
@@ -227,6 +229,7 @@ public class GD_NhanVien extends javax.swing.JFrame {
         lblDonHang.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         lblDonHang.setForeground(new java.awt.Color(255, 255, 255));
         lblDonHang.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblDonHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/donHang.png"))); // NOI18N
         lblDonHang.setText("ĐƠN HÀNG");
         pnlDonHang.add(lblDonHang, java.awt.BorderLayout.CENTER);
         lblDonHang.getAccessibleContext().setAccessibleDescription("");
@@ -253,6 +256,7 @@ public class GD_NhanVien extends javax.swing.JFrame {
         lblTaoHoaDon.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         lblTaoHoaDon.setForeground(new java.awt.Color(255, 255, 255));
         lblTaoHoaDon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTaoHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/taoDonHangMoi.png"))); // NOI18N
         lblTaoHoaDon.setText("TẠO ĐƠN HÀNG");
         lblTaoHoaDon.setVerifyInputWhenFocusTarget(false);
         pnlTaoDonHang.add(lblTaoHoaDon, java.awt.BorderLayout.CENTER);
@@ -280,6 +284,7 @@ public class GD_NhanVien extends javax.swing.JFrame {
         lblLichSuDonHang.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         lblLichSuDonHang.setForeground(new java.awt.Color(255, 255, 255));
         lblLichSuDonHang.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblLichSuDonHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/donHang.png"))); // NOI18N
         lblLichSuDonHang.setText("TẠO ĐƠN HÀNG HOÀN");
         pnlLichSuDonHang.add(lblLichSuDonHang, java.awt.BorderLayout.CENTER);
 
@@ -302,6 +307,7 @@ public class GD_NhanVien extends javax.swing.JFrame {
         lblThongKe.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         lblThongKe.setForeground(new java.awt.Color(255, 255, 255));
         lblThongKe.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/thongKe.png"))); // NOI18N
         lblThongKe.setText("THỐNG KÊ");
         pnlThongKe.add(lblThongKe, java.awt.BorderLayout.CENTER);
 
@@ -322,6 +328,7 @@ public class GD_NhanVien extends javax.swing.JFrame {
         lblTroGiup.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         lblTroGiup.setForeground(new java.awt.Color(255, 255, 255));
         lblTroGiup.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTroGiup.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/troGiup.png"))); // NOI18N
         lblTroGiup.setText("TRỢ GIÚP");
         pnlTroGiup.add(lblTroGiup, java.awt.BorderLayout.CENTER);
 
@@ -332,6 +339,7 @@ public class GD_NhanVien extends javax.swing.JFrame {
         btnDangXuat.setBackground(new java.awt.Color(252, 249, 250));
         btnDangXuat.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnDangXuat.setForeground(new java.awt.Color(102, 0, 102));
+        btnDangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/dangXuat.png"))); // NOI18N
         btnDangXuat.setText("Đăng xuất");
         btnDangXuat.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 0, 153), 3, true));
         btnDangXuat.setPreferredSize(new java.awt.Dimension(76, 40));

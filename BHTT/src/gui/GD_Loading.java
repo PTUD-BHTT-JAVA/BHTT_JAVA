@@ -1,7 +1,6 @@
 
 package gui;
 
-import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 public class GD_Loading extends javax.swing.JFrame {
@@ -26,6 +25,7 @@ public class GD_Loading extends javax.swing.JFrame {
         lplPhanTram = new javax.swing.JLabel();
         prgLoading = new javax.swing.JProgressBar();
         lplTitle = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -40,22 +40,26 @@ public class GD_Loading extends javax.swing.JFrame {
 
         lplTitle.setText("Starting...");
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/logo.png"))); // NOI18N
+
         javax.swing.GroupLayout pnlLoadingLayout = new javax.swing.GroupLayout(pnlLoading);
         pnlLoading.setLayout(pnlLoadingLayout);
         pnlLoadingLayout.setHorizontalGroup(
             pnlLoadingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(prgLoading, javax.swing.GroupLayout.DEFAULT_SIZE, 751, Short.MAX_VALUE)
+            .addComponent(prgLoading, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(pnlLoadingLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lplTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(250, 250, 250)
                 .addComponent(lplPhanTram, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnlLoadingLayout.setVerticalGroup(
             pnlLoadingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLoadingLayout.createSequentialGroup()
-                .addContainerGap(320, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlLoadingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lplPhanTram, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lplTitle, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -83,7 +87,7 @@ public class GD_Loading extends javax.swing.JFrame {
     public static void main(String args[]) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
       
         java.awt.EventQueue.invokeLater(new Runnable() {
-          
+            @Override
             public void run() {
                 new GD_Loading().setVisible(true);
                 
@@ -93,6 +97,7 @@ public class GD_Loading extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     public javax.swing.JLabel lplPhanTram;
     private javax.swing.JLabel lplTitle;
     public javax.swing.JPanel pnlLoading;
