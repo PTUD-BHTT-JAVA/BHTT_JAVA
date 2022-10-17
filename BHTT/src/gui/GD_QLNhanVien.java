@@ -525,24 +525,35 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
     }
     
     private String setMaNV(){
-        String id = "";
+        String ma="NV";
+        int tachMa;
+        int i=0,j=1;
+        int[] dem=new int[999];
+        String id;
         for (NhanVien nv : nvDAO.layTatCaNhanVienVaoBang()) {
             id = nv.getMaNV();
+            tachMa=Integer.parseInt(id.substring(2, 5));
+            dem[i] =tachMa;
+            i++;
+       }
+        i=0;
+        while (j<999){
+            
+            if (dem[i]== j){
+                i++;
+                j++;
+
+            }else{
+                if (j < 9) {
+                    ma +=  "00" + (j);
+                } else {
+                    ma += "0" + (j);
+                }
+                break;
+            }
         }
-        String[] parts = id.split("NV");
-        if (Integer.parseInt(parts[1]) < 10) {
-            int i = Integer.parseInt(parts[1]) + 1;
-            id = "NV00" + i;
-        }
-        if (Integer.parseInt(parts[1]) >= 10 && Integer.parseInt(parts[1]) < 100) {
-            int i = Integer.parseInt(parts[1]) + 1;
-            id = "NV0" + i;
-        }
-        if (Integer.parseInt(parts[1]) >= 100 && Integer.parseInt(parts[1]) < 1000) {
-            int i = Integer.parseInt(parts[1]) + 1;
-            id = "NV" + i;
-        }
-        return id;
+     
+        return ma;
     }
     private void clearInput(){
         txtCMND.setText("");
