@@ -539,17 +539,21 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
         i=0;
         while (j<999){
             
-            if (dem[i]== j){
-                i++;
-                j++;
-            }else{
+            if(dem[i]<j){
                 if (j <= 9) {
                     ma +=  "00" + (j);
                 } else {
                     ma += "0" + (j);
                 }
                 break;
-            } 
+            } else if(dem[i]>j){
+                j=dem[i];
+            }else{
+               
+                i++;
+                j++;
+            }
+            
         }    
         return ma;
     }

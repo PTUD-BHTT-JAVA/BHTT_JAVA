@@ -29,6 +29,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.plaf.BorderUIResource;
 
 /**
  *
@@ -178,8 +179,8 @@ public class GD_NhanVien extends javax.swing.JFrame {
         pnlGioiThieu.setMaximumSize(new java.awt.Dimension(2147483647, 40));
         pnlGioiThieu.setPreferredSize(new java.awt.Dimension(270, 40));
         pnlGioiThieu.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                pnlGioiThieuMousePressed(evt);
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pnlGioiThieuMouseClicked(evt);
             }
         });
         pnlGioiThieu.setLayout(new java.awt.BorderLayout());
@@ -189,6 +190,11 @@ public class GD_NhanVien extends javax.swing.JFrame {
         lblGioiThieu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblGioiThieu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/trangChu.png"))); // NOI18N
         lblGioiThieu.setText("GIỚI THIỆU");
+        lblGioiThieu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblGioiThieuMouseClicked(evt);
+            }
+        });
         pnlGioiThieu.add(lblGioiThieu, java.awt.BorderLayout.CENTER);
 
         pnlSilde.add(pnlGioiThieu);
@@ -380,11 +386,6 @@ public class GD_NhanVien extends javax.swing.JFrame {
         openComponent(frame);
     }//GEN-LAST:event_pnlTaoDonHangMousePressed
 
-    private void pnlGioiThieuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlGioiThieuMousePressed
-        GD_GioiThieu frGioiThieu = new GD_GioiThieu(username);
-        openComponent(frGioiThieu);
-    }//GEN-LAST:event_pnlGioiThieuMousePressed
-
     private void pnlKhachHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlKhachHangMousePressed
         GD_KhachHang frKhachHang = new GD_KhachHang(username);
         openComponent(frKhachHang);
@@ -448,6 +449,30 @@ public class GD_NhanVien extends javax.swing.JFrame {
             setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         }
     }//GEN-LAST:event_formWindowClosing
+
+    private void lblGioiThieuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblGioiThieuMouseClicked
+        pnlGioiThieu.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlGioiThieu.setkStartColor(new java.awt.Color(164, 158, 213));
+        lblGioiThieu.setForeground(new Color(102,0,102));
+
+    }//GEN-LAST:event_lblGioiThieuMouseClicked
+
+    private void pnlGioiThieuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlGioiThieuMouseClicked
+        GD_GioiThieu d_GioiThieu=new GD_GioiThieu(username);
+        openComponent(d_GioiThieu);
+        pnlGioiThieu.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlGioiThieu.setkStartColor(new java.awt.Color(164, 158, 213));
+        lblGioiThieu.setForeground(new Color(102,0,102));
+
+
+
+
+
+
+
+//        pnlGioiThieu.setkEndColor(new java.awt.Color(255, 204, 204));
+//        pnlGioiThieu.setkStartColor(new java.awt.Color(102, 0, 153));
+    }//GEN-LAST:event_pnlGioiThieuMouseClicked
     // open frame when click panel
     void openComponent(JInternalFrame frame) {
         Component[] components = pnlForm.getComponents();
