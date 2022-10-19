@@ -49,6 +49,8 @@ public class GD_NhanVien extends javax.swing.JFrame {
         this.setVisible(true);
 
         initComponents();
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icon/tuisach.png")));
+        setTitle("Thời trang nữ BHTT");
         setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         Toolkit tk = Toolkit.getDefaultToolkit();
@@ -134,6 +136,7 @@ public class GD_NhanVien extends javax.swing.JFrame {
         lblChucVu.setText("Nhân viên");
 
         lblImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-employee-80.png"))); // NOI18N
         lblImage.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         lblTen.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
@@ -190,6 +193,7 @@ public class GD_NhanVien extends javax.swing.JFrame {
         lblGioiThieu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblGioiThieu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/trangChu.png"))); // NOI18N
         lblGioiThieu.setText("GIỚI THIỆU");
+        lblGioiThieu.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         lblGioiThieu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblGioiThieuMouseClicked(evt);
@@ -237,6 +241,7 @@ public class GD_NhanVien extends javax.swing.JFrame {
         lblDonHang.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDonHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/donHang.png"))); // NOI18N
         lblDonHang.setText("ĐƠN HÀNG");
+        lblDonHang.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         pnlDonHang.add(lblDonHang, java.awt.BorderLayout.CENTER);
         lblDonHang.getAccessibleContext().setAccessibleDescription("");
 
@@ -265,7 +270,7 @@ public class GD_NhanVien extends javax.swing.JFrame {
         lblTaoHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/taoDonHangMoi.png"))); // NOI18N
         lblTaoHoaDon.setText("TẠO ĐƠN HÀNG");
         lblTaoHoaDon.setVerifyInputWhenFocusTarget(false);
-        pnlTaoDonHang.add(lblTaoHoaDon, java.awt.BorderLayout.CENTER);
+        pnlTaoDonHang.add(lblTaoHoaDon, java.awt.BorderLayout.LINE_START);
 
         pnlTitleTaoDonHang.add(pnlTaoDonHang, java.awt.BorderLayout.EAST);
 

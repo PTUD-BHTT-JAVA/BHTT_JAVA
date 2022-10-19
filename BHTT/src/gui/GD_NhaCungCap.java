@@ -6,12 +6,17 @@ package gui;
 
 import connectDB.ConnectDB;
 import dao.DAO_NhaCungCap;
-import entity.KhachHang;
 import entity.NhaCungCap;
-import entity.NhanVien;
+
+
+
 import java.util.List;
+
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+
 
 /**
  *
@@ -39,37 +44,59 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
         modelNhaCungCap = (DefaultTableModel) tableNhaCC.getModel();
         DocDuLieuDatabaseVaoTable();
     }
-    private String maTuSinh() {
-        String s = "NCC";
-        int ma = nhacc.getalltbNhaCungCap().size();
-        if (ma < 9) {
-            s = s + "00" + (ma + 1);
-        } else {
-            s = s + "0" + (ma + 1);
+    private String maTuSinh(){
+        String ma="NCC";
+        int tachMa;
+        int i=0,j=1;
+        int[] dem=new int[999];
+        String id;
+        for (NhaCungCap ncc : nhacc.getalltbNhaCungCap()) {
+            id = ncc.getMaNCC();
+            tachMa=Integer.parseInt(id.substring(3, 6));
+            dem[i] =tachMa;
+            i++;
         }
-        return s;
+        i=0;
+        while (j<999){
+            
+            if(dem[i]<j){
+                if (j <= 9) {
+                    ma +=  "00" + (j);
+                } else {
+                    ma += "0" + (j);
+                }
+                break;
+            } else if(dem[i]>j){
+                j=dem[i];
+            }else{
+                i++;
+                j++;
+            }
+            
+        }    
+        return ma;
+    }
+    private void xoaTextField(){
+       txtTenNCC.setText("");
+       txtSoDienThoai.setText("");
+       txtDiaChi.setText("");
+       txtEmail.setText("");
+    }
+    public void timKiemNhaCC(String ten){
+        modelNhaCungCap = (DefaultTableModel) tableNhaCC.getModel();
+        TableRowSorter<DefaultTableModel> trs =  new TableRowSorter<>(modelNhaCungCap);
+        tableNhaCC.setRowSorter(trs);
+        trs.setRowFilter(RowFilter.regexFilter(ten));
     }
     public boolean kiemTraForm(){
-        String tenNCC = txtTenNCC.getText();
-        String diaChi = txtDiaChi.getText();
-        String soDienThoai = txtSoDienThoai.getText();
         String email = txtEmail.getText();
-        if(tenNCC.equals("")){
-            return false;
-        }
-        if(diaChi.equals("")){
-            return false;
-        }
-        if(soDienThoai.equals("")){
-            return false;
-        }
         if(email.equals("") || !email.matches("^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$")){
-            JOptionPane.showMessageDialog(this, "Email không đúng định dạng");
+            JOptionPane.showMessageDialog(this, "Email không đúng định dạng","Cảnh báo",JOptionPane.WARNING_MESSAGE);
             return false;
         }
         return true;
     }
-    public void DocDuLieuDatabaseVaoTable() {
+    private void DocDuLieuDatabaseVaoTable() {
         nhacc = new DAO_NhaCungCap();
         List<NhaCungCap> list = nhacc.getalltbNhaCungCap();
         for (NhaCungCap ncc : list) {
@@ -78,6 +105,8 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
             });
         }
     }
+    
+//    Import file excel
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -102,16 +131,17 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
         txtEmail = new javax.swing.JTextField();
         pnlNut = new javax.swing.JPanel();
         btnThemNCC = new javax.swing.JButton();
-        btnXoaNCC = new javax.swing.JButton();
         btnSuaNCC = new javax.swing.JButton();
-        btnXoaTrang = new javax.swing.JButton();
+        btnLuu = new javax.swing.JButton();
+        btnImport = new javax.swing.JButton();
         pnlGiua = new javax.swing.JPanel();
-        jTextField2 = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
+        txtTim = new swing.TextFieldAnimation();
         pnlDuoi = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableNhaCC = new javax.swing.JTable();
 
+        setBackground(new java.awt.Color(204, 204, 204));
         setBorder(null);
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setFrameIcon(null);
@@ -162,10 +192,9 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
                     .addComponent(jLabel8))
                 .addGap(68, 68, 68)
                 .addGroup(pnlThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 731, Short.MAX_VALUE)
-                        .addComponent(txtSoDienThoai, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtDiaChi, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 731, Short.MAX_VALUE)
+                    .addComponent(txtSoDienThoai)
+                    .addComponent(txtDiaChi)
                     .addComponent(txtTenNCC))
                 .addContainerGap())
         );
@@ -198,34 +227,46 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
         pnlNut.setPreferredSize(new java.awt.Dimension(300, 300));
 
         btnThemNCC.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
+        btnThemNCC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/themNCC.png"))); // NOI18N
         btnThemNCC.setText("Thêm nhà cung cấp");
+        btnThemNCC.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnThemNCC.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnThemNCC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThemNCCActionPerformed(evt);
             }
         });
 
-        btnXoaNCC.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
-        btnXoaNCC.setText("Xóa nhà cung cấp");
-        btnXoaNCC.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXoaNCCActionPerformed(evt);
-            }
-        });
-
         btnSuaNCC.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
-        btnSuaNCC.setText("Cập nhật thông tin nhà cung cấp");
+        btnSuaNCC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/capnhatKH.png"))); // NOI18N
+        btnSuaNCC.setText("Cập nhật thông tin");
+        btnSuaNCC.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnSuaNCC.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnSuaNCC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSuaNCCActionPerformed(evt);
             }
         });
 
-        btnXoaTrang.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
-        btnXoaTrang.setText("Xóa trắng");
-        btnXoaTrang.addActionListener(new java.awt.event.ActionListener() {
+        btnLuu.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
+        btnLuu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/save.png"))); // NOI18N
+        btnLuu.setText("Lưu thông tin");
+        btnLuu.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnLuu.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnLuu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXoaTrangActionPerformed(evt);
+                btnLuuActionPerformed(evt);
+            }
+        });
+
+        btnImport.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
+        btnImport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/excel.png"))); // NOI18N
+        btnImport.setText("Import (Excel)");
+        btnImport.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnImport.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnImport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImportActionPerformed(evt);
             }
         });
 
@@ -233,14 +274,14 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
         pnlNut.setLayout(pnlNutLayout);
         pnlNutLayout.setHorizontalGroup(
             pnlNutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlNutLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlNutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnThemNCC, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnXoaNCC, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSuaNCC, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
-                    .addComponent(btnXoaTrang, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE))
-                .addContainerGap())
+            .addGroup(pnlNutLayout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addGroup(pnlNutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnImport, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
+                    .addComponent(btnLuu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSuaNCC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnThemNCC, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         pnlNutLayout.setVerticalGroup(
             pnlNutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -248,12 +289,12 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(btnThemNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnXoaNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addComponent(btnSuaNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnXoaTrang, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(btnImport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(46, 46, 46))
         );
 
         pnlTren.add(pnlNut, java.awt.BorderLayout.CENTER);
@@ -263,11 +304,14 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
         pnlGiua.setMaximumSize(new java.awt.Dimension(32767, 50));
         pnlGiua.setPreferredSize(new java.awt.Dimension(3666, 60));
 
-        jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
-        jTextField2.setText("Tìm kiếm nhân viên");
-
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel13.setText("Tìm kiếm :");
+
+        txtTim.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTimKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlGiuaLayout = new javax.swing.GroupLayout(pnlGiua);
         pnlGiua.setLayout(pnlGiuaLayout);
@@ -276,17 +320,17 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
             .addGroup(pnlGiuaLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(jLabel13)
-                .addGap(33, 33, 33)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(902, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(884, Short.MAX_VALUE))
         );
         pnlGiuaLayout.setVerticalGroup(
             pnlGiuaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlGiuaLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addGap(12, 12, 12)
                 .addGroup(pnlGiuaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13))
+                    .addComponent(jLabel13)
+                    .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -303,7 +347,7 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Mã ", "Tên nhân viên", "Địa chỉ", "Số điện thoại", "Email"
+                "Mã ", "Tên nhà cung cấp", "Địa chỉ", "Số điện thoại", "Email"
             }
         ));
         tableNhaCC.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -331,38 +375,29 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnXoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrangActionPerformed
-       txtTenNCC.setText("");
-       txtSoDienThoai.setText("");
-       txtDiaChi.setText("");
-       txtEmail.setText("");
-    }//GEN-LAST:event_btnXoaTrangActionPerformed
-
-    private void btnThemNCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemNCCActionPerformed
-        String tenNCC = txtTenNCC.getText();
+    private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
+       String tenNCC = txtTenNCC.getText();
         String diaChi = txtDiaChi.getText();
         String soDienThoai = txtSoDienThoai.getText();
         String email = txtEmail.getText();
-        if (!kiemTraForm()) {
-            JOptionPane.showMessageDialog(null, "Nhập đầy đủ thông tin");
+        if (tenNCC.equals("") || diaChi.equals("")|| soDienThoai.equals("") || email.equals("")) {
+            JOptionPane.showMessageDialog(null, "Nhập đầy đủ thông tin","Cảnh báo",JOptionPane.WARNING_MESSAGE);
         } else {
-            NhaCungCap ncc = new NhaCungCap(maTuSinh(), tenNCC, diaChi, soDienThoai, email);
-            nhacc.themNhaCungCap(ncc);
-            modelNhaCungCap.addRow(new Object[]{
-                ncc.getMaNCC(),ncc.getTenNCC(),ncc.getDiaChi(),ncc.getSoDienThoai(),ncc.getEmail()
-            });
+            if(kiemTraForm()){
+                NhaCungCap ncc = new NhaCungCap(maTuSinh(), tenNCC, diaChi, soDienThoai, email);
+                nhacc.themNhaCungCap(ncc);
+                modelNhaCungCap.addRow(new Object[]{
+                    ncc.getMaNCC(), ncc.getTenNCC(), ncc.getDiaChi(), ncc.getSoDienThoai(), ncc.getEmail()
+                });
+                JOptionPane.showMessageDialog(null, "Thêm thành công");
+                xoaTextField();
+            }
         }
-    }//GEN-LAST:event_btnThemNCCActionPerformed
+    }//GEN-LAST:event_btnLuuActionPerformed
 
-    private void btnXoaNCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaNCCActionPerformed
-       if (JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn xóa nhà cung cấp này ?", "Xóa nhà cung cấp", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-            int r = tableNhaCC.getSelectedRow();
-            modelNhaCungCap.removeRow(r); // xóa trong table model
-            NhaCungCap ncc_xoa = nhacc.getElement(r);
-            nhacc.xoaNhaCungCap(ncc_xoa.getMaNCC());
-            JOptionPane.showMessageDialog(rootPane, "Xóa thành công");
-        }
-    }//GEN-LAST:event_btnXoaNCCActionPerformed
+    private void btnThemNCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemNCCActionPerformed
+        xoaTextField();
+    }//GEN-LAST:event_btnThemNCCActionPerformed
 
     private void btnSuaNCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaNCCActionPerformed
         if (JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn cập nhật khách hàng này ?", "Cập nhật khách hàng", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
@@ -394,12 +429,22 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
       txtEmail.setText(modelNhaCungCap.getValueAt(r, 4).toString());
     }//GEN-LAST:event_tableNhaCCMouseClicked
 
+    
+    private void btnImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportActionPerformed
+       
+    }//GEN-LAST:event_btnImportActionPerformed
+
+    private void txtTimKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKeyReleased
+       String search = txtTim.getText();
+       timKiemNhaCC(search);
+    }//GEN-LAST:event_txtTimKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnImport;
+    private javax.swing.JButton btnLuu;
     private javax.swing.JButton btnSuaNCC;
     private javax.swing.JButton btnThemNCC;
-    private javax.swing.JButton btnXoaNCC;
-    private javax.swing.JButton btnXoaTrang;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel4;
@@ -407,7 +452,6 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JPanel pnlDuoi;
     private javax.swing.JPanel pnlGiua;
     private javax.swing.JPanel pnlMain;
@@ -419,5 +463,6 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtSoDienThoai;
     private javax.swing.JTextField txtTenNCC;
+    private swing.TextFieldAnimation txtTim;
     // End of variables declaration//GEN-END:variables
 }
