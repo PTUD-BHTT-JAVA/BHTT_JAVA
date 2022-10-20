@@ -14,7 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ButtonModel;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import regex.RegexHelper;
 
 /**
@@ -316,9 +318,19 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
 
         txtTimKiem.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         txtTimKiem.setText("Tìm kiếm nhân viên");
+        txtTimKiem.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTimKiemKeyReleased(evt);
+            }
+        });
 
         cmbLocChucVu.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         cmbLocChucVu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Nhân viên", "Quản lý" }));
+        cmbLocChucVu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbLocChucVuActionPerformed(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel11.setText("Chức vụ :");
@@ -438,11 +450,50 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnXoaTrangActionPerformed
 
     private void btnSuaThongTinNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaThongTinNVActionPerformed
-        // TODO add your handling code here:
+        int index = tblNhanVien.getSelectedRow();
+        if (index==-1){
+            JOptionPane.showMessageDialog(this, "Hãy chọn dòng cần sửa!");
+        }else{
+        if (checkData()){
+            lnvDAO=new DAO_LoaiNhanVien();
+            NhanVien s=nvDAO.layNhanVienBangMa(modelNhanVien.getValueAt(index, 0)+"");            
+            
+            s.setTenNV( txtTenNhanVien.getText());
+            s.setCMND(txtCMND.getText());
+            s.setSoDienThoai(txtSoDienThoai.getText());
+            s.setGioiTinh(radNam.isSelected());
+            s.setLuongCoBan(Double.parseDouble(txtLuongCoBan.getText()));
+            String lnv="LNV002";
+            String tLNV="Nhân viên";
+            if(cmbChucVu.getSelectedItem().toString().equals("Quản lý")){
+                lnv="LNV001";
+                tLNV="Quản lý";
+            }
+            s.setLoaiNhanVien(new LoaiNhanVien(lnv,tLNV));           
+            nvDAO.capNhatNV(s);             
+            docDuLieuLenTable(nvDAO.layTatCaNhanVienVaoBang(), modelNhanVien);
+            JOptionPane.showMessageDialog(this, "Sửa thành công!");
+            clearInput();
+            }
+        }
     }//GEN-LAST:event_btnSuaThongTinNVActionPerformed
 
     private void btnXoaNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaNhanVienActionPerformed
-        // TODO add your handling code here:
+        clearInput();
+        int index=tblNhanVien.getSelectedRow();
+        if(index==-1){
+            JOptionPane.showMessageDialog(this, "Hãy chọn một nhân viên để xóa !");
+        }else{
+            int chon= JOptionPane.showConfirmDialog(this, "Bạn có chắn chắn muốn xóa nhân viên này?", "Hỏi",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+            if(chon==JOptionPane.YES_OPTION){
+                NhanVien nv=nvDAO.layNhanVienBangMa(modelNhanVien.getValueAt(index, 0)+"");
+                tkDAO.xoaTK(tkDAO.timTaiKhoan(nv.getMaNV()));
+                nvDAO.xoaNV(nv);
+                docDuLieuLenTable(nvDAO.layTatCaNhanVienVaoBang(), modelNhanVien);
+                JOptionPane.showMessageDialog(this, "Xóa thành công !");
+                clearInput();
+            }
+        }
     }//GEN-LAST:event_btnXoaNhanVienActionPerformed
 
     private void tblNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNhanVienMouseClicked
@@ -460,6 +511,30 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_tblNhanVienMouseClicked
 
+    private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
+        String s=txtTimKiem.getText();
+        filter(s);
+
+    }//GEN-LAST:event_txtTimKiemKeyReleased
+
+    private void cmbLocChucVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbLocChucVuActionPerformed
+        if (cmbLocChucVu.getSelectedItem().toString().equals("Tất cả")){
+            docDuLieuLenTable(nvDAO.layTatCaNhanVienVaoBang(), modelNhanVien);
+        }
+        if (cmbLocChucVu.getSelectedItem().toString().equals("Nhân viên")){
+            docDuLieuLenTable(nvDAO.layNhanVienVaoBang(), modelNhanVien);
+        }
+        if (cmbLocChucVu.getSelectedItem().toString().equals("Quản lý")){
+            docDuLieuLenTable(nvDAO.layQuanLyVaoBang(), modelNhanVien);
+        }
+    }//GEN-LAST:event_cmbLocChucVuActionPerformed
+    private void filter(String s){
+        TableRowSorter<DefaultTableModel> tr=new TableRowSorter<DefaultTableModel>(modelNhanVien);
+        tblNhanVien.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter("(?i)"+s));
+
+        
+    }
     private void docDuLieuLenTable(List<NhanVien> list,DefaultTableModel dtm){
         dtm.setRowCount(0);
         String gt;

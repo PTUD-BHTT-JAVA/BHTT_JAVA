@@ -5,6 +5,7 @@
 package dao;
 
 import connectDB.ConnectDB;
+import entity.NhanVien;
 import entity.TaiKhoan;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -61,6 +62,16 @@ public class DAO_TaiKhoan {
         }
         return null;
     }
-   
+       public boolean xoaTK(TaiKhoan tk) {
+
+        try (Connection conn = ConnectDB.opConnection();
+                PreparedStatement pstmt = conn.prepareStatement("DELETE FROM TAIKHOAN WHERE tenDN=?")) {
+            pstmt.setString(1, tk.getTenDN());
+            return pstmt.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
 }
