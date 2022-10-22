@@ -29,6 +29,11 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
     private DAO_NhanVien nvDAO;
     private DAO_LoaiNhanVien lnvDAO;
     private DAO_TaiKhoan tkDAO;
+    List<RowFilter<DefaultTableModel,Object>> filters = new ArrayList<>();
+    private TableRowSorter<DefaultTableModel> tr;
+
+    
+
     /**
      * Creates new form QuanLyHoaDon
      */
@@ -52,7 +57,9 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
         modelNhanVien=(DefaultTableModel) tblNhanVien.getModel();
         tkDAO=new DAO_TaiKhoan();
         docDuLieuLenTable(nvDAO.layTatCaNhanVienVaoBang(),modelNhanVien);
-        
+        tr=new TableRowSorter<DefaultTableModel>(modelNhanVien);
+
+        tblNhanVien.setRowSorter(tr);
     }
 
     /**
@@ -526,31 +533,44 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
     private void cmbLocChucVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbLocChucVuActionPerformed
         
         String s= cmbLocChucVu.getSelectedItem().toString();
-        if (cmbLocChucVu.getSelectedItem().toString().equals("Tất cả")){
-            docDuLieuLenTable(nvDAO.layTatCaNhanVienVaoBang(), modelNhanVien);
-        }
         if (s.equals("Tất cả"))
-            s="N";
-        TableRowSorter<DefaultTableModel> tr=new TableRowSorter<DefaultTableModel>(modelNhanVien);
-        tblNhanVien.setRowSorter(tr);
-        tr.setRowFilter(RowFilter.regexFilter("(?i)"+s));
-    
+            s="(Quản lý)|(Nhân viên)";
+
+        
+        if(filters.isEmpty())
+            filters.add(RowFilter.regexFilter(s, 5));
+        else
+            filters.set(0, RowFilter.regexFilter(s, 5));
+        // Apply filters
+        tr.setRowFilter(RowFilter.andFilter(filters));
+        
+        
+//        
+//        if (s.equals("Tất cả")){
+//                s="(Nhân viên)|(Quản lý)";
+//            tblNhanVien.setRowSorter(tr);
+//            tr.setRowFilter(RowFilter.regexFilter("(?i)"+s));
+//        }
+//        else{
+//        
+//            TableRowSorter<DefaultTableModel> tr=new TableRowSorter<DefaultTableModel>(modelNhanVien);
+//            tblNhanVien.setRowSorter(tr);
+//            tr.setRowFilter(RowFilter.regexFilter("(?i)"+s));
+//        }
     }//GEN-LAST:event_cmbLocChucVuActionPerformed
 
     private void cmbLocGioiTinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbLocGioiTinhActionPerformed
         
         String s= cmbLocGioiTinh.getSelectedItem().toString();
-        if (s.equals("Tất cả")){
-            docDuLieuLenTable(nvDAO.layTatCaNhanVienVaoBang(), modelNhanVien);
-
-        }else{
+        if (s.equals("Tất cả"))
+            s="(Nam)|(Nữ)";
         
-            if (s.equals("Nam"))
-                s="1";
-            else
-                s="0";
-            docDuLieuLenTable(nvDAO.layTheoGioiTinh(s), modelNhanVien);
-        }
+        if(filters.size()<2)
+            filters.add(RowFilter.regexFilter(s, 3));
+        else
+            filters.set(1, RowFilter.regexFilter(s, 3));
+        // Apply filters
+        tr.setRowFilter(RowFilter.andFilter(filters));
 
             
     }//GEN-LAST:event_cmbLocGioiTinhActionPerformed
