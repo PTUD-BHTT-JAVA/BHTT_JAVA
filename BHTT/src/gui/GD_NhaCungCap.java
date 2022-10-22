@@ -8,11 +8,13 @@ import connectDB.ConnectDB;
 import dao.DAO_NhaCungCap;
 import entity.NhaCungCap;
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.System.Logger;
-import java.lang.System.Logger.Level;
+
 
 
 
@@ -20,10 +22,12 @@ import java.util.List;
 import javax.swing.JFileChooser;
 
 import javax.swing.JOptionPane;
+
 import javax.swing.RowFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -38,6 +42,9 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
     private DefaultTableModel modelNhaCungCap;
     private String username;
     private DAO_NhaCungCap nhacc;
+    private XSSFRow rowCount;
+  
+    
     /**
      * Creates new form QuanLyHoaDon
      */
@@ -45,7 +52,7 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
         try {
             ConnectDB.getInstance().connect();
         } catch (Exception e) {
-            
+            System.out.println(e);
         }
         this.setRootPaneCheckingEnabled(false);
         javax.swing.plaf.InternalFrameUI ui
@@ -57,7 +64,7 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
         modelNhaCungCap = (DefaultTableModel) tableNhaCC.getModel();
         DocDuLieuDatabaseVaoTable();
     }
-    private void importFileExcel(){
+    private void importNhaCungCap(){
         File excelFile;
         FileInputStream excelFIS = null;
         BufferedInputStream excelBIS = null;
@@ -103,12 +110,71 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
                         excelImportToJTable.close();
                     }
                 }catch (IOException ex) {
-//                    Logger.getLogger(GD_NhaCungCap.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println(ex);
                 }
             }
         }
     }
+//    Export file excel
+    public void exportNhaCungCap(){
+        FileOutputStream excelFOU = null;
+        BufferedOutputStream excelBOU = null;
+        XSSFWorkbook excelJTableExporter = null;
+        //Choose Location For Saving Excel File
+        JFileChooser excelFileChooser = new JFileChooser("C:\\Users\\Trinh Cui Bap\\Desktop");
+//        Change Dilog Box Title
+        excelFileChooser.setDialogTitle("Save As");
+        FileNameExtensionFilter fnef = new FileNameExtensionFilter("EXCEL FILES", "xls", "xlsx", "xlsm");
+        excelFileChooser.setFileFilter(fnef);
+        int excelChooser = excelFileChooser.showSaveDialog(null);
+        if (excelChooser == JFileChooser.APPROVE_OPTION) {
+            try {
+                //Import excel poi libraries to netbeans
+                excelJTableExporter = new XSSFWorkbook();
+                XSSFSheet excelSheet = excelJTableExporter.createSheet("JTable Sheet");
+                rowCount = excelSheet.createRow(0);
 
+                for (int i = 0; i < modelNhaCungCap.getColumnCount(); i++) {
+                    XSSFCell cell = rowCount.createCell(i);
+                    cell.setCellValue(modelNhaCungCap.getColumnName(i));
+                }
+
+                for (int i = 0; i < modelNhaCungCap.getRowCount(); i++) {
+                    XSSFRow excelRow = excelSheet.createRow(i + 1);
+                    for (int j = 0; j < modelNhaCungCap.getColumnCount(); j++) {
+                        XSSFCell excelCell = excelRow.createCell(j);
+                        excelCell.setCellValue(modelNhaCungCap.getValueAt(i, j).toString());
+                    }
+                }
+                excelFOU = new FileOutputStream(excelFileChooser.getSelectedFile() + ".xlsx");
+                excelBOU = new BufferedOutputStream(excelFOU);
+                excelJTableExporter.write(excelBOU);
+                JOptionPane.showMessageDialog(null, "Export thành công !!!........");
+            } catch (FileNotFoundException ex) {
+                System.out.println(ex);
+            } catch (IOException ex) {
+                System.out.println(ex);
+            } finally {
+                try {
+                    if (excelBOU != null) {
+                        excelBOU.close();
+                    }
+                    if (excelFOU != null) {
+                        excelFOU.close();
+                    }
+                    if (excelJTableExporter != null) {
+                        excelJTableExporter.close();
+                    }
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Expor không thành công");
+        }
+
+    }
+    
     private String maTuSinh(){
         String ma="NCC";
         int tachMa;
@@ -141,18 +207,20 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
         }    
         return ma;
     }
+    
     private void xoaTextField(){
        txtTenNCC.setText("");
        txtSoDienThoai.setText("");
        txtDiaChi.setText("");
        txtEmail.setText("");
     }
-    public void timKiemNhaCC(String ten){
-        modelNhaCungCap = (DefaultTableModel) tableNhaCC.getModel();
-        TableRowSorter<DefaultTableModel> trs =  new TableRowSorter<>(modelNhaCungCap);
-        tableNhaCC.setRowSorter(trs);
-        trs.setRowFilter(RowFilter.regexFilter(ten));
+    
+    private void timKiemNhaCC(String ten){
+        TableRowSorter<DefaultTableModel> tr=new TableRowSorter<DefaultTableModel>(modelNhaCungCap);
+        tableNhaCC.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter("(?i)"+ten));
     }
+    
     public boolean kiemTraForm(){
         String email = txtEmail.getText();
         if(email.equals("") || !email.matches("^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$")){
@@ -161,6 +229,7 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
         }
         return true;
     }
+    
     private void DocDuLieuDatabaseVaoTable() {
         nhacc = new DAO_NhaCungCap();
         List<NhaCungCap> list = nhacc.getalltbNhaCungCap();
@@ -171,13 +240,8 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
         }
     }
     
-//    Import file excel
     
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
+   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -199,6 +263,7 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
         btnSuaNCC = new javax.swing.JButton();
         btnLuu = new javax.swing.JButton();
         btnImport = new javax.swing.JButton();
+        btnExport = new javax.swing.JButton();
         pnlGiua = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         txtTim = new swing.TextFieldAnimation();
@@ -335,6 +400,16 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
             }
         });
 
+        btnExport.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
+        btnExport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-export-excel-32.png"))); // NOI18N
+        btnExport.setText("Export (Excel)");
+        btnExport.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnExport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExportActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlNutLayout = new javax.swing.GroupLayout(pnlNut);
         pnlNut.setLayout(pnlNutLayout);
         pnlNutLayout.setHorizontalGroup(
@@ -345,7 +420,8 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
                     .addComponent(btnImport, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
                     .addComponent(btnLuu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnSuaNCC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnThemNCC, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE))
+                    .addComponent(btnThemNCC, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
+                    .addComponent(btnExport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(44, Short.MAX_VALUE))
         );
         pnlNutLayout.setVerticalGroup(
@@ -353,13 +429,15 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlNutLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnThemNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSuaNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addGap(18, 18, 18)
                 .addComponent(btnImport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(46, 46, 46))
+                .addGap(18, 18, 18)
+                .addComponent(btnExport, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
         );
 
         pnlTren.add(pnlNut, java.awt.BorderLayout.CENTER);
@@ -372,6 +450,7 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel13.setText("Tìm kiếm :");
 
+        txtTim.setHintText("Nhập tên để tìm kiếm.");
         txtTim.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtTimKeyReleased(evt);
@@ -494,9 +573,8 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
       txtEmail.setText(modelNhaCungCap.getValueAt(r, 4).toString());
     }//GEN-LAST:event_tableNhaCCMouseClicked
 
-    
     private void btnImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportActionPerformed
-       importFileExcel();
+       importNhaCungCap();
     }//GEN-LAST:event_btnImportActionPerformed
 
     private void txtTimKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKeyReleased
@@ -504,8 +582,13 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
        timKiemNhaCC(search);
     }//GEN-LAST:event_txtTimKeyReleased
 
+    private void btnExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportActionPerformed
+        exportNhaCungCap();
+    }//GEN-LAST:event_btnExportActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnExport;
     private javax.swing.JButton btnImport;
     private javax.swing.JButton btnLuu;
     private javax.swing.JButton btnSuaNCC;
@@ -523,7 +606,7 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
     private javax.swing.JPanel pnlNut;
     private javax.swing.JPanel pnlThongTin;
     private javax.swing.JPanel pnlTren;
-    private javax.swing.JTable tableNhaCC;
+    public javax.swing.JTable tableNhaCC;
     private javax.swing.JTextField txtDiaChi;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtSoDienThoai;
