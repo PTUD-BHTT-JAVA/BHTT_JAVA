@@ -48,4 +48,21 @@ public class DAO_ChatLieu {
        }
        return null;
      }
+     public ChatLieu layKichThuocBangTen(String tenTim) {
+        
+        try(
+             java.sql.Connection con = ConnectDB.opConnection();
+            PreparedStatement pts = con.prepareStatement("Select * from ChatLieu where tenChatLieu=?  ")){
+            pts.setString(1,tenTim );
+                try(ResultSet rs = pts.executeQuery()){
+                    if (rs.next()){
+                       ChatLieu cl = new ChatLieu(rs.getString("maChatLieu"), rs.getString("tenChatLieu"));
+                        return cl;
+                    }
+                }
+            }catch(Exception e){
+                e.printStackTrace();
+       }
+       return null;
+     }
 }

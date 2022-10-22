@@ -50,4 +50,21 @@ public class DAO_KichThuoc {
        }
        return null;
      }
+    public KichThuoc layKichThuocBangTen(String tenTim) {
+        
+        try(
+             java.sql.Connection con = ConnectDB.opConnection();
+            PreparedStatement pts = con.prepareStatement("Select * from KichThuoc where tenKichThuoc=?  ")){
+            pts.setString(1,tenTim );
+                try(ResultSet rs = pts.executeQuery()){
+                    if (rs.next()){
+                       KichThuoc kt = new KichThuoc(rs.getString("maKichThuoc"), rs.getString("tenKichThuoc"), rs.getString("moTa"));
+                        return kt;
+                    }
+                }
+            }catch(Exception e){
+                e.printStackTrace();
+       }
+       return null;
+     }
 }

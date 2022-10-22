@@ -68,6 +68,7 @@ public class GD_SanPham extends javax.swing.JInternalFrame  {
         
         DocDuLieuLenTable();
         DocDuLieuVaoCombobox();
+        moKhoaTextfields(false);
     }
 
     /**
@@ -110,10 +111,10 @@ public class GD_SanPham extends javax.swing.JInternalFrame  {
         lblHinhAnh = new javax.swing.JLabel();
         pnlNutSP = new javax.swing.JPanel();
         btnChonAnh = new javax.swing.JButton();
-        btnXoaTrang = new javax.swing.JButton();
+        btnLuu = new javax.swing.JButton();
         btnXoaSP = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnSua = new javax.swing.JButton();
+        btnThemNhieu = new javax.swing.JButton();
         btnThem = new javax.swing.JButton();
         pnlGiua = new javax.swing.JPanel();
         cbxPLL = new javax.swing.JComboBox<>();
@@ -356,14 +357,14 @@ public class GD_SanPham extends javax.swing.JInternalFrame  {
         });
         pnlNutSP.add(btnChonAnh);
 
-        btnXoaTrang.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnXoaTrang.setText("Xóa trắng");
-        btnXoaTrang.addActionListener(new java.awt.event.ActionListener() {
+        btnLuu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnLuu.setText("Lưu ");
+        btnLuu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXoaTrangActionPerformed(evt);
+                btnLuuActionPerformed(evt);
             }
         });
-        pnlNutSP.add(btnXoaTrang);
+        pnlNutSP.add(btnLuu);
 
         btnXoaSP.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnXoaSP.setText("Xóa");
@@ -374,13 +375,13 @@ public class GD_SanPham extends javax.swing.JInternalFrame  {
         });
         pnlNutSP.add(btnXoaSP);
 
-        jButton5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton5.setText("Sửa");
-        pnlNutSP.add(jButton5);
+        btnSua.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnSua.setText("Sửa");
+        pnlNutSP.add(btnSua);
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton3.setText("Thêm nhiều");
-        pnlNutSP.add(jButton3);
+        btnThemNhieu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnThemNhieu.setText("Thêm nhiều");
+        pnlNutSP.add(btnThemNhieu);
 
         btnThem.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnThem.setText("Thêm");
@@ -402,6 +403,11 @@ public class GD_SanPham extends javax.swing.JInternalFrame  {
 
         cbxPLL.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         cbxPLL.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả" }));
+        cbxPLL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxPLLActionPerformed(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel11.setText("Phân loại:");
@@ -541,9 +547,14 @@ public class GD_SanPham extends javax.swing.JInternalFrame  {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtbSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbSanPhamMouseClicked
-       
+       NapDuLieuTuTable();
+        
+    }//GEN-LAST:event_jtbSanPhamMouseClicked
+    private void NapDuLieuTuTable(){
         int hangChon= jtbSanPham.getSelectedRow();
-           String ma = modolSP.getValueAt(hangChon, 1).toString();
+        if(hangChon==-1)
+            return;
+          String ma = modolSP.getValueAt(hangChon, 1).toString();
          SanPham spp = new DAO_SanPham().laySanPhamBangMa(ma);
          txtTenSP.setText(spp.getTenSP());
          txtSL.setText(spp.getSoLuong()+"");
@@ -575,28 +586,96 @@ public class GD_SanPham extends javax.swing.JInternalFrame  {
         {
             
         }
-    }//GEN-LAST:event_jtbSanPhamMouseClicked
-    private void XoaHetDLTrenTbale(){
-        DefaultTableModel fm = (DefaultTableModel) jtbSanPham.getModel();
-        fm.getDataVector().removeAllElements();
     }
-    private void btnXoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrangActionPerformed
-        XoaTrang();
-    }//GEN-LAST:event_btnXoaTrangActionPerformed
-private void XoaTrang(){
-    cbxCLF.setSelectedItem("Tất cả");
+    
+    private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
+        if(btnThem.getText().equalsIgnoreCase("Hủy")){
+            String ma="SP";
+            int tachMa;
+            int i=0,j=1;
+            int[] dem=new int[999];
+            String id;
+            sp_dao = new DAO_SanPham();
+            for (SanPham sanpham : sp_dao.getAllSP()) {
+                id = sanpham.getMaSP();
+                tachMa=Integer.parseInt(id.substring(2, 5));
+                dem[i] =tachMa;
+                i++;
+            }
+             i=0;
+            while (j<999){
+                if(dem[i]<j){
+                    if (j <= 9) {
+                        ma +=  "00" + (j);
+                    }else {
+                        ma += "0" + (j);
+                    }
+                    break;
+                }else if(dem[i]>j){
+                    j=dem[i];
+                }else{
+                    i++;
+                    j++;
+                }
+            }    
+        
+            DAO_SanPham sp = new DAO_SanPham();
+    
+            SanPham spp = new SanPham(ma, txtTenSP.getText(), Double.parseDouble(txtGia.getText()), Integer.parseInt(txtSL.getText()), anhSP, txaMoTa.getText(), ngayNhap.getDate(), hanSD.getDate(), new NhaCungCap(cbxNCCF.getSelectedItem().toString()),new ChatLieu(cbxCLF.getSelectedItem().toString()),new MauSac(cbxMF.getSelectedItem().toString()), new KichThuoc(cbxKTF.getSelectedItem().toString()),new LoaiSanPham(cbxPLF.getSelectedItem().toString()));
+            try {
+            sp_dao.themSP(spp);
+            XoaHetDLTrenTbale();
+            DocDuLieuLenTable();
+            XoaTrang();
+            moKhoaTextfields(false);
+            moKhoaControls(true);
+            btnLuu.setEnabled(false);
+             btnThem.setText("Thêm");
+              int hangChon= jtbSanPham.getSelectedRow();
+              if(hangChon!=-1){
+                   NapDuLieuTuTable();
+              }
+            }catch (Exception e) {
+            }
+        }
+    }//GEN-LAST:event_btnLuuActionPerformed
+    private void moKhoaControls(boolean b) {
+        btnChonAnh.setEnabled(b);
+        btnLuu.setEnabled(b);
+        btnXoaSP.setEnabled(b);
+        btnThem.setEnabled(b);
+        btnSua.setEnabled(b);
+        btnThemNhieu.setEnabled(b);
+    }
+   private void moKhoaTextfields(boolean b) { 
+        txtGia.setEditable(b);
+        txtSL.setEditable(b);
+        txtTenSP.setEditable(b);
+        txtTim.setEditable(b);
+        txaMoTa.setEditable(b);
+        hanSD.setEnabled(b);
+        ngayNhap.setEnabled(b);
+        cbxCLF.setEnabled(b);
+        cbxKTF.setEnabled(b);
+        cbxMF.setEnabled(b);
+        cbxNCCF.setEnabled(b);
+        cbxPLF.setEnabled(b);
+        
+    }
+    private void XoaTrang(){
+        cbxCLF.setSelectedItem("Tất cả");
         cbxMF.setSelectedItem("Tất cả");
         cbxKTF.setSelectedItem("Tất cả");
         cbxNCCF.setSelectedItem("Tất cả");
         cbxPLF.setSelectedItem("Tất cả");
         txtTenSP.setText("");
-         txtGia.setText("");
-          txtSL.setText("");
-          txaMoTa.setText("");
-          java.util.Date date = new java.util.Date();
-          ngayNhap.setDate(date);
-          hanSD.setDate(date);
-          txtTenSP.requestFocus();
+        txtGia.setText("");
+        txtSL.setText("");
+        txaMoTa.setText("");
+        java.util.Date date = new java.util.Date();
+        ngayNhap.setDate(date);
+        hanSD.setDate(date);
+        txtTenSP.requestFocus();
         lblHinhAnh.setIcon(null);
 }
     private void btnChonAnhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonAnhActionPerformed
@@ -621,55 +700,27 @@ private void XoaTrang(){
     }//GEN-LAST:event_btnChonAnhActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-   
-        String ma="SP";
-        int tachMa;
-        int i=0,j=1;
-        int[] dem=new int[999];
-        String id;
-       sp_dao = new DAO_SanPham();
-        for (SanPham sanpham : sp_dao.getAllSP()) {
-            id = sanpham.getMaSP();
-            tachMa=Integer.parseInt(id.substring(2, 5));
-            dem[i] =tachMa;
-            i++;
-        }
-        i=0;
-        while (j<999){
+        if(btnThem.getText().equalsIgnoreCase("Thêm")){
+            moKhoaTextfields(true);
+            moKhoaControls(false);
+            btnLuu.setEnabled(true);
+            btnThem.setEnabled(true);
+            btnChonAnh.setEnabled(true);
+            XoaTrang();
+            btnThem.setText("Hủy");
             
-            if(dem[i]<j){
-                if (j <= 9) {
-                    ma +=  "00" + (j);
-                } else {
-                    ma += "0" + (j);
-                }
-                break;
-            } else if(dem[i]>j){
-                j=dem[i];
-            }else{
+        }else if(btnThem.getText().equalsIgnoreCase("Hủy")) {
+             moKhoaTextfields(false);
+            moKhoaControls(true);
+            btnLuu.setEnabled(false);
+             btnThem.setText("Thêm");
+              int hangChon= jtbSanPham.getSelectedRow();
+              if(hangChon!=-1){
+                   NapDuLieuTuTable();
+              }
                
-                i++;
-                j++;
-            }
-            
-        }    
-        
-            DAO_SanPham sp = new DAO_SanPham();
-//            int ma = sp.getAllSP().size();
-//            if (ma<9){
-//                s=s+"00"+(ma+1);
-//            }else{
-//                s=s+"0"+(ma+1);
-//            }
-    
-    SanPham spp = new SanPham(ma, txtTenSP.getText(), Double.parseDouble(txtGia.getText()), Integer.parseInt(txtSL.getText()), anhSP, txaMoTa.getText(), ngayNhap.getDate(), hanSD.getDate(), new NhaCungCap(cbxNCCF.getSelectedItem().toString()),new ChatLieu(cbxCLF.getSelectedItem().toString()),new MauSac(cbxMF.getSelectedItem().toString()), new KichThuoc(cbxKTF.getSelectedItem().toString()),new LoaiSanPham(cbxPLF.getSelectedItem().toString()));
-        try {
-            sp_dao.themSP(spp);
-            XoaHetDLTrenTbale();
-            DocDuLieuLenTable();
-            
-        } catch (Exception e) {
         }
+      
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void txtSLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSLActionPerformed
@@ -696,6 +747,49 @@ private void XoaTrang(){
          String search = txtTim.getText();
         timKiemNhaCC(search);
     }//GEN-LAST:event_txtTimKeyReleased
+private void XoaHetDLTrenTbale(){
+        DefaultTableModel fm = (DefaultTableModel) jtbSanPham.getModel();
+        fm.getDataVector().removeAllElements();
+    }
+    private void cbxPLLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxPLLActionPerformed
+       
+//        String tenLSP = cbxPLL.getSelectedItem().toString();
+//        String tenMau = cbxML.getSelectedItem().toString();
+//        String tenKT = cbxKTL.getSelectedItem().toString();
+//        String tenCL = cbxCLL.getSelectedItem().toString();
+//        if (tenLSP.equalsIgnoreCase("Tất cả")){
+//            
+//        }
+//        LoaiSanPham lsp = lsp_dao.layLoaiSPBangTen(tenLSP);
+//        ChatLieu cl = cl_dao.layKichThuocBangTen(tenCL);
+//        MauSac ms = mau_dao.layMauSacBangTen(tenMau);
+//        KichThuoc kt = kt_dao.layKichThuocBangTen(tenKT);
+//        String m = ms.getMaMau();
+//        String c = cl.getMaChatLieu();
+//        String k= kt.getMaKichThuoc();
+//        String l = lsp.getMaLoaiSP();
+//        if(m ==null){
+//            m="";
+//        }
+//        if(c ==null){
+//            c="";
+//        }
+//        if(k ==null){
+//            k="";
+//        }
+//        if(l ==null){
+//            l="";
+//        }
+//        ArrayList<SanPham> listSP = sp_dao.getDSTheoLoc(m, c, k, l);
+//        modolSP.setRowCount(0);
+//        
+//        int i=1;
+//        for( SanPham sp : listSP){
+//             modolSP.addRow(new Object[]{i++,
+//                sp.getMaSP(),sp.getTenSP(),sp.getSoLuong(),sp.getGiaGoc(),sp.getLoaiSanPham().getTenLoaiSP(),sp.getNhaCungCap().getTenNCC(),sp.getMauSac().getTenMau(), sp.getChatLieu().getTenChatLieu(),sp.getKichThuoc().getTenKichThuoc()
+//            ,sp.getNgayNhap()});
+//        }
+    }//GEN-LAST:event_cbxPLLActionPerformed
 
 private void DocDuLieuLenTable() {
         sp_dao = new DAO_SanPham();
@@ -704,7 +798,7 @@ private void DocDuLieuLenTable() {
 //            show
 //        }
 //
-        int i=0;
+        int i=1;
         for( SanPham sp : ds){
              modolSP.addRow(new Object[]{i++,
                 sp.getMaSP(),sp.getTenSP(),sp.getSoLuong(),sp.getGiaGoc(),sp.getLoaiSanPham().getTenLoaiSP(),sp.getNhaCungCap().getTenNCC(),sp.getMauSac().getTenMau(), sp.getChatLieu().getTenChatLieu(),sp.getKichThuoc().getTenKichThuoc()
@@ -744,11 +838,14 @@ private void DocDuLieuVaoCombobox (){
         cbxKTL.addItem(kt.getTenKichThuoc());
     }
 }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnChonAnh;
+    private javax.swing.JButton btnLuu;
+    private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnThemNhieu;
     private javax.swing.JButton btnXoaSP;
-    private javax.swing.JButton btnXoaTrang;
     private javax.swing.JComboBox<String> cbxCLF;
     private javax.swing.JComboBox<String> cbxCLL;
     private javax.swing.JComboBox<String> cbxKTF;
@@ -759,8 +856,6 @@ private void DocDuLieuVaoCombobox (){
     private javax.swing.JComboBox<String> cbxPLF;
     private javax.swing.JComboBox<String> cbxPLL;
     private com.toedter.calendar.JDateChooser hanSD;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

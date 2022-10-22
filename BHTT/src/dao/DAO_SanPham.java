@@ -167,5 +167,69 @@ public class DAO_SanPham {
         }
         return n>0;
     }
-   
+    public ArrayList<SanPham> LocSP() {
+        ArrayList<SanPham> dsSP = new ArrayList<SanPham>();
+         try{
+           
+            Connection con = ConnectDB.getInstance().getConnection();
+            String sql = "select * from SanPham";
+            java.sql.Statement statement = con.createStatement();
+            java.sql.ResultSet rs = statement.executeQuery(sql);
+        
+        } catch (Exception e) {
+            e.printStackTrace();
+        
+        }
+        return null;
+        
+    }
+    ///
+//    public ArrayList<SanPham> getDSTheoLoc(String maMau, String maChatLieu, String maKichThuoc,String maloaiSP) {
+//		ConnectDB.getInstance();
+//		Connection con = ConnectDB.getConnection();
+//		ArrayList<SanPham> ds = new ArrayList<SanPham>();
+//		PreparedStatement pstm = null;
+//		try {
+//			pstm = con.prepareStatement("select * from SanPham where maMau = ? and maKichThuoc=? and maLoaiSP =? and maChatLieu=?");
+//			pstm.setString(1, maMau);
+//                        pstm.setString(2, maKichThuoc);
+//			pstm.setString(3, maloaiSP);
+//			pstm.setString(4, maChatLieu);
+//			ResultSet rs = pstm.executeQuery();
+//			while (rs.next()) {
+//                        String maSP= rs.getString("maSP");
+//                String tenSP= rs.getString("tenSP"); 
+//                double gia= rs.getDouble("giaGoc");
+//                int sl= rs.getInt("soLuong");
+//                byte[] hinhanh= rs.getBytes("hinhAnh");
+//                String moTa= rs.getString("moTa");
+//                java.sql.Date ngayN= rs.getDate("ngayNhap");
+//                Date ngayNhap = new Date(ngayN.getTime());
+//                
+//                java.sql.Date han= rs.getDate("hanSD");
+//                Date hanSD = new Date(han.getTime());
+//                String maNCC= rs.getString("maNCC");
+//                String mau= rs.getString("maMau");
+//                String kt= rs.getString("maKichThuoc");
+//                String loiSP= rs.getString("maLoaiSP");
+//                NhaCungCap ncc = dao_ncc.layNhaCungCapBangMa(maNCC);
+//                LoaiSanPham lsp = dao_lsp.layLoaiSPBangMa(loiSP);
+//                ChatLieu chatl= dao_cl.layChatLieuBangMa(rs.getString("maChatLieu"));
+//                MauSac ms= dao_ms.layMauSacBangMa(rs.getString("maMau"));
+//                KichThuoc kicht = dao_kt.layKichThuocBangMa(kt);
+//                LoaiSanPham loaiSP= new LoaiSanPham(loiSP);
+//                SanPham sp = new SanPham(maSP, tenSP, gia, sl, hinhanh, moTa, ngayNhap, hanSD, ncc, chatl, ms, kicht, lsp);
+//		ds.add(sp);
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			try {
+//				pstm.close();
+//			} catch (SQLException e2) {
+//				e2.printStackTrace();
+//			}
+//		}
+//		return ds;
+//	}
 }
