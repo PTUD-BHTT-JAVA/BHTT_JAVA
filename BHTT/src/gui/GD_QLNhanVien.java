@@ -529,12 +529,6 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
         if (cmbLocChucVu.getSelectedItem().toString().equals("Tất cả")){
             docDuLieuLenTable(nvDAO.layTatCaNhanVienVaoBang(), modelNhanVien);
         }
-//        if (cmbLocChucVu.getSelectedItem().toString().equals("Nhân viên")){
-//            docDuLieuLenTable(nvDAO.layNhanVienVaoBang(), modelNhanVien);
-//        }
-//        if (cmbLocChucVu.getSelectedItem().toString().equals("Quản lý")){
-//            docDuLieuLenTable(nvDAO.layQuanLyVaoBang(), modelNhanVien);
-//        }
         if (s.equals("Tất cả"))
             s="N";
         TableRowSorter<DefaultTableModel> tr=new TableRowSorter<DefaultTableModel>(modelNhanVien);
