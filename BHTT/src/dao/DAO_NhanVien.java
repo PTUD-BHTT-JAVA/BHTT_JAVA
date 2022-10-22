@@ -36,8 +36,10 @@ public class DAO_NhanVien {
                 String SDT = rs.getString("soDienThoai");
                 boolean gioiTinh = rs.getBoolean("gioiTinh");
                 double luongCoBan = rs.getDouble("luongCoBan");
+                boolean trangThai = rs.getBoolean("trangThai");
                 LoaiNhanVien lnv=new LoaiNhanVien(rs.getString("maLoaiNV"));
-                NhanVien nv = new NhanVien(maNV, tenNV,CMND,SDT,gioiTinh,luongCoBan,lnv);
+                NhanVien nv = new NhanVien(maNV, tenNV,CMND,SDT,gioiTinh,luongCoBan,trangThai,lnv);
+               
                 ds.add(nv);
             }
         }catch (SQLException e) {
@@ -60,8 +62,9 @@ public class DAO_NhanVien {
                 String SDT = rs.getString("soDienThoai");
                 boolean gioiTinh = rs.getBoolean("gioiTinh");
                 double luongCoBan = rs.getDouble("luongCoBan");
+                boolean trangThai = rs.getBoolean("trangThai");
                 LoaiNhanVien lnv=new LoaiNhanVien(rs.getString("maLoaiNV"));
-                NhanVien nv = new NhanVien(maNV, tenNV,CMND,SDT,gioiTinh,luongCoBan,lnv);
+                NhanVien nv = new NhanVien(maNV, tenNV,CMND,SDT,gioiTinh,luongCoBan,trangThai,lnv);
                 ds.add(nv);
             }
         }catch (SQLException e) {
@@ -83,8 +86,9 @@ public class DAO_NhanVien {
                 String SDT = rs.getString("soDienThoai");
                 boolean gioiTinh = rs.getBoolean("gioiTinh");
                 double luongCoBan = rs.getDouble("luongCoBan");
+                boolean trangThai = rs.getBoolean("trangThai");
                 LoaiNhanVien lnv=new LoaiNhanVien(rs.getString("maLoaiNV"));
-                NhanVien nv = new NhanVien(maNV, tenNV,CMND,SDT,gioiTinh,luongCoBan,lnv);
+                NhanVien nv = new NhanVien(maNV, tenNV,CMND,SDT,gioiTinh,luongCoBan,trangThai,lnv);
                 ds.add(nv);
             }
         }catch (SQLException e) {
@@ -100,7 +104,7 @@ public class DAO_NhanVien {
                 try(ResultSet rs = pts.executeQuery()){
                     if (rs.next()){
                         LoaiNhanVien lnv= lnvDAO.timLoaiNVBangMa(rs.getString("maLoaiNV"));
-                        NhanVien nv=new NhanVien(rs.getString("maNV"),rs.getString("tenNV"),rs.getString("CMND"),rs.getString("soDienThoai"),rs.getBoolean("gioiTinh"),rs.getDouble("luongCoBan"),lnv);
+                        NhanVien nv=new NhanVien(rs.getString("maNV"),rs.getString("tenNV"),rs.getString("CMND"),rs.getString("soDienThoai"),rs.getBoolean("gioiTinh"),rs.getDouble("luongCoBan"),rs.getBoolean("trangThai"),lnv);
                         return nv;
                     }
                 }
@@ -117,7 +121,7 @@ public class DAO_NhanVien {
                 try(ResultSet rs = pts.executeQuery()){
                     if (rs.next()){
                         LoaiNhanVien lnv= lnvDAO.timLoaiNVBangMa(rs.getString("maLoaiNV"));
-                        NhanVien nv=new NhanVien(rs.getString("maNV"),rs.getString("tenNV"),rs.getString("CMND"),rs.getString("soDienThoai"),rs.getBoolean("gioiTinh"),rs.getDouble("luongCoBan"),lnv);
+                        NhanVien nv=new NhanVien(rs.getString("maNV"),rs.getString("tenNV"),rs.getString("CMND"),rs.getString("soDienThoai"),rs.getBoolean("gioiTinh"),rs.getDouble("luongCoBan"),rs.getBoolean("trangThai"),lnv);
                         return nv;
                     }
                 }
@@ -128,7 +132,7 @@ public class DAO_NhanVien {
     }
     public boolean themNV(NhanVien nv) {
         try(
-            Connection conn = ConnectDB.opConnection();  PreparedStatement pstmt = conn.prepareStatement("INSERT INTO NHANVIEN VALUES (?,?,?,?,?,?,?)");)
+            Connection conn = ConnectDB.opConnection();  PreparedStatement pstmt = conn.prepareStatement("INSERT INTO NHANVIEN VALUES (?,?,?,?,?,?,?,?)");)
             {
                 pstmt.setString(1, nv.getMaNV());
                 pstmt.setString(2, nv.getTenNV());
@@ -136,7 +140,8 @@ public class DAO_NhanVien {
                 pstmt.setString(4, nv.getSoDienThoai());
                 pstmt.setBoolean(5, nv.isGioiTinh());               
                 pstmt.setDouble(6, nv.getLuongCoBan());
-                pstmt.setString(7, nv.getLoaiNhanVien().getMaLoaiNV());
+                 pstmt.setBoolean(7, nv.isTrangThai());
+                pstmt.setString(8, nv.getLoaiNhanVien().getMaLoaiNV());
                 return  pstmt.executeUpdate()>0;
             } catch (Exception e) {
             System.err.println("themNV(): connect db fail");
@@ -152,16 +157,17 @@ public class DAO_NhanVien {
     public boolean capNhatNV(NhanVien nv) {
         try(
             Connection conn = ConnectDB.opConnection();  
-                PreparedStatement pstmt = conn.prepareStatement("UPDATE NHANVIEN SET CMND=?, SODIENTHOAI=?, GIOITINH=?, LUONGCOBAN=? ,MALOAINV=? WHERE MANV=?");)
+                PreparedStatement pstmt = conn.prepareStatement("UPDATE NHANVIEN SET CMND=?, SODIENTHOAI=?, GIOITINH=?, LUONGCOBAN=?,trangThai=? ,MALOAINV=? WHERE MANV=?");)
             {
                 pstmt.setString(1, nv.getTenNV());
                 pstmt.setString(3, nv.getCMND());
                 pstmt.setString(4, nv.getSoDienThoai());
                 pstmt.setInt(5, nv.isGioiTinh() ==true ? 1:0);               
                 pstmt.setFloat(6, (float)nv.getLuongCoBan());
-                pstmt.setString(7, nv.getLoaiNhanVien().getMaLoaiNV());
+                pstmt.setInt(7, nv.isTrangThai()==true ? 1:0);   
+                pstmt.setString(8, nv.getLoaiNhanVien().getMaLoaiNV());
                 
-                pstmt.setString(8, nv.getMaNV());
+                pstmt.setString(9, nv.getMaNV());
                 return pstmt.executeUpdate() > 0;
         } catch (Exception e) {
             System.err.println("capnhatNV(): connect db fail");

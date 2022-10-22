@@ -366,11 +366,13 @@ public class GD_QuanLy extends javax.swing.JFrame {
     private void pnlGioiThieuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlGioiThieuMousePressed
         GD_GioiThieu frGioiThieu = new GD_GioiThieu(username);
         openComponent(frGioiThieu);
+      
     }//GEN-LAST:event_pnlGioiThieuMousePressed
 
     private void pnlSanPhamMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlSanPhamMousePressed
         GD_SanPham fSanPham = new GD_SanPham(username);
         openComponent(fSanPham);
+        
     }//GEN-LAST:event_pnlSanPhamMousePressed
 
     private void pnlTaiKhoanMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlTaiKhoanMousePressed

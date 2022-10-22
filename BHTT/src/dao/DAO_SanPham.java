@@ -147,5 +147,25 @@ public class DAO_SanPham {
         }
         return n>0;
     }
+    public boolean XoaSP(String ma){
+         Connection con = ConnectDB.getInstance().getConnection();
+        PreparedStatement stemnt = null;
+        int n=0;
+        String sql= "Delete SanPham Where maSP = ?";
+        try {
+            stemnt = con.prepareStatement(sql);
+			stemnt.setString(1, ma);
+			n = stemnt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            try {
+                stemnt.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return n>0;
+    }
    
 }
