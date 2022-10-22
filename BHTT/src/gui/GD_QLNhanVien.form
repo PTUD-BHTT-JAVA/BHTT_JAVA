@@ -312,32 +312,26 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="btnTaoTaiKhoanNV" alignment="1" pref="306" max="32767" attributes="0"/>
-                              <Component id="btnThemNhanVien" alignment="0" max="32767" attributes="0"/>
-                              <Component id="btnXoaTrang" alignment="0" max="32767" attributes="0"/>
-                              <Component id="btnSuaThongTinNV" alignment="0" max="32767" attributes="0"/>
-                              <Component id="btnXoaNhanVien" alignment="0" max="32767" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="btnTaoTaiKhoanNV" alignment="1" pref="330" max="32767" attributes="0"/>
+                      <Component id="btnThemNhanVien" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnXoaTrang" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnSuaThongTinNV" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnXoaNhanVien" alignment="0" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnThemNhanVien" min="-2" pref="37" max="-2" attributes="0"/>
+                          <Component id="btnThemNhanVien" min="-2" pref="40" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="btnXoaNhanVien" min="-2" pref="37" max="-2" attributes="0"/>
+                          <Component id="btnXoaNhanVien" min="-2" pref="40" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="btnSuaThongTinNV" min="-2" pref="37" max="-2" attributes="0"/>
-                          <EmptySpace pref="22" max="32767" attributes="0"/>
-                          <Component id="btnXoaTrang" min="-2" pref="37" max="-2" attributes="0"/>
+                          <Component id="btnSuaThongTinNV" min="-2" pref="40" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="btnXoaTrang" min="-2" pref="40" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="btnTaoTaiKhoanNV" min="-2" pref="37" max="-2" attributes="0"/>
+                          <Component id="btnTaoTaiKhoanNV" min="-2" pref="40" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -347,7 +341,10 @@
                 <Component class="javax.swing.JButton" name="btnTaoTaiKhoanNV">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Segoe UI" size="17" style="1"/>
+                      <Font name="Segoe UI" size="16" style="1"/>
+                    </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/icon/themTK.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="T&#x1ea1;o t&#xe0;i kho&#x1ea3;n"/>
                   </Properties>
@@ -355,7 +352,10 @@
                 <Component class="javax.swing.JButton" name="btnThemNhanVien">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Segoe UI" size="17" style="1"/>
+                      <Font name="Segoe UI" size="16" style="1"/>
+                    </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/icon/them.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Th&#xea;m nh&#xe2;n vi&#xea;n"/>
                   </Properties>
@@ -366,7 +366,10 @@
                 <Component class="javax.swing.JButton" name="btnXoaTrang">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Segoe UI" size="17" style="1"/>
+                      <Font name="Segoe UI" size="16" style="1"/>
+                    </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/icon/xoaTrang.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="X&#xf3;a tr&#x1eaf;ng"/>
                   </Properties>
@@ -377,7 +380,10 @@
                 <Component class="javax.swing.JButton" name="btnSuaThongTinNV">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Segoe UI" size="17" style="1"/>
+                      <Font name="Segoe UI" size="16" style="1"/>
+                    </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/icon/capNhat.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="C&#x1ead;p nh&#x1ead;t th&#xf4;ng tin nh&#xe2;n vi&#xea;n"/>
                   </Properties>
@@ -388,7 +394,10 @@
                 <Component class="javax.swing.JButton" name="btnXoaNhanVien">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Segoe UI" size="17" style="1"/>
+                      <Font name="Segoe UI" size="16" style="1"/>
+                    </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/icon/xoa.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="X&#xf3;a nh&#xe2;n vi&#xea;n"/>
                   </Properties>
@@ -512,6 +521,9 @@
                   </StringArray>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbLocGioiTinhActionPerformed"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>

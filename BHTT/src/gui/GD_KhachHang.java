@@ -687,7 +687,7 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
             }
         }
         } catch (Exception e) {
-            
+           
         }
     }//GEN-LAST:event_cboLoaiKHItemStateChanged
 

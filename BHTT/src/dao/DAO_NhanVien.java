@@ -71,12 +71,13 @@ public class DAO_NhanVien {
         }
         return ds;
     }
-        public List<NhanVien> layQuanLyVaoBang() {
+
+        public List<NhanVien> layTheoGioiTinh(String s) {
         List<NhanVien> ds = new ArrayList<>();
         try{
             ConnectDB.getInstance();
             Connection con = ConnectDB.getConnection();
-            String sql = "select * from NhanVien where maLoaiNV= 'LNV001'";
+            String sql = "select * from NhanVien where gioitinh= '"+s+"'";
             java.sql.Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()) {
@@ -185,6 +186,30 @@ public class DAO_NhanVien {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public List<NhanVien> layQuanLyVaoBang() {List<NhanVien> ds = new ArrayList<>();
+        try{
+            ConnectDB.getInstance();
+            Connection con = ConnectDB.getConnection();
+            String sql = "select * from NhanVien where maLoaiNV= 'LNV001'";
+            java.sql.Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                String maNV = rs.getString("maNV");
+                String tenNV = rs.getString("tenNV");
+                String CMND = rs.getString("CMND");
+                String SDT = rs.getString("soDienThoai");
+                boolean gioiTinh = rs.getBoolean("gioiTinh");
+                double luongCoBan = rs.getDouble("luongCoBan");
+                boolean trangThai = rs.getBoolean("trangThai");
+                LoaiNhanVien lnv=new LoaiNhanVien(rs.getString("maLoaiNV"));
+                NhanVien nv = new NhanVien(maNV, tenNV,CMND,SDT,gioiTinh,luongCoBan,trangThai,lnv);
+                ds.add(nv);
+            }
+        }catch (SQLException e) {
+        }
+        return ds;
     }
     
 }

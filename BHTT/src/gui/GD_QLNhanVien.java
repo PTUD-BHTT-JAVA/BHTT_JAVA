@@ -244,10 +244,12 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
         pnlNut.setMaximumSize(new java.awt.Dimension(300, 32767));
         pnlNut.setPreferredSize(new java.awt.Dimension(300, 300));
 
-        btnTaoTaiKhoanNV.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
+        btnTaoTaiKhoanNV.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        btnTaoTaiKhoanNV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/themTK.png"))); // NOI18N
         btnTaoTaiKhoanNV.setText("Tạo tài khoản");
 
-        btnThemNhanVien.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
+        btnThemNhanVien.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        btnThemNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/them.png"))); // NOI18N
         btnThemNhanVien.setText("Thêm nhân viên");
         btnThemNhanVien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -255,7 +257,8 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
             }
         });
 
-        btnXoaTrang.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
+        btnXoaTrang.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        btnXoaTrang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/xoaTrang.png"))); // NOI18N
         btnXoaTrang.setText("Xóa trắng");
         btnXoaTrang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -263,7 +266,8 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
             }
         });
 
-        btnSuaThongTinNV.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
+        btnSuaThongTinNV.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        btnSuaThongTinNV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/capNhat.png"))); // NOI18N
         btnSuaThongTinNV.setText("Cập nhật thông tin nhân viên");
         btnSuaThongTinNV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -271,7 +275,8 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
             }
         });
 
-        btnXoaNhanVien.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
+        btnXoaNhanVien.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        btnXoaNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/xoa.png"))); // NOI18N
         btnXoaNhanVien.setText("Xóa nhân viên");
         btnXoaNhanVien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -283,29 +288,25 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
         pnlNut.setLayout(pnlNutLayout);
         pnlNutLayout.setHorizontalGroup(
             pnlNutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlNutLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlNutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnTaoTaiKhoanNV, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
-                    .addComponent(btnThemNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnXoaTrang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSuaThongTinNV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnXoaNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+            .addComponent(btnTaoTaiKhoanNV, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
+            .addComponent(btnThemNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnXoaTrang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnSuaThongTinNV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnXoaNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnlNutLayout.setVerticalGroup(
             pnlNutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlNutLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnThemNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnThemNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnXoaNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnXoaNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnSuaThongTinNV, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                .addComponent(btnXoaTrang, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSuaThongTinNV, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnXoaTrang, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnTaoTaiKhoanNV, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnTaoTaiKhoanNV, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
         );
 
@@ -340,6 +341,11 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
 
         cmbLocGioiTinh.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         cmbLocGioiTinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Nam", "Nữ" }));
+        cmbLocGioiTinh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbLocGioiTinhActionPerformed(evt);
+            }
+        });
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel13.setText("Tìm kiếm :");
@@ -518,16 +524,42 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtTimKiemKeyReleased
 
     private void cmbLocChucVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbLocChucVuActionPerformed
+        
+        String s= cmbLocChucVu.getSelectedItem().toString();
         if (cmbLocChucVu.getSelectedItem().toString().equals("Tất cả")){
             docDuLieuLenTable(nvDAO.layTatCaNhanVienVaoBang(), modelNhanVien);
         }
-        if (cmbLocChucVu.getSelectedItem().toString().equals("Nhân viên")){
-            docDuLieuLenTable(nvDAO.layNhanVienVaoBang(), modelNhanVien);
-        }
-        if (cmbLocChucVu.getSelectedItem().toString().equals("Quản lý")){
-            docDuLieuLenTable(nvDAO.layQuanLyVaoBang(), modelNhanVien);
-        }
+//        if (cmbLocChucVu.getSelectedItem().toString().equals("Nhân viên")){
+//            docDuLieuLenTable(nvDAO.layNhanVienVaoBang(), modelNhanVien);
+//        }
+//        if (cmbLocChucVu.getSelectedItem().toString().equals("Quản lý")){
+//            docDuLieuLenTable(nvDAO.layQuanLyVaoBang(), modelNhanVien);
+//        }
+        if (s.equals("Tất cả"))
+            s="N";
+        TableRowSorter<DefaultTableModel> tr=new TableRowSorter<DefaultTableModel>(modelNhanVien);
+        tblNhanVien.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter("(?i)"+s));
+    
     }//GEN-LAST:event_cmbLocChucVuActionPerformed
+
+    private void cmbLocGioiTinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbLocGioiTinhActionPerformed
+        
+        String s= cmbLocGioiTinh.getSelectedItem().toString();
+        if (s.equals("Tất cả")){
+            docDuLieuLenTable(nvDAO.layTatCaNhanVienVaoBang(), modelNhanVien);
+
+        }else{
+        
+            if (s.equals("Nam"))
+                s="1";
+            else
+                s="0";
+            docDuLieuLenTable(nvDAO.layTheoGioiTinh(s), modelNhanVien);
+        }
+
+            
+    }//GEN-LAST:event_cmbLocGioiTinhActionPerformed
     private void filter(String s){
         TableRowSorter<DefaultTableModel> tr=new TableRowSorter<DefaultTableModel>(modelNhanVien);
         tblNhanVien.setRowSorter(tr);
