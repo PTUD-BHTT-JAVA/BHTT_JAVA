@@ -17,6 +17,7 @@ public class NhanVien {
     private String soDienThoai;
     private boolean gioiTinh;
     private double luongCoBan;
+    private boolean trangThai;
     private LoaiNhanVien loaiNhanVien;
 
     public NhanVien() {
@@ -25,16 +26,27 @@ public class NhanVien {
     public NhanVien(String maNV) {
         this.maNV = maNV;
     }
-    
-    public NhanVien(String maNV, String tenNV, String CMND, String soDienThoai, boolean gioiTinh, double luongCoBan, LoaiNhanVien loaiNhanVien) {
+
+    public NhanVien(String maNV, String tenNV, String CMND, String soDienThoai, boolean gioiTinh, double luongCoBan, boolean trangThai, LoaiNhanVien loaiNhanVien) {
         this.maNV = maNV;
         this.tenNV = tenNV;
         this.CMND = CMND;
         this.soDienThoai = soDienThoai;
         this.gioiTinh = gioiTinh;
         this.luongCoBan = luongCoBan;
+        this.trangThai = trangThai;
         this.loaiNhanVien = loaiNhanVien;
     }
+
+    public boolean isTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(boolean trangThai) {
+        this.trangThai = trangThai;
+    }
+    
+    
 
     public String getMaNV() {
         return maNV;
@@ -94,9 +106,10 @@ public class NhanVien {
 
     @Override
     public String toString() {
-        return "NhanVien{" + "maNV=" + maNV + ", tenNV=" + tenNV + ", CMND=" + CMND + ", soDienThoai=" + soDienThoai + ", gioiTinh=" + gioiTinh + ", luongCoBan=" + luongCoBan + ", loaiNhanVien=" + loaiNhanVien + '}';
+        return "NhanVien{" + "maNV=" + maNV + ", tenNV=" + tenNV + ", CMND=" + CMND + ", soDienThoai=" + soDienThoai + ", gioiTinh=" + gioiTinh + ", luongCoBan=" + luongCoBan + ", trangThai=" + trangThai + ", loaiNhanVien=" + loaiNhanVien + '}';
     }
 
+    
     @Override
     public int hashCode() {
         int hash = 7;

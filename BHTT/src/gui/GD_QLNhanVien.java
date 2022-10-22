@@ -590,12 +590,13 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
         double luongCoBan=Double.parseDouble(txtLuongCoBan.getText());
         String lnv="LNV002";
         String tLNV="Nhân viên";
+        boolean trangThai = true;
         if(cmbChucVu.getSelectedItem().toString().equals("Quản lý")){
             lnv="LNV001";
             tLNV="Quản lý";
         }
         
-        NhanVien nv=new NhanVien(setMaNV(), tenNV,cmnd, sdt, gt,luongCoBan, new LoaiNhanVien(lnv,tLNV));
+        NhanVien nv=new NhanVien(setMaNV(), tenNV,cmnd, sdt, gt,luongCoBan,trangThai, new LoaiNhanVien(lnv,tLNV));
         return nv;
     }
     
