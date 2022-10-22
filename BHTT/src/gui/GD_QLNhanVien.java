@@ -543,20 +543,7 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
             filters.set(0, RowFilter.regexFilter(s, 5));
         // Apply filters
         tr.setRowFilter(RowFilter.andFilter(filters));
-        
-        
-//        
-//        if (s.equals("Tất cả")){
-//                s="(Nhân viên)|(Quản lý)";
-//            tblNhanVien.setRowSorter(tr);
-//            tr.setRowFilter(RowFilter.regexFilter("(?i)"+s));
-//        }
-//        else{
-//        
-//            TableRowSorter<DefaultTableModel> tr=new TableRowSorter<DefaultTableModel>(modelNhanVien);
-//            tblNhanVien.setRowSorter(tr);
-//            tr.setRowFilter(RowFilter.regexFilter("(?i)"+s));
-//        }
+
     }//GEN-LAST:event_cmbLocChucVuActionPerformed
 
     private void cmbLocGioiTinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbLocGioiTinhActionPerformed

@@ -24,6 +24,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -48,6 +49,8 @@ public class GD_SanPham extends javax.swing.JInternalFrame  {
     private String filename = null;
     private byte[] anhSP = null;
      private final DefaultTableModel modolSP;
+    List<RowFilter<DefaultTableModel,Object>> filters = new ArrayList<>();
+    private TableRowSorter<DefaultTableModel> tr;
     /**
      * Creates new form QuanLyHoaDon
      */
@@ -69,6 +72,11 @@ public class GD_SanPham extends javax.swing.JInternalFrame  {
         DocDuLieuLenTable();
         DocDuLieuVaoCombobox();
         moKhoaTextfields(false);
+        
+        
+        tr=new TableRowSorter<DefaultTableModel>(modolSP);
+
+        jtbSanPham.setRowSorter(tr);
     }
 
     /**
@@ -423,12 +431,27 @@ public class GD_SanPham extends javax.swing.JInternalFrame  {
 
         cbxCLL.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         cbxCLL.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả" }));
+        cbxCLL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxCLLActionPerformed(evt);
+            }
+        });
 
         cbxML.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         cbxML.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả" }));
+        cbxML.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxMLActionPerformed(evt);
+            }
+        });
 
         cbxKTL.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         cbxKTL.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả" }));
+        cbxKTL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxKTLActionPerformed(evt);
+            }
+        });
 
         jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel20.setText("Tìm kiếm:");
@@ -789,7 +812,89 @@ private void XoaHetDLTrenTbale(){
 //                sp.getMaSP(),sp.getTenSP(),sp.getSoLuong(),sp.getGiaGoc(),sp.getLoaiSanPham().getTenLoaiSP(),sp.getNhaCungCap().getTenNCC(),sp.getMauSac().getTenMau(), sp.getChatLieu().getTenChatLieu(),sp.getKichThuoc().getTenKichThuoc()
 //            ,sp.getNgayNhap()});
 //        }
+        
+        lsp_dao = new DAO_LoaiSP();
+        String s= cbxPLL.getSelectedItem().toString();
+        if (s.equals("Tất cả")){
+            s="(Tất cả)";
+        
+            for(LoaiSanPham lsp: lsp_dao.getAllLSP())
+            {
+            s+="|("+lsp.getTenLoaiSP()+")";
+            }
+        }
+
+        
+        if(filters.isEmpty())
+            filters.add(RowFilter.regexFilter(s, 5));
+        else
+            filters.set(0, RowFilter.regexFilter(s, 5));
+        // Apply filters
+        tr.setRowFilter(RowFilter.andFilter(filters));
     }//GEN-LAST:event_cbxPLLActionPerformed
+
+    private void cbxKTLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxKTLActionPerformed
+        kt_dao = new DAO_KichThuoc();
+        String s= cbxKTL.getSelectedItem().toString();
+        if (s.equals("Tất cả")){
+            s="(Tất cả)";
+        
+            for(KichThuoc kt: kt_dao.getAllKT())
+            {
+            s+="|("+kt.getTenKichThuoc()+")";
+            }
+        }
+
+        
+        if(filters.size()<2)
+            filters.add(RowFilter.regexFilter(s, 9));
+        else
+            filters.set(1, RowFilter.regexFilter(s, 9));
+        // Apply filters
+        tr.setRowFilter(RowFilter.andFilter(filters));
+    }//GEN-LAST:event_cbxKTLActionPerformed
+
+    private void cbxCLLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCLLActionPerformed
+        cl_dao = new DAO_ChatLieu();
+        String s= cbxCLL.getSelectedItem().toString();
+        if (s.equals("Tất cả")){
+            s="(Tất cả)";
+        
+            for(ChatLieu cl: cl_dao.getAllCL())
+            {
+            s+="|("+cl.getTenChatLieu()+")";
+            }
+        }
+
+        
+        if(filters.size()<3)
+            filters.add(RowFilter.regexFilter(s, 8));
+        else
+            filters.set(2, RowFilter.regexFilter(s, 8));
+        // Apply filters
+        tr.setRowFilter(RowFilter.andFilter(filters));
+    }//GEN-LAST:event_cbxCLLActionPerformed
+
+    private void cbxMLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxMLActionPerformed
+        mau_dao = new DAO_MauSac();
+        String s= cbxML.getSelectedItem().toString();
+        if (s.equals("Tất cả")){
+            s="(Tất cả)";
+        
+            for(MauSac ms: mau_dao.getAllMau())
+            {
+            s+="|("+ms.getTenMau()+")";
+            }
+        }
+
+        
+        if(filters.size()<4)
+            filters.add(RowFilter.regexFilter(s, 7));
+        else
+            filters.set(3, RowFilter.regexFilter(s, 7));
+        // Apply filters
+        tr.setRowFilter(RowFilter.andFilter(filters));
+    }//GEN-LAST:event_cbxMLActionPerformed
 
 private void DocDuLieuLenTable() {
         sp_dao = new DAO_SanPham();
