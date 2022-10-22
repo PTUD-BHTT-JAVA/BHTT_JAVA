@@ -7,15 +7,27 @@ package gui;
 import connectDB.ConnectDB;
 import dao.DAO_NhaCungCap;
 import entity.NhaCungCap;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 
 
 
 import java.util.List;
+import javax.swing.JFileChooser;
 
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 
 /**
@@ -33,6 +45,7 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
         try {
             ConnectDB.getInstance().connect();
         } catch (Exception e) {
+            
         }
         this.setRootPaneCheckingEnabled(false);
         javax.swing.plaf.InternalFrameUI ui
@@ -44,6 +57,58 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
         modelNhaCungCap = (DefaultTableModel) tableNhaCC.getModel();
         DocDuLieuDatabaseVaoTable();
     }
+    private void importFileExcel(){
+        File excelFile;
+        FileInputStream excelFIS = null;
+        BufferedInputStream excelBIS = null;
+        XSSFWorkbook excelImportToJTable  = null;
+        String defaultCurrentDirectoryPath = "C:\\Users\\Trinh Cui Bap\\Desktop";
+        JFileChooser excelFileChooser = new JFileChooser(defaultCurrentDirectoryPath);
+        excelFileChooser.setDialogTitle("Chọn file để import");
+        FileNameExtensionFilter fnef = new FileNameExtensionFilter("EXCEL FILE", "xls","xlsx","xlsm");
+        excelFileChooser.setFileFilter(fnef);
+        int excelChooser = excelFileChooser.showOpenDialog(null);
+        if(excelChooser == JFileChooser.APPROVE_OPTION){
+            try {
+                excelFile = excelFileChooser.getSelectedFile();
+                excelFIS = new FileInputStream(excelFile);
+                excelBIS = new BufferedInputStream(excelBIS);
+                excelImportToJTable = new XSSFWorkbook(excelFIS);
+                XSSFSheet excelSheet = excelImportToJTable.getSheetAt(0);
+                for(int row = 1;row < excelSheet.getLastRowNum();row++){
+                    XSSFRow excelRow = excelSheet.getRow(row);
+                    XSSFCell excelTen = excelRow.getCell(0);
+                    XSSFCell excelDiaChi = excelRow.getCell(1);
+                    XSSFCell excelSoDienThoai = excelRow.getCell(2);
+                    XSSFCell excelEmail =  excelRow.getCell(3);
+                    NhaCungCap nccImport = new NhaCungCap(maTuSinh(),excelTen.toString(),excelDiaChi.toString(),excelSoDienThoai.toString(),excelEmail.toString());
+                    nhacc.themNhaCungCap(nccImport);
+                    modelNhaCungCap.addRow(new Object[]{
+                        nccImport.getMaNCC(),nccImport.getTenNCC(),nccImport.getDiaChi(),nccImport.getSoDienThoai(),nccImport.getEmail()
+                    });
+                    
+                }
+                JOptionPane.showMessageDialog(null,"Import thành công");
+            } catch (IOException iOException) {
+                JOptionPane.showMessageDialog(null,iOException.getMessage());
+            }finally{
+                try {
+                    if(excelFIS != null){
+                        excelFIS.close();
+                    }
+                    if(excelBIS  != null){
+                        excelBIS.close();
+                    }
+                    if(excelImportToJTable != null){
+                        excelImportToJTable.close();
+                    }
+                }catch (IOException ex) {
+//                    Logger.getLogger(GD_NhaCungCap.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+
     private String maTuSinh(){
         String ma="NCC";
         int tachMa;
@@ -431,7 +496,7 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
 
     
     private void btnImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportActionPerformed
-       
+       importFileExcel();
     }//GEN-LAST:event_btnImportActionPerformed
 
     private void txtTimKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKeyReleased
