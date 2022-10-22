@@ -58,7 +58,6 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
         tkDAO=new DAO_TaiKhoan();
         docDuLieuLenTable(nvDAO.layTatCaNhanVienVaoBang(),modelNhanVien);
         tr=new TableRowSorter<DefaultTableModel>(modelNhanVien);
-
         tblNhanVien.setRowSorter(tr);
     }
 

@@ -51,6 +51,7 @@ public class GD_SanPham extends javax.swing.JInternalFrame  {
      private final DefaultTableModel modolSP;
     List<RowFilter<DefaultTableModel,Object>> filters = new ArrayList<>();
     private TableRowSorter<DefaultTableModel> tr;
+    int index=-1;
     /**
      * Creates new form QuanLyHoaDon
      */
@@ -813,7 +814,7 @@ private void XoaHetDLTrenTbale(){
 //            ,sp.getNgayNhap()});
 //        }
         
-        lsp_dao = new DAO_LoaiSP();
+        
         String s= cbxPLL.getSelectedItem().toString();
         if (s.equals("Tất cả")){
             s="(Tất cả)";
@@ -834,7 +835,7 @@ private void XoaHetDLTrenTbale(){
     }//GEN-LAST:event_cbxPLLActionPerformed
 
     private void cbxKTLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxKTLActionPerformed
-        kt_dao = new DAO_KichThuoc();
+        
         String s= cbxKTL.getSelectedItem().toString();
         if (s.equals("Tất cả")){
             s="(Tất cả)";
@@ -845,28 +846,25 @@ private void XoaHetDLTrenTbale(){
             }
         }
 
-        
-        if(filters.size()<2)
+        if(filters.size()<4)
             filters.add(RowFilter.regexFilter(s, 9));
         else
-            filters.set(1, RowFilter.regexFilter(s, 9));
+            filters.set(3, RowFilter.regexFilter(s, 9));
         // Apply filters
         tr.setRowFilter(RowFilter.andFilter(filters));
     }//GEN-LAST:event_cbxKTLActionPerformed
 
     private void cbxCLLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCLLActionPerformed
-        cl_dao = new DAO_ChatLieu();
+       
         String s= cbxCLL.getSelectedItem().toString();
         if (s.equals("Tất cả")){
-            s="(Tất cả)";
+            s="(Tất cả )";
         
             for(ChatLieu cl: cl_dao.getAllCL())
             {
             s+="|("+cl.getTenChatLieu()+")";
             }
         }
-
-        
         if(filters.size()<3)
             filters.add(RowFilter.regexFilter(s, 8));
         else
@@ -876,7 +874,7 @@ private void XoaHetDLTrenTbale(){
     }//GEN-LAST:event_cbxCLLActionPerformed
 
     private void cbxMLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxMLActionPerformed
-        mau_dao = new DAO_MauSac();
+     
         String s= cbxML.getSelectedItem().toString();
         if (s.equals("Tất cả")){
             s="(Tất cả)";
@@ -886,12 +884,10 @@ private void XoaHetDLTrenTbale(){
             s+="|("+ms.getTenMau()+")";
             }
         }
-
-        
-        if(filters.size()<4)
+        if(filters.size()<2)
             filters.add(RowFilter.regexFilter(s, 7));
         else
-            filters.set(3, RowFilter.regexFilter(s, 7));
+            filters.set(1, RowFilter.regexFilter(s, 7));
         // Apply filters
         tr.setRowFilter(RowFilter.andFilter(filters));
     }//GEN-LAST:event_cbxMLActionPerformed
