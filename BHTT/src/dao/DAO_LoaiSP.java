@@ -55,4 +55,21 @@ public class DAO_LoaiSP {
        }
        return null;
      }
+     public LoaiSanPham layLoaiSPBangTen(String tenTim) {
+        
+        try(
+             java.sql.Connection con = ConnectDB.opConnection();
+            PreparedStatement pts = con.prepareStatement("Select * from LoaiSanPham where tenLoaiSP=?  ")){
+            pts.setString(1,tenTim );
+                try(ResultSet rs = pts.executeQuery()){
+                    if (rs.next()){
+                       LoaiSanPham lsp= new LoaiSanPham(rs.getString("maLoaiSP"), rs.getString("tenLoaiSP"));
+                        return lsp;
+                    }
+                }
+            }catch(Exception e){
+                e.printStackTrace();
+       }
+       return null;
+     }
 }
