@@ -85,20 +85,27 @@ public class GD_NhanVien extends javax.swing.JFrame {
         pnlSilde = new javax.swing.JPanel();
         pnlGioiThieu = new keeptoo.KGradientPanel();
         lblGioiThieu = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         pnlKhachHang = new keeptoo.KGradientPanel();
         lblKhachHang = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         pnlDonHang = new keeptoo.KGradientPanel();
         lblDonHang = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         pnlTitleTaoDonHang = new javax.swing.JPanel();
         pnlTaoDonHang = new keeptoo.KGradientPanel();
         lblTaoHoaDon = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         pnlTitleLichSuDonHang = new javax.swing.JPanel();
         pnlLichSuDonHang = new keeptoo.KGradientPanel();
         lblLichSuDonHang = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         pnlThongKe = new keeptoo.KGradientPanel();
         lblThongKe = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         pnlTroGiup = new keeptoo.KGradientPanel();
         lblTroGiup = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         btnDangXuat = new javax.swing.JButton();
         kGradientPanel1 = new keeptoo.KGradientPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -191,7 +198,6 @@ public class GD_NhanVien extends javax.swing.JFrame {
         lblGioiThieu.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         lblGioiThieu.setForeground(new java.awt.Color(255, 255, 255));
         lblGioiThieu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblGioiThieu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/trangChu.png"))); // NOI18N
         lblGioiThieu.setText("GIỚI THIỆU");
         lblGioiThieu.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         lblGioiThieu.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -200,6 +206,10 @@ public class GD_NhanVien extends javax.swing.JFrame {
             }
         });
         pnlGioiThieu.add(lblGioiThieu, java.awt.BorderLayout.CENTER);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/trangChu.png"))); // NOI18N
+        jLabel1.setText("\n");
+        pnlGioiThieu.add(jLabel1, java.awt.BorderLayout.LINE_START);
 
         pnlSilde.add(pnlGioiThieu);
 
@@ -218,9 +228,12 @@ public class GD_NhanVien extends javax.swing.JFrame {
         lblKhachHang.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         lblKhachHang.setForeground(new java.awt.Color(255, 255, 255));
         lblKhachHang.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblKhachHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/khachHang.png"))); // NOI18N
         lblKhachHang.setText("KHÁCH HÀNG");
         pnlKhachHang.add(lblKhachHang, java.awt.BorderLayout.CENTER);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/khachHang.png"))); // NOI18N
+        jLabel2.setText("\n");
+        pnlKhachHang.add(jLabel2, java.awt.BorderLayout.LINE_START);
 
         pnlSilde.add(pnlKhachHang);
 
@@ -239,11 +252,14 @@ public class GD_NhanVien extends javax.swing.JFrame {
         lblDonHang.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         lblDonHang.setForeground(new java.awt.Color(255, 255, 255));
         lblDonHang.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblDonHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/donHang.png"))); // NOI18N
         lblDonHang.setText("ĐƠN HÀNG");
         lblDonHang.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         pnlDonHang.add(lblDonHang, java.awt.BorderLayout.CENTER);
         lblDonHang.getAccessibleContext().setAccessibleDescription("");
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/donHang.png"))); // NOI18N
+        jLabel4.setText("\n");
+        pnlDonHang.add(jLabel4, java.awt.BorderLayout.LINE_START);
 
         pnlSilde.add(pnlDonHang);
 
@@ -267,10 +283,13 @@ public class GD_NhanVien extends javax.swing.JFrame {
         lblTaoHoaDon.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         lblTaoHoaDon.setForeground(new java.awt.Color(255, 255, 255));
         lblTaoHoaDon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTaoHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/taoDonHangMoi.png"))); // NOI18N
         lblTaoHoaDon.setText("TẠO ĐƠN HÀNG");
         lblTaoHoaDon.setVerifyInputWhenFocusTarget(false);
-        pnlTaoDonHang.add(lblTaoHoaDon, java.awt.BorderLayout.LINE_START);
+        pnlTaoDonHang.add(lblTaoHoaDon, java.awt.BorderLayout.CENTER);
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/taoDonHangMoi.png"))); // NOI18N
+        jLabel5.setText("\n");
+        pnlTaoDonHang.add(jLabel5, java.awt.BorderLayout.LINE_START);
 
         pnlTitleTaoDonHang.add(pnlTaoDonHang, java.awt.BorderLayout.EAST);
 
@@ -295,9 +314,12 @@ public class GD_NhanVien extends javax.swing.JFrame {
         lblLichSuDonHang.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         lblLichSuDonHang.setForeground(new java.awt.Color(255, 255, 255));
         lblLichSuDonHang.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblLichSuDonHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/donHang.png"))); // NOI18N
-        lblLichSuDonHang.setText("TẠO ĐƠN HÀNG HOÀN");
+        lblLichSuDonHang.setText("TẠO ĐƠN HOÀN");
         pnlLichSuDonHang.add(lblLichSuDonHang, java.awt.BorderLayout.CENTER);
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/lichSuDonHang.png"))); // NOI18N
+        jLabel6.setText("\n");
+        pnlLichSuDonHang.add(jLabel6, java.awt.BorderLayout.LINE_START);
 
         pnlTitleLichSuDonHang.add(pnlLichSuDonHang, java.awt.BorderLayout.EAST);
 
@@ -318,9 +340,12 @@ public class GD_NhanVien extends javax.swing.JFrame {
         lblThongKe.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         lblThongKe.setForeground(new java.awt.Color(255, 255, 255));
         lblThongKe.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/thongKe.png"))); // NOI18N
         lblThongKe.setText("THỐNG KÊ");
         pnlThongKe.add(lblThongKe, java.awt.BorderLayout.CENTER);
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/thongKe.png"))); // NOI18N
+        jLabel7.setText("\n");
+        pnlThongKe.add(jLabel7, java.awt.BorderLayout.LINE_START);
 
         pnlSilde.add(pnlThongKe);
 
@@ -339,9 +364,12 @@ public class GD_NhanVien extends javax.swing.JFrame {
         lblTroGiup.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         lblTroGiup.setForeground(new java.awt.Color(255, 255, 255));
         lblTroGiup.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTroGiup.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/troGiup.png"))); // NOI18N
         lblTroGiup.setText("TRỢ GIÚP");
         pnlTroGiup.add(lblTroGiup, java.awt.BorderLayout.CENTER);
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/troGiup.png"))); // NOI18N
+        jLabel8.setText("\n");
+        pnlTroGiup.add(jLabel8, java.awt.BorderLayout.LINE_START);
 
         pnlSilde.add(pnlTroGiup);
 
@@ -546,7 +574,14 @@ public class GD_NhanVien extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDangXuat;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private keeptoo.KGradientPanel kGradientPanel1;
     private javax.swing.JLabel lblChucVu;
     private javax.swing.JLabel lblDonHang;

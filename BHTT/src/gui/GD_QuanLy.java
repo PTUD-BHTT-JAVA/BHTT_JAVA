@@ -93,18 +93,25 @@ public class GD_QuanLy extends javax.swing.JFrame {
         pnlSilde = new javax.swing.JPanel();
         pnlGioiThieu = new keeptoo.KGradientPanel();
         lblGioiThieu = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         pnlSanPham = new keeptoo.KGradientPanel();
         lblSanPham = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         pnlNhanVien = new keeptoo.KGradientPanel();
         lblNhanVien = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         pnlTaiKhoan = new keeptoo.KGradientPanel();
         lblTaiKhoan = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         pnlNhaCungCap = new keeptoo.KGradientPanel();
         lblNhaCungCap = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         pnlThongKe = new keeptoo.KGradientPanel();
         lblThongKe = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         pnlTroGiup = new keeptoo.KGradientPanel();
         lblTroGiup = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
         btnDangXuat = new javax.swing.JButton();
         kGradientPanel1 = new keeptoo.KGradientPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -192,9 +199,12 @@ public class GD_QuanLy extends javax.swing.JFrame {
         lblGioiThieu.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         lblGioiThieu.setForeground(new java.awt.Color(255, 255, 255));
         lblGioiThieu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblGioiThieu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/trangChu.png"))); // NOI18N
         lblGioiThieu.setText("GIỚI THIỆU");
         pnlGioiThieu.add(lblGioiThieu, java.awt.BorderLayout.CENTER);
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/trangChu.png"))); // NOI18N
+        jLabel6.setText("\n");
+        pnlGioiThieu.add(jLabel6, java.awt.BorderLayout.LINE_START);
 
         pnlSilde.add(pnlGioiThieu);
 
@@ -213,9 +223,12 @@ public class GD_QuanLy extends javax.swing.JFrame {
         lblSanPham.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         lblSanPham.setForeground(new java.awt.Color(255, 255, 255));
         lblSanPham.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblSanPham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sanPham.png"))); // NOI18N
         lblSanPham.setText("SẢN PHẨM");
         pnlSanPham.add(lblSanPham, java.awt.BorderLayout.CENTER);
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sanPham.png"))); // NOI18N
+        jLabel7.setText("\n");
+        pnlSanPham.add(jLabel7, java.awt.BorderLayout.LINE_START);
 
         pnlSilde.add(pnlSanPham);
 
@@ -234,9 +247,12 @@ public class GD_QuanLy extends javax.swing.JFrame {
         lblNhanVien.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         lblNhanVien.setForeground(new java.awt.Color(255, 255, 255));
         lblNhanVien.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/nhanVien.png"))); // NOI18N
         lblNhanVien.setText("NHÂN VIÊN");
         pnlNhanVien.add(lblNhanVien, java.awt.BorderLayout.CENTER);
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/nhanVien.png"))); // NOI18N
+        jLabel8.setText("\n");
+        pnlNhanVien.add(jLabel8, java.awt.BorderLayout.LINE_START);
 
         pnlSilde.add(pnlNhanVien);
 
@@ -255,9 +271,12 @@ public class GD_QuanLy extends javax.swing.JFrame {
         lblTaiKhoan.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         lblTaiKhoan.setForeground(new java.awt.Color(255, 255, 255));
         lblTaiKhoan.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTaiKhoan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/taiKhoan.png"))); // NOI18N
         lblTaiKhoan.setText("TÀI KHOẢN");
         pnlTaiKhoan.add(lblTaiKhoan, java.awt.BorderLayout.CENTER);
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/taiKhoan.png"))); // NOI18N
+        jLabel9.setText("\n");
+        pnlTaiKhoan.add(jLabel9, java.awt.BorderLayout.LINE_START);
 
         pnlSilde.add(pnlTaiKhoan);
 
@@ -276,9 +295,12 @@ public class GD_QuanLy extends javax.swing.JFrame {
         lblNhaCungCap.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         lblNhaCungCap.setForeground(new java.awt.Color(255, 255, 255));
         lblNhaCungCap.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblNhaCungCap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/nhaCungCap.png"))); // NOI18N
         lblNhaCungCap.setText("NHÀ CUNG CẤP");
         pnlNhaCungCap.add(lblNhaCungCap, java.awt.BorderLayout.CENTER);
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/nhaCungCap.png"))); // NOI18N
+        jLabel10.setText("\n");
+        pnlNhaCungCap.add(jLabel10, java.awt.BorderLayout.LINE_START);
 
         pnlSilde.add(pnlNhaCungCap);
 
@@ -297,9 +319,12 @@ public class GD_QuanLy extends javax.swing.JFrame {
         lblThongKe.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         lblThongKe.setForeground(new java.awt.Color(255, 255, 255));
         lblThongKe.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/thongKe.png"))); // NOI18N
         lblThongKe.setText("THỐNG KÊ");
         pnlThongKe.add(lblThongKe, java.awt.BorderLayout.CENTER);
+
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/thongKe.png"))); // NOI18N
+        jLabel11.setText("\n");
+        pnlThongKe.add(jLabel11, java.awt.BorderLayout.LINE_START);
 
         pnlSilde.add(pnlThongKe);
 
@@ -318,9 +343,12 @@ public class GD_QuanLy extends javax.swing.JFrame {
         lblTroGiup.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         lblTroGiup.setForeground(new java.awt.Color(255, 255, 255));
         lblTroGiup.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTroGiup.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/troGiup.png"))); // NOI18N
         lblTroGiup.setText("TRỢ GIÚP");
         pnlTroGiup.add(lblTroGiup, java.awt.BorderLayout.CENTER);
+
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/troGiup.png"))); // NOI18N
+        jLabel12.setText("\n");
+        pnlTroGiup.add(jLabel12, java.awt.BorderLayout.LINE_START);
 
         pnlSilde.add(pnlTroGiup);
 
@@ -474,7 +502,14 @@ public class GD_QuanLy extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDangXuat;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private keeptoo.KGradientPanel kGradientPanel1;
     private javax.swing.JLabel lblChucVu;
     private javax.swing.JLabel lblGioiThieu;
