@@ -269,7 +269,7 @@
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="btnLuu" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="btnXoaTrang" alignment="1" max="32767" attributes="0"/>
                                       <Component id="btnCapNhat" alignment="1" max="32767" attributes="0"/>
                                       <Component id="btnThemKH" alignment="1" max="32767" attributes="0"/>
                                       <Component id="btnGuiMail" alignment="0" max="32767" attributes="0"/>
@@ -294,7 +294,7 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="btnCapNhat" min="-2" pref="40" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="btnLuu" min="-2" pref="41" max="-2" attributes="0"/>
+                          <Component id="btnXoaTrang" min="-2" pref="41" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="btnGuiMail" min="-2" pref="39" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -334,20 +334,20 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCapNhatActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="btnLuu">
+                <Component class="javax.swing.JButton" name="btnXoaTrang">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="17" style="1"/>
                     </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/icon/save.png"/>
+                      <Image iconType="3" name="/icon/tay.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="L&#x1b0;u th&#xf4;ng tin"/>
+                    <Property name="text" type="java.lang.String" value="     X&#xf3;a tr&#x1eaf;ng"/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="horizontalTextPosition" type="int" value="4"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLuuActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnXoaTrangActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnGuiMail">
