@@ -44,10 +44,10 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
     private DAO_NhaCungCap nhacc;
     private XSSFRow rowCount;
   
-    
     /**
      * Creates new form QuanLyHoaDon
      */
+    
     public GD_NhaCungCap(String _username) {
         try {
             ConnectDB.getInstance().connect();
@@ -64,6 +64,7 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
         modelNhaCungCap = (DefaultTableModel) tableNhaCC.getModel();
         DocDuLieuDatabaseVaoTable();
     }
+    
     private void importNhaCungCap(){
         File excelFile;
         FileInputStream excelFIS = null;
@@ -115,7 +116,7 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
             }
         }
     }
-//    Export file excel
+
     public void exportNhaCungCap(){
         FileOutputStream excelFOU = null;
         BufferedOutputStream excelBOU = null;
@@ -241,7 +242,6 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
     }
     
     
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -261,7 +261,7 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
         pnlNut = new javax.swing.JPanel();
         btnThemNCC = new javax.swing.JButton();
         btnSuaNCC = new javax.swing.JButton();
-        btnLuu = new javax.swing.JButton();
+        btnXoaTrang = new javax.swing.JButton();
         btnImport = new javax.swing.JButton();
         btnExport = new javax.swing.JButton();
         pnlGiua = new javax.swing.JPanel();
@@ -378,14 +378,14 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
             }
         });
 
-        btnLuu.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
-        btnLuu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/save.png"))); // NOI18N
-        btnLuu.setText("Lưu thông tin");
-        btnLuu.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnLuu.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btnLuu.addActionListener(new java.awt.event.ActionListener() {
+        btnXoaTrang.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
+        btnXoaTrang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/tay.png"))); // NOI18N
+        btnXoaTrang.setText("Xóa trắng");
+        btnXoaTrang.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnXoaTrang.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnXoaTrang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLuuActionPerformed(evt);
+                btnXoaTrangActionPerformed(evt);
             }
         });
 
@@ -418,7 +418,7 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
                 .addGap(39, 39, 39)
                 .addGroup(pnlNutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnImport, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
-                    .addComponent(btnLuu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnXoaTrang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnSuaNCC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnThemNCC, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
                     .addComponent(btnExport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -432,7 +432,7 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSuaNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnXoaTrang, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnImport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
@@ -519,7 +519,11 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
+    private void btnXoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrangActionPerformed
+       xoaTextField();
+    }//GEN-LAST:event_btnXoaTrangActionPerformed
+
+    private void btnThemNCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemNCCActionPerformed
        String tenNCC = txtTenNCC.getText();
         String diaChi = txtDiaChi.getText();
         String soDienThoai = txtSoDienThoai.getText();
@@ -537,10 +541,6 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
                 xoaTextField();
             }
         }
-    }//GEN-LAST:event_btnLuuActionPerformed
-
-    private void btnThemNCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemNCCActionPerformed
-        xoaTextField();
     }//GEN-LAST:event_btnThemNCCActionPerformed
 
     private void btnSuaNCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaNCCActionPerformed
@@ -590,9 +590,9 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExport;
     private javax.swing.JButton btnImport;
-    private javax.swing.JButton btnLuu;
     private javax.swing.JButton btnSuaNCC;
     private javax.swing.JButton btnThemNCC;
+    private javax.swing.JButton btnXoaTrang;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel4;

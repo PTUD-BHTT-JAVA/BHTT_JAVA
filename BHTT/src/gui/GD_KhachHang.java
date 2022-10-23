@@ -595,12 +595,7 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemKHActionPerformed
-        xoaTrangTextField();
-    }//GEN-LAST:event_btnThemKHActionPerformed
-
-    private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
-
-        String tenKH = txtTenKH.getText();
+       String tenKH = txtTenKH.getText();
         String soDienThoai = txtSoDienThoai.getText();
         String email = txtEmail.getText();
         boolean gioiTinh = radNam.isSelected();
@@ -620,6 +615,11 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
                 xoaTrangTextField();
             }
         }
+    }//GEN-LAST:event_btnThemKHActionPerformed
+
+    private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
+        xoaTrangTextField();
+        
     }//GEN-LAST:event_btnLuuActionPerformed
 
     private void tableKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableKhachHangMouseClicked
