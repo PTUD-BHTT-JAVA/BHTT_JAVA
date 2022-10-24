@@ -146,7 +146,7 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame {
         jTextField13 = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jTextField14 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnChonKhachHang = new javax.swing.JButton();
         pnlCenter = new javax.swing.JPanel();
         pnlTKnSL = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
@@ -336,10 +336,15 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(99, 203, 116));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("+");
+        btnChonKhachHang.setBackground(new java.awt.Color(99, 203, 116));
+        btnChonKhachHang.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        btnChonKhachHang.setForeground(new java.awt.Color(255, 255, 255));
+        btnChonKhachHang.setText("+");
+        btnChonKhachHang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChonKhachHangActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlKhachHang2Layout = new javax.swing.GroupLayout(pnlKhachHang2);
         pnlKhachHang2.setLayout(pnlKhachHang2Layout);
@@ -361,14 +366,14 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame {
                             .addComponent(jTextField13)
                             .addComponent(jTextField14))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                .addComponent(btnChonKhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
                 .addContainerGap())
         );
         pnlKhachHang2Layout.setVerticalGroup(
             pnlKhachHang2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlKhachHang2Layout.createSequentialGroup()
                 .addGroup(pnlKhachHang2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnChonKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlKhachHang2Layout.createSequentialGroup()
                         .addGroup(pnlKhachHang2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -741,13 +746,19 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtGioActionPerformed
 
+    private void btnChonKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonKhachHangActionPerformed
+        GD_TimKiemKH gdtkkh=new GD_TimKiemKH();
+        gdtkkh.setLocationRelativeTo(null);
+        gdtkkh.setVisible(true);
+    }//GEN-LAST:event_btnChonKhachHangActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnChonKhachHang;
     private javax.swing.JComboBox<String> cbxCL;
     private javax.swing.JComboBox<String> cbxKT;
     private javax.swing.JComboBox<String> cbxMS;
     private javax.swing.JComboBox<String> cbxPL;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
