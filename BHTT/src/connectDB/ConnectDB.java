@@ -17,7 +17,7 @@ public class ConnectDB {
     public void connect() throws SQLException {
         String url = "jdbc:sqlserver://localhost:1433;databasename=BHTT";
         String user = "sa";
-        String password = "sa";
+        String password = "123456";
         con = DriverManager.getConnection(url, user, password);
     }
 
@@ -40,7 +40,7 @@ public class ConnectDB {
         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         String connectionUrl = "jdbc:sqlserver://localhost;database=BHTT"; 
         String user = "sa";
-        String pass = "sa";
+        String pass = "123456";
         Connection con = DriverManager.getConnection(connectionUrl,user,pass);
         return con;
     }

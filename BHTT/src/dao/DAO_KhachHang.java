@@ -3,6 +3,8 @@ package dao;
 import connectDB.ConnectDB;
 import entity.KhachHang;
 import entity.LoaiKhachHang;
+import entity.LoaiNhanVien;
+import entity.NhanVien;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,6 +14,7 @@ import java.util.ArrayList;
 public class DAO_KhachHang {
 
     private ArrayList<KhachHang> dsKH;
+    private final DAO_LoaiKhachHang lkhDAO = new DAO_LoaiKhachHang();
 
     public ArrayList<KhachHang> getalltbKhachHang() {
         dsKH = new ArrayList<KhachHang>();
@@ -36,6 +39,23 @@ public class DAO_KhachHang {
             e.printStackTrace();
         }
         return dsKH;
+    }
+    public KhachHang layKhachHangBangSDT(String sdt) {
+        try(
+            Connection con = ConnectDB.opConnection();
+            PreparedStatement pts = con.prepareStatement("Select * from KhachHang where soDienThoai =? ")){
+            pts.setString(1,sdt );
+                try(ResultSet rs = pts.executeQuery()){
+                    if (rs.next()){
+                        LoaiKhachHang lkh= lkhDAO.timLoaiKHBangMa(rs.getString("maLoaiKH"));
+                        KhachHang kh=new KhachHang(rs.getString("maKH"),rs.getString("tenKH"),rs.getString("SoDienThoai"),rs.getInt("diemTichLuy"),rs.getString("email"),rs.getBoolean("gioiTinh"),lkh);
+                        return kh;
+                    }
+                }
+            }catch(Exception e){
+           
+       }
+       return null; 
     }
 
     public boolean themKhachHang(KhachHang kh) {

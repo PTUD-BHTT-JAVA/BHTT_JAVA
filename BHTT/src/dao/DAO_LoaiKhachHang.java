@@ -7,7 +7,9 @@ package dao;
 import connectDB.ConnectDB;
 
 import entity.LoaiKhachHang;
+import entity.LoaiNhanVien;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -37,6 +39,22 @@ public class DAO_LoaiKhachHang {
             e.printStackTrace();
         }
         return dsLKH;
+    }
+    public LoaiKhachHang timLoaiKHBangMa(String ma) {
+        try(
+            Connection con = ConnectDB.opConnection();
+            PreparedStatement pts = con.prepareStatement("Select * from LoaiKhachHang where maLoaiKH = ? ")){
+            pts.setString(1,ma );
+                try(ResultSet rs = pts.executeQuery()){
+                    if (rs.next()){
+                        LoaiKhachHang lkh=new LoaiKhachHang(rs.getString("maLoaiKH"),rs.getString("tenLoaiKH"));
+                        return lkh;
+                    }
+                }
+        }catch(Exception e){
+           e.printStackTrace();
+       }
+       return null;
     }
     
 }
