@@ -687,8 +687,17 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cboLoaiKHItemStateChanged
 
     private void btnGuiMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuiMailActionPerformed
-        
+        int hangChon = tableKhachHang.getSelectedRow();
+        if (hangChon == -1) {
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn khách hàng cần gửi");
+            return;
+        }
+        String m = modelKhachHang.getValueAt(hangChon, 3).toString();
+        GD_GuiMail gdGM= new GD_GuiMail( m  );
+        gdGM.setLocationRelativeTo(null);
+        gdGM.setVisible(true);
     }//GEN-LAST:event_btnGuiMailActionPerformed
+  
 
     private void txtTimKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKeyReleased
         String search = txtTim.getText();
