@@ -19,6 +19,7 @@ import entity.MauSac;
 import entity.NhaCungCap;
 import entity.SanPham;
 import java.awt.Image;
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -484,6 +485,11 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
         });
 
         btnIX.setText("Import");
+        btnIX.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIXActionPerformed(evt);
+            }
+        });
 
         btnEX.setText("export");
         btnEX.addActionListener(new java.awt.event.ActionListener() {
@@ -842,7 +848,7 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
         trs.setRowFilter(RowFilter.regexFilter(ten));
     }
     private void txtTimKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKeyReleased
-     
+
         String search = txtTim.getText();
         timKiemNhaCC(search);
     }//GEN-LAST:event_txtTimKeyReleased
@@ -888,16 +894,6 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
 //                sp.getMaSP(),sp.getTenSP(),sp.getSoLuong(),sp.getGiaGoc(),sp.getLoaiSanPham().getTenLoaiSP(),sp.getNhaCungCap().getTenNCC(),sp.getMauSac().getTenMau(), sp.getChatLieu().getTenChatLieu(),sp.getKichThuoc().getTenKichThuoc()
 //            ,sp.getNgayNhap()});
 //        }
-
-
-
-
-
-
-
-
-
-
 //THƯ
         String s = cbxPLL.getSelectedItem().toString();
         if (s.equals("Tất cả")) {
@@ -1050,87 +1046,87 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
 //            
 //            
 //        }
-    try {
-       
-        XSSFWorkbook workbook = new XSSFWorkbook();
-        XSSFSheet sheet = workbook.createSheet("Danh sách sản phẩm ");
+        try {
 
-        XSSFRow row = null;
-        Cell cell = null;
-        row = sheet.createRow(3);
+            XSSFWorkbook workbook = new XSSFWorkbook();
+            XSSFSheet sheet = workbook.createSheet("Danh sách sản phẩm ");
 
-        cell = row.createCell(0, CellType.STRING);
-        cell.setCellValue("Mã sản phẩm");
+            XSSFRow row = null;
+            Cell cell = null;
+            row = sheet.createRow(3);
 
-        cell = row.createCell(1, CellType.STRING);
-        cell.setCellValue("Tên sản phẩm");
-
-        cell = row.createCell(2, CellType.STRING);
-        cell.setCellValue("Giá gốc");
-
-        cell = row.createCell(3, CellType.STRING);
-        cell.setCellValue("Số lượng");
-
-        cell = row.createCell(4, CellType.STRING);
-        cell.setCellValue("Mô tả");
-
-        cell = row.createCell(5, CellType.STRING);
-        cell.setCellValue("Ngày nhập");
-
-        cell = row.createCell(6, CellType.STRING);
-        cell.setCellValue("Hạn sử dụng");
-
-        cell = row.createCell(7, CellType.STRING);
-        cell.setCellValue("Nhà cung cấp");
-
-        cell = row.createCell(8, CellType.STRING);
-        cell.setCellValue("Chất liệu");
-
-        cell = row.createCell(9, CellType.STRING);
-        cell.setCellValue("Màu sắc");
-
-        cell = row.createCell(10, CellType.STRING);
-        cell.setCellValue("Kích thước");
-
-        cell = row.createCell(11, CellType.STRING);
-        cell.setCellValue("Loại sản phẩm");
-
-        cell = row.createCell(12, CellType.STRING);
-        cell.setCellValue("Hình ảnh");
-        sp_dao = new DAO_SanPham();
-        ArrayList<SanPham> ds = sp_dao.getAllSP();
-        for (int i = 0; i < ds.size(); i++) {
-            row = sheet.createRow(4 + i);
             cell = row.createCell(0, CellType.STRING);
-            cell.setCellValue(ds.get(i).getMaSP());
+            cell.setCellValue("Mã sản phẩm");
+
             cell = row.createCell(1, CellType.STRING);
-            cell.setCellValue(ds.get(i).getTenSP());
+            cell.setCellValue("Tên sản phẩm");
+
             cell = row.createCell(2, CellType.STRING);
-            cell.setCellValue(ds.get(i).getGiaGoc());
+            cell.setCellValue("Giá gốc");
+
             cell = row.createCell(3, CellType.STRING);
-            cell.setCellValue(ds.get(i).getSoLuong());
+            cell.setCellValue("Số lượng");
+
             cell = row.createCell(4, CellType.STRING);
-            cell.setCellValue(ds.get(i).getMoTa());
+            cell.setCellValue("Mô tả");
 
             cell = row.createCell(5, CellType.STRING);
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            String ngayNhap = sdf.format(ds.get(i).getNgayNhap());
-            String hanSD = sdf.format(ds.get(i).getHanSD());
-            cell.setCellValue(ngayNhap);
+            cell.setCellValue("Ngày nhập");
+
             cell = row.createCell(6, CellType.STRING);
-            cell.setCellValue(hanSD);
+            cell.setCellValue("Hạn sử dụng");
 
             cell = row.createCell(7, CellType.STRING);
-            cell.setCellValue(ds.get(i).getNhaCungCap().getTenNCC());
+            cell.setCellValue("Nhà cung cấp");
+
             cell = row.createCell(8, CellType.STRING);
-            cell.setCellValue(ds.get(i).getChatLieu().getTenChatLieu());
+            cell.setCellValue("Chất liệu");
+
             cell = row.createCell(9, CellType.STRING);
-            cell.setCellValue(ds.get(i).getMauSac().getTenMau());
+            cell.setCellValue("Màu sắc");
+
             cell = row.createCell(10, CellType.STRING);
-            cell.setCellValue(ds.get(i).getKichThuoc().getTenKichThuoc());
+            cell.setCellValue("Kích thước");
+
             cell = row.createCell(11, CellType.STRING);
-            cell.setCellValue(ds.get(i).getLoaiSanPham().getTenLoaiSP());
-           
+            cell.setCellValue("Loại sản phẩm");
+
+            cell = row.createCell(12, CellType.STRING);
+            cell.setCellValue("Hình ảnh");
+            sp_dao = new DAO_SanPham();
+            ArrayList<SanPham> ds = sp_dao.getAllSP();
+            for (int i = 0; i < ds.size(); i++) {
+                row = sheet.createRow(4 + i);
+                cell = row.createCell(0, CellType.STRING);
+                cell.setCellValue(ds.get(i).getMaSP());
+                cell = row.createCell(1, CellType.STRING);
+                cell.setCellValue(ds.get(i).getTenSP());
+                cell = row.createCell(2, CellType.STRING);
+                cell.setCellValue(ds.get(i).getGiaGoc());
+                cell = row.createCell(3, CellType.STRING);
+                cell.setCellValue(ds.get(i).getSoLuong());
+                cell = row.createCell(4, CellType.STRING);
+                cell.setCellValue(ds.get(i).getMoTa());
+
+                cell = row.createCell(5, CellType.STRING);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                String ngayNhap = sdf.format(ds.get(i).getNgayNhap());
+                String hanSD = sdf.format(ds.get(i).getHanSD());
+                cell.setCellValue(ngayNhap);
+                cell = row.createCell(6, CellType.STRING);
+                cell.setCellValue(hanSD);
+
+                cell = row.createCell(7, CellType.STRING);
+                cell.setCellValue(ds.get(i).getNhaCungCap().getTenNCC());
+                cell = row.createCell(8, CellType.STRING);
+                cell.setCellValue(ds.get(i).getChatLieu().getTenChatLieu());
+                cell = row.createCell(9, CellType.STRING);
+                cell.setCellValue(ds.get(i).getMauSac().getTenMau());
+                cell = row.createCell(10, CellType.STRING);
+                cell.setCellValue(ds.get(i).getKichThuoc().getTenKichThuoc());
+                cell = row.createCell(11, CellType.STRING);
+                cell.setCellValue(ds.get(i).getLoaiSanPham().getTenLoaiSP());
+
 //            byte[] lblha= ds.get(i).getHinhAnh();
 //            if(lblha!=null){
 //                 String a= new String(lblha);
@@ -1139,23 +1135,118 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
 //            
 //            cell.setCellValue(lblha.length);
 //            }
-           
-           
-        }
-        File f = new File("Excell/sanpham.xlsx");
-        try {
-            FileOutputStream file = new FileOutputStream(f);
-            workbook.write(file);
-            file.close();
+            }
+            File f = new File("Excell/sanpham.xlsx");
+            try {
+                FileOutputStream file = new FileOutputStream(f);
+                workbook.write(file);
+                file.close();
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+            JOptionPane.showMessageDialog(null, "Xuất file thành công");
+
         } catch (Exception e2) {
             e2.printStackTrace();
         }
-        JOptionPane.showMessageDialog(null, "Xuất file thành công");
-    
-    }catch (Exception e2) {
-	e2.printStackTrace();
-            }
     }//GEN-LAST:event_btnEXActionPerformed
+
+    private void btnIXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIXActionPerformed
+//        File excelFile;
+//        FileInputStream excelFIS = null;
+//        BufferedInputStream excelBIS = null;
+//        XSSFWorkbook excelImportToJTable = null;
+//        String defaultCurrentDirectoryPath = "C:\\Users\\bohie\\OneDrive\\Documents\\GitHub\\BHTT_JAVA\\BHTT\\Excell";
+//        JFileChooser excelFileChooser = new JFileChooser(defaultCurrentDirectoryPath);
+//        excelFileChooser.setDialogTitle("Chọn file để import");
+//        FileNameExtensionFilter fnef = new FileNameExtensionFilter("EXCEL FILE", "xls", "xlsx", "xlsm");
+//        excelFileChooser.setFileFilter(fnef);
+//        int excelChooser = excelFileChooser.showOpenDialog(null);
+//        if (excelChooser == JFileChooser.APPROVE_OPTION) {
+//            try {
+//                excelFile = excelFileChooser.getSelectedFile();
+//                excelFIS = new FileInputStream(excelFile);
+//                excelBIS = new BufferedInputStream(excelBIS);
+//                excelImportToJTable = new XSSFWorkbook(excelFIS);
+//                XSSFSheet excelSheet = excelImportToJTable.getSheetAt(0);
+//                for (int row = 1; row < excelSheet.getLastRowNum(); row++) {
+//                   
+//                    XSSFRow excelRow = excelSheet.getRow(row);
+//                    XSSFCell excelTen = excelRow.getCell(0);
+//                    XSSFCell excelgia = excelRow.getCell(1);
+//                    XSSFCell excelSL = excelRow.getCell(2);
+//                    XSSFCell excelHA = excelRow.getCell(3);
+//                    XSSFCell excelMT = excelRow.getCell(4);
+//                    XSSFCell excelNgayNhap = excelRow.getCell(5);
+//                    XSSFCell excelHD = excelRow.getCell(6);
+//                    XSSFCell excelNCC = excelRow.getCell(7);
+//                    XSSFCell excelCL = excelRow.getCell(8);
+//                    XSSFCell excelMS = excelRow.getCell(9);
+//                    XSSFCell excelKT = excelRow.getCell(10);
+//                    XSSFCell excelPL = excelRow.getCell(11);
+//                    MauSac m = mau_dao.layMauSacBangTen(excelMS.toString());
+//                    KichThuoc k = kt_dao.layKichThuocBangTen(excelKT.toString());
+//                    NhaCungCap ncc = ncc_dao.layNhaCungCapBangTen(excelNCC.toString());
+//                    LoaiSanPham lsp = lsp_dao.layLoaiSPBangTen(excelPL.toString());
+//                    ChatLieu cl = cl_dao.layKichThuocBangTen(excelCL.toString());
+//                    SanPham sp = new SanPham(maTuSinh(), excelTen.toString(), excelgia, excelSL, excelHA, excelMT, excelNgayNhap, excelHD, new NhaCungCap(ncc.getMaNCC()), new ChatLieu(cl.getMaChatLieu()), new MauSac(m.getMaMau()), new KichThuoc(k.getMaKichThuoc()), new LoaiSanPham(lsp.getMaLoaiSP()));
+//                    nhacc.themNhaCungCap(nccImport);
+//                    
+//
+//                }
+//                JOptionPane.showMessageDialog(null, "Import thành công");
+//            } catch (IOException iOException) {
+//                JOptionPane.showMessageDialog(null, iOException.getMessage());
+//            } finally {
+//                try {
+//                    if (excelFIS != null) {
+//                        excelFIS.close();
+//                    }
+//                    if (excelBIS != null) {
+//                        excelBIS.close();
+//                    }
+//                    if (excelImportToJTable != null) {
+//                        excelImportToJTable.close();
+//                    }
+//                } catch (IOException ex) {
+//                    System.out.println(ex);
+//                }
+//            }
+//        }
+
+    }//GEN-LAST:event_btnIXActionPerformed
+private String maTuSinh(){
+    String ma = "SP";
+            int tachMa;
+            int i = 0, j = 1;
+            int[] dem = new int[999];
+            String id;
+            sp_dao = new DAO_SanPham();
+            for (SanPham sanpham : sp_dao.getAllSP()) {
+                id = sanpham.getMaSP();
+                tachMa = Integer.parseInt(id.substring(2, 5));
+                dem[i] = tachMa;
+                i++;
+            }
+            i = 0;
+            //gd:  String maPhatSinh= ("SP%3d",i);
+            while (j < 999) {
+                if (dem[i] < j) {
+                    if (j <= 9) {
+                        ma += "00" + (j);
+                    } else {
+                        ma += "0" + (j);
+                    }
+                    break;
+                } else if (dem[i] > j) {
+                    j = dem[i];
+                } else {
+                    i++;
+                    j++;
+                }
+            }
+            return ma;
+}
 
     private void DocDuLieuLenTable() {
         sp_dao = new DAO_SanPham();
