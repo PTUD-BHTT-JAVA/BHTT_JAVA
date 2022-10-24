@@ -4,11 +4,15 @@
  */
 package gui;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Trinh Cui Bap
  */
 public class Form_HoaDon extends javax.swing.JFrame {
+
+    public DefaultTableModel modalXuatHoaDon;
 
     /**
      * Creates new form Form_HoaDon
@@ -16,6 +20,10 @@ public class Form_HoaDon extends javax.swing.JFrame {
     public Form_HoaDon() {
         initComponents();
         setLocationRelativeTo(null);
+        modalXuatHoaDon = (DefaultTableModel) tableXuatHoaDon.getModel();
+        modalXuatHoaDon.addRow(new Object[]{
+            
+        });
     }
 
     /**
@@ -51,7 +59,7 @@ public class Form_HoaDon extends javax.swing.JFrame {
         lplGio = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableXuatHoaDon = new javax.swing.JTable();
         jPanel8 = new javax.swing.JPanel();
         pnlGiua = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -238,7 +246,7 @@ public class Form_HoaDon extends javax.swing.JFrame {
 
         pnlHoaDon.add(pblTren);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableXuatHoaDon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -246,7 +254,7 @@ public class Form_HoaDon extends javax.swing.JFrame {
                 "Sản phẩm", "Số lượng", "Giá", "Thành tiền"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tableXuatHoaDon);
 
         pnlHoaDon.add(jScrollPane1);
 
@@ -471,7 +479,6 @@ public class Form_HoaDon extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblKhuyenMai;
     private javax.swing.JLabel lplGio;
     private javax.swing.JPanel lplKhuyenMai;
@@ -482,6 +489,7 @@ public class Form_HoaDon extends javax.swing.JFrame {
     private javax.swing.JPanel pnlDuoi;
     private javax.swing.JPanel pnlGiua;
     private javax.swing.JPanel pnlHoaDon;
+    private javax.swing.JTable tableXuatHoaDon;
     private javax.swing.JTextField txtTienKhachDua;
     private javax.swing.JTextField txtTienThoiLai;
     private javax.swing.JLabel txtTongCong;
