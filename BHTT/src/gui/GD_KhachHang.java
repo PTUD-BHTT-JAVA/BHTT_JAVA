@@ -6,7 +6,7 @@ import dao.DAO_LoaiKhachHang;
 
 import entity.KhachHang;
 import entity.LoaiKhachHang;
-import entity.NhaCungCap;
+
 import java.awt.event.ItemEvent;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -209,9 +209,8 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
         FileOutputStream excelFOU = null;
         BufferedOutputStream excelBOU = null;
         XSSFWorkbook excelJTableExporter = null;
-        //Choose Location For Saving Excel File
+       
         JFileChooser excelFileChooser = new JFileChooser("C:\\Users\\Trinh Cui Bap\\Desktop");
-//        Change Dilog Box Title
         excelFileChooser.setDialogTitle("Save As");
         FileNameExtensionFilter fnef = new FileNameExtensionFilter("EXCEL FILES", "xls", "xlsx", "xlsm");
         excelFileChooser.setFileFilter(fnef);
@@ -286,10 +285,10 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
         pnlButton = new javax.swing.JPanel();
         btnThemKH = new javax.swing.JButton();
         btnCapNhat = new javax.swing.JButton();
-        btnLuu = new javax.swing.JButton();
         btnGuiMail = new javax.swing.JButton();
         btnImport = new javax.swing.JButton();
         btnExport = new javax.swing.JButton();
+        btnXoaTrang = new javax.swing.JButton();
         pnlCenter = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableKhachHang = new javax.swing.JTable();
@@ -354,17 +353,6 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
             }
         });
 
-        btnLuu.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
-        btnLuu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/save.png"))); // NOI18N
-        btnLuu.setText("Lưu thông tin");
-        btnLuu.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnLuu.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btnLuu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLuuActionPerformed(evt);
-            }
-        });
-
         btnGuiMail.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
         btnGuiMail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/email.png"))); // NOI18N
         btnGuiMail.setText("   Gửi mail");
@@ -394,24 +382,34 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
             }
         });
 
+        btnXoaTrang.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
+        btnXoaTrang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/tay.png"))); // NOI18N
+        btnXoaTrang.setText("    Xóa trắng");
+        btnXoaTrang.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnXoaTrang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaTrangActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlButtonLayout = new javax.swing.GroupLayout(pnlButton);
         pnlButton.setLayout(pnlButtonLayout);
         pnlButtonLayout.setHorizontalGroup(
             pnlButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlButtonLayout.createSequentialGroup()
                 .addGroup(pnlButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(pnlButtonLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(pnlButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnLuu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnCapNhat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnThemKH, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnGuiMail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlButtonLayout.createSequentialGroup()
                         .addGap(45, 45, 45)
                         .addGroup(pnlButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnImport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnExport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(btnExport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(pnlButtonLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(pnlButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnCapNhat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnThemKH, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnGuiMail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnXoaTrang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(55, 55, 55))
         );
         pnlButtonLayout.setVerticalGroup(
@@ -420,9 +418,9 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
                 .addComponent(btnThemKH, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCapNhat, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnXoaTrang, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btnGuiMail, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnImport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -618,8 +616,7 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnThemKHActionPerformed
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
-        xoaTrangTextField();
-        
+        xoaTrangTextField();  
     }//GEN-LAST:event_btnLuuActionPerformed
 
     private void tableKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableKhachHangMouseClicked
@@ -639,7 +636,6 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_tableKhachHangMouseClicked
-
 
     private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
 
@@ -670,7 +666,6 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
         try {
             if (evt.getStateChange() == ItemEvent.SELECTED) {
             String selectItem = cboLoaiKH.getSelectedItem().toString();
-//            kh.getKhachHangTheoMaLoai(selectItem);
             List<KhachHang> khCanLoc = kh.getKhachHangTheoMaLoai(selectItem);
             if (!khCanLoc.isEmpty()) {
                 XoaHetDuLieuTrenTableModel();
@@ -692,7 +687,7 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cboLoaiKHItemStateChanged
 
     private void btnGuiMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuiMailActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnGuiMailActionPerformed
 
     private void txtTimKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKeyReleased
@@ -708,14 +703,17 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
        exportKhachHang();
     }//GEN-LAST:event_btnExportActionPerformed
 
+    private void btnXoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrangActionPerformed
+      xoaTrangTextField();
+    }//GEN-LAST:event_btnXoaTrangActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCapNhat;
     private javax.swing.JButton btnExport;
     private javax.swing.JButton btnGuiMail;
     private javax.swing.JButton btnImport;
-    private javax.swing.JButton btnLuu;
     private javax.swing.JButton btnThemKH;
+    private javax.swing.JButton btnXoaTrang;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cboLoaiKH;
     private javax.swing.JLabel jLabel1;

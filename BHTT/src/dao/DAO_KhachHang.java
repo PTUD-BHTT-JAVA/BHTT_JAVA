@@ -10,6 +10,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class DAO_KhachHang {
+
     private ArrayList<KhachHang> dsKH;
 
     public ArrayList<KhachHang> getalltbKhachHang() {
@@ -23,7 +24,7 @@ public class DAO_KhachHang {
             while (rs.next()) {
                 String maNV = rs.getString("maKH");
                 String tenKH = rs.getString("tenKH");
-                String soDienThoai  = rs.getString("soDienThoai");
+                String soDienThoai = rs.getString("soDienThoai");
                 int diemTichLuy = rs.getInt("diemTichLuy");
                 String email = rs.getString("email");
                 boolean gioiTinh = rs.getBoolean("gioiTinh");
@@ -36,9 +37,7 @@ public class DAO_KhachHang {
         }
         return dsKH;
     }
-    /*
-        Thêm khách hàng
-    */
+
     public boolean themKhachHang(KhachHang kh) {
         ConnectDB.getInstance();
         Connection con = ConnectDB.getConnection();
@@ -46,13 +45,13 @@ public class DAO_KhachHang {
         int n = 0;
         try {
             stmt = con.prepareStatement("insert into KhachHang values(?,?,?,?,?,?,?)");
-            stmt.setString(1,kh.getMaKH());
-            stmt.setString(2,kh.getTenKH());
-            stmt.setString(3,kh.getSoDienThoai());
-            stmt.setInt(4,kh.getDiemTichLuy());
-            stmt.setString(5,kh.getEmail());
-            stmt.setBoolean(6,kh.isGioiTinh());
-            stmt.setString(7,kh.getLoaiKhachHang().getMaLoaiKH());
+            stmt.setString(1, kh.getMaKH());
+            stmt.setString(2, kh.getTenKH());
+            stmt.setString(3, kh.getSoDienThoai());
+            stmt.setInt(4, kh.getDiemTichLuy());
+            stmt.setString(5, kh.getEmail());
+            stmt.setBoolean(6, kh.isGioiTinh());
+            stmt.setString(7, kh.getLoaiKhachHang().getMaLoaiKH());
             n = stmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -65,28 +64,28 @@ public class DAO_KhachHang {
         }
         return n > 0;
     }
-//    Xóa khách hàng
-      public void xoaKhachHang(String maKH) {
+
+    public void xoaKhachHang(String maKH) {
         Connection con = ConnectDB.getConnection();
         PreparedStatement stmt = null;
         String sql = "delete from KhachHang where maKH = ?";
         try {
             stmt = con.prepareStatement(sql);
-            stmt.setString(1,maKH);
+            stmt.setString(1, maKH);
             stmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-      public KhachHang getElement(int index) {
+
+    public KhachHang getElement(int index) {
         if (index < 0 || index > dsKH.size()) {
             return null;
         }
         return dsKH.get(index);
     }
-    
-      
-     public boolean capNhatKhachHang(KhachHang kh) {
+
+    public boolean capNhatKhachHang(KhachHang kh) {
         ConnectDB.getInstance();
         Connection con = ConnectDB.getConnection();
         PreparedStatement stmt = null;
@@ -96,10 +95,10 @@ public class DAO_KhachHang {
             stmt.setString(1, kh.getTenKH());
             stmt.setString(2, kh.getSoDienThoai());
             stmt.setInt(3, kh.getDiemTichLuy());
-            stmt.setString(4,kh.getEmail());
-            stmt.setBoolean(5,kh.isGioiTinh());
-            stmt.setString(6,kh.getLoaiKhachHang().getMaLoaiKH());
-            stmt.setString(7,kh.getMaKH());
+            stmt.setString(4, kh.getEmail());
+            stmt.setBoolean(5, kh.isGioiTinh());
+            stmt.setString(6, kh.getLoaiKhachHang().getMaLoaiKH());
+            stmt.setString(7, kh.getMaKH());
             n = stmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -112,8 +111,8 @@ public class DAO_KhachHang {
         }
         return n > 0;
     }
-     
-     public ArrayList<KhachHang> getKhachHangTheoMaLoai(String maLKH) {
+
+    public ArrayList<KhachHang> getKhachHangTheoMaLoai(String maLKH) {
         ArrayList<KhachHang> dsKH = new ArrayList<KhachHang>();
         ConnectDB.getInstance();
         Connection con = ConnectDB.getConnection();
@@ -121,12 +120,12 @@ public class DAO_KhachHang {
         try {
             String sql = "select * from KhachHang where maLoaiKH = ? ";
             statement = con.prepareStatement(sql);
-            statement.setString(1,maLKH);
+            statement.setString(1, maLKH);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 String maNV = rs.getString("maKH");
                 String ten = rs.getString("tenKH");
-                String soDienThoai  = rs.getString("soDienThoai");
+                String soDienThoai = rs.getString("soDienThoai");
                 int diemTichLuy = rs.getInt("diemTichLuy");
                 String email = rs.getString("email");
                 boolean gioiTinh = rs.getBoolean("gioiTinh");
@@ -145,5 +144,5 @@ public class DAO_KhachHang {
         }
         return dsKH;
     }
-         
+
 }
