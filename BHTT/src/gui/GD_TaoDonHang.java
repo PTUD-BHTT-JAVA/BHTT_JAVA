@@ -175,10 +175,10 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame {
         pnlDonHang = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         tab1 = new javax.swing.JTabbedPane();
-        tblDonHang = new javax.swing.JScrollPane();
-        tableDonHang = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
+        tblDonHang = new javax.swing.JScrollPane();
+        tableDonHang = new javax.swing.JTable();
         jPanel5 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         lplTongTien = new javax.swing.JTextField();
@@ -575,9 +575,23 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame {
         jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         pnlDonHang.add(jLabel5);
 
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable3);
+
+        tab1.addTab("tab2", jScrollPane2);
+
         tblDonHang.setPreferredSize(new java.awt.Dimension(700, 450));
 
-        tableDonHang.setBackground(new java.awt.Color(204, 204, 255));
         tableDonHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -595,21 +609,6 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame {
         tblDonHang.setViewportView(tableDonHang);
 
         tab1.addTab("Đơn hàng ", tblDonHang);
-
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(jTable3);
-
-        tab1.addTab("tab2", jScrollPane2);
 
         pnlDonHang.add(tab1);
 
@@ -831,8 +830,11 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnXoaCTHDActionPerformed
 
     private void tableDonHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDonHangMouseClicked
-        int row = tableDonHang.getSelectedRow();
-        jspSoLuong.setValue(modelDonHang.getValueAt(row,2));
+        try {
+             int row = tableDonHang.getSelectedRow();
+            jspSoLuong.setValue(modelDonHang.getValueAt(row,2));
+        } catch (Exception e) {
+        }
     }//GEN-LAST:event_tableDonHangMouseClicked
 
     private void btnTimKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKHActionPerformed
