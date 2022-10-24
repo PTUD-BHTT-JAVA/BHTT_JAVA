@@ -59,6 +59,7 @@ public class GD_DangNhap extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setUndecorated(true);
 
         kGradientPanel3.setForeground(new java.awt.Color(255, 255, 255));
