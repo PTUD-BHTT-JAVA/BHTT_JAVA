@@ -167,22 +167,56 @@ public class DAO_SanPham {
         }
         return n>0;
     }
-    public ArrayList<SanPham> LocSP() {
-        ArrayList<SanPham> dsSP = new ArrayList<SanPham>();
-         try{
+    public void CapNhatSP(SanPham spNew){
+        Connection con = ConnectDB.getInstance().getConnection();
+        PreparedStatement stemnt = null;
+        String sql= "update SanPham set tenSP=?, giaGoc=?,soLuong=?,hinhAnh=?,moTa=?,ngayNhap=?,hanSD=?,maNCC=?,maChatLieu=?,maMau=?,maKichThuoc=?,maLoaiSP=? Where maSP = ?";
+        try {
+            stemnt = con.prepareStatement(sql);
            
-            Connection con = ConnectDB.getInstance().getConnection();
-            String sql = "select * from SanPham";
-            java.sql.Statement statement = con.createStatement();
-            java.sql.ResultSet rs = statement.executeQuery(sql);
-        
+            stemnt.setString(1, spNew.getTenSP());
+            stemnt.setDouble(2, spNew.getGiaGoc());
+            stemnt.setInt(3 , spNew.getSoLuong());
+            stemnt.setBytes(4, spNew.getHinhAnh());
+            stemnt.setString(5, spNew.getMoTa());
+             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String ngayNhap= sdf.format(spNew.getNgayNhap());
+            stemnt.setString(6,  ngayNhap);
+            String hanSD= sdf.format( spNew.getNgayNhap());
+            stemnt.setString(7, hanSD);
+            stemnt.setString(8, spNew.getNhaCungCap().getMaNCC());
+            stemnt.setString(9, spNew.getChatLieu().getMaChatLieu());
+            stemnt.setString(10, spNew.getMauSac().getMaMau());
+            stemnt.setString(11, spNew.getKichThuoc().getMaKichThuoc());
+              stemnt.setString(12, spNew.getLoaiSanPham().getMaLoaiSP());
+               stemnt.setString(13, spNew.getMaSP());
+            stemnt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
-        
+        }finally{
+            try {
+                stemnt.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-        return null;
-        
     }
+//    public ArrayList<SanPham> LocSP() {
+//        ArrayList<SanPham> dsSP = new ArrayList<SanPham>();
+//         try{
+//           
+//            Connection con = ConnectDB.getInstance().getConnection();
+//            String sql = "select * from SanPham";
+//            java.sql.Statement statement = con.createStatement();
+//            java.sql.ResultSet rs = statement.executeQuery(sql);
+//        
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        
+//        }
+//        return null;
+//        
+//    }
     ///
 //    public ArrayList<SanPham> getDSTheoLoc(String maMau, String maChatLieu, String maKichThuoc,String maloaiSP) {
 //		ConnectDB.getInstance();

@@ -19,44 +19,59 @@ import entity.MauSac;
 import entity.NhaCungCap;
 import entity.SanPham;
 import java.awt.Image;
+import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
  * @author ACER
  */
-public class GD_SanPham extends javax.swing.JInternalFrame  {
+public class GD_SanPham extends javax.swing.JInternalFrame {
+
     private String username;
     private DAO_SanPham sp_dao;
     private DAO_LoaiSP lsp_dao;
     private DAO_MauSac mau_dao;
-      private DAO_NhaCungCap ncc_dao;
-        private DAO_ChatLieu cl_dao;
-          private DAO_KichThuoc kt_dao;
+    private DAO_NhaCungCap ncc_dao;
+    private DAO_ChatLieu cl_dao;
+    private DAO_KichThuoc kt_dao;
     private String filename = null;
     private byte[] anhSP = null;
-     private final DefaultTableModel modolSP;
-    List<RowFilter<DefaultTableModel,Object>> filters = new ArrayList<>();
+    private final DefaultTableModel modolSP;
+    List<RowFilter<DefaultTableModel, Object>> filters = new ArrayList<>();
     private TableRowSorter<DefaultTableModel> tr;
-    int index=-1;
+    int index = -1;
+
     /**
      * Creates new form QuanLyHoaDon
      */
-    public GD_SanPham (String _username)  {
-         try {
+    public GD_SanPham(String _username) {
+        try {
             ConnectDB.getInstance().connect();
         } catch (Exception e) {
         }
@@ -66,16 +81,14 @@ public class GD_SanPham extends javax.swing.JInternalFrame  {
         ((javax.swing.plaf.basic.BasicInternalFrameUI) ui).setNorthPane(null);
         initComponents();
         this.setFocusable(true);
-        username=_username;
+        username = _username;
         modolSP = (DefaultTableModel) jtbSanPham.getModel();
-        
-        
+
         DocDuLieuLenTable();
         DocDuLieuVaoCombobox();
         moKhoaTextfields(false);
-        
-        
-        tr=new TableRowSorter<DefaultTableModel>(modolSP);
+
+        tr = new TableRowSorter<DefaultTableModel>(modolSP);
 
         jtbSanPham.setRowSorter(tr);
     }
@@ -136,6 +149,8 @@ public class GD_SanPham extends javax.swing.JInternalFrame  {
         cbxKTL = new javax.swing.JComboBox<>();
         jLabel20 = new javax.swing.JLabel();
         txtTim = new swing.TextFieldAnimation();
+        btnIX = new javax.swing.JButton();
+        btnEX = new javax.swing.JButton();
         pnlDuoi = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtbSanPham = new javax.swing.JTable();
@@ -386,6 +401,11 @@ public class GD_SanPham extends javax.swing.JInternalFrame  {
 
         btnSua.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnSua.setText("Sửa");
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaActionPerformed(evt);
+            }
+        });
         pnlNutSP.add(btnSua);
 
         btnThemNhieu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -463,6 +483,15 @@ public class GD_SanPham extends javax.swing.JInternalFrame  {
             }
         });
 
+        btnIX.setText("Import");
+
+        btnEX.setText("export");
+        btnEX.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEXActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlGiuaLayout = new javax.swing.GroupLayout(pnlGiua);
         pnlGiua.setLayout(pnlGiuaLayout);
         pnlGiuaLayout.setHorizontalGroup(
@@ -487,8 +516,15 @@ public class GD_SanPham extends javax.swing.JInternalFrame  {
                 .addGap(132, 132, 132)
                 .addComponent(jLabel20)
                 .addGap(18, 18, 18)
-                .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addGroup(pnlGiuaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlGiuaLayout.createSequentialGroup()
+                        .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(66, Short.MAX_VALUE))
+                    .addGroup(pnlGiuaLayout.createSequentialGroup()
+                        .addComponent(btnIX)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEX)
+                        .addGap(44, 44, 44))))
         );
         pnlGiuaLayout.setVerticalGroup(
             pnlGiuaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -517,7 +553,11 @@ public class GD_SanPham extends javax.swing.JInternalFrame  {
                             .addComponent(cbxKTL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(17, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlGiuaLayout.createSequentialGroup()
-                .addGap(0, 40, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(pnlGiuaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnIX)
+                    .addComponent(btnEX))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlGiuaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -571,95 +611,126 @@ public class GD_SanPham extends javax.swing.JInternalFrame  {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtbSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbSanPhamMouseClicked
-       NapDuLieuTuTable();
-        
+        NapDuLieuTuTable();
+
     }//GEN-LAST:event_jtbSanPhamMouseClicked
-    private void NapDuLieuTuTable(){
-        int hangChon= jtbSanPham.getSelectedRow();
-        if(hangChon==-1)
+    private void NapDuLieuTuTable() {
+        int hangChon = jtbSanPham.getSelectedRow();
+        if (hangChon == -1) {
             return;
-          String ma = modolSP.getValueAt(hangChon, 1).toString();
-         SanPham spp = new DAO_SanPham().laySanPhamBangMa(ma);
-         txtTenSP.setText(spp.getTenSP());
-         txtSL.setText(spp.getSoLuong()+"");
-         txtGia.setText(spp.getGiaGoc()+"");
-         cbxPLF.setSelectedItem(spp.getLoaiSanPham().getMaLoaiSP());
-         cbxMF.setSelectedItem(spp.getMauSac().getMaMau());
-         cbxCLF.setSelectedItem(spp.getChatLieu().getMaChatLieu());
-         cbxNCCF.setSelectedItem(spp.getNhaCungCap().getMaNCC());
-         cbxKTF.setSelectedItem(spp.getKichThuoc().getMaKichThuoc());
+        }
+        String ma = modolSP.getValueAt(hangChon, 1).toString();
+        SanPham spp = new DAO_SanPham().laySanPhamBangMa(ma);
+        txtTenSP.setText(spp.getTenSP());
+        txtSL.setText(spp.getSoLuong() + "");
+        txtGia.setText(spp.getGiaGoc() + "");
+        cbxPLF.setSelectedItem(spp.getLoaiSanPham().getTenLoaiSP());
+        cbxMF.setSelectedItem(spp.getMauSac().getTenMau());
+        cbxCLF.setSelectedItem(spp.getChatLieu().getTenChatLieu());
+        cbxNCCF.setSelectedItem(spp.getNhaCungCap().getTenNCC());
+        cbxKTF.setSelectedItem(spp.getKichThuoc().getTenKichThuoc());
         // cbxPLF.setSelectedItem(modolSP.getValueAt(hangChon, 5).toString());
 //         cbxMF.setSelectedItem(modolSP.getValueAt(hangChon, 7).toString());
 //         cbxCLF.setSelectedItem(modolSP.getValueAt(hangChon, 8).toString());
 //         cbxNCCF.setSelectedItem(modolSP.getValueAt(hangChon, 6).toString());
 //         cbxKTF.setSelectedItem(modolSP.getValueAt(hangChon, 9).toString());
-         txaMoTa.setText(spp.getMoTa());
-         hanSD.setDate(spp.getNgayNhap());
-         ngayNhap.setDate(spp.getHanSD());
-         byte[] hinhanh = spp.getHinhAnh();///
-         if (hinhanh==null){    
-             lblHinhAnh.setIcon(null);
-         }
-         else{
-         ImageIcon imageIcon = new ImageIcon(new ImageIcon(hinhanh).getImage().getScaledInstance(lblHinhAnh.getWidth(), lblHinhAnh.getHeight(), Image.SCALE_SMOOTH));
-        lblHinhAnh.setIcon(imageIcon);
-         }
+        txaMoTa.setText(spp.getMoTa());
+        hanSD.setDate(spp.getNgayNhap());
+        ngayNhap.setDate(spp.getHanSD());
+        byte[] hinhanh = spp.getHinhAnh();///
+        if (hinhanh == null) {
+            lblHinhAnh.setIcon(null);
+        } else {
+            ImageIcon imageIcon = new ImageIcon(new ImageIcon(hinhanh).getImage().getScaledInstance(lblHinhAnh.getWidth(), lblHinhAnh.getHeight(), Image.SCALE_SMOOTH));
+            lblHinhAnh.setIcon(imageIcon);
+        }
 //        lsp_dao = new DAO_LoaiSP();
 //        LoaiSanPham listLSP = lsp_dao.layLoaiSPBangMa(spp.getLoaiSanPham().getMaLoaiSP());
 //        for (LoaiSanPham lsp: listLSP)
         {
-            
+
         }
     }
-    
+
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
-        if(btnThem.getText().equalsIgnoreCase("Hủy")){
-            String ma="SP";
+        if (btnThem.getText().equalsIgnoreCase("Hủy")) {
+            String ma = "SP";
             int tachMa;
-            int i=0,j=1;
-            int[] dem=new int[999];
+            int i = 0, j = 1;
+            int[] dem = new int[999];
             String id;
             sp_dao = new DAO_SanPham();
             for (SanPham sanpham : sp_dao.getAllSP()) {
                 id = sanpham.getMaSP();
-                tachMa=Integer.parseInt(id.substring(2, 5));
-                dem[i] =tachMa;
+                tachMa = Integer.parseInt(id.substring(2, 5));
+                dem[i] = tachMa;
                 i++;
             }
-             i=0;
-            while (j<999){
-                if(dem[i]<j){
+            i = 0;
+            //gd:  String maPhatSinh= ("SP%3d",i);
+            while (j < 999) {
+                if (dem[i] < j) {
                     if (j <= 9) {
-                        ma +=  "00" + (j);
-                    }else {
+                        ma += "00" + (j);
+                    } else {
                         ma += "0" + (j);
                     }
                     break;
-                }else if(dem[i]>j){
-                    j=dem[i];
-                }else{
+                } else if (dem[i] > j) {
+                    j = dem[i];
+                } else {
                     i++;
                     j++;
                 }
-            }    
-        
+            }
+
             DAO_SanPham sp = new DAO_SanPham();
-    
-            SanPham spp = new SanPham(ma, txtTenSP.getText(), Double.parseDouble(txtGia.getText()), Integer.parseInt(txtSL.getText()), anhSP, txaMoTa.getText(), ngayNhap.getDate(), hanSD.getDate(), new NhaCungCap(cbxNCCF.getSelectedItem().toString()),new ChatLieu(cbxCLF.getSelectedItem().toString()),new MauSac(cbxMF.getSelectedItem().toString()), new KichThuoc(cbxKTF.getSelectedItem().toString()),new LoaiSanPham(cbxPLF.getSelectedItem().toString()));
+            MauSac m = mau_dao.layMauSacBangTen(cbxMF.getSelectedItem().toString());
+            KichThuoc k = kt_dao.layKichThuocBangTen(cbxKTF.getSelectedItem().toString());
+            NhaCungCap ncc = ncc_dao.layNhaCungCapBangTen(cbxNCCF.getSelectedItem().toString());
+            LoaiSanPham lsp = lsp_dao.layLoaiSPBangTen(cbxPLF.getSelectedItem().toString());
+            ChatLieu cl = cl_dao.layKichThuocBangTen(cbxCLF.getSelectedItem().toString());
+            SanPham spp = new SanPham(ma, txtTenSP.getText(), Double.parseDouble(txtGia.getText()), Integer.parseInt(txtSL.getText()), anhSP, txaMoTa.getText(), ngayNhap.getDate(),
+                    hanSD.getDate(), new NhaCungCap(ncc.getMaNCC()), new ChatLieu(cl.getMaChatLieu()), new MauSac(m.getMaMau()),
+                    new KichThuoc(k.getMaKichThuoc()), new LoaiSanPham(lsp.getMaLoaiSP()));
             try {
-            sp_dao.themSP(spp);
-            XoaHetDLTrenTbale();
-            DocDuLieuLenTable();
-            XoaTrang();
-            moKhoaTextfields(false);
-            moKhoaControls(true);
-            btnLuu.setEnabled(false);
-             btnThem.setText("Thêm");
-              int hangChon= jtbSanPham.getSelectedRow();
-              if(hangChon!=-1){
-                   NapDuLieuTuTable();
-              }
-            }catch (Exception e) {
+                sp_dao.themSP(spp);
+                XoaHetDLTrenTbale();
+                DocDuLieuLenTable();
+                XoaTrang();
+                moKhoaTextfields(false);
+                moKhoaControls(true);
+                btnLuu.setEnabled(false);
+                btnThem.setText("Thêm");
+                int hangChon = jtbSanPham.getSelectedRow();
+                NapDuLieuTuTable();
+            } catch (Exception e) {
+            }
+        }
+        if (btnSua.getText().equalsIgnoreCase("Hủy")) {
+            int hangChon = jtbSanPham.getSelectedRow();
+            String ma = modolSP.getValueAt(hangChon, 1).toString();
+            DAO_SanPham sp = new DAO_SanPham();
+            MauSac m = mau_dao.layMauSacBangTen(cbxMF.getSelectedItem().toString());
+            KichThuoc k = kt_dao.layKichThuocBangTen(cbxKTF.getSelectedItem().toString());
+            NhaCungCap ncc = ncc_dao.layNhaCungCapBangTen(cbxNCCF.getSelectedItem().toString());
+            LoaiSanPham lsp = lsp_dao.layLoaiSPBangTen(cbxPLF.getSelectedItem().toString());
+            ChatLieu cl = cl_dao.layKichThuocBangTen(cbxCLF.getSelectedItem().toString());
+            SanPham spp = new SanPham(ma, txtTenSP.getText(), Double.parseDouble(txtGia.getText()), Integer.parseInt(txtSL.getText()), anhSP, txaMoTa.getText(), ngayNhap.getDate(),
+                    hanSD.getDate(), new NhaCungCap(ncc.getMaNCC()), new ChatLieu(cl.getMaChatLieu()), new MauSac(m.getMaMau()),
+                    new KichThuoc(k.getMaKichThuoc()), new LoaiSanPham(lsp.getMaLoaiSP()));
+            try {
+                sp_dao.CapNhatSP(spp);
+                XoaHetDLTrenTbale();
+                DocDuLieuLenTable();
+                XoaTrang();
+                moKhoaTextfields(false);
+                moKhoaControls(true);
+                btnLuu.setEnabled(false);
+                btnSua.setText("Sửa");
+
+                NapDuLieuTuTable();
+            } catch (Exception e) {
             }
         }
     }//GEN-LAST:event_btnLuuActionPerformed
@@ -671,7 +742,8 @@ public class GD_SanPham extends javax.swing.JInternalFrame  {
         btnSua.setEnabled(b);
         btnThemNhieu.setEnabled(b);
     }
-   private void moKhoaTextfields(boolean b) { 
+
+    private void moKhoaTextfields(boolean b) {
         txtGia.setEditable(b);
         txtSL.setEditable(b);
         txtTenSP.setEditable(b);
@@ -684,9 +756,10 @@ public class GD_SanPham extends javax.swing.JInternalFrame  {
         cbxMF.setEnabled(b);
         cbxNCCF.setEnabled(b);
         cbxPLF.setEnabled(b);
-        
+
     }
-    private void XoaTrang(){
+
+    private void XoaTrang() {
         cbxCLF.setSelectedItem("Tất cả");
         cbxMF.setSelectedItem("Tất cả");
         cbxKTF.setSelectedItem("Tất cả");
@@ -701,7 +774,8 @@ public class GD_SanPham extends javax.swing.JInternalFrame  {
         hanSD.setDate(date);
         txtTenSP.requestFocus();
         lblHinhAnh.setIcon(null);
-}
+        anhSP = null;
+    }
     private void btnChonAnhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonAnhActionPerformed
         JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);
@@ -724,7 +798,7 @@ public class GD_SanPham extends javax.swing.JInternalFrame  {
     }//GEN-LAST:event_btnChonAnhActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        if(btnThem.getText().equalsIgnoreCase("Thêm")){
+        if (btnThem.getText().equalsIgnoreCase("Thêm")) {
             moKhoaTextfields(true);
             moKhoaControls(false);
             btnLuu.setEnabled(true);
@@ -732,19 +806,19 @@ public class GD_SanPham extends javax.swing.JInternalFrame  {
             btnChonAnh.setEnabled(true);
             XoaTrang();
             btnThem.setText("Hủy");
-            
-        }else if(btnThem.getText().equalsIgnoreCase("Hủy")) {
-             moKhoaTextfields(false);
+
+        } else if (btnThem.getText().equalsIgnoreCase("Hủy")) {
+            moKhoaTextfields(false);
             moKhoaControls(true);
             btnLuu.setEnabled(false);
-             btnThem.setText("Thêm");
-              int hangChon= jtbSanPham.getSelectedRow();
-              if(hangChon!=-1){
-                   NapDuLieuTuTable();
-              }
-               
+            btnThem.setText("Thêm");
+            int hangChon = jtbSanPham.getSelectedRow();
+            if (hangChon != -1) {
+                NapDuLieuTuTable();
+            }
+
         }
-      
+
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void txtSLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSLActionPerformed
@@ -752,31 +826,32 @@ public class GD_SanPham extends javax.swing.JInternalFrame  {
     }//GEN-LAST:event_txtSLActionPerformed
 
     private void btnXoaSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaSPActionPerformed
-      int r = jtbSanPham.getSelectedRow();
-			String ma = modolSP.getValueAt(r, 1).toString();
-			int opt = JOptionPane.showConfirmDialog(null, "Xác nhận", "Bạn muốn xóa", JOptionPane.YES_NO_OPTION);
-			if (opt == JOptionPane.YES_OPTION) {
-				modolSP.removeRow(r); // xóa trong table model
-				sp_dao.XoaSP(ma);
-                                XoaHetDLTrenTbale();
-                                DocDuLieuLenTable();    
-			}
+        int r = jtbSanPham.getSelectedRow();
+        String ma = modolSP.getValueAt(r, 1).toString();
+        int opt = JOptionPane.showConfirmDialog(null, "Xác nhận", "Bạn muốn xóa", JOptionPane.YES_NO_OPTION);
+        if (opt == JOptionPane.YES_OPTION) {
+            modolSP.removeRow(r); // xóa trong table model
+            sp_dao.XoaSP(ma);
+            XoaHetDLTrenTbale();
+            DocDuLieuLenTable();
+        }
     }//GEN-LAST:event_btnXoaSPActionPerformed
- public void timKiemNhaCC(String ten){
-        TableRowSorter<DefaultTableModel> trs =  new TableRowSorter<>(modolSP);
+    public void timKiemNhaCC(String ten) {
+        TableRowSorter<DefaultTableModel> trs = new TableRowSorter<>(modolSP);
         jtbSanPham.setRowSorter(trs);
         trs.setRowFilter(RowFilter.regexFilter(ten));
     }
     private void txtTimKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKeyReleased
-         String search = txtTim.getText();
+     
+        String search = txtTim.getText();
         timKiemNhaCC(search);
     }//GEN-LAST:event_txtTimKeyReleased
-private void XoaHetDLTrenTbale(){
+    private void XoaHetDLTrenTbale() {
         DefaultTableModel fm = (DefaultTableModel) jtbSanPham.getModel();
         fm.getDataVector().removeAllElements();
     }
     private void cbxPLLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxPLLActionPerformed
-       
+
 //        String tenLSP = cbxPLL.getSelectedItem().toString();
 //        String tenMau = cbxML.getSelectedItem().toString();
 //        String tenKT = cbxKTL.getSelectedItem().toString();
@@ -813,135 +888,328 @@ private void XoaHetDLTrenTbale(){
 //                sp.getMaSP(),sp.getTenSP(),sp.getSoLuong(),sp.getGiaGoc(),sp.getLoaiSanPham().getTenLoaiSP(),sp.getNhaCungCap().getTenNCC(),sp.getMauSac().getTenMau(), sp.getChatLieu().getTenChatLieu(),sp.getKichThuoc().getTenKichThuoc()
 //            ,sp.getNgayNhap()});
 //        }
-        
-        
-        String s= cbxPLL.getSelectedItem().toString();
-        if (s.equals("Tất cả")){
-            s="(Tất cả)";
-        
-            for(LoaiSanPham lsp: lsp_dao.getAllLSP())
-            {
-            s+="|("+lsp.getTenLoaiSP()+")";
+
+
+
+
+
+
+
+
+
+
+//THƯ
+        String s = cbxPLL.getSelectedItem().toString();
+        if (s.equals("Tất cả")) {
+            s = "(Tất cả)";
+
+            for (LoaiSanPham lsp : lsp_dao.getAllLSP()) {
+                s += "|(" + lsp.getTenLoaiSP() + ")";
             }
         }
 
-        
-        if(filters.isEmpty())
+        if (filters.isEmpty()) {
             filters.add(RowFilter.regexFilter(s, 5));
-        else
+        } else {
             filters.set(0, RowFilter.regexFilter(s, 5));
+        }
         // Apply filters
         tr.setRowFilter(RowFilter.andFilter(filters));
     }//GEN-LAST:event_cbxPLLActionPerformed
 
     private void cbxKTLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxKTLActionPerformed
-        
-        String s= cbxKTL.getSelectedItem().toString();
-        if (s.equals("Tất cả")){
-            s="(Tất cả)";
-        
-            for(KichThuoc kt: kt_dao.getAllKT())
-            {
-            s+="|("+kt.getTenKichThuoc()+")";
+
+        String s = cbxKTL.getSelectedItem().toString();
+        if (s.equals("Tất cả")) {
+            s = "(Tất cả)";
+
+            for (KichThuoc kt : kt_dao.getAllKT()) {
+                s += "|(" + kt.getTenKichThuoc() + ")";
             }
         }
 
-        if(filters.size()<4)
+        if (filters.size() < 4) {
             filters.add(RowFilter.regexFilter(s, 9));
-        else
+        } else {
             filters.set(3, RowFilter.regexFilter(s, 9));
+        }
         // Apply filters
         tr.setRowFilter(RowFilter.andFilter(filters));
     }//GEN-LAST:event_cbxKTLActionPerformed
 
     private void cbxCLLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCLLActionPerformed
-       
-        String s= cbxCLL.getSelectedItem().toString();
-        if (s.equals("Tất cả")){
-            s="(Tất cả )";
-        
-            for(ChatLieu cl: cl_dao.getAllCL())
-            {
-            s+="|("+cl.getTenChatLieu()+")";
+
+        String s = cbxCLL.getSelectedItem().toString();
+        if (s.equals("Tất cả")) {
+            s = "(Tất cả )";
+
+            for (ChatLieu cl : cl_dao.getAllCL()) {
+                s += "|(" + cl.getTenChatLieu() + ")";
             }
         }
-        if(filters.size()<3)
+        if (filters.size() < 3) {
             filters.add(RowFilter.regexFilter(s, 8));
-        else
+        } else {
             filters.set(2, RowFilter.regexFilter(s, 8));
+        }
         // Apply filters
         tr.setRowFilter(RowFilter.andFilter(filters));
     }//GEN-LAST:event_cbxCLLActionPerformed
 
     private void cbxMLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxMLActionPerformed
-     
-        String s= cbxML.getSelectedItem().toString();
-        if (s.equals("Tất cả")){
-            s="(Tất cả)";
-        
-            for(MauSac ms: mau_dao.getAllMau())
-            {
-            s+="|("+ms.getTenMau()+")";
+
+        String s = cbxML.getSelectedItem().toString();
+        if (s.equals("Tất cả")) {
+            s = "(Tất cả)";
+
+            for (MauSac ms : mau_dao.getAllMau()) {
+                s += "|(" + ms.getTenMau() + ")";
             }
         }
-        if(filters.size()<2)
+        if (filters.size() < 2) {
             filters.add(RowFilter.regexFilter(s, 7));
-        else
+        } else {
             filters.set(1, RowFilter.regexFilter(s, 7));
+        }
         // Apply filters
         tr.setRowFilter(RowFilter.andFilter(filters));
     }//GEN-LAST:event_cbxMLActionPerformed
 
-private void DocDuLieuLenTable() {
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        int hangChon = jtbSanPham.getSelectedRow();
+        if (hangChon == -1) {
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn sản phẩm cần sửa");
+            return;
+        }
+        if (btnSua.getText().equalsIgnoreCase("Sửa")) {
+            moKhoaTextfields(true);
+            moKhoaControls(false);
+            btnLuu.setEnabled(true);
+            btnSua.setEnabled(true);
+            btnChonAnh.setEnabled(true);
+            XoaTrang();
+            btnSua.setText("Hủy");
+
+        } else if (btnSua.getText().equalsIgnoreCase("Hủy")) {
+            moKhoaTextfields(false);
+            moKhoaControls(true);
+            btnLuu.setEnabled(false);
+            btnSua.setText("Sửa");
+
+            if (hangChon != -1) {
+                NapDuLieuTuTable();
+            }
+
+        }
+    }//GEN-LAST:event_btnSuaActionPerformed
+
+    private void btnEXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEXActionPerformed
+//       FileOutputStream excelOut = null;
+//            BufferedOutputStream exBOU = null;
+//            XSSFWorkbook excelJtableExport = null;
+//        JFileChooser excellFileChooser = new JFileChooser("C:\\Users\\bohie\\OneDrive\\Documents\\GitHub\\BHTT_JAVA\\BHTT\\src\\Excell"
+//               + "");
+//       excellFileChooser.setDialogTitle("Lưu bằng");
+//        FileNameExtensionFilter fnef= new FileNameExtensionFilter("EXCEL FILES", "xls","xlsx","xlsm");
+//        excellFileChooser.setFileFilter(fnef);
+//        int excellChooser=excellFileChooser.showSaveDialog(null);
+//        if( excellChooser == JFileChooser.APPROVE_OPTION){
+//           
+//           try {
+//                excelJtableExport = new XSSFWorkbook();
+//               XSSFSheet excelSheet = excelJtableExport.createSheet();
+//               for(int i=0; i<modolSP.getRowCount();i++){
+//                   XSSFRow excellrow = excelSheet.createRow(i);
+//                   for (int j = 0; j < modolSP.getColumnCount(); j++) {
+//                       XSSFCell excelcell = excellrow.createCell(j);
+//                       excelcell.setCellValue(modolSP.getValueAt(i, j).toString());
+//                       
+//                   }
+//               } excelOut = new FileOutputStream(excellFileChooser.getSelectedFile()+".xlsx");
+//                exBOU = new BufferedOutputStream(excelOut);
+//               excelJtableExport.write(exBOU);
+//           } catch (FileNotFoundException ex) {
+//               ex.printStackTrace();
+//           } catch (IOException ex) {
+//               ex.printStackTrace();
+//           } finally {
+//               try {
+//                   if(excelOut!=null){
+//                       excelOut.close();
+//                   }
+//                   if(exBOU!=null){
+//                       exBOU.close();
+//                   }
+//                   if(excelJtableExport!=null){
+//                       excelJtableExport.close();
+//                   }
+//               } catch (IOException ex) {
+//                   ex.printStackTrace();
+//               }
+//           }
+//            
+//            
+//        }
+    try {
+       
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        XSSFSheet sheet = workbook.createSheet("Danh sách sản phẩm ");
+
+        XSSFRow row = null;
+        Cell cell = null;
+        row = sheet.createRow(3);
+
+        cell = row.createCell(0, CellType.STRING);
+        cell.setCellValue("Mã sản phẩm");
+
+        cell = row.createCell(1, CellType.STRING);
+        cell.setCellValue("Tên sản phẩm");
+
+        cell = row.createCell(2, CellType.STRING);
+        cell.setCellValue("Giá gốc");
+
+        cell = row.createCell(3, CellType.STRING);
+        cell.setCellValue("Số lượng");
+
+        cell = row.createCell(4, CellType.STRING);
+        cell.setCellValue("Mô tả");
+
+        cell = row.createCell(5, CellType.STRING);
+        cell.setCellValue("Ngày nhập");
+
+        cell = row.createCell(6, CellType.STRING);
+        cell.setCellValue("Hạn sử dụng");
+
+        cell = row.createCell(7, CellType.STRING);
+        cell.setCellValue("Nhà cung cấp");
+
+        cell = row.createCell(8, CellType.STRING);
+        cell.setCellValue("Chất liệu");
+
+        cell = row.createCell(9, CellType.STRING);
+        cell.setCellValue("Màu sắc");
+
+        cell = row.createCell(10, CellType.STRING);
+        cell.setCellValue("Kích thước");
+
+        cell = row.createCell(11, CellType.STRING);
+        cell.setCellValue("Loại sản phẩm");
+
+        cell = row.createCell(12, CellType.STRING);
+        cell.setCellValue("Hình ảnh");
+        sp_dao = new DAO_SanPham();
+        ArrayList<SanPham> ds = sp_dao.getAllSP();
+        for (int i = 0; i < ds.size(); i++) {
+            row = sheet.createRow(4 + i);
+            cell = row.createCell(0, CellType.STRING);
+            cell.setCellValue(ds.get(i).getMaSP());
+            cell = row.createCell(1, CellType.STRING);
+            cell.setCellValue(ds.get(i).getTenSP());
+            cell = row.createCell(2, CellType.STRING);
+            cell.setCellValue(ds.get(i).getGiaGoc());
+            cell = row.createCell(3, CellType.STRING);
+            cell.setCellValue(ds.get(i).getSoLuong());
+            cell = row.createCell(4, CellType.STRING);
+            cell.setCellValue(ds.get(i).getMoTa());
+
+            cell = row.createCell(5, CellType.STRING);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String ngayNhap = sdf.format(ds.get(i).getNgayNhap());
+            String hanSD = sdf.format(ds.get(i).getHanSD());
+            cell.setCellValue(ngayNhap);
+            cell = row.createCell(6, CellType.STRING);
+            cell.setCellValue(hanSD);
+
+            cell = row.createCell(7, CellType.STRING);
+            cell.setCellValue(ds.get(i).getNhaCungCap().getTenNCC());
+            cell = row.createCell(8, CellType.STRING);
+            cell.setCellValue(ds.get(i).getChatLieu().getTenChatLieu());
+            cell = row.createCell(9, CellType.STRING);
+            cell.setCellValue(ds.get(i).getMauSac().getTenMau());
+            cell = row.createCell(10, CellType.STRING);
+            cell.setCellValue(ds.get(i).getKichThuoc().getTenKichThuoc());
+            cell = row.createCell(11, CellType.STRING);
+            cell.setCellValue(ds.get(i).getLoaiSanPham().getTenLoaiSP());
+           
+//            byte[] lblha= ds.get(i).getHinhAnh();
+//            if(lblha!=null){
+//                 String a= new String(lblha);
+//            cell = row.createCell(12, CellType.STRING);
+//            // byte[] ha= ds.get(i).getHinhAnh();
+//            
+//            cell.setCellValue(lblha.length);
+//            }
+           
+           
+        }
+        File f = new File("Excell/sanpham.xlsx");
+        try {
+            FileOutputStream file = new FileOutputStream(f);
+            workbook.write(file);
+            file.close();
+        } catch (Exception e2) {
+            e2.printStackTrace();
+        }
+        JOptionPane.showMessageDialog(null, "Xuất file thành công");
+    
+    }catch (Exception e2) {
+	e2.printStackTrace();
+            }
+    }//GEN-LAST:event_btnEXActionPerformed
+
+    private void DocDuLieuLenTable() {
         sp_dao = new DAO_SanPham();
         ArrayList<SanPham> ds = sp_dao.getAllSP();
 //        if (ds==null){
 //            show
 //        }
 //
-        int i=1;
-        for( SanPham sp : ds){
-             modolSP.addRow(new Object[]{i++,
-                sp.getMaSP(),sp.getTenSP(),sp.getSoLuong(),sp.getGiaGoc(),sp.getLoaiSanPham().getTenLoaiSP(),sp.getNhaCungCap().getTenNCC(),sp.getMauSac().getTenMau(), sp.getChatLieu().getTenChatLieu(),sp.getKichThuoc().getTenKichThuoc()
-            ,sp.getNgayNhap()});
+        int i = 1;
+        for (SanPham sp : ds) {
+            modolSP.addRow(new Object[]{i++,
+                sp.getMaSP(), sp.getTenSP(), sp.getSoLuong(), sp.getGiaGoc(), sp.getLoaiSanPham().getTenLoaiSP(), sp.getNhaCungCap().getTenNCC(), sp.getMauSac().getTenMau(), sp.getChatLieu().getTenChatLieu(), sp.getKichThuoc().getTenKichThuoc(),
+                sp.getNgayNhap()});
         }
-        
+
     }
-private void DocDuLieuVaoCombobox (){
-    lsp_dao = new DAO_LoaiSP();
-    ArrayList<LoaiSanPham> listLSP = lsp_dao.getAllLSP();
-    for (LoaiSanPham lsp : listLSP){
-        cbxPLL.addItem(lsp.getTenLoaiSP());
-        cbxPLF.addItem(lsp.getMaLoaiSP());
+
+    private void DocDuLieuVaoCombobox() {
+        lsp_dao = new DAO_LoaiSP();
+        ArrayList<LoaiSanPham> listLSP = lsp_dao.getAllLSP();
+        for (LoaiSanPham lsp : listLSP) {
+            cbxPLL.addItem(lsp.getTenLoaiSP());
+            cbxPLF.addItem(lsp.getTenLoaiSP());
+        }
+        mau_dao = new DAO_MauSac();
+        ArrayList<MauSac> listMau = mau_dao.getAllMau();
+        for (MauSac m : listMau) {
+            cbxML.addItem(m.getTenMau());
+            cbxMF.addItem(m.getTenMau());
+        }
+        cl_dao = new DAO_ChatLieu();
+        ArrayList<ChatLieu> listCL = cl_dao.getAllCL();
+        for (ChatLieu cl : listCL) {
+            cbxCLF.addItem(cl.getTenChatLieu());
+            cbxCLL.addItem(cl.getTenChatLieu());
+        }
+
+        ncc_dao = new DAO_NhaCungCap();
+        ArrayList<NhaCungCap> listNCC = ncc_dao.getalltbNhaCungCap();
+        for (NhaCungCap ncc : listNCC) {
+            cbxNCCF.addItem(ncc.getTenNCC());
+        }
+        kt_dao = new DAO_KichThuoc();
+        ArrayList<KichThuoc> listKT = kt_dao.getAllKT();
+        for (KichThuoc kt : listKT) {
+            cbxKTF.addItem(kt.getTenKichThuoc());
+            cbxKTL.addItem(kt.getTenKichThuoc());
+        }
     }
-    mau_dao = new DAO_MauSac();
-    ArrayList<MauSac> listMau = mau_dao.getAllMau();
-    for (MauSac m : listMau){
-        cbxML.addItem(m.getTenMau());
-        cbxMF.addItem(m.getMaMau());
-    }
-    cl_dao = new DAO_ChatLieu();
-    ArrayList<ChatLieu> listCL= cl_dao.getAllCL();
-    for(ChatLieu cl:listCL){
-        cbxCLF.addItem(cl.getMaChatLieu());
-        cbxCLL.addItem(cl.getTenChatLieu());
-    }
- 
-    ncc_dao= new DAO_NhaCungCap();
-    ArrayList<NhaCungCap> listNCC = ncc_dao.getalltbNhaCungCap();
-    for(NhaCungCap ncc:listNCC){
-        cbxNCCF.addItem(ncc.getMaNCC());
-    }
-     kt_dao= new DAO_KichThuoc();
-    ArrayList<KichThuoc> listKT = kt_dao.getAllKT();
-    for(KichThuoc kt:listKT){
-        cbxKTF.addItem(kt.getMaKichThuoc());
-        cbxKTL.addItem(kt.getTenKichThuoc());
-    }
-}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnChonAnh;
+    private javax.swing.JButton btnEX;
+    private javax.swing.JButton btnIX;
     private javax.swing.JButton btnLuu;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
