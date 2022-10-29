@@ -186,37 +186,37 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
 //
 //    }
 //    
-//     private String maTuSinh() {
-//        String ma = "HD";
-//        int tachMa;
-//        int i = 0, j = 1;
-//        int[] dem = new int[999];
-//        String id;
-//        for (HoaDon hd : hd_dao.getallDSHoaDon()) {
-//            id = hd.getMaHD();
-//            tachMa = Integer.parseInt(id.substring(2, 5));
-//            dem[i] = tachMa;
-//            i++;
-//        }
-//        i = 0;
-//        while (j < 999) {
-//            if (dem[i] < j) {
-//                if (j <= 9) {
-//                    ma += "00" + (j);
-//                } else {
-//                    ma += "0" + (j);
-//                }
-//                break;
-//            } else if (dem[i] > j) {
-//                j = dem[i];
-//            } else {
-//
-//                i++;
-//                j++;
-//            }
-//        }
-//        return ma;
-//    }
+     private String maTuSinh() {
+        String ma = "HD";
+        int tachMa;
+        int i = 0, j = 1;
+        int[] dem = new int[999];
+        String id;
+        for (HoaDon hd : hd_dao.getallDSHoaDon()) {
+            id = hd.getMaHD();
+            tachMa = Integer.parseInt(id.substring(2, 5));
+            dem[i] = tachMa;
+            i++;
+        }
+        i = 0;
+        while (j < 999) {
+            if (dem[i] < j) {
+                if (j <= 9) {
+                    ma += "00" + (j);
+                } else {
+                    ma += "0" + (j);
+                }
+                break;
+            } else if (dem[i] > j) {
+                j = dem[i];
+            } else {
+
+                i++;
+                j++;
+            }
+        }
+        return ma;
+    }
 //    public double ParseDouble(String strNumber) {
 //        if (strNumber != null && strNumber.length() > 0) {
 //            try {
@@ -307,7 +307,7 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
         pnlDau = new javax.swing.JPanel();
         pnlDongHo1 = new javax.swing.JPanel();
         txtGio = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
+        txtSoDon = new javax.swing.JTextField();
         txtNgay = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         pnlThongTinCuaHang = new javax.swing.JPanel();
@@ -358,11 +358,10 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
             }
         });
 
-        jTextField10.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jTextField10.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField10.setText("001");
-        jTextField10.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        jTextField10.setEnabled(false);
+        txtSoDon.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        txtSoDon.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtSoDon.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtSoDon.setEnabled(false);
 
         txtNgay.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtNgay.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -384,14 +383,14 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDongHo1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                        .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtSoDon, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         pnlDongHo1Layout.setVerticalGroup(
             pnlDongHo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDongHo1Layout.createSequentialGroup()
                 .addGroup(pnlDongHo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSoDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtGio, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -593,7 +592,7 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 851, Short.MAX_VALUE)
+            .addGap(0, 852, Short.MAX_VALUE)
             .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel7Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -671,6 +670,7 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
         txtSDT.setText("");
         txtTenKH.setText("");
         txtLoaiKH.setText("");
+        txtSoDon.setText(maTuSinh());
         }
     }//GEN-LAST:event_btnTaoDHActionPerformed
 
@@ -680,9 +680,41 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
         }else
         if (JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn đóng đơn hàng này?", "Xác nhận", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             pnlTab.remove(pnlTab.getSelectedComponent());
+            
+        txtSoDon.setText(maTuSinh());
         }
     }//GEN-LAST:event_btnHuyActionPerformed
+     private String maTuSinh() {
+        String ma = "HD";
+        int tachMa;
+        int i = 0, j = 1;
+        int[] dem = new int[999];
+        String id;
+        for (HoaDon hd : hd_dao.getallDSHoaDon()) {
+            id = hd.getMaHD();
+            tachMa = Integer.parseInt(id.substring(2, 5));
+            dem[i] = tachMa;
+            i++;
+        }
+        i = 0;
+        while (j < 999) {
+            if (dem[i] < j) {
+                if (j <= 9) {
+                    ma += "00" + (j);
+                } else {
+                    ma += "0" + (j);
+                }
+                break;
+            } else if (dem[i] > j) {
+                j = dem[i];
+            } else {
 
+                i++;
+                j++;
+            }
+        }
+        return ma;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHuy;
@@ -699,7 +731,6 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JTextField jTextField10;
     private javax.swing.JPanel pnlDau;
     private javax.swing.JPanel pnlDongHo1;
     private javax.swing.JPanel pnlKhachHang2;
@@ -710,6 +741,7 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
     private javax.swing.JTextField txtLoaiKH;
     private javax.swing.JTextField txtNgay;
     private javax.swing.JTextField txtSDT;
+    private javax.swing.JTextField txtSoDon;
     private javax.swing.JTextField txtTenKH;
     private javax.swing.JTextField txtTenNV;
     // End of variables declaration//GEN-END:variables
