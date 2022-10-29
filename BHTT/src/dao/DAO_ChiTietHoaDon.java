@@ -26,6 +26,7 @@ public class DAO_ChiTietHoaDon {
     private DAO_ChatLieu dao_cl = new DAO_ChatLieu();
     private DAO_KichThuoc dao_kt = new DAO_KichThuoc();
     private DAO_HoaDon hd_dao = new DAO_HoaDon();
+    private DAO_SanPham sp_dao = new DAO_SanPham();
     private ArrayList<ChiTietHoaDon> dsCTHD;
    
     public ArrayList<ChiTietHoaDon> getallDSHoaDon() {
@@ -39,8 +40,8 @@ public class DAO_ChiTietHoaDon {
             while (rs.next()) {
                 int soLuong = rs.getInt("soLuong");
                 double VAT = rs.getDouble("VAT");
-                HoaDon maHD = new HoaDon(rs.getString("maHD"));
-                SanPham maSP = new SanPham(rs.getString("maSP"));
+                HoaDon maHD =  hd_dao.layHoaDonTheoMa(rs.getString("maHD"));
+                SanPham maSP = sp_dao.laySanPhamBangMa(rs.getString("maSP"));
                 double tongTien = rs.getDouble("tongTien");
                 double tienThoi = rs.getDouble("tienThoi");
                 ChiTietHoaDon cthd = new ChiTietHoaDon(soLuong, VAT, tongTien, tienThoi, maHD, maSP);
@@ -108,9 +109,8 @@ public class DAO_ChiTietHoaDon {
     }
 
     public SanPham laySanPhamBangMa(String maTim) {
-
         try (
-                 java.sql.Connection con = ConnectDB.opConnection();  PreparedStatement pts = con.prepareStatement("Select * from SanPham where maSP = ?  ")) {
+            java.sql.Connection con = ConnectDB.opConnection();  PreparedStatement pts = con.prepareStatement("Select * from SanPham where maSP = ?  ")) {
             pts.setString(1, maTim);
             try ( ResultSet rs = pts.executeQuery()) {
                 if (rs.next()) {
@@ -122,7 +122,6 @@ public class DAO_ChiTietHoaDon {
                     String moTa = rs.getString("moTa");
                     java.sql.Date ngayN = rs.getDate("ngayNhap");
                     Date ngayNhap = new Date(ngayN.getTime());
-
                     java.sql.Date han = rs.getDate("hanSD");
                     Date hanSD = new Date(han.getTime());
                     String maNCC = rs.getString("maNCC");
@@ -143,6 +142,38 @@ public class DAO_ChiTietHoaDon {
             e.printStackTrace();
         }
         return null;
+    }
+    
+    public ArrayList<ChiTietHoaDon> layDSHDBangMa(String maTim){
+        ArrayList<ChiTietHoaDon> dsHDHoan = new ArrayList<ChiTietHoaDon>();
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        PreparedStatement statement = null;
+        try {
+            String sql = "select * from ChiTietHoaDon where maHD = ? ";
+            statement = con.prepareStatement(sql);
+            statement.setString(1, maTim);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                int soLuong = rs.getInt("soLuong");
+                double VAT = rs.getDouble("VAT");
+                HoaDon maHD =  hd_dao.layHoaDonTheoMa(rs.getString("maHD"));
+                SanPham maSP = sp_dao.laySanPhamBangMa(rs.getString("maSP"));
+                double tongTien = rs.getDouble("tongTien");
+                double tienThoi = rs.getDouble("tienThoi");
+                ChiTietHoaDon cthd = new ChiTietHoaDon(soLuong, VAT, tongTien, tienThoi, maHD, maSP);
+                dsHDHoan.add(cthd);  
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                statement.close();
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+        return dsHDHoan;
     }
 
 }
