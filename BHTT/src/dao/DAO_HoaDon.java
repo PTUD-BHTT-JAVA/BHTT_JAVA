@@ -11,9 +11,7 @@ import entity.NhanVien;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,6 +23,8 @@ import java.util.Date;
 public class DAO_HoaDon {
 
     private ArrayList<HoaDon> dsHD;
+    private DAO_KhachHang kh_dao = new DAO_KhachHang();
+
     public ArrayList<HoaDon> getallDSHoaDon() {
         dsHD = new ArrayList<HoaDon>();
         try {
@@ -38,8 +38,8 @@ public class DAO_HoaDon {
                 Date ngayLap = rs.getDate("ngayLap");
                 double tienKhachDua = rs.getDouble("tienKhachDua");
                 String diaChi = rs.getString("diaChi");
-                NhanVien  nv = new NhanVien(rs.getString("maNV"));
-                KhachHang kh = new KhachHang(rs.getString("maKH"));
+                NhanVien nv = new NhanVien(rs.getString("maNV"));
+                KhachHang kh = kh_dao.getKHBangMa(rs.getString("maKH"));
                 HoaDon hd = new HoaDon(maNV, ngayLap, tienKhachDua, diaChi, nv, kh);
                 dsHD.add(hd);
             }
@@ -48,7 +48,7 @@ public class DAO_HoaDon {
         }
         return dsHD;
     }
-    
+
     public boolean themHoaDon(HoaDon hd) {
         ConnectDB.getInstance();
         Connection con = ConnectDB.getConnection();
@@ -58,12 +58,12 @@ public class DAO_HoaDon {
             stmt = con.prepareStatement("insert into HoaDon values(?,?,?,?,?,?)");
             stmt.setString(1, hd.getMaHD());
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            String ngayLap= sdf.format(hd.getNgayLap());
+            String ngayLap = sdf.format(hd.getNgayLap());
             stmt.setString(2, ngayLap);
-            stmt.setDouble(3,hd.getTienKhachDua());
+            stmt.setDouble(3, hd.getTienKhachDua());
             stmt.setString(4, hd.getDiaChi());
-            stmt.setString(5,hd.getNhanVien().getMaNV());
-            stmt.setString(6,hd.getKhachHang().getMaKH());
+            stmt.setString(5, hd.getNhanVien().getMaNV());
+            stmt.setString(6, hd.getKhachHang().getMaKH());
             n = stmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -76,7 +76,7 @@ public class DAO_HoaDon {
         }
         return n > 0;
     }
-    
+
     public HoaDon getHoaDonMoiNhat() {
         HoaDon hd = null;
         ConnectDB.getInstance();
@@ -93,11 +93,34 @@ public class DAO_HoaDon {
                 KhachHang kh = kh_dao.getKHBangMa(rs.getString("maKH"));
 //                hd = new HDBanHang(rs.getString("MaHDBH"), nv, kh, rs.getDate("NgayLapHDBH"), rs.getDouble("TongTien"));
                 hd = new HoaDon(rs.getString("maHD"), rs.getDate("ngayLap"),
-                        rs.getDouble("tienKhachDua"),rs.getString("diaChi"), nv, kh);
+                        rs.getDouble("tienKhachDua"), rs.getString("diaChi"), nv, kh);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return hd;
     }
+
+    public HoaDon layHoaDonTheoMa(String maHD) {
+        try (
+                 Connection con = ConnectDB.opConnection();  PreparedStatement pts = con.prepareStatement("Select * from HoaDon where maHD =? ")) {
+            pts.setString(1, maHD);
+            try ( ResultSet rs = pts.executeQuery()) {
+                if (rs.next()) {
+                    String maNV = rs.getString("maHD");
+                    Date ngayLap = rs.getDate("ngayLap");
+                    double tienKhachDua = rs.getDouble("tienKhachDua");
+                    String diaChi = rs.getString("diaChi");
+                    NhanVien nv = new NhanVien(rs.getString("maNV"));
+                    KhachHang kh = kh_dao.getKHBangMa(rs.getString("maKH"));
+                    HoaDon hd = new HoaDon(maNV, ngayLap, tienKhachDua, diaChi, nv, kh);
+                    return hd;
+                }
+            }
+        } catch (Exception e) {
+
+        }
+        return null;
+    }
+
 }

@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package gui;
 
 import connectDB.ConnectDB;
@@ -34,19 +31,13 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 
-/**
- *
- * @author ACER
- */
 public class GD_NhaCungCap extends javax.swing.JInternalFrame {
     private DefaultTableModel modelNhaCungCap;
     private String username;
     private DAO_NhaCungCap nhacc;
     private XSSFRow rowCount;
   
-    /**
-     * Creates new form QuanLyHoaDon
-     */
+  
     
     public GD_NhaCungCap(String _username) {
         try {
@@ -122,9 +113,8 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
         FileOutputStream excelFOU = null;
         BufferedOutputStream excelBOU = null;
         XSSFWorkbook excelJTableExporter = null;
-        //Choose Location For Saving Excel File
+        
         JFileChooser excelFileChooser = new JFileChooser("C:\\Users\\Trinh Cui Bap\\Desktop");
-//        Change Dilog Box Title
         excelFileChooser.setDialogTitle("Save As");
         FileNameExtensionFilter fnef = new FileNameExtensionFilter("EXCEL FILES", "xls", "xlsx", "xlsm");
         excelFileChooser.setFileFilter(fnef);
