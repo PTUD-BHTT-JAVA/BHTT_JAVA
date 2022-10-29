@@ -4,12 +4,17 @@
  */
 package gui;
 
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+
 /**
  *
  * @author ACER
  */
 public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame {
     private String username;
+    private DefaultTableModel modelHoaDon;
     /**
      * Creates new form QuanLyHoaDon
      */
@@ -21,6 +26,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame {
         initComponents();
         this.setFocusable(true);
         username=_username;
+        modelHoaDon=(DefaultTableModel) tblDSHD.getModel();
     }
 
     /**
@@ -53,15 +59,15 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame {
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
         jButton1 = new javax.swing.JButton();
         pnlTimXem = new javax.swing.JPanel();
-        jTextField2 = new javax.swing.JTextField();
+        txtTim = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         pnlDanhSachHoaDon = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblDSHD = new javax.swing.JTable();
         pnlHoan = new javax.swing.JPanel();
         pnlDonHang = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        tblDonHang = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         pnlThanhTienDonHang = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
@@ -74,7 +80,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame {
         jLabel10 = new javax.swing.JLabel();
         pnlDonHoan = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
+        tblDonHoan = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
         pnlThanhTienDonHoan = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
@@ -270,11 +276,11 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame {
 
         pnlMain.add(pnlDau);
 
-        jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField2.setText("Tìm hóa đơn theo mã/ tên khách hàng");
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        txtTim.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtTim.setText("Tìm hóa đơn theo mã/ tên khách hàng");
+        txtTim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                txtTimActionPerformed(evt);
             }
         });
 
@@ -290,7 +296,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame {
             pnlTimXemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlTimXemLayout.createSequentialGroup()
                 .addGap(41, 41, 41)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 377, Short.MAX_VALUE)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(156, 156, 156))
@@ -300,7 +306,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame {
             .addGroup(pnlTimXemLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlTimXemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -310,7 +316,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame {
         pnlDanhSachHoaDon.setMinimumSize(new java.awt.Dimension(100, 16));
         pnlDanhSachHoaDon.setLayout(new javax.swing.BoxLayout(pnlDanhSachHoaDon, javax.swing.BoxLayout.X_AXIS));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblDSHD.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -321,7 +327,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame {
                 "Mã hóa đơn", "Ngày lập", "Tổng số lượng sản phẩm", "Tổng thành tiền", "Tên khách hàng"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblDSHD);
 
         pnlDanhSachHoaDon.add(jScrollPane1);
 
@@ -355,9 +361,9 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame {
                 "Mã ", "Tên sản phẩm", "Số lượng", "Thành tiền"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        tblDonHang.setViewportView(jTable2);
 
-        pnlDonHang.add(jScrollPane2);
+        pnlDonHang.add(tblDonHang);
 
         pnlThanhTienDonHang.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -488,9 +494,9 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame {
                 "Mã ", "Tên sản phẩm", "Số lượng", "Thành tiền"
             }
         ));
-        jScrollPane3.setViewportView(jTable3);
+        tblDonHoan.setViewportView(jTable3);
 
-        pnlDonHoan.add(jScrollPane3);
+        pnlDonHoan.add(tblDonHoan);
 
         pnlThanhTienDonHoan.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -582,10 +588,17 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    private void txtTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimActionPerformed
+        String s=txtTim.getText();
+        filter(s);
+    }//GEN-LAST:event_txtTimActionPerformed
+    private void filter(String s){
+        TableRowSorter<DefaultTableModel> tr=new TableRowSorter<DefaultTableModel>(modelHoaDon);
+        tblDSHD.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter("(?i)"+s));
 
+        
+    }
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -636,17 +649,13 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField15;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField9;
     private javax.swing.JPanel pnlDanhSachHoaDon;
@@ -663,5 +672,9 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame {
     private javax.swing.JPanel pnlThanhTienDonHoan;
     private javax.swing.JPanel pnlThongTinCuaHang;
     private javax.swing.JPanel pnlTimXem;
+    private javax.swing.JTable tblDSHD;
+    private javax.swing.JScrollPane tblDonHang;
+    private javax.swing.JScrollPane tblDonHoan;
+    private javax.swing.JTextField txtTim;
     // End of variables declaration//GEN-END:variables
 }
