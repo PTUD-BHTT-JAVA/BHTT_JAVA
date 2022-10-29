@@ -13,12 +13,16 @@ import java.util.Objects;
 public class ChiTietHoaDon {
     private int soLuong;
     private double VAT;
+    private double tongTien;
+    private double tienThoi;
     private HoaDon hoaDon;
     private SanPham sanPham;
 
-    public ChiTietHoaDon(int soLuong, double VAT, HoaDon hoaDon, SanPham sanPham) {
+    public ChiTietHoaDon(int soLuong, double VAT, double tongTien, double tienThoi, HoaDon hoaDon, SanPham sanPham) {
         this.soLuong = soLuong;
         this.VAT = VAT;
+        this.tongTien = tongTien;
+        this.tienThoi = tienThoi;
         this.hoaDon = hoaDon;
         this.sanPham = sanPham;
     }
@@ -26,11 +30,24 @@ public class ChiTietHoaDon {
     public ChiTietHoaDon() {
     }
 
-    public ChiTietHoaDon(HoaDon hoaDon, SanPham sanPham) {
-        this.hoaDon = hoaDon;
-        this.sanPham = sanPham;
+    public double getTienThoi() {
+        return tienThoi;
     }
 
+    public void setTienThoi(double tienThoi) {
+        this.tienThoi = tienThoi;
+    }
+
+   
+    public double getTongTien() {
+        return tongTien;
+    }
+
+    public void setTongTien(double tongTien) {
+        this.tongTien = tongTien;
+    }
+
+    
     public int getSoLuong() {
         return soLuong;
     }
@@ -91,7 +108,9 @@ public class ChiTietHoaDon {
 
     @Override
     public String toString() {
-        return "ChiTietHoaDon{" + "soLuong=" + soLuong + ", VAT=" + VAT + ", hoaDon=" + hoaDon + ", sanPham=" + sanPham + '}';
+        return "ChiTietHoaDon{" + "soLuong=" + soLuong + ", VAT=" + VAT + ", tongTien=" + tongTien + ", tienThoi=" + tienThoi + ", hoaDon=" + hoaDon + ", sanPham=" + sanPham + '}';
     }
+    
+   
     
 }
