@@ -5,6 +5,7 @@
 package entity;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -13,13 +14,13 @@ import java.util.Objects;
  */
 public class HoaDon {
     private String maHD;
-    private LocalDate ngayLap;
+    private Date ngayLap;
     private double tienKhachDua;
     private String diaChi;
     private NhanVien nhanVien;
     private KhachHang khachHang;
 
-    public HoaDon(String maHD, LocalDate ngayLap, double tienKhachDua, String diaChi, NhanVien nhanVien, KhachHang khachHang) {
+    public HoaDon(String maHD, Date ngayLap, double tienKhachDua, String diaChi, NhanVien nhanVien, KhachHang khachHang) {
         this.maHD = maHD;
         this.ngayLap = ngayLap;
         this.tienKhachDua = tienKhachDua;
@@ -27,12 +28,12 @@ public class HoaDon {
         this.nhanVien = nhanVien;
         this.khachHang = khachHang;
     }
+
+    public HoaDon() {
+    }
+
     public HoaDon(String maHD) {
         this.maHD = maHD;
-      
-    }
-    public HoaDon() {
-      
     }
 
     public String getMaHD() {
@@ -43,11 +44,11 @@ public class HoaDon {
         this.maHD = maHD;
     }
 
-    public LocalDate getNgayLap() {
+    public Date getNgayLap() {
         return ngayLap;
     }
 
-    public void setNgayLap(LocalDate ngayLap) {
+    public void setNgayLap(Date ngayLap) {
         this.ngayLap = ngayLap;
     }
 
@@ -84,9 +85,14 @@ public class HoaDon {
     }
 
     @Override
+    public String toString() {
+        return "HoaDon{" + "maHD=" + maHD + ", ngayLap=" + ngayLap + ", tienKhachDua=" + tienKhachDua + ", diaChi=" + diaChi + ", nhanVien=" + nhanVien + ", khachHang=" + khachHang + '}';
+    }
+
+    @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 47 * hash + Objects.hashCode(this.maHD);
+        int hash = 5;
+        hash = 59 * hash + Objects.hashCode(this.maHD);
         return hash;
     }
 
@@ -105,9 +111,5 @@ public class HoaDon {
         return Objects.equals(this.maHD, other.maHD);
     }
 
-    @Override
-    public String toString() {
-        return "HoaDon{" + "maHD=" + maHD + ", ngayLap=" + ngayLap + ", tienKhachDua=" + tienKhachDua + ", diaChi=" + diaChi + ", nhanVien=" + nhanVien + ", khachHang=" + khachHang + '}';
-    }
     
 }

@@ -164,5 +164,21 @@ public class DAO_KhachHang {
         }
         return dsKH;
     }
-
+    public KhachHang getKHBangMa(String maKH){
+        try(
+            Connection con = ConnectDB.opConnection();
+            PreparedStatement pts = con.prepareStatement("Select * from KhachHang where maKH =? ")){
+            pts.setString(1,maKH );
+                try(ResultSet rs = pts.executeQuery()){
+                    if (rs.next()){
+                        LoaiKhachHang lkh= lkhDAO.timLoaiKHBangMa(rs.getString("maLoaiKH"));
+                        KhachHang kh=new KhachHang(rs.getString("maKH"),rs.getString("tenKH"),rs.getString("SoDienThoai"),rs.getInt("diemTichLuy"),rs.getString("email"),rs.getBoolean("gioiTinh"),lkh);
+                        return kh;
+                    }
+                }
+            }catch(Exception e){
+           
+       }
+       return null; 
+    }
 }

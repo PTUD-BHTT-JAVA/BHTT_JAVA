@@ -212,5 +212,23 @@ public class DAO_NhanVien {
         return ds;
     }
     
+    
+    public NhanVien layNhanVienBangTen(String tenNV) {
+        try (
+            Connection con = ConnectDB.opConnection();  PreparedStatement pts = con.prepareStatement("select * from NhanVien where tenNV = ?")) {
+            pts.setNString(1, tenNV);
+            try ( ResultSet rs = pts.executeQuery()) {
+                if (rs.next()) {
+                    LoaiNhanVien lnv = lnvDAO.timLoaiNVBangMa(rs.getString("maLoaiNV"));
+                    NhanVien nv = new NhanVien(rs.getString("maNV"), rs.getString("tenNV"), rs.getString("CMND"), rs.getString("soDienThoai"), rs.getBoolean("gioiTinh"), rs.getDouble("luongCoBan"), rs.getBoolean("trangThai"), lnv);
+                    return nv;
+                }
+            }
+        } catch (Exception e) {
+
+        }
+        return null;
+    }
+    
 }
 

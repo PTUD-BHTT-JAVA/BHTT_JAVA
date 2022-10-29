@@ -201,6 +201,69 @@ public class DAO_SanPham {
             }
         }
     }
+    public ArrayList<SanPham> layDSSPBangMa(String maTim){
+        ArrayList<SanPham> dsSP = new ArrayList<SanPham>();
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        PreparedStatement statement = null;
+        try {
+            String sql = "select * from SanPham where maSP = ? ";
+            statement = con.prepareStatement(sql);
+            statement.setString(1, maTim);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                String maSP = rs.getString("maSP");
+                String tenSP = rs.getString("tenSP");
+                double gia = rs.getDouble("giaGoc");
+                int sl = rs.getInt("soLuong");
+                byte[] hinhanh = rs.getBytes("hinhAnh");
+                String moTa = rs.getString("moTa");
+                java.sql.Date ngayN = rs.getDate("ngayNhap");
+                Date ngayNhap = new Date(ngayN.getTime());
+
+                java.sql.Date han = rs.getDate("hanSD");
+                Date hanSD = new Date(han.getTime());
+                String maNCC = rs.getString("maNCC");
+                String mau = rs.getString("maMau");
+                String kt = rs.getString("maKichThuoc");
+                String loiSP = rs.getString("maLoaiSP");
+                NhaCungCap ncc = dao_ncc.layNhaCungCapBangMa(maNCC);
+                LoaiSanPham lsp = dao_lsp.layLoaiSPBangMa(loiSP);
+                ChatLieu chatl = dao_cl.layChatLieuBangMa(rs.getString("maChatLieu"));
+                MauSac ms = dao_ms.layMauSacBangMa(rs.getString("maMau"));
+                KichThuoc kicht = dao_kt.layKichThuocBangMa(kt);
+                LoaiSanPham loaiSP = new LoaiSanPham(loiSP);
+                SanPham sp = new SanPham(maSP, tenSP, gia, sl, hinhanh, moTa, ngayNhap, hanSD, ncc, chatl, ms, kicht, lsp);
+                dsSP.add(sp);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                statement.close();
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+        return dsSP;
+    }
+    
+     public boolean capNhatSoLuong(String maSP, int soLuong) {
+        int n = -1;
+        String sql = "update SanPham  set soLuong = ? where maSP = ?";
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        try {
+            PreparedStatement pstmt = con.prepareCall(sql);
+            pstmt.setInt(1, soLuong);
+            pstmt.setString(2, maSP);
+            n = pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return n > 0;
+    }
 //    public ArrayList<SanPham> LocSP() {
 //        ArrayList<SanPham> dsSP = new ArrayList<SanPham>();
 //         try{
