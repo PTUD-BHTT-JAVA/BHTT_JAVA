@@ -185,38 +185,8 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
 //        }
 //
 //    }
-//    
-     private String maTuSinh() {
-        String ma = "HD";
-        int tachMa;
-        int i = 0, j = 1;
-        int[] dem = new int[999];
-        String id;
-        for (HoaDon hd : hd_dao.getallDSHoaDon()) {
-            id = hd.getMaHD();
-            tachMa = Integer.parseInt(id.substring(2, 5));
-            dem[i] = tachMa;
-            i++;
-        }
-        i = 0;
-        while (j < 999) {
-            if (dem[i] < j) {
-                if (j <= 9) {
-                    ma += "00" + (j);
-                } else {
-                    ma += "0" + (j);
-                }
-                break;
-            } else if (dem[i] > j) {
-                j = dem[i];
-            } else {
+ 
 
-                i++;
-                j++;
-            }
-        }
-        return ma;
-    }
 //    public double ParseDouble(String strNumber) {
 //        if (strNumber != null && strNumber.length() > 0) {
 //            try {
@@ -280,14 +250,14 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
 //            }
 //            tongThanhTien *= 0.1;
 //            txtTongTien.setText(df.format(tongThanhTien));
-////            Thư khóa
+//           Thư khóa
 //   XoaHetDLTrenTbale(tableDonHang);
 //            XoaHetDLTrenTbale(jtbSanPham);
 //            DocDuLieuLenTable();
 //
 //        } else {
 //            setTongThanhTien();
-////            Thư khóa
+//            Thư khóa
 //            XoaHetDLTrenTbale(tableDonHang);
 //            XoaHetDLTrenTbale(jtbSanPham);
 //            DocDuLieuLenTable();

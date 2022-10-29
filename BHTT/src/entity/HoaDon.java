@@ -4,8 +4,11 @@
  */
 package entity;
 
+import dao.DAO_ChiTietHoaDon;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -109,6 +112,35 @@ public class HoaDon {
         }
         final HoaDon other = (HoaDon) obj;
         return Objects.equals(this.maHD, other.maHD);
+    }
+    
+    public double thanhTienVIP(HoaDon hd){
+        double tt=0;
+        DAO_ChiTietHoaDon dao_cthd = new DAO_ChiTietHoaDon();
+        List<ChiTietHoaDon> list=dao_cthd.layDSHDBangMa(hd.getMaHD());
+        if (hd.getKhachHang().getLoaiKhachHang().getMaLoaiKH().equals("LKH001")){
+                for (ChiTietHoaDon ct:list){
+                    tt+=ct.getTongTien();
+            }
+                 
+                
+        }
+            tt=tt-(tt*10/100);
+        return tt;
+    }
+    
+    public double thanhTienThuong(HoaDon hd){
+        double tt=0;
+        DAO_ChiTietHoaDon dao_cthd = new DAO_ChiTietHoaDon();
+        List<ChiTietHoaDon> list=dao_cthd.layDSHDBangMa(hd.getMaHD());
+        if (hd.getKhachHang().getLoaiKhachHang().getMaLoaiKH().equals("LKH002")){
+                for (ChiTietHoaDon ct:list){
+                    tt+=ct.getTongTien();
+            }
+                 
+                
+        }
+        return tt;
     }
 
     

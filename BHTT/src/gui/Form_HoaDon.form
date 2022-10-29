@@ -207,7 +207,7 @@
                         <Property name="text" type="java.lang.String" value="Ng&#xe0;y:"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="lplNgay">
+                    <Component class="javax.swing.JLabel" name="lblNgay">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="24/10/2022"/>
                       </Properties>
@@ -220,7 +220,7 @@
                         <Property name="text" type="java.lang.String" value="Thu ng&#xe2;n:"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="lplThuNgan">
+                    <Component class="javax.swing.JLabel" name="lblThuNgan">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="lplThuNgan"/>
                       </Properties>
@@ -265,23 +265,12 @@
                         <Property name="text" type="java.lang.String" value="M&#xe3; phi&#x1ebf;u"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="lplMaPhieu">
+                    <Component class="javax.swing.JLabel" name="lblMaPhieu">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="jLabel20"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel9">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Segoe UI" size="14" style="0"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Gi&#x1edd;"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="lplGio">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="jLabel21"/>
-                      </Properties>
+                    <Component class="javax.swing.JLabel" name="lblGio">
                     </Component>
                   </SubComponents>
                 </Container>
@@ -328,6 +317,30 @@
                     <Column editable="true" title="Gi&#xe1;" type="java.lang.Object"/>
                     <Column editable="true" title="Th&#xe0;nh ti&#x1ec1;n" type="java.lang.Object"/>
                   </Table>
+                </Property>
+                <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                  <TableColumnModel selectionModel="0">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                  </TableColumnModel>
                 </Property>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
@@ -405,7 +418,7 @@
                     <Property name="text" type="java.lang.String" value="Khuy&#x1ebf;n m&#xe3;i :"/>
                   </Properties>
                 </Component>
-                <Container class="javax.swing.JPanel" name="lplKhuyenMai">
+                <Container class="javax.swing.JPanel" name="lblKM">
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
                   <SubComponents>

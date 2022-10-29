@@ -205,12 +205,12 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel{
         }
         txtTongTien.setText(df.format(tongThanhTien));
     }
-    public void thanhToan(){
+    public void thanhToan(String ma){
         KhachHang khTT = kh.layKhachHangBangSDT(txtSDT);
         NhanVien nvTT = nv.layNhanVienBangTen(txtTenNV);
         String diaChi = "12 Nguyễn Văn Bảo,phường 4,Gò Vấp,Hồ Chí Minh";
         Date ngayLapHD = new Date();
-        HoaDon hd = new HoaDon(maTuSinh(), ngayLapHD, Double.parseDouble(txtTienKhachDua.getText()),
+        HoaDon hd = new HoaDon(ma, ngayLapHD, Double.parseDouble(txtTienKhachDua.getText()),
                 diaChi, new NhanVien(nvTT.getMaNV()), new KhachHang(khTT.getMaKH()));
         hd_dao.themHoaDon(hd);
         HoaDon hoaDonMoiThem = hd_dao.getHoaDonMoiNhat();
@@ -720,6 +720,7 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel{
     }//GEN-LAST:event_cbxMSActionPerformed
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
+        
         if(txtTienKhachDua.getText().equals("")){
             JOptionPane.showMessageDialog(null,"Cần nhập tiền khách đưa","Cảnh báo",JOptionPane.WARNING_MESSAGE);
         }else if(txtSDT.equals("")){
@@ -728,8 +729,10 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel{
             if(tienThoi < 0){
                 JOptionPane.showMessageDialog(null,"Số tiền không đủ");
             }else{
+                String ma=maTuSinh();
                 try {
-                    thanhToan();
+                    
+                    thanhToan(ma);
                 } catch (Exception ex) {
                     Logger.getLogger(GD_TaoDonHang.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -741,7 +744,9 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel{
                 JOptionPane.showMessageDialog(null,"Thanh toán thành công");
 
                 XoaHetDLTrenTbale(tableDonHang);
-                Panel_ChiTietHoaDon.this.remove(this);
+                Form_HoaDon fHD=new Form_HoaDon(ma);
+                fHD.setLocationRelativeTo(null);
+                fHD.setVisible(true);
             } 
         }
     }//GEN-LAST:event_btnThanhToanActionPerformed
