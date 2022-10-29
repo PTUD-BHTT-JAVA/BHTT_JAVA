@@ -89,6 +89,7 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
                     XSSFCell excelDiaChi = excelRow.getCell(1);
                     XSSFCell excelSoDienThoai = excelRow.getCell(2);
                     XSSFCell excelEmail =  excelRow.getCell(3);
+                    System.out.println(excelDiaChi.toString());
                     NhaCungCap nccImport = new NhaCungCap(maTuSinh(),excelTen.toString(),excelDiaChi.toString(),excelSoDienThoai.toString(),excelEmail.toString());
                     nhacc.themNhaCungCap(nccImport);
                     modelNhaCungCap.addRow(new Object[]{
