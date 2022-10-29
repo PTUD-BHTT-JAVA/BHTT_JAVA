@@ -28,8 +28,10 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -67,8 +69,8 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
     List<RowFilter<DefaultTableModel, Object>> filters = new ArrayList<>();
     private TableRowSorter<DefaultTableModel> tr;
     int index = -1;
-    
-        int hangChon;
+
+    int hangChon;
 
     /**
      * Creates new form QuanLyHoaDon
@@ -86,7 +88,7 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
         this.setFocusable(true);
         username = _username;
         modolSP = (DefaultTableModel) jtbSanPham.getModel();
-        
+
         hangChon = jtbSanPham.getSelectedRow();
         DocDuLieuLenTable();
         DocDuLieuVaoCombobox();
@@ -624,7 +626,7 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jtbSanPhamMouseClicked
     private void NapDuLieuTuTable() {
-        
+
         hangChon = jtbSanPham.getSelectedRow();
         if (hangChon == -1) {
             return;
@@ -660,7 +662,7 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
         {
 
         }
-        
+
         hangChon = jtbSanPham.getSelectedRow();
     }
 
@@ -1158,101 +1160,130 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEXActionPerformed
 
     private void btnIXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIXActionPerformed
-//        File excelFile;
-//        FileInputStream excelFIS = null;
-//        BufferedInputStream excelBIS = null;
-//        XSSFWorkbook excelImportToJTable = null;
-//        String defaultCurrentDirectoryPath = "C:\\Users\\bohie\\OneDrive\\Documents\\GitHub\\BHTT_JAVA\\BHTT\\Excell";
-//        JFileChooser excelFileChooser = new JFileChooser(defaultCurrentDirectoryPath);
-//        excelFileChooser.setDialogTitle("Chọn file để import");
-//        FileNameExtensionFilter fnef = new FileNameExtensionFilter("EXCEL FILE", "xls", "xlsx", "xlsm");
-//        excelFileChooser.setFileFilter(fnef);
-//        int excelChooser = excelFileChooser.showOpenDialog(null);
-//        if (excelChooser == JFileChooser.APPROVE_OPTION) {
-//            try {
-//                excelFile = excelFileChooser.getSelectedFile();
-//                excelFIS = new FileInputStream(excelFile);
-//                excelBIS = new BufferedInputStream(excelBIS);
-//                excelImportToJTable = new XSSFWorkbook(excelFIS);
-//                XSSFSheet excelSheet = excelImportToJTable.getSheetAt(0);
-//                for (int row = 1; row < excelSheet.getLastRowNum(); row++) {
-//                   
-//                    XSSFRow excelRow = excelSheet.getRow(row);
-//                    XSSFCell excelTen = excelRow.getCell(0);
-//                    XSSFCell excelgia = excelRow.getCell(1);
-//                    XSSFCell excelSL = excelRow.getCell(2);
-//                    XSSFCell excelHA = excelRow.getCell(3);
-//                    XSSFCell excelMT = excelRow.getCell(4);
-//                    XSSFCell excelNgayNhap = excelRow.getCell(5);
-//                    XSSFCell excelHD = excelRow.getCell(6);
-//                    XSSFCell excelNCC = excelRow.getCell(7);
-//                    XSSFCell excelCL = excelRow.getCell(8);
-//                    XSSFCell excelMS = excelRow.getCell(9);
-//                    XSSFCell excelKT = excelRow.getCell(10);
-//                    XSSFCell excelPL = excelRow.getCell(11);
-//                    MauSac m = mau_dao.layMauSacBangTen(excelMS.toString());
-//                    KichThuoc k = kt_dao.layKichThuocBangTen(excelKT.toString());
-//                    NhaCungCap ncc = ncc_dao.layNhaCungCapBangTen(excelNCC.toString());
-//                    LoaiSanPham lsp = lsp_dao.layLoaiSPBangTen(excelPL.toString());
-//                    ChatLieu cl = cl_dao.layKichThuocBangTen(excelCL.toString());
-//                    SanPham sp = new SanPham(maTuSinh(), excelTen.toString(), excelgia, excelSL, excelHA, excelMT, excelNgayNhap, excelHD, new NhaCungCap(ncc.getMaNCC()), new ChatLieu(cl.getMaChatLieu()), new MauSac(m.getMaMau()), new KichThuoc(k.getMaKichThuoc()), new LoaiSanPham(lsp.getMaLoaiSP()));
-//                    nhacc.themNhaCungCap(nccImport);
-//                    
-//
-//                }
-//                JOptionPane.showMessageDialog(null, "Import thành công");
-//            } catch (IOException iOException) {
-//                JOptionPane.showMessageDialog(null, iOException.getMessage());
-//            } finally {
-//                try {
-//                    if (excelFIS != null) {
-//                        excelFIS.close();
-//                    }
-//                    if (excelBIS != null) {
-//                        excelBIS.close();
-//                    }
-//                    if (excelImportToJTable != null) {
-//                        excelImportToJTable.close();
-//                    }
-//                } catch (IOException ex) {
-//                    System.out.println(ex);
-//                }
-//            }
-//        }
+        File excelFile;
+        FileInputStream excelFIS = null;
+        BufferedInputStream excelBIS = null;
+        XSSFWorkbook excelImportToJTable = null;
+        String defaultCurrentDirectoryPath = "C:\\Users\\bohie\\OneDrive\\Documents\\GitHub\\BHTT_JAVA\\BHTT\\Excell";
+        JFileChooser excelFileChooser = new JFileChooser(defaultCurrentDirectoryPath);
+        excelFileChooser.setDialogTitle("Chọn file để import");
+        FileNameExtensionFilter fnef = new FileNameExtensionFilter("EXCEL FILE", "xls", "xlsx", "xlsm");
+        excelFileChooser.setFileFilter(fnef);
+        int excelChooser = excelFileChooser.showOpenDialog(null);
+        if (excelChooser == JFileChooser.APPROVE_OPTION) {
+            try {
+                excelFile = excelFileChooser.getSelectedFile();
+                excelFIS = new FileInputStream(excelFile);
+                excelBIS = new BufferedInputStream(excelBIS);
+                excelImportToJTable = new XSSFWorkbook(excelFIS);
+                XSSFSheet excelSheet = excelImportToJTable.getSheetAt(0);
+                for (int row = 2; row <= excelSheet.getLastRowNum(); row++) {
 
-    }//GEN-LAST:event_btnIXActionPerformed
-private String maTuSinh(){
-    String ma = "SP";
-            int tachMa;
-            int i = 0, j = 1;
-            int[] dem = new int[999];
-            String id;
-            sp_dao = new DAO_SanPham();
-            for (SanPham sanpham : sp_dao.getAllSP()) {
-                id = sanpham.getMaSP();
-                tachMa = Integer.parseInt(id.substring(2, 5));
-                dem[i] = tachMa;
-                i++;
-            }
-            i = 0;
-            //gd:  String maPhatSinh= ("SP%3d",i);
-            while (j < 999) {
-                if (dem[i] < j) {
-                    if (j <= 9) {
-                        ma += "00" + (j);
-                    } else {
-                        ma += "0" + (j);
+                    XSSFRow excelRow = excelSheet.getRow(row);
+                    XSSFCell excelTen = excelRow.getCell(0);
+                    XSSFCell excelgia = excelRow.getCell(1);
+                    XSSFCell excelSL = excelRow.getCell(2);
+                    XSSFCell excelHA = excelRow.getCell(3);
+                    XSSFCell excelMT = excelRow.getCell(4);
+                    XSSFCell excelNgayNhap = excelRow.getCell(5);
+                    XSSFCell excelHD = excelRow.getCell(6);
+                    XSSFCell excelNCC = excelRow.getCell(7);
+                    XSSFCell excelCL = excelRow.getCell(8);
+                    XSSFCell excelMS = excelRow.getCell(9);
+                    XSSFCell excelKT = excelRow.getCell(10);
+                    XSSFCell excelPL = excelRow.getCell(11);
+                    double x = Double.parseDouble(excelSL.toString());
+                    int y = (int) x;
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    Date ngayN = sdf.parse(excelNgayNhap.toString());
+                    Date hanD = sdf.parse(excelHD.toString());
+                    try {
+                        File image = new File(excelHA.toString());
+                        FileInputStream fis = new FileInputStream(image);
+                        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                        byte[] buf = new byte[1024];
+                        for (int n; (n = fis.read(buf)) != -1;) {
+                            bos.write(buf, 0, n);
+                        }
+                        anhSP = bos.toByteArray();
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, e);
                     }
-                    break;
-                } else if (dem[i] > j) {
-                    j = dem[i];
-                } else {
-                    i++;
-                    j++;
+                    MauSac m = mau_dao.layMauSacBangTen(excelMS.toString());
+                    KichThuoc k = kt_dao.layKichThuocBangTen(excelKT.toString());
+                    NhaCungCap ncc = ncc_dao.layNhaCungCapBangTen(excelNCC.toString());
+                    LoaiSanPham lsp = lsp_dao.layLoaiSPBangTen(excelPL.toString());
+                    ChatLieu cl = cl_dao.layKichThuocBangTen(excelCL.toString());
+                    System.out.println(excelNCC.toString());
+                    SanPham sp = new SanPham(maTuSinh(),
+                            excelTen.toString(),
+                            Double.parseDouble(excelgia.toString()),
+                            y,
+                            anhSP,
+                            excelMT.toString(),
+                            ngayN,
+                            hanD,
+                            new NhaCungCap(ncc.getMaNCC()), new ChatLieu(cl.getMaChatLieu()), new MauSac(m.getMaMau()), new KichThuoc(k.getMaKichThuoc()), new LoaiSanPham(lsp.getMaLoaiSP()));
+                    sp_dao.themSP(sp);
+                    JOptionPane.showMessageDialog(null, "Import thành công");
+                    XoaHetDLTrenTbale();
+                    DocDuLieuLenTable();
+                }
+
+            } catch (IOException iOException) {
+                JOptionPane.showMessageDialog(null, iOException.getMessage());
+            } catch (ParseException ex) {
+                ex.printStackTrace();
+            } finally {
+                try {
+                    if (excelFIS != null) {
+                        excelFIS.close();
+                    }
+                    if (excelBIS != null) {
+                        excelBIS.close();
+                    }
+                    if (excelImportToJTable != null) {
+                        excelImportToJTable.close();
+                    }
+                } catch (IOException ex) {
+                    System.out.println(ex);
                 }
             }
-            return ma;
-}
+        }
+
+    }//GEN-LAST:event_btnIXActionPerformed
+    private String maTuSinh() {
+        String ma = "SP";
+        int tachMa;
+        int i = 0, j = 1;
+        int[] dem = new int[999];
+        String id;
+        sp_dao = new DAO_SanPham();
+        for (SanPham sanpham : sp_dao.getAllSP()) {
+            id = sanpham.getMaSP();
+            tachMa = Integer.parseInt(id.substring(2, 5));
+            dem[i] = tachMa;
+            i++;
+        }
+        i = 0;
+        //gd:  String maPhatSinh= ("SP%3d",i);
+        while (j < 999) {
+            if (dem[i] < j) {
+                if (j <= 9) {
+                    ma += "00" + (j);
+                } else {
+                    ma += "0" + (j);
+                }
+                break;
+            } else if (dem[i] > j) {
+                j = dem[i];
+            } else {
+                i++;
+                j++;
+            }
+        }
+        return ma;
+    }
 
     private void DocDuLieuLenTable() {
         sp_dao = new DAO_SanPham();
