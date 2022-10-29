@@ -668,6 +668,9 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
         Panel_ChiTietHoaDon pnl=new Panel_ChiTietHoaDon(txtSDT.getText(),txtTenNV.getText());
         pnlTab.add(txtTenKH.getText(),pnl);
         pnlTab.setSelectedComponent(pnl);
+        txtSDT.setText("");
+        txtTenKH.setText("");
+        txtLoaiKH.setText("");
         }
     }//GEN-LAST:event_btnTaoDHActionPerformed
 
