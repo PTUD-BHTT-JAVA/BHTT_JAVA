@@ -38,6 +38,7 @@ import java.util.logging.Logger;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -46,7 +47,7 @@ import javax.swing.table.TableRowSorter;
  *
  * @author ACER
  */
-public class GD_TaoDonHang extends javax.swing.JInternalFrame {
+public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnable{
     private String username;
      private DAO_SanPham sp_dao;
     private DAO_LoaiSP lsp_dao;
@@ -63,6 +64,7 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame {
 //    int index = -1;
     public DefaultTableModel modelDonHang;
     DecimalFormat df = new DecimalFormat("#,##0 VND");
+    private Thread thread = new Thread(this);
     
     private double tongThanhTien;
     private double tienThoi;
@@ -74,10 +76,12 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame {
     private DAO_HoaDon hd_dao;
     private ArrayList<SanPham> dsSPTrongDonHang;
     public GD_TaoDonHang(String _username) {
+        thread.start();
         try {
             ConnectDB.getInstance().connect();
         } catch (Exception e) {
         }
+        
         this.setRootPaneCheckingEnabled(false);
         javax.swing.plaf.InternalFrameUI ui
                 = this.getUI();
@@ -97,6 +101,8 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame {
         kh = new DAO_KhachHang();
         nv = new DAO_NhanVien();
         jtbSanPham.setRowSorter(tr);
+        
+        
     }
     private void XoaHetDLTrenTbale() {
         DefaultTableModel fm = (DefaultTableModel) jtbSanPham.getModel();
@@ -1004,13 +1010,15 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnCapNhatActionPerformed
 
     private void btnXoaCTHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaCTHDActionPerformed
-        int r = tableDonHangCho.getSelectedRow();
-        modelDonHang.removeRow(r);
-        double tongTien = 0;
-        for(int i=0;i<modelDonHang.getRowCount();i++){
-            tongTien += Double.parseDouble(modelDonHang.getValueAt(i, 4).toString());
-        }
-        txtTongTien.setText(String.valueOf(tongTien));
+        
+        
+         int r = tableDonHang.getSelectedRow();
+       if(r < 0){
+           JOptionPane.showMessageDialog(null,"Chọn sản phẩm cần xóa");
+       }else{
+           modelDonHang.removeRow(r);
+           setTongThanhTien();
+       }
     }//GEN-LAST:event_btnXoaCTHDActionPerformed
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
@@ -1124,4 +1132,28 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame {
     private swing.TextField txtTienKhachDua;
     private javax.swing.JTextField txtTongTien;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void run() {
+        try {
+           txtGio =new JTextField();
+           txtNgay =new JTextField();
+			Date thoiGianHienTai = new Date();
+			SimpleDateFormat sdf_Gio = new SimpleDateFormat("hh:mm:ss");
+			SimpleDateFormat sdf_Ngay = new SimpleDateFormat("dd/MM/yyyy");
+			while (true) {
+				thoiGianHienTai = new Date(); // lấy thời gian hiện tại
+				String ngayTrongTuan = "";
+				if (thoiGianHienTai.getDay()== 0)
+					ngayTrongTuan = "Chủ nhật, ";
+				else
+					ngayTrongTuan = "Thứ " + (thoiGianHienTai.getDay() + 1) + ", ";// do getDay() tính từ 1.
+				txtGio.setText(sdf_Gio.format(thoiGianHienTai));
+				txtNgay.setText(ngayTrongTuan + sdf_Ngay.format(thoiGianHienTai));
+				thread.sleep(1000); // cho phép ngủ trong khoảng 1000 mns =1s
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+    }
 }

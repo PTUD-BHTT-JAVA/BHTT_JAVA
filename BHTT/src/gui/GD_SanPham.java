@@ -67,6 +67,8 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
     List<RowFilter<DefaultTableModel, Object>> filters = new ArrayList<>();
     private TableRowSorter<DefaultTableModel> tr;
     int index = -1;
+    
+        int hangChon;
 
     /**
      * Creates new form QuanLyHoaDon
@@ -84,7 +86,8 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
         this.setFocusable(true);
         username = _username;
         modolSP = (DefaultTableModel) jtbSanPham.getModel();
-
+        
+        hangChon = jtbSanPham.getSelectedRow();
         DocDuLieuLenTable();
         DocDuLieuVaoCombobox();
         moKhoaTextfields(false);
@@ -621,7 +624,8 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jtbSanPhamMouseClicked
     private void NapDuLieuTuTable() {
-        int hangChon = jtbSanPham.getSelectedRow();
+        
+        hangChon = jtbSanPham.getSelectedRow();
         if (hangChon == -1) {
             return;
         }
@@ -656,6 +660,8 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
         {
 
         }
+        
+        hangChon = jtbSanPham.getSelectedRow();
     }
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
