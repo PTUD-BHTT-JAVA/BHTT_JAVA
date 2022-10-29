@@ -661,9 +661,9 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel{
             }
         }
         if (filters.size() < 3) {
-            filters.add(RowFilter.regexFilter(s, 8));
+            filters.add(RowFilter.regexFilter(s, 6));
         } else {
-            filters.set(2, RowFilter.regexFilter(s, 8));
+            filters.set(2, RowFilter.regexFilter(s, 6));
         }
         // Apply filters
         tr.setRowFilter(RowFilter.andFilter(filters));
@@ -711,9 +711,9 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel{
             }
         }
         if (filters.size() < 2) {
-            filters.add(RowFilter.regexFilter(s, 7));
+            filters.add(RowFilter.regexFilter(s, 5));
         } else {
-            filters.set(1, RowFilter.regexFilter(s, 7));
+            filters.set(1, RowFilter.regexFilter(s, 5));
         }
         // Apply filters
         tr.setRowFilter(RowFilter.andFilter(filters));
@@ -791,9 +791,9 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel{
         }
 
         if (filters.size() < 4) {
-            filters.add(RowFilter.regexFilter(s, 9));
+            filters.add(RowFilter.regexFilter(s, 7));
         } else {
-            filters.set(3, RowFilter.regexFilter(s, 9));
+            filters.set(3, RowFilter.regexFilter(s, 7));
         }
         // Apply filters
         tr.setRowFilter(RowFilter.andFilter(filters));
@@ -810,9 +810,9 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel{
         }
 
         if (filters.isEmpty()) {
-            filters.add(RowFilter.regexFilter(s, 5));
+            filters.add(RowFilter.regexFilter(s, 4));
         } else {
-            filters.set(0, RowFilter.regexFilter(s, 5));
+            filters.set(0, RowFilter.regexFilter(s, 4));
         }
         // Apply filters
         tr.setRowFilter(RowFilter.andFilter(filters));
