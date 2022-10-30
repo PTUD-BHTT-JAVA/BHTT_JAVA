@@ -86,31 +86,31 @@ public class GD_NhanVien extends javax.swing.JFrame {
         pnlSilde = new javax.swing.JPanel();
         pnlGioiThieu = new keeptoo.KGradientPanel();
         lblGioiThieu = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        icGioiThieu = new javax.swing.JLabel();
         pnlKhachHang = new keeptoo.KGradientPanel();
         lblKhachHang = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        icKhachHang = new javax.swing.JLabel();
         pnlDonHang = new keeptoo.KGradientPanel();
         lblDonHang = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        icDonHang = new javax.swing.JLabel();
         pnlTitleTaoDonHang = new javax.swing.JPanel();
         pnlTaoDonHang = new keeptoo.KGradientPanel();
         lblTaoHoaDon = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        icTaoDonHang = new javax.swing.JLabel();
         pnlTitleDonHangHoan = new javax.swing.JPanel();
         pnlDonHangHoan = new keeptoo.KGradientPanel();
-        lblLichSuDonHang = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        lblDonHangHoan = new javax.swing.JLabel();
+        icTaoDonHoan = new javax.swing.JLabel();
         pnlTitleLichSuDonHang = new javax.swing.JPanel();
         pnlLichSuDonHang = new keeptoo.KGradientPanel();
-        lblTaoHoaDon1 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        lblLichSuDonHang = new javax.swing.JLabel();
+        icLichSuDonHang = new javax.swing.JLabel();
         pnlThongKe = new keeptoo.KGradientPanel();
         lblThongKe = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        icThongKe = new javax.swing.JLabel();
         pnlTroGiup = new keeptoo.KGradientPanel();
         lblTroGiup = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        icTroGiup = new javax.swing.JLabel();
         btnDangXuat = new javax.swing.JButton();
         kGradientPanel1 = new keeptoo.KGradientPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -205,16 +205,11 @@ public class GD_NhanVien extends javax.swing.JFrame {
         lblGioiThieu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblGioiThieu.setText("GIỚI THIỆU");
         lblGioiThieu.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        lblGioiThieu.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblGioiThieuMouseClicked(evt);
-            }
-        });
         pnlGioiThieu.add(lblGioiThieu, java.awt.BorderLayout.CENTER);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/trangChu.png"))); // NOI18N
-        jLabel1.setText("\n");
-        pnlGioiThieu.add(jLabel1, java.awt.BorderLayout.LINE_START);
+        icGioiThieu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/trangChu.png"))); // NOI18N
+        icGioiThieu.setText("\n");
+        pnlGioiThieu.add(icGioiThieu, java.awt.BorderLayout.LINE_START);
 
         pnlSilde.add(pnlGioiThieu);
 
@@ -236,9 +231,9 @@ public class GD_NhanVien extends javax.swing.JFrame {
         lblKhachHang.setText("KHÁCH HÀNG");
         pnlKhachHang.add(lblKhachHang, java.awt.BorderLayout.CENTER);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/khachHang.png"))); // NOI18N
-        jLabel2.setText("\n");
-        pnlKhachHang.add(jLabel2, java.awt.BorderLayout.LINE_START);
+        icKhachHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/khachHang.png"))); // NOI18N
+        icKhachHang.setText("\n");
+        pnlKhachHang.add(icKhachHang, java.awt.BorderLayout.LINE_START);
 
         pnlSilde.add(pnlKhachHang);
 
@@ -262,12 +257,13 @@ public class GD_NhanVien extends javax.swing.JFrame {
         pnlDonHang.add(lblDonHang, java.awt.BorderLayout.CENTER);
         lblDonHang.getAccessibleContext().setAccessibleDescription("");
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/donHang.png"))); // NOI18N
-        jLabel4.setText("\n");
-        pnlDonHang.add(jLabel4, java.awt.BorderLayout.LINE_START);
+        icDonHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/donHang.png"))); // NOI18N
+        icDonHang.setText("\n");
+        pnlDonHang.add(icDonHang, java.awt.BorderLayout.LINE_START);
 
         pnlSilde.add(pnlDonHang);
 
+        pnlTitleTaoDonHang.setBackground(new java.awt.Color(255, 255, 255));
         pnlTitleTaoDonHang.setMaximumSize(new java.awt.Dimension(32767, 40));
         pnlTitleTaoDonHang.setLayout(new java.awt.BorderLayout());
 
@@ -292,14 +288,15 @@ public class GD_NhanVien extends javax.swing.JFrame {
         lblTaoHoaDon.setVerifyInputWhenFocusTarget(false);
         pnlTaoDonHang.add(lblTaoHoaDon, java.awt.BorderLayout.CENTER);
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/taoDonHangMoi.png"))); // NOI18N
-        jLabel5.setText("\n");
-        pnlTaoDonHang.add(jLabel5, java.awt.BorderLayout.LINE_START);
+        icTaoDonHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/taoDonHangMoi.png"))); // NOI18N
+        icTaoDonHang.setText("\n");
+        pnlTaoDonHang.add(icTaoDonHang, java.awt.BorderLayout.LINE_START);
 
         pnlTitleTaoDonHang.add(pnlTaoDonHang, java.awt.BorderLayout.EAST);
 
         pnlSilde.add(pnlTitleTaoDonHang);
 
+        pnlTitleDonHangHoan.setBackground(new java.awt.Color(255, 255, 255));
         pnlTitleDonHangHoan.setMaximumSize(new java.awt.Dimension(32767, 40));
         pnlTitleDonHangHoan.setLayout(new java.awt.BorderLayout());
 
@@ -316,20 +313,21 @@ public class GD_NhanVien extends javax.swing.JFrame {
         });
         pnlDonHangHoan.setLayout(new java.awt.BorderLayout());
 
-        lblLichSuDonHang.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        lblLichSuDonHang.setForeground(new java.awt.Color(255, 255, 255));
-        lblLichSuDonHang.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblLichSuDonHang.setText("TẠO ĐƠN HOÀN");
-        pnlDonHangHoan.add(lblLichSuDonHang, java.awt.BorderLayout.CENTER);
+        lblDonHangHoan.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        lblDonHangHoan.setForeground(new java.awt.Color(255, 255, 255));
+        lblDonHangHoan.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblDonHangHoan.setText("TẠO ĐƠN HOÀN");
+        pnlDonHangHoan.add(lblDonHangHoan, java.awt.BorderLayout.CENTER);
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/taoDonHangMoi.png"))); // NOI18N
-        jLabel6.setText("\n");
-        pnlDonHangHoan.add(jLabel6, java.awt.BorderLayout.LINE_START);
+        icTaoDonHoan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/taoDonHangMoi.png"))); // NOI18N
+        icTaoDonHoan.setText("\n");
+        pnlDonHangHoan.add(icTaoDonHoan, java.awt.BorderLayout.LINE_START);
 
         pnlTitleDonHangHoan.add(pnlDonHangHoan, java.awt.BorderLayout.EAST);
 
         pnlSilde.add(pnlTitleDonHangHoan);
 
+        pnlTitleLichSuDonHang.setBackground(new java.awt.Color(255, 255, 255));
         pnlTitleLichSuDonHang.setMaximumSize(new java.awt.Dimension(32767, 40));
         pnlTitleLichSuDonHang.setLayout(new java.awt.BorderLayout());
 
@@ -346,17 +344,17 @@ public class GD_NhanVien extends javax.swing.JFrame {
         });
         pnlLichSuDonHang.setLayout(new java.awt.BorderLayout());
 
-        lblTaoHoaDon1.setBackground(new java.awt.Color(102, 0, 204));
-        lblTaoHoaDon1.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        lblTaoHoaDon1.setForeground(new java.awt.Color(255, 255, 255));
-        lblTaoHoaDon1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTaoHoaDon1.setText("LỊCH SỬ ĐƠN HÀNG");
-        lblTaoHoaDon1.setVerifyInputWhenFocusTarget(false);
-        pnlLichSuDonHang.add(lblTaoHoaDon1, java.awt.BorderLayout.CENTER);
+        lblLichSuDonHang.setBackground(new java.awt.Color(102, 0, 204));
+        lblLichSuDonHang.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        lblLichSuDonHang.setForeground(new java.awt.Color(255, 255, 255));
+        lblLichSuDonHang.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblLichSuDonHang.setText("LỊCH SỬ ĐƠN HÀNG");
+        lblLichSuDonHang.setVerifyInputWhenFocusTarget(false);
+        pnlLichSuDonHang.add(lblLichSuDonHang, java.awt.BorderLayout.CENTER);
 
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/lichSuDonHang.png"))); // NOI18N
-        jLabel9.setText("\n");
-        pnlLichSuDonHang.add(jLabel9, java.awt.BorderLayout.LINE_START);
+        icLichSuDonHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/lichSuDonHang.png"))); // NOI18N
+        icLichSuDonHang.setText("\n");
+        pnlLichSuDonHang.add(icLichSuDonHang, java.awt.BorderLayout.LINE_START);
 
         pnlTitleLichSuDonHang.add(pnlLichSuDonHang, java.awt.BorderLayout.EAST);
 
@@ -380,9 +378,9 @@ public class GD_NhanVien extends javax.swing.JFrame {
         lblThongKe.setText("THỐNG KÊ");
         pnlThongKe.add(lblThongKe, java.awt.BorderLayout.CENTER);
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/thongKe.png"))); // NOI18N
-        jLabel7.setText("\n");
-        pnlThongKe.add(jLabel7, java.awt.BorderLayout.LINE_START);
+        icThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/thongKe.png"))); // NOI18N
+        icThongKe.setText("\n");
+        pnlThongKe.add(icThongKe, java.awt.BorderLayout.LINE_START);
 
         pnlSilde.add(pnlThongKe);
 
@@ -404,9 +402,9 @@ public class GD_NhanVien extends javax.swing.JFrame {
         lblTroGiup.setText("TRỢ GIÚP");
         pnlTroGiup.add(lblTroGiup, java.awt.BorderLayout.CENTER);
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/troGiup.png"))); // NOI18N
-        jLabel8.setText("\n");
-        pnlTroGiup.add(jLabel8, java.awt.BorderLayout.LINE_START);
+        icTroGiup.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/troGiup.png"))); // NOI18N
+        icTroGiup.setText("\n");
+        pnlTroGiup.add(icTroGiup, java.awt.BorderLayout.LINE_START);
 
         pnlSilde.add(pnlTroGiup);
 
@@ -454,36 +452,279 @@ public class GD_NhanVien extends javax.swing.JFrame {
 
         GD_TaoDonHang frame = new GD_TaoDonHang(username);
         openComponent(frame);
+        pnlTaoDonHang.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlTaoDonHang.setkStartColor(new java.awt.Color(164, 158, 213));
+        lblTaoHoaDon.setForeground(new Color(102,0,102));
+        icTaoDonHang.setForeground(new Color(102,0,102));
+        
+        // trả lại màu
+        pnlGioiThieu.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlGioiThieu.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblGioiThieu.setForeground(new java.awt.Color(255, 255, 255));
+        icGioiThieu.setForeground(new java.awt.Color(255, 255, 255));
+        
+        pnlKhachHang.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlKhachHang.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblKhachHang.setForeground(new java.awt.Color(255, 255, 255));
+        icKhachHang.setForeground(new java.awt.Color(255, 255, 255));
+        
+        pnlDonHang.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlDonHang.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblDonHang.setForeground(new java.awt.Color(255, 255, 255));
+        icDonHang.setForeground(new java.awt.Color(255, 255, 255));
+        
+        pnlThongKe.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlThongKe.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblThongKe.setForeground(new java.awt.Color(255, 255, 255));
+        icThongKe.setForeground(new java.awt.Color(255, 255, 255));
+               
+        pnlTroGiup.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlTroGiup.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblTroGiup.setForeground(new java.awt.Color(255, 255, 255));
+        icTroGiup.setForeground(new java.awt.Color(255, 255, 255));
+        
+  
+        
+        pnlDonHangHoan.setkEndColor(new java.awt.Color(102, 0, 153));
+        pnlDonHangHoan.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblDonHangHoan.setForeground(new java.awt.Color(255, 255, 255));
+        icTaoDonHoan.setForeground(new java.awt.Color(255, 255, 255));
+        
+        pnlLichSuDonHang.setkEndColor(new java.awt.Color(102, 0, 153));
+        pnlLichSuDonHang.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblLichSuDonHang.setForeground(new java.awt.Color(255, 255, 255));
+        icLichSuDonHang.setForeground(new java.awt.Color(255, 255, 255));
     }//GEN-LAST:event_pnlTaoDonHangMousePressed
 
     private void pnlKhachHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlKhachHangMousePressed
         GD_KhachHang frKhachHang = new GD_KhachHang(username);
         openComponent(frKhachHang);
+        pnlKhachHang.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlKhachHang.setkStartColor(new java.awt.Color(164, 158, 213));
+        lblKhachHang.setForeground(new Color(102,0,102));
+        icKhachHang.setForeground(new Color(102,0,102));
+        
+        // trả lại màu
+        pnlGioiThieu.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlGioiThieu.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblGioiThieu.setForeground(new java.awt.Color(255, 255, 255));
+        icGioiThieu.setForeground(new java.awt.Color(255, 255, 255));
+
+        
+        pnlDonHang.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlDonHang.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblDonHang.setForeground(new java.awt.Color(255, 255, 255));
+        icDonHang.setForeground(new java.awt.Color(255, 255, 255));
+        
+        pnlThongKe.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlThongKe.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblThongKe.setForeground(new java.awt.Color(255, 255, 255));
+        icThongKe.setForeground(new java.awt.Color(255, 255, 255));
+               
+        pnlTroGiup.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlTroGiup.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblTroGiup.setForeground(new java.awt.Color(255, 255, 255));
+        icTroGiup.setForeground(new java.awt.Color(255, 255, 255));
+        
+        pnlTaoDonHang.setkEndColor(new java.awt.Color(102, 0, 153));
+        pnlTaoDonHang.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblTaoHoaDon.setForeground(new java.awt.Color(255, 255, 255));
+        icTaoDonHang.setForeground(new java.awt.Color(255, 255, 255));
+        
+        pnlDonHangHoan.setkEndColor(new java.awt.Color(102, 0, 153));
+        pnlDonHangHoan.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblDonHangHoan.setForeground(new java.awt.Color(255, 255, 255));
+        icTaoDonHoan.setForeground(new java.awt.Color(255, 255, 255));
+        
+        pnlLichSuDonHang.setkEndColor(new java.awt.Color(102, 0, 153));
+        pnlLichSuDonHang.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblLichSuDonHang.setForeground(new java.awt.Color(255, 255, 255));
+        icLichSuDonHang.setForeground(new java.awt.Color(255, 255, 255));
     }//GEN-LAST:event_pnlKhachHangMousePressed
 
     private void pnlThongKeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlThongKeMousePressed
         GD_NVThongKe fNVThongKe = new GD_NVThongKe(username);
         openComponent(fNVThongKe);
+        pnlThongKe.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlThongKe.setkStartColor(new java.awt.Color(164, 158, 213));
+        lblThongKe.setForeground(new Color(102,0,102));
+        icThongKe.setForeground(new Color(102,0,102));
+        
+        // trả lại màu
+        pnlGioiThieu.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlGioiThieu.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblGioiThieu.setForeground(new java.awt.Color(255, 255, 255));
+        icGioiThieu.setForeground(new java.awt.Color(255, 255, 255));
+        
+        pnlKhachHang.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlKhachHang.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblKhachHang.setForeground(new java.awt.Color(255, 255, 255));
+        icKhachHang.setForeground(new java.awt.Color(255, 255, 255));
+        
+        pnlDonHang.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlDonHang.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblDonHang.setForeground(new java.awt.Color(255, 255, 255));
+        icDonHang.setForeground(new java.awt.Color(255, 255, 255));
+        
+
+               
+        pnlTroGiup.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlTroGiup.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblTroGiup.setForeground(new java.awt.Color(255, 255, 255));
+        icTroGiup.setForeground(new java.awt.Color(255, 255, 255));
+        
+        pnlTaoDonHang.setkEndColor(new java.awt.Color(102, 0, 153));
+        pnlTaoDonHang.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblTaoHoaDon.setForeground(new java.awt.Color(255, 255, 255));
+        icTaoDonHang.setForeground(new java.awt.Color(255, 255, 255));
+        
+        pnlDonHangHoan.setkEndColor(new java.awt.Color(102, 0, 153));
+        pnlDonHangHoan.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblDonHangHoan.setForeground(new java.awt.Color(255, 255, 255));
+        icTaoDonHoan.setForeground(new java.awt.Color(255, 255, 255));
+        
+        pnlLichSuDonHang.setkEndColor(new java.awt.Color(102, 0, 153));
+        pnlLichSuDonHang.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblLichSuDonHang.setForeground(new java.awt.Color(255, 255, 255));
+        icLichSuDonHang.setForeground(new java.awt.Color(255, 255, 255));
     }//GEN-LAST:event_pnlThongKeMousePressed
 
     private void pnlTroGiupMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlTroGiupMousePressed
         GD_NVTroGiup fNVTroGiup = new GD_NVTroGiup(username);
         openComponent(fNVTroGiup);
+        pnlTroGiup.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlTroGiup.setkStartColor(new java.awt.Color(164, 158, 213));
+        lblTroGiup.setForeground(new Color(102,0,102));
+        icTroGiup.setForeground(new Color(102,0,102));
+        
+        // trả lại màu
+        pnlGioiThieu.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlGioiThieu.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblGioiThieu.setForeground(new java.awt.Color(255, 255, 255));
+        icGioiThieu.setForeground(new java.awt.Color(255, 255, 255));
+        
+        pnlKhachHang.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlKhachHang.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblKhachHang.setForeground(new java.awt.Color(255, 255, 255));
+        icKhachHang.setForeground(new java.awt.Color(255, 255, 255));
+        
+        pnlDonHang.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlDonHang.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblDonHang.setForeground(new java.awt.Color(255, 255, 255));
+        icDonHang.setForeground(new java.awt.Color(255, 255, 255));
+        
+        pnlThongKe.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlThongKe.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblThongKe.setForeground(new java.awt.Color(255, 255, 255));
+        icThongKe.setForeground(new java.awt.Color(255, 255, 255));
+               
+
+        
+        pnlTaoDonHang.setkEndColor(new java.awt.Color(102, 0, 153));
+        pnlTaoDonHang.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblTaoHoaDon.setForeground(new java.awt.Color(255, 255, 255));
+        icTaoDonHang.setForeground(new java.awt.Color(255, 255, 255));
+        
+        pnlDonHangHoan.setkEndColor(new java.awt.Color(102, 0, 153));
+        pnlDonHangHoan.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblDonHangHoan.setForeground(new java.awt.Color(255, 255, 255));
+        icTaoDonHoan.setForeground(new java.awt.Color(255, 255, 255));
+        
+        pnlLichSuDonHang.setkEndColor(new java.awt.Color(102, 0, 153));
+        pnlLichSuDonHang.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblLichSuDonHang.setForeground(new java.awt.Color(255, 255, 255));
+        icLichSuDonHang.setForeground(new java.awt.Color(255, 255, 255));
     }//GEN-LAST:event_pnlTroGiupMousePressed
 
     private void pnlDonHangHoanMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlDonHangHoanMousePressed
         GD_TaoDonHangHoan fLichSuDonHang = new GD_TaoDonHangHoan(username);
         openComponent(fLichSuDonHang);
+        pnlDonHangHoan.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlDonHangHoan.setkStartColor(new java.awt.Color(164, 158, 213));
+        lblDonHangHoan.setForeground(new Color(102,0,102));
+        icTaoDonHoan.setForeground(new Color(102,0,102));
+        
+        // trả lại màu
+        pnlGioiThieu.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlGioiThieu.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblGioiThieu.setForeground(new java.awt.Color(255, 255, 255));
+        icGioiThieu.setForeground(new java.awt.Color(255, 255, 255));
+        
+        pnlKhachHang.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlKhachHang.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblKhachHang.setForeground(new java.awt.Color(255, 255, 255));
+        icKhachHang.setForeground(new java.awt.Color(255, 255, 255));
+        
+        pnlDonHang.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlDonHang.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblDonHang.setForeground(new java.awt.Color(255, 255, 255));
+        icDonHang.setForeground(new java.awt.Color(255, 255, 255));
+        
+        pnlThongKe.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlThongKe.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblThongKe.setForeground(new java.awt.Color(255, 255, 255));
+        icThongKe.setForeground(new java.awt.Color(255, 255, 255));
+               
+        pnlTroGiup.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlTroGiup.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblTroGiup.setForeground(new java.awt.Color(255, 255, 255));
+        icTroGiup.setForeground(new java.awt.Color(255, 255, 255));
+        
+        pnlTaoDonHang.setkEndColor(new java.awt.Color(102, 0, 153));
+        pnlTaoDonHang.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblTaoHoaDon.setForeground(new java.awt.Color(255, 255, 255));
+        icTaoDonHang.setForeground(new java.awt.Color(255, 255, 255));
+        
+
+        
+        pnlLichSuDonHang.setkEndColor(new java.awt.Color(102, 0, 153));
+        pnlLichSuDonHang.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblLichSuDonHang.setForeground(new java.awt.Color(255, 255, 255));
+        icLichSuDonHang.setForeground(new java.awt.Color(255, 255, 255));
     }//GEN-LAST:event_pnlDonHangHoanMousePressed
 
     private void pnlDonHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlDonHangMouseClicked
         boolean flag = true;
         if (pnlTitleTaoDonHang.isVisible()) {
             flag = false;
+            pnlDonHang.setkEndColor(new java.awt.Color(255, 204, 204));
+            pnlDonHang.setkStartColor(new java.awt.Color(102, 0, 153));
+            lblDonHang.setForeground(new java.awt.Color(255, 255, 255));
+            icDonHang.setForeground(new java.awt.Color(255, 255, 255));
         }
         pnlTitleTaoDonHang.setVisible(flag);
         pnlTitleDonHangHoan.setVisible(flag);
         pnlTitleLichSuDonHang.setVisible(flag);
+        
+        pnlDonHang.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlDonHang.setkStartColor(new java.awt.Color(164, 158, 213));
+        lblDonHang.setForeground(new Color(102,0,102));
+        icDonHang.setForeground(new Color(102,0,102));
+        
+        // trả lại màu
+        pnlGioiThieu.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlGioiThieu.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblGioiThieu.setForeground(new java.awt.Color(255, 255, 255));
+        icGioiThieu.setForeground(new java.awt.Color(255, 255, 255));
+        
+        pnlKhachHang.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlKhachHang.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblKhachHang.setForeground(new java.awt.Color(255, 255, 255));
+        icKhachHang.setForeground(new java.awt.Color(255, 255, 255));
+        
+
+        
+        pnlThongKe.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlThongKe.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblThongKe.setForeground(new java.awt.Color(255, 255, 255));
+        icThongKe.setForeground(new java.awt.Color(255, 255, 255));
+               
+        pnlTroGiup.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlTroGiup.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblTroGiup.setForeground(new java.awt.Color(255, 255, 255));
+        icTroGiup.setForeground(new java.awt.Color(255, 255, 255));
+        
+
     }//GEN-LAST:event_pnlDonHangMouseClicked
 
     private void btnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatActionPerformed
@@ -521,23 +762,51 @@ public class GD_NhanVien extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowClosing
 
-    private void lblGioiThieuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblGioiThieuMouseClicked
-        pnlGioiThieu.setkEndColor(new java.awt.Color(255, 204, 204));
-        pnlGioiThieu.setkStartColor(new java.awt.Color(164, 158, 213));
-        lblGioiThieu.setForeground(new Color(102,0,102));
-
-    }//GEN-LAST:event_lblGioiThieuMouseClicked
-
     private void pnlGioiThieuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlGioiThieuMouseClicked
         GD_GioiThieu d_GioiThieu=new GD_GioiThieu(username);
         openComponent(d_GioiThieu);
         pnlGioiThieu.setkEndColor(new java.awt.Color(255, 204, 204));
         pnlGioiThieu.setkStartColor(new java.awt.Color(164, 158, 213));
         lblGioiThieu.setForeground(new Color(102,0,102));
+        icGioiThieu.setForeground(new Color(102,0,102));
 
+        // trả lại màu
 
-
-
+        
+        pnlKhachHang.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlKhachHang.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblKhachHang.setForeground(new java.awt.Color(255, 255, 255));
+        icKhachHang.setForeground(new java.awt.Color(255, 255, 255));
+        
+        pnlDonHang.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlDonHang.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblDonHang.setForeground(new java.awt.Color(255, 255, 255));
+        icDonHang.setForeground(new java.awt.Color(255, 255, 255));
+        
+        pnlThongKe.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlThongKe.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblThongKe.setForeground(new java.awt.Color(255, 255, 255));
+        icThongKe.setForeground(new java.awt.Color(255, 255, 255));
+               
+        pnlTroGiup.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlTroGiup.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblTroGiup.setForeground(new java.awt.Color(255, 255, 255));
+        icTroGiup.setForeground(new java.awt.Color(255, 255, 255));
+        
+        pnlTaoDonHang.setkEndColor(new java.awt.Color(102, 0, 153));
+        pnlTaoDonHang.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblTaoHoaDon.setForeground(new java.awt.Color(255, 255, 255));
+        icTaoDonHang.setForeground(new java.awt.Color(255, 255, 255));
+        
+        pnlDonHangHoan.setkEndColor(new java.awt.Color(102, 0, 153));
+        pnlDonHangHoan.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblDonHangHoan.setForeground(new java.awt.Color(255, 255, 255));
+        icTaoDonHoan.setForeground(new java.awt.Color(255, 255, 255));
+        
+        pnlLichSuDonHang.setkEndColor(new java.awt.Color(102, 0, 153));
+        pnlLichSuDonHang.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblLichSuDonHang.setForeground(new java.awt.Color(255, 255, 255));
+        icLichSuDonHang.setForeground(new java.awt.Color(255, 255, 255));
 
 
 
@@ -548,6 +817,48 @@ public class GD_NhanVien extends javax.swing.JFrame {
     private void pnlLichSuDonHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlLichSuDonHangMousePressed
         GD_LichSuDonHang gd = new GD_LichSuDonHang(username);
         openComponent(gd);
+        pnlLichSuDonHang.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlLichSuDonHang.setkStartColor(new java.awt.Color(164, 158, 213));
+        lblLichSuDonHang.setForeground(new Color(102,0,102));
+        icLichSuDonHang.setForeground(new Color(102,0,102));
+        
+        // trả lại màu
+        pnlGioiThieu.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlGioiThieu.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblGioiThieu.setForeground(new java.awt.Color(255, 255, 255));
+        icDonHang.setForeground(new java.awt.Color(255, 255, 255));
+        
+        pnlKhachHang.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlKhachHang.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblKhachHang.setForeground(new java.awt.Color(255, 255, 255));
+        icKhachHang.setForeground(new java.awt.Color(255, 255, 255));
+        
+        pnlDonHang.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlDonHang.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblDonHang.setForeground(new java.awt.Color(255, 255, 255));
+        icDonHang.setForeground(new java.awt.Color(255, 255, 255));
+        
+        pnlThongKe.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlThongKe.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblThongKe.setForeground(new java.awt.Color(255, 255, 255));
+        icThongKe.setForeground(new java.awt.Color(255, 255, 255));
+               
+        pnlTroGiup.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlTroGiup.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblTroGiup.setForeground(new java.awt.Color(255, 255, 255));
+        icTroGiup.setForeground(new java.awt.Color(255, 255, 255));
+        
+        pnlTaoDonHang.setkEndColor(new java.awt.Color(102, 0, 153));
+        pnlTaoDonHang.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblTaoHoaDon.setForeground(new java.awt.Color(255, 255, 255));
+        icTaoDonHang.setForeground(new java.awt.Color(255, 255, 255));
+        
+        pnlDonHangHoan.setkEndColor(new java.awt.Color(102, 0, 153));
+        pnlDonHangHoan.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblDonHangHoan.setForeground(new java.awt.Color(255, 255, 255));
+        icTaoDonHoan.setForeground(new java.awt.Color(255, 255, 255));
+        
+
     }//GEN-LAST:event_pnlLichSuDonHangMousePressed
     // open frame when click panel
     void openComponent(JInternalFrame frame) {
@@ -617,24 +928,24 @@ public class GD_NhanVien extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDangXuat;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel icDonHang;
+    private javax.swing.JLabel icGioiThieu;
+    private javax.swing.JLabel icKhachHang;
+    private javax.swing.JLabel icLichSuDonHang;
+    private javax.swing.JLabel icTaoDonHang;
+    private javax.swing.JLabel icTaoDonHoan;
+    private javax.swing.JLabel icThongKe;
+    private javax.swing.JLabel icTroGiup;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private keeptoo.KGradientPanel kGradientPanel1;
     private javax.swing.JLabel lblChucVu;
     private javax.swing.JLabel lblDonHang;
+    private javax.swing.JLabel lblDonHangHoan;
     private javax.swing.JLabel lblGioiThieu;
     private javax.swing.JLabel lblImage;
     private javax.swing.JLabel lblKhachHang;
     private javax.swing.JLabel lblLichSuDonHang;
     private javax.swing.JLabel lblTaoHoaDon;
-    private javax.swing.JLabel lblTaoHoaDon1;
     private javax.swing.JLabel lblTen;
     private javax.swing.JLabel lblThongKe;
     private javax.swing.JLabel lblTroGiup;
