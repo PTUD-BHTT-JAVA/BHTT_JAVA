@@ -412,6 +412,11 @@ public class Form_HoaDon extends javax.swing.JFrame {
         btnHoanThanh.setText("Hoàn thành");
         btnHoanThanh.setMaximumSize(new java.awt.Dimension(107, 40));
         btnHoanThanh.setPreferredSize(new java.awt.Dimension(107, 40));
+        btnHoanThanh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHoanThanhActionPerformed(evt);
+            }
+        });
         pnlDuoi.add(btnHoanThanh);
 
         jPanel1.setMaximumSize(new java.awt.Dimension(50, 60));
@@ -457,6 +462,10 @@ public class Form_HoaDon extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnHoanThanhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHoanThanhActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_btnHoanThanhActionPerformed
 
     /**
      * @param args the command line arguments
