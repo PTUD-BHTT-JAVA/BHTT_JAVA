@@ -61,6 +61,7 @@ public class GD_NhanVien extends javax.swing.JFrame {
         openComponent(frGioiThieu);
 
         pnlTitleTaoDonHang.setVisible(false);
+        pnlTitleDonHangHoan.setVisible(false);
         pnlTitleLichSuDonHang.setVisible(false);
 
     }
@@ -96,10 +97,14 @@ public class GD_NhanVien extends javax.swing.JFrame {
         pnlTaoDonHang = new keeptoo.KGradientPanel();
         lblTaoHoaDon = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        pnlTitleLichSuDonHang = new javax.swing.JPanel();
-        pnlLichSuDonHang = new keeptoo.KGradientPanel();
+        pnlTitleDonHangHoan = new javax.swing.JPanel();
+        pnlDonHangHoan = new keeptoo.KGradientPanel();
         lblLichSuDonHang = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        pnlTitleLichSuDonHang = new javax.swing.JPanel();
+        pnlLichSuDonHang = new keeptoo.KGradientPanel();
+        lblTaoHoaDon1 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         pnlThongKe = new keeptoo.KGradientPanel();
         lblThongKe = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -295,6 +300,36 @@ public class GD_NhanVien extends javax.swing.JFrame {
 
         pnlSilde.add(pnlTitleTaoDonHang);
 
+        pnlTitleDonHangHoan.setMaximumSize(new java.awt.Dimension(32767, 40));
+        pnlTitleDonHangHoan.setLayout(new java.awt.BorderLayout());
+
+        pnlDonHangHoan.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
+        pnlDonHangHoan.setkEndColor(new java.awt.Color(102, 0, 153));
+        pnlDonHangHoan.setkGradientFocus(50);
+        pnlDonHangHoan.setkStartColor(new java.awt.Color(102, 0, 153));
+        pnlDonHangHoan.setMaximumSize(new java.awt.Dimension(2147483647, 40));
+        pnlDonHangHoan.setPreferredSize(new java.awt.Dimension(220, 40));
+        pnlDonHangHoan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                pnlDonHangHoanMousePressed(evt);
+            }
+        });
+        pnlDonHangHoan.setLayout(new java.awt.BorderLayout());
+
+        lblLichSuDonHang.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        lblLichSuDonHang.setForeground(new java.awt.Color(255, 255, 255));
+        lblLichSuDonHang.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblLichSuDonHang.setText("TẠO ĐƠN HOÀN");
+        pnlDonHangHoan.add(lblLichSuDonHang, java.awt.BorderLayout.CENTER);
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/taoDonHangMoi.png"))); // NOI18N
+        jLabel6.setText("\n");
+        pnlDonHangHoan.add(jLabel6, java.awt.BorderLayout.LINE_START);
+
+        pnlTitleDonHangHoan.add(pnlDonHangHoan, java.awt.BorderLayout.EAST);
+
+        pnlSilde.add(pnlTitleDonHangHoan);
+
         pnlTitleLichSuDonHang.setMaximumSize(new java.awt.Dimension(32767, 40));
         pnlTitleLichSuDonHang.setLayout(new java.awt.BorderLayout());
 
@@ -302,7 +337,7 @@ public class GD_NhanVien extends javax.swing.JFrame {
         pnlLichSuDonHang.setkEndColor(new java.awt.Color(102, 0, 153));
         pnlLichSuDonHang.setkGradientFocus(50);
         pnlLichSuDonHang.setkStartColor(new java.awt.Color(102, 0, 153));
-        pnlLichSuDonHang.setMaximumSize(new java.awt.Dimension(2147483647, 40));
+        pnlLichSuDonHang.setMaximumSize(new java.awt.Dimension(200, 40));
         pnlLichSuDonHang.setPreferredSize(new java.awt.Dimension(220, 40));
         pnlLichSuDonHang.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -311,15 +346,17 @@ public class GD_NhanVien extends javax.swing.JFrame {
         });
         pnlLichSuDonHang.setLayout(new java.awt.BorderLayout());
 
-        lblLichSuDonHang.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        lblLichSuDonHang.setForeground(new java.awt.Color(255, 255, 255));
-        lblLichSuDonHang.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblLichSuDonHang.setText("TẠO ĐƠN HOÀN");
-        pnlLichSuDonHang.add(lblLichSuDonHang, java.awt.BorderLayout.CENTER);
+        lblTaoHoaDon1.setBackground(new java.awt.Color(102, 0, 204));
+        lblTaoHoaDon1.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        lblTaoHoaDon1.setForeground(new java.awt.Color(255, 255, 255));
+        lblTaoHoaDon1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTaoHoaDon1.setText("LỊCH SỬ ĐƠN HÀNG");
+        lblTaoHoaDon1.setVerifyInputWhenFocusTarget(false);
+        pnlLichSuDonHang.add(lblTaoHoaDon1, java.awt.BorderLayout.CENTER);
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/lichSuDonHang.png"))); // NOI18N
-        jLabel6.setText("\n");
-        pnlLichSuDonHang.add(jLabel6, java.awt.BorderLayout.LINE_START);
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/lichSuDonHang.png"))); // NOI18N
+        jLabel9.setText("\n");
+        pnlLichSuDonHang.add(jLabel9, java.awt.BorderLayout.LINE_START);
 
         pnlTitleLichSuDonHang.add(pnlLichSuDonHang, java.awt.BorderLayout.EAST);
 
@@ -434,10 +471,10 @@ public class GD_NhanVien extends javax.swing.JFrame {
         openComponent(fNVTroGiup);
     }//GEN-LAST:event_pnlTroGiupMousePressed
 
-    private void pnlLichSuDonHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlLichSuDonHangMousePressed
+    private void pnlDonHangHoanMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlDonHangHoanMousePressed
         GD_TaoDonHangHoan fLichSuDonHang = new GD_TaoDonHangHoan(username);
         openComponent(fLichSuDonHang);
-    }//GEN-LAST:event_pnlLichSuDonHangMousePressed
+    }//GEN-LAST:event_pnlDonHangHoanMousePressed
 
     private void pnlDonHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlDonHangMouseClicked
         boolean flag = true;
@@ -445,6 +482,7 @@ public class GD_NhanVien extends javax.swing.JFrame {
             flag = false;
         }
         pnlTitleTaoDonHang.setVisible(flag);
+        pnlTitleDonHangHoan.setVisible(flag);
         pnlTitleLichSuDonHang.setVisible(flag);
     }//GEN-LAST:event_pnlDonHangMouseClicked
 
@@ -506,6 +544,11 @@ public class GD_NhanVien extends javax.swing.JFrame {
 //        pnlGioiThieu.setkEndColor(new java.awt.Color(255, 204, 204));
 //        pnlGioiThieu.setkStartColor(new java.awt.Color(102, 0, 153));
     }//GEN-LAST:event_pnlGioiThieuMouseClicked
+
+    private void pnlLichSuDonHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlLichSuDonHangMousePressed
+        GD_LichSuDonHang gd = new GD_LichSuDonHang(username);
+        openComponent(gd);
+    }//GEN-LAST:event_pnlLichSuDonHangMousePressed
     // open frame when click panel
     void openComponent(JInternalFrame frame) {
         Component[] components = pnlForm.getComponents();
@@ -582,6 +625,7 @@ public class GD_NhanVien extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private keeptoo.KGradientPanel kGradientPanel1;
     private javax.swing.JLabel lblChucVu;
     private javax.swing.JLabel lblDonHang;
@@ -590,10 +634,12 @@ public class GD_NhanVien extends javax.swing.JFrame {
     private javax.swing.JLabel lblKhachHang;
     private javax.swing.JLabel lblLichSuDonHang;
     private javax.swing.JLabel lblTaoHoaDon;
+    private javax.swing.JLabel lblTaoHoaDon1;
     private javax.swing.JLabel lblTen;
     private javax.swing.JLabel lblThongKe;
     private javax.swing.JLabel lblTroGiup;
     private keeptoo.KGradientPanel pnlDonHang;
+    private keeptoo.KGradientPanel pnlDonHangHoan;
     private javax.swing.JPanel pnlForm;
     private keeptoo.KGradientPanel pnlGioiThieu;
     private keeptoo.KGradientPanel pnlKhachHang;
@@ -604,6 +650,7 @@ public class GD_NhanVien extends javax.swing.JFrame {
     private javax.swing.JPanel pnlSilde;
     private keeptoo.KGradientPanel pnlTaoDonHang;
     private keeptoo.KGradientPanel pnlThongKe;
+    private javax.swing.JPanel pnlTitleDonHangHoan;
     private javax.swing.JPanel pnlTitleLichSuDonHang;
     private javax.swing.JPanel pnlTitleTaoDonHang;
     private keeptoo.KGradientPanel pnlTroGiup;
