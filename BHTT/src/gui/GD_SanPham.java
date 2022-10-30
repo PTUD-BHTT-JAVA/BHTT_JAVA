@@ -65,7 +65,7 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
     private DAO_KichThuoc kt_dao;
     private String filename = null;
     private byte[] anhSP = null;
-    private final DefaultTableModel modolSP;
+    private  DefaultTableModel modolSP;
     List<RowFilter<DefaultTableModel, Object>> filters = new ArrayList<>();
     private TableRowSorter<DefaultTableModel> tr;
     int index = -1;
@@ -439,6 +439,11 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
 
         cbxPLL.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         cbxPLL.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả" }));
+        cbxPLL.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbxCLLMouseClicked(evt);
+            }
+        });
         cbxPLL.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxPLLActionPerformed(evt);
@@ -459,6 +464,11 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
 
         cbxCLL.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         cbxCLL.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả" }));
+        cbxCLL.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbxCLLMouseClicked(evt);
+            }
+        });
         cbxCLL.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxCLLActionPerformed(evt);
@@ -467,6 +477,11 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
 
         cbxML.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         cbxML.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả" }));
+        cbxML.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbxCLLMouseClicked(evt);
+            }
+        });
         cbxML.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxMLActionPerformed(evt);
@@ -475,6 +490,11 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
 
         cbxKTL.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         cbxKTL.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả" }));
+        cbxKTL.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbxCLLMouseClicked(evt);
+            }
+        });
         cbxKTL.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxKTLActionPerformed(evt);
@@ -484,6 +504,11 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
         jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel20.setText("Tìm kiếm:");
 
+        txtTim.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtTimMouseClicked(evt);
+            }
+        });
         txtTim.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtTimKeyReleased(evt);
@@ -594,15 +619,7 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
             new String [] {
                 "STT", "Mã ", "Tên sản phẩm", "Số lượng", "Giá", "Phân loại", "Nhà cung cấp", "Màu sắc", "Chất liệu", "Kích thước"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
+        ));
         jtbSanPham.setMaximumSize(new java.awt.Dimension(2147483647, 460));
         jtbSanPham.setMinimumSize(new java.awt.Dimension(1500, 300));
         jtbSanPham.setPreferredSize(new java.awt.Dimension(750, 450));
@@ -623,11 +640,40 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtbSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbSanPhamMouseClicked
-        NapDuLieuTuTable();
+        int chon = jtbSanPham.getSelectedRow();
+        String ma = jtbSanPham.getValueAt(chon, 1).toString();
+        SanPham spp = new DAO_SanPham().laySanPhamBangMa(ma);
+        txtTenSP.setText(spp.getTenSP());
+        txtSL.setText(spp.getSoLuong() + "");
+        txtGia.setText(spp.getGiaGoc() + "");
+        cbxPLF.setSelectedItem(spp.getLoaiSanPham().getTenLoaiSP());
+        cbxMF.setSelectedItem(spp.getMauSac().getTenMau());
+        cbxCLF.setSelectedItem(spp.getChatLieu().getTenChatLieu());
+        cbxNCCF.setSelectedItem(spp.getNhaCungCap().getTenNCC());
+        cbxKTF.setSelectedItem(spp.getKichThuoc().getTenKichThuoc());
+        txaMoTa.setText(spp.getMoTa());
+        hanSD.setDate(spp.getNgayNhap());
+        ngayNhap.setDate(spp.getHanSD());
+        byte[] hinhanh = spp.getHinhAnh();///
+        if (hinhanh == null) {
+            lblHinhAnh.setIcon(null);
+        } else {
+            ImageIcon imageIcon = new ImageIcon(new ImageIcon(hinhanh).getImage().getScaledInstance(lblHinhAnh.getWidth(), lblHinhAnh.getHeight(), Image.SCALE_SMOOTH));
+            lblHinhAnh.setIcon(imageIcon);
+        }
+//        lsp_dao = new DAO_LoaiSP();
+//        LoaiSanPham listLSP = lsp_dao.layLoaiSPBangMa(spp.getLoaiSanPham().getMaLoaiSP());
+//        for (LoaiSanPham lsp: listLSP)
+        {
+
+        }
+
+        hangChon = jtbSanPham.getSelectedRow();
 
     }//GEN-LAST:event_jtbSanPhamMouseClicked
     private void NapDuLieuTuTable() {
         hangChon = jtbSanPham.getSelectedRow();
+        
         String ma = modolSP.getValueAt(hangChon, 1).toString();
         SanPham spp = new DAO_SanPham().laySanPhamBangMa(ma);
         txtTenSP.setText(spp.getTenSP());
@@ -845,15 +891,17 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
             DocDuLieuLenTable();
         }
     }//GEN-LAST:event_btnXoaSPActionPerformed
-    public void timKiemNhaCC(String ten) {
-        TableRowSorter<DefaultTableModel> trs = new TableRowSorter<>(modolSP);
-        jtbSanPham.setRowSorter(trs);
-        trs.setRowFilter(RowFilter.regexFilter(ten));
+    private void filter(String s){
+        TableRowSorter<DefaultTableModel> tr=new TableRowSorter<DefaultTableModel>(modolSP);
+        jtbSanPham.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter("(?i)"+s));
+
+        
     }
     private void txtTimKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKeyReleased
 
         String search = txtTim.getText();
-        timKiemNhaCC(search);
+        filter(search);
     }//GEN-LAST:event_txtTimKeyReleased
     private void XoaHetDLTrenTbale() {
         DefaultTableModel fm = (DefaultTableModel) jtbSanPham.getModel();
@@ -1201,6 +1249,20 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
         }
 
     }//GEN-LAST:event_btnIXActionPerformed
+
+    private void cbxCLLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbxCLLMouseClicked
+        txtTim.setText("");
+        
+    }//GEN-LAST:event_cbxCLLMouseClicked
+
+    private void txtTimMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTimMouseClicked
+        filter("");
+        cbxCLL.setSelectedIndex(0);
+        cbxML.setSelectedIndex(0);
+        cbxKTL.setSelectedIndex(0);
+        cbxPLL.setSelectedIndex(0);
+        filters.removeAll(filters);
+    }//GEN-LAST:event_txtTimMouseClicked
     private String maTuSinh() {
         String ma = "SP";
         int tachMa;
