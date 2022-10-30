@@ -342,18 +342,25 @@ public class Form_HoaDon extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel10.setText("Tổng số lượng :");
         jPanel2.add(jLabel10);
+
+        txtTongSoLuong.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jPanel2.add(txtTongSoLuong);
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel11.setText("Khuyến mãi :");
         jPanel2.add(jLabel11);
 
-        lblKM.setLayout(new java.awt.BorderLayout());
-        lblKM.add(lblKhuyenMai, java.awt.BorderLayout.WEST);
+        lblKM.setLayout(new javax.swing.BoxLayout(lblKM, javax.swing.BoxLayout.X_AXIS));
+
+        lblKhuyenMai.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        lblKhuyenMai.setMaximumSize(new java.awt.Dimension(700, 900));
+        lblKhuyenMai.setMinimumSize(new java.awt.Dimension(80, 0));
+        lblKhuyenMai.setPreferredSize(new java.awt.Dimension(80, 0));
+        lblKM.add(lblKhuyenMai);
 
         jLabel18.setText("%");
         jLabel18.setPreferredSize(new java.awt.Dimension(20, 16));
-        lblKM.add(jLabel18, java.awt.BorderLayout.EAST);
+        lblKM.add(jLabel18);
 
         jPanel2.add(lblKM);
         jPanel2.add(jLabel15);
@@ -364,16 +371,21 @@ public class Form_HoaDon extends javax.swing.JFrame {
         jPanel2.add(jLabel12);
 
         txtTongCong.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtTongCong.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jPanel2.add(txtTongCong);
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel13.setText("Tiền khách đưa");
         jPanel2.add(jLabel13);
+
+        txtTienKhachDua.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
         jPanel2.add(txtTienKhachDua);
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel14.setText("Tiền thối lại");
         jPanel2.add(jLabel14);
+
+        txtTienThoiLai.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
         jPanel2.add(txtTienThoiLai);
 
         pnlGiua.add(jPanel2);

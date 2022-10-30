@@ -26,7 +26,9 @@ import entity.MauSac;
 import entity.NhanVien;
 import entity.SanPham;
 import entity.TaiKhoan;
+import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.event.ComponentListener;
 import java.awt.event.ContainerEvent;
 import java.awt.event.ContainerListener;
@@ -42,6 +44,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import java.util.logging.Logger;
 import java.util.logging.Level;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 
@@ -80,11 +84,15 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel{
     private DAO_HoaDon hd_dao;
     private ArrayList<SanPham> dsSPTrongDonHang;
     private String txtSDT,txtTenNV;
+    private JLabel lblHT;
+
     
     public Panel_ChiTietHoaDon(String sdt, String tenNV) {
+        
         txtSDT=sdt;
         txtTenNV=tenNV;
         initComponents();
+        pnlTB.setVisible(false);
         this.setFocusable(true);
 
         try {
@@ -302,7 +310,10 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel{
         txtTienKhachDua = new swing.TextField();
         lblTienThoi = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
+        pnlTB = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(204, 204, 255));
         setLayout(new javax.swing.OverlayLayout(this));
 
         jPanel6.setLayout(new javax.swing.BoxLayout(jPanel6, javax.swing.BoxLayout.Y_AXIS));
@@ -635,7 +646,7 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel{
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1122, Short.MAX_VALUE)
+            .addGap(0, 1240, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -649,6 +660,19 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel{
         jPanel6.add(pnlLast);
 
         add(jPanel6);
+
+        pnlTB.setMaximumSize(new java.awt.Dimension(999999, 99999999));
+        pnlTB.setMinimumSize(new java.awt.Dimension(600, 600));
+        pnlTB.setPreferredSize(new java.awt.Dimension(1700, 900));
+        pnlTB.setLayout(new java.awt.BorderLayout());
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(153, 0, 153));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("ĐƠN HÀNG ĐÃ HOÀN THÀNH");
+        pnlTB.add(jLabel1, java.awt.BorderLayout.CENTER);
+
+        add(pnlTB);
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbxCLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCLActionPerformed
@@ -741,12 +765,13 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel{
                 lblTienThoi.setText(df.format(tienThoi));
                 txtTongTien.setText(df.format(tongThanhTien));
                 txtTienKhachDua.setText("");
-                JOptionPane.showMessageDialog(null,"Thanh toán thành công");
-
-                XoaHetDLTrenTbale(tableDonHang);
+                XoaHetDLTrenTbale(tableDonHang);       
                 Form_HoaDon fHD=new Form_HoaDon(ma);
                 fHD.setLocationRelativeTo(null);
                 fHD.setVisible(true);
+                this.remove(jPanel6);
+                pnlTB.setVisible(true);
+                
             } 
         }
     }//GEN-LAST:event_btnThanhToanActionPerformed
@@ -842,6 +867,7 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel{
     private javax.swing.JComboBox<String> cbxKT;
     private javax.swing.JComboBox<String> cbxMS;
     private javax.swing.JComboBox<String> cbxPL;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
@@ -865,6 +891,7 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel{
     private javax.swing.JPanel pnlDonHang;
     private javax.swing.JPanel pnlForm;
     private javax.swing.JPanel pnlLast;
+    private javax.swing.JPanel pnlTB;
     private javax.swing.JPanel pnlTKnSL;
     private javax.swing.JTable tableDonHang;
     private swing.TextField txtTienKhachDua;
@@ -875,6 +902,7 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel{
     Component setPreferredSize(JPanel pnlForm) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
 
 
 }
