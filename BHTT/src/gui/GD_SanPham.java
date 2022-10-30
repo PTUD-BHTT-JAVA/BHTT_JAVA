@@ -93,7 +93,8 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
         DocDuLieuLenTable();
         DocDuLieuVaoCombobox();
         moKhoaTextfields(false);
-
+        btnChonAnh.setEnabled(false);
+        btnLuu.setEnabled(false);
         tr = new TableRowSorter<DefaultTableModel>(modolSP);
 
         jtbSanPham.setRowSorter(tr);
@@ -626,11 +627,7 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jtbSanPhamMouseClicked
     private void NapDuLieuTuTable() {
-
         hangChon = jtbSanPham.getSelectedRow();
-        if (hangChon == -1) {
-            return;
-        }
         String ma = modolSP.getValueAt(hangChon, 1).toString();
         SanPham spp = new DAO_SanPham().laySanPhamBangMa(ma);
         txtTenSP.setText(spp.getTenSP());
@@ -641,11 +638,6 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
         cbxCLF.setSelectedItem(spp.getChatLieu().getTenChatLieu());
         cbxNCCF.setSelectedItem(spp.getNhaCungCap().getTenNCC());
         cbxKTF.setSelectedItem(spp.getKichThuoc().getTenKichThuoc());
-        // cbxPLF.setSelectedItem(modolSP.getValueAt(hangChon, 5).toString());
-//         cbxMF.setSelectedItem(modolSP.getValueAt(hangChon, 7).toString());
-//         cbxCLF.setSelectedItem(modolSP.getValueAt(hangChon, 8).toString());
-//         cbxNCCF.setSelectedItem(modolSP.getValueAt(hangChon, 6).toString());
-//         cbxKTF.setSelectedItem(modolSP.getValueAt(hangChon, 9).toString());
         txaMoTa.setText(spp.getMoTa());
         hanSD.setDate(spp.getNgayNhap());
         ngayNhap.setDate(spp.getHanSD());
@@ -761,7 +753,6 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
         txtGia.setEditable(b);
         txtSL.setEditable(b);
         txtTenSP.setEditable(b);
-        txtTim.setEditable(b);
         txaMoTa.setEditable(b);
         hanSD.setEnabled(b);
         ngayNhap.setEnabled(b);
@@ -841,6 +832,10 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
 
     private void btnXoaSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaSPActionPerformed
         int r = jtbSanPham.getSelectedRow();
+        if (r == -1) {
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn sản phẩm cần xóa");
+            return;
+        }
         String ma = modolSP.getValueAt(r, 1).toString();
         int opt = JOptionPane.showConfirmDialog(null, "Xác nhận", "Bạn muốn xóa", JOptionPane.YES_NO_OPTION);
         if (opt == JOptionPane.YES_OPTION) {
@@ -991,7 +986,6 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
             btnLuu.setEnabled(true);
             btnSua.setEnabled(true);
             btnChonAnh.setEnabled(true);
-            XoaTrang();
             btnSua.setText("Hủy");
 
         } else if (btnSua.getText().equalsIgnoreCase("Hủy")) {
@@ -1008,52 +1002,6 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnEXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEXActionPerformed
-//       FileOutputStream excelOut = null;
-//            BufferedOutputStream exBOU = null;
-//            XSSFWorkbook excelJtableExport = null;
-//        JFileChooser excellFileChooser = new JFileChooser("C:\\Users\\bohie\\OneDrive\\Documents\\GitHub\\BHTT_JAVA\\BHTT\\src\\Excell"
-//               + "");
-//       excellFileChooser.setDialogTitle("Lưu bằng");
-//        FileNameExtensionFilter fnef= new FileNameExtensionFilter("EXCEL FILES", "xls","xlsx","xlsm");
-//        excellFileChooser.setFileFilter(fnef);
-//        int excellChooser=excellFileChooser.showSaveDialog(null);
-//        if( excellChooser == JFileChooser.APPROVE_OPTION){
-//           
-//           try {
-//                excelJtableExport = new XSSFWorkbook();
-//               XSSFSheet excelSheet = excelJtableExport.createSheet();
-//               for(int i=0; i<modolSP.getRowCount();i++){
-//                   XSSFRow excellrow = excelSheet.createRow(i);
-//                   for (int j = 0; j < modolSP.getColumnCount(); j++) {
-//                       XSSFCell excelcell = excellrow.createCell(j);
-//                       excelcell.setCellValue(modolSP.getValueAt(i, j).toString());
-//                       
-//                   }
-//               } excelOut = new FileOutputStream(excellFileChooser.getSelectedFile()+".xlsx");
-//                exBOU = new BufferedOutputStream(excelOut);
-//               excelJtableExport.write(exBOU);
-//           } catch (FileNotFoundException ex) {
-//               ex.printStackTrace();
-//           } catch (IOException ex) {
-//               ex.printStackTrace();
-//           } finally {
-//               try {
-//                   if(excelOut!=null){
-//                       excelOut.close();
-//                   }
-//                   if(exBOU!=null){
-//                       exBOU.close();
-//                   }
-//                   if(excelJtableExport!=null){
-//                       excelJtableExport.close();
-//                   }
-//               } catch (IOException ex) {
-//                   ex.printStackTrace();
-//               }
-//           }
-//            
-//            
-//        }
         try {
 
             XSSFWorkbook workbook = new XSSFWorkbook();
@@ -1098,9 +1046,7 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
 
             cell = row.createCell(11, CellType.STRING);
             cell.setCellValue("Loại sản phẩm");
-
-            cell = row.createCell(12, CellType.STRING);
-            cell.setCellValue("Hình ảnh");
+          
             sp_dao = new DAO_SanPham();
             ArrayList<SanPham> ds = sp_dao.getAllSP();
             for (int i = 0; i < ds.size(); i++) {
@@ -1134,29 +1080,32 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
                 cell.setCellValue(ds.get(i).getKichThuoc().getTenKichThuoc());
                 cell = row.createCell(11, CellType.STRING);
                 cell.setCellValue(ds.get(i).getLoaiSanPham().getTenLoaiSP());
-
-//            byte[] lblha= ds.get(i).getHinhAnh();
-//            if(lblha!=null){
-//                 String a= new String(lblha);
-//            cell = row.createCell(12, CellType.STRING);
-//            // byte[] ha= ds.get(i).getHinhAnh();
-//            
-//            cell.setCellValue(lblha.length);
-//            }
             }
-            File f = new File("Excell/sanpham.xlsx");
-            try {
-                FileOutputStream file = new FileOutputStream(f);
-                workbook.write(file);
-                file.close();
-            } catch (Exception e2) {
-                e2.printStackTrace();
+            File excelFile;
+            FileInputStream excelFIS = null;
+            BufferedInputStream excelBIS = null;
+            XSSFWorkbook excelImportToJTable = null;
+            String defaultCurrentDirectoryPath = "C:\\Users\\bohie\\OneDrive\\Documents\\GitHub\\BHTT_JAVA\\BHTT\\Excell";
+            JFileChooser excelFileChooser = new JFileChooser(defaultCurrentDirectoryPath);
+            excelFileChooser.setDialogTitle("Chọn file để import");
+            FileNameExtensionFilter fnef = new FileNameExtensionFilter("EXCEL FILE", "xls", "xlsx", "xlsm");
+            excelFileChooser.setFileFilter(fnef);
+            int excelChooser = excelFileChooser.showOpenDialog(null);
+            if (excelChooser == JFileChooser.APPROVE_OPTION) {
+                try {
+                    excelFile = excelFileChooser.getSelectedFile();
+                    FileOutputStream file = new FileOutputStream(excelFile);
+                    workbook.write(file);
+                    file.close();
+                } catch (Exception e2) {
+                    e2.printStackTrace();
+                }
+                JOptionPane.showMessageDialog(null, "Xuất file thành công");
             }
-            JOptionPane.showMessageDialog(null, "Xuất file thành công");
-
         } catch (Exception e2) {
             e2.printStackTrace();
         }
+
     }//GEN-LAST:event_btnEXActionPerformed
 
     private void btnIXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIXActionPerformed

@@ -409,6 +409,9 @@
                 <Property name="text" type="java.lang.String" value="Xem chi ti&#x1ebf;t &#x111;&#x1a1;n h&#xe0;ng"/>
                 <Property name="focusPainted" type="boolean" value="false"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnChiTietActionPerformed"/>
+              </Events>
             </Component>
             <Component class="swing.TextFieldAnimation" name="txtTim">
               <Properties>

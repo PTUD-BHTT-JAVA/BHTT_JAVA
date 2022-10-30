@@ -323,6 +323,11 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame {
         btnChiTiet.setForeground(new java.awt.Color(255, 255, 255));
         btnChiTiet.setText("Xem chi tiết đơn hàng");
         btnChiTiet.setFocusPainted(false);
+        btnChiTiet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChiTietActionPerformed(evt);
+            }
+        });
 
         txtTim.setHintText("Tìm theo mã hóa đơn / tên khách hàng");
 
@@ -685,6 +690,18 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame {
           setTongThanhTien();
        }
     }//GEN-LAST:event_btnThemActionPerformed
+
+    private void btnChiTietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChiTietActionPerformed
+        int hangChon = tblDSHD.getSelectedRow();
+        if (hangChon == -1) {
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn hóa đơn cần xem chi tiết");
+            return;
+        }
+        String m = modelHoaDon.getValueAt(hangChon, 0).toString();
+        DG_CTDH dgCTDH= new DG_CTDH(m  );
+        dgCTDH.setLocationRelativeTo(null);
+        dgCTDH.setVisible(true);
+    }//GEN-LAST:event_btnChiTietActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
