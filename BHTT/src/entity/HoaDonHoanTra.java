@@ -5,6 +5,7 @@
 package entity;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -13,10 +14,10 @@ import java.util.Objects;
  */
 public class HoaDonHoanTra {
     private String maHDHT;
-    private LocalDate ngayHoanTra;
+    private Date ngayHoanTra;
     private HoaDon hoaDon;
 
-    public HoaDonHoanTra(String maHDHT, LocalDate ngayHoanTra, HoaDon hoaDon) {
+    public HoaDonHoanTra(String maHDHT, Date ngayHoanTra, HoaDon hoaDon) {
         this.maHDHT = maHDHT;
         this.ngayHoanTra = ngayHoanTra;
         this.hoaDon = hoaDon;
@@ -37,11 +38,11 @@ public class HoaDonHoanTra {
         this.maHDHT = maHDHT;
     }
 
-    public LocalDate getNgayHoanTra() {
+    public Date getNgayHoanTra() {
         return ngayHoanTra;
     }
 
-    public void setNgayHoanTra(LocalDate ngayHoanTra) {
+    public void setNgayHoanTra(Date ngayHoanTra) {
         this.ngayHoanTra = ngayHoanTra;
     }
 
