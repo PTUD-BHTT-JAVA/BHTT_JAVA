@@ -203,7 +203,7 @@ public class GD_TaiKhoan extends javax.swing.JInternalFrame {
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel13.setText("Tìm kiếm :");
 
-        txtTimKiem.setHintText("Nhập vào tài khoản");
+        txtTimKiem.setHintText("Nhập vào tên đăng nhập...");
         txtTimKiem.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtTimKiemKeyReleased(evt);
@@ -218,8 +218,8 @@ public class GD_TaiKhoan extends javax.swing.JInternalFrame {
                 .addGap(29, 29, 29)
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(855, Short.MAX_VALUE))
+                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(792, Short.MAX_VALUE))
         );
         pnlGiuaLayout.setVerticalGroup(
             pnlGiuaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -246,7 +246,7 @@ public class GD_TaiKhoan extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Tên đăng nhập", "Mật khẩu", "Tên nhân viên", "Chức vụ"
+                "Tên đăng nhập", "Mật khẩu"
             }
         ));
         tblTaiKhoan.addMouseListener(new java.awt.event.MouseAdapter() {
