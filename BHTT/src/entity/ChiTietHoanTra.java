@@ -29,6 +29,34 @@ public class ChiTietHoanTra {
         this.hoaDonHoanTra = hoaDonHoanTra;
     }
 
+    public int getSoLuong() {
+        return soLuong;
+    }
+
+    public void setSoLuong(int soLuong) {
+        this.soLuong = soLuong;
+    }
+
+    public SanPham getSanPham() {
+        return sanPham;
+    }
+
+    public void setSanPham(SanPham sanPham) {
+        this.sanPham = sanPham;
+    }
+
+    public HoaDonHoanTra getHoaDonHoanTra() {
+        return hoaDonHoanTra;
+    }
+
+    public void setHoaDonHoanTra(HoaDonHoanTra hoaDonHoanTra) {
+        this.hoaDonHoanTra = hoaDonHoanTra;
+    }
+    
+//    public double tinhThanhTien(){
+//        
+//    }
+
     @Override
     public int hashCode() {
         int hash = 3;

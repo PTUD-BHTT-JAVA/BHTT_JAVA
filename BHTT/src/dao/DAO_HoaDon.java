@@ -49,6 +49,29 @@ public class DAO_HoaDon {
         }
         return dsHD;
     }
+    public ArrayList<HoaDon> getallDSHoaDonConHoan() {
+        dsHD = new ArrayList<HoaDon>();
+        try {
+            ConnectDB.getInstance();
+            Connection con = ConnectDB.getConnection();
+            String sql = "select * from HoaDon";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                String maNV = rs.getString("maHD");
+                Date ngayLap = rs.getDate("ngayLap");
+                double tienKhachDua = rs.getDouble("tienKhachDua");
+                String diaChi = rs.getString("diaChi");
+                NhanVien nv = new NhanVien(rs.getString("maNV"));
+                KhachHang kh = kh_dao.getKHBangMa(rs.getString("maKH"));
+                HoaDon hd = new HoaDon(maNV, ngayLap, tienKhachDua, diaChi, nv, kh);
+                dsHD.add(hd);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return dsHD;
+    }
 
     public boolean themHoaDon(HoaDon hd) {
         ConnectDB.getInstance();

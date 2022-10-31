@@ -15,7 +15,8 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
-
+import java.sql.PreparedStatement;
+import java.text.SimpleDateFormat;
 /**
  *
  * @author bohie
@@ -46,4 +47,45 @@ public class DAO_HoaDonHoan {
         return dsHDH;
     }
 
+    public boolean themHoaDonHon(HoaDonHoanTra hdHoan) {
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        PreparedStatement stmt = null;
+        int n = 0;
+        try {
+            stmt = con.prepareStatement("insert into HoaDonHoanTra values(?,?,?)");
+            stmt.setString(1, hdHoan.getMaHDHT());
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String ngayLap = sdf.format(hdHoan.getNgayHoanTra());
+            stmt.setString(2, ngayLap);
+            stmt.setString(3, hdHoan.getHoaDon().getMaHD());
+            n = stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                stmt.close();
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+        return n > 0;
+    }
+     public HoaDonHoanTra layHoaDonHoanTheoMa(String maHDH) {
+        try (
+                 Connection con = ConnectDB.opConnection();  PreparedStatement pts = con.prepareStatement("Select * from HoaDonHoanTra where maHDHT =? ")) {
+            pts.setString(1, maHDH);
+            try ( ResultSet rs = pts.executeQuery()) {
+                if (rs.next()) {
+                    Date ngayLap = rs.getDate("HoaDonHoanTra");
+                    HoaDon hd = hd_dao.layHoaDonTheoMa(rs.getString("maHD"));
+                    HoaDonHoanTra hdht = new HoaDonHoanTra(maHDH, ngayLap, hd);
+                    return hdht;
+                }
+            }
+        } catch (Exception e) {
+
+        }
+        return null;
+    }
 }
