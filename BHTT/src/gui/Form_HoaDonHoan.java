@@ -270,18 +270,20 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
+            .addGap(0, 102, Short.MAX_VALUE)
         );
 
         pnlGiua.add(jPanel4);
 
         jPanel2.setMaximumSize(new java.awt.Dimension(500, 32767));
         jPanel2.setPreferredSize(new java.awt.Dimension(350, 122));
-        jPanel2.setLayout(new java.awt.GridLayout(6, 2));
+        jPanel2.setLayout(new java.awt.GridLayout(2, 2));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel10.setText("Tổng số lượng :");
         jPanel2.add(jLabel10);
+
+        txtTongSoLuong.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jPanel2.add(txtTongSoLuong);
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -289,6 +291,7 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
         jPanel2.add(jLabel12);
 
         txtTongCong.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtTongCong.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jPanel2.add(txtTongCong);
 
         pnlGiua.add(jPanel2);
@@ -301,7 +304,7 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
+            .addGap(0, 102, Short.MAX_VALUE)
         );
 
         pnlGiua.add(jPanel9);
@@ -346,7 +349,7 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 41, Short.MAX_VALUE)
+            .addGap(0, 43, Short.MAX_VALUE)
         );
 
         pnlDuoi.add(jPanel1);

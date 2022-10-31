@@ -179,7 +179,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel12" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtTenNV" alignment="0" min="-2" pref="202" max="-2" attributes="0"/>
+                              <Component id="lblTenNV" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       </Group>
@@ -199,9 +199,9 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtTenNV" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblTenNV" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="13" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -229,11 +229,6 @@
                     <Property name="text" type="java.lang.String" value="T&#xea;n nh&#xe2;n vi&#xea;n :"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="txtTenNV">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Nguy&#x1ec5;n V&#x103;n A"/>
-                  </Properties>
-                </Component>
                 <Component class="javax.swing.JLabel" name="jLabel11">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="12 Nguy&#x1ec5;n V&#x103;n B&#x1ea3;o, ph&#x1b0;&#x1edd;ng 4, qu&#x1ead;n G&#xf2; V&#x1ea5;p,  "/>
@@ -242,6 +237,11 @@
                 <Component class="javax.swing.JLabel" name="jLabel12">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="th&#xe0;nh ph&#x1ed1; H&#x1ed3; Ch&#xed; Minh"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblTenNV">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="jLabel4"/>
                   </Properties>
                 </Component>
               </SubComponents>

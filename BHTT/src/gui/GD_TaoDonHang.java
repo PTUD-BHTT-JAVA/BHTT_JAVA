@@ -107,6 +107,7 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
         cthd_dao = new DAO_ChiTietHoaDon();
         kh = new DAO_KhachHang();
         nv = new DAO_NhanVien();
+        lblTenNV.setText(nv.layNhanVienBangMa(username).getTenNV());
 //        jtbSanPham.setRowSorter(tr);
         
         
@@ -284,9 +285,9 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        txtTenNV = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        lblTenNV = new javax.swing.JLabel();
         pnlKhachHang2 = new javax.swing.JPanel();
         txtSDT = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
@@ -385,11 +386,11 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
 
         jLabel10.setText("Tên nhân viên :");
 
-        txtTenNV.setText("Nguyễn Văn A");
-
         jLabel11.setText("12 Nguyễn Văn Bảo, phường 4, quận Gò Vấp,  ");
 
         jLabel12.setText("thành phố Hồ Chí Minh");
+
+        lblTenNV.setText("jLabel4");
 
         javax.swing.GroupLayout pnlThongTinCuaHangLayout = new javax.swing.GroupLayout(pnlThongTinCuaHang);
         pnlThongTinCuaHang.setLayout(pnlThongTinCuaHangLayout);
@@ -405,7 +406,7 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
                 .addGroup(pnlThongTinCuaHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel12)
                     .addComponent(jLabel11)
-                    .addComponent(txtTenNV, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblTenNV))
                 .addGap(26, 26, 26))
         );
         pnlThongTinCuaHangLayout.setVerticalGroup(
@@ -421,8 +422,8 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlThongTinCuaHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(txtTenNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblTenNV))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         pnlDau.add(pnlThongTinCuaHang);
@@ -634,7 +635,7 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
             JOptionPane.showMessageDialog(this, "Hãy chọn khách hàng để tạo hóa đơn!");
         }else{
     
-        Panel_ChiTietHoaDon pnl=new Panel_ChiTietHoaDon(txtSDT.getText(),txtTenNV.getText());
+        Panel_ChiTietHoaDon pnl=new Panel_ChiTietHoaDon(txtSDT.getText(),lblTenNV.getText());
         pnlTab.add(txtTenKH.getText(),pnl);
         pnlTab.setSelectedComponent(pnl);
         txtSDT.setText("");
@@ -701,6 +702,7 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JLabel lblTenNV;
     private javax.swing.JPanel pnlDau;
     private javax.swing.JPanel pnlDongHo1;
     private javax.swing.JPanel pnlKhachHang2;
@@ -713,7 +715,6 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
     private javax.swing.JTextField txtSDT;
     private javax.swing.JTextField txtSoDon;
     private javax.swing.JTextField txtTenKH;
-    private javax.swing.JTextField txtTenNV;
     // End of variables declaration//GEN-END:variables
 
     @Override

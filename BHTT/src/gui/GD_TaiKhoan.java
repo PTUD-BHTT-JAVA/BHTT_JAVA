@@ -88,6 +88,7 @@ public class GD_TaiKhoan extends javax.swing.JInternalFrame {
         pnlTren.setPreferredSize(new java.awt.Dimension(1324, 130));
         pnlTren.setLayout(new java.awt.BorderLayout());
 
+        pnlThongTin.setBackground(new java.awt.Color(204, 204, 255));
         pnlThongTin.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 204, 102)), "Thông tin tài khoản", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 3, 14))); // NOI18N
         pnlThongTin.setToolTipText("");
         pnlThongTin.setMaximumSize(new java.awt.Dimension(841, 32767));
@@ -146,6 +147,7 @@ public class GD_TaiKhoan extends javax.swing.JInternalFrame {
 
         pnlTren.add(pnlThongTin, java.awt.BorderLayout.WEST);
 
+        pnlNut.setBackground(new java.awt.Color(204, 204, 255));
         pnlNut.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         pnlNut.setMaximumSize(new java.awt.Dimension(300, 32767));
         pnlNut.setPreferredSize(new java.awt.Dimension(300, 300));
@@ -155,6 +157,11 @@ public class GD_TaiKhoan extends javax.swing.JInternalFrame {
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
         jButton2.setText("Xóa tài khoản");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlNutLayout = new javax.swing.GroupLayout(pnlNut);
         pnlNut.setLayout(pnlNutLayout);
@@ -181,6 +188,7 @@ public class GD_TaiKhoan extends javax.swing.JInternalFrame {
 
         pnlMain.add(pnlTren);
 
+        pnlGiua.setBackground(new java.awt.Color(204, 204, 255));
         pnlGiua.setMaximumSize(new java.awt.Dimension(32767, 50));
         pnlGiua.setPreferredSize(new java.awt.Dimension(3666, 60));
 
@@ -218,6 +226,7 @@ public class GD_TaiKhoan extends javax.swing.JInternalFrame {
 
         pnlMain.add(pnlGiua);
 
+        pnlDuoi.setBackground(new java.awt.Color(204, 204, 255));
         pnlDuoi.setMaximumSize(new java.awt.Dimension(2147483647, 900));
         pnlDuoi.setPreferredSize(new java.awt.Dimension(1314, 505));
         pnlDuoi.setLayout(new javax.swing.BoxLayout(pnlDuoi, javax.swing.BoxLayout.LINE_AXIS));
@@ -255,6 +264,10 @@ public class GD_TaiKhoan extends javax.swing.JInternalFrame {
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

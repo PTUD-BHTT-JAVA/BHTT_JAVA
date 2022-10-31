@@ -268,13 +268,16 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
         setFrameIcon(null);
         getContentPane().setLayout(new javax.swing.OverlayLayout(getContentPane()));
 
+        pnlMain.setBackground(new java.awt.Color(204, 204, 255));
         pnlMain.setLayout(new javax.swing.BoxLayout(pnlMain, javax.swing.BoxLayout.Y_AXIS));
 
+        pnlTren.setBackground(new java.awt.Color(204, 204, 255));
         pnlTren.setMaximumSize(new java.awt.Dimension(2147483647, 280));
         pnlTren.setMinimumSize(new java.awt.Dimension(100, 300));
         pnlTren.setPreferredSize(new java.awt.Dimension(1324, 290));
         pnlTren.setLayout(new java.awt.BorderLayout());
 
+        pnlThongTin.setBackground(new java.awt.Color(204, 204, 255));
         pnlThongTin.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 204, 102)), "Thông tin nhà cung cấp", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 3, 14))); // NOI18N
         pnlThongTin.setToolTipText("");
         pnlThongTin.setMaximumSize(new java.awt.Dimension(841, 32767));
@@ -343,6 +346,7 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
 
         pnlTren.add(pnlThongTin, java.awt.BorderLayout.WEST);
 
+        pnlNut.setBackground(new java.awt.Color(204, 204, 255));
         pnlNut.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         pnlNut.setMaximumSize(new java.awt.Dimension(300, 32767));
         pnlNut.setPreferredSize(new java.awt.Dimension(300, 300));
@@ -435,6 +439,7 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
 
         pnlMain.add(pnlTren);
 
+        pnlGiua.setBackground(new java.awt.Color(204, 204, 255));
         pnlGiua.setMaximumSize(new java.awt.Dimension(32767, 50));
         pnlGiua.setPreferredSize(new java.awt.Dimension(3666, 60));
 
@@ -471,6 +476,7 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
 
         pnlMain.add(pnlGiua);
 
+        pnlDuoi.setBackground(new java.awt.Color(204, 204, 255));
         pnlDuoi.setMaximumSize(new java.awt.Dimension(2147483647, 500));
         pnlDuoi.setPreferredSize(new java.awt.Dimension(1314, 505));
 

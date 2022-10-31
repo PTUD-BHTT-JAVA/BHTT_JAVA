@@ -107,10 +107,14 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setFrameIcon(null);
 
+        pnlMain.setBackground(new java.awt.Color(204, 204, 255));
+
+        pnlTop.setBackground(new java.awt.Color(204, 204, 255));
+
         lblTieuDe.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
         lblTieuDe.setText("THỐNG KÊ");
 
-        pnlTieuChi.setBackground(new java.awt.Color(255, 255, 255));
+        pnlTieuChi.setBackground(new java.awt.Color(204, 204, 255));
         pnlTieuChi.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         lblTuNgay.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
@@ -154,8 +158,6 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
         btnQuy4.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         btnQuy4.setForeground(new java.awt.Color(255, 255, 255));
         btnQuy4.setText("Quý 4 ");
-
-        jYearChooser1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout pnlTieuChiLayout = new javax.swing.GroupLayout(pnlTieuChi);
         pnlTieuChi.setLayout(pnlTieuChiLayout);
@@ -240,6 +242,8 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
                 .addComponent(pnlTieuChi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        pnlBottom.setBackground(new java.awt.Color(204, 204, 255));
 
         tbpThongKe.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         tbpThongKe.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
