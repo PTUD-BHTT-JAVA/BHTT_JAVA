@@ -841,8 +841,8 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
                 modelCanHoan.addRow(new Object[]{
                     cthd.getSanPham().getMaSP(),
                     cthd.getSanPham().getTenSP(),
-                    sl,
-                    cthd.getTongTien()
+                    sl,sl*
+                    cthd.getSanPham().getGiaGoc()
                 });
                 slDaHoan=0;
                 sl=0;

@@ -4,6 +4,10 @@
  */
 package gui;
 
+import java.awt.Desktop;
+import java.io.File;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ACER
@@ -32,41 +36,123 @@ public class GD_NVTroGiup extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pnlMain1 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         pnlMain = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
 
         setBorder(null);
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setFrameIcon(null);
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel2.setText("Trợ giúp nhân viên");
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel3.setText("Phần mềm được cài đặt trên máy tính và chạy không phụ thuộc vào mạng internet. Ngoài ra, nhà quản lý có thể theo dõi tình hình kinh doanh của cơ sở dễ dàng.");
+
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
+        jButton1.setText("Hướng dẫn sử dụng phần mềm");
+        jButton1.setPreferredSize(new java.awt.Dimension(257, 47));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel4.setText("BHTT là phần mềm quản lý cửa hàng chạy trên nền tảng Window.");
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel5.setText("Nhằm mang đến cho quý khách hàng sự hài lòng nhất cũng như dễ dàng tiếp cận với hệ thống quản lý cửa hàng, chúng tôi đã đưa ra bản hướng dẫn sử dụng hệ thống quản lý cửa hàng BHTT.");
 
         javax.swing.GroupLayout pnlMainLayout = new javax.swing.GroupLayout(pnlMain);
         pnlMain.setLayout(pnlMainLayout);
         pnlMainLayout.setHorizontalGroup(
             pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlMainLayout.createSequentialGroup()
-                .addGap(122, 122, 122)
-                .addComponent(jLabel2)
-                .addContainerGap(894, Short.MAX_VALUE))
+            .addGap(0, 1314, Short.MAX_VALUE)
         );
         pnlMainLayout.setVerticalGroup(
             pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlMainLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(jLabel2)
-                .addContainerGap(672, Short.MAX_VALUE))
+            .addGap(0, 756, Short.MAX_VALUE)
         );
 
-        getContentPane().add(pnlMain, java.awt.BorderLayout.CENTER);
+        javax.swing.GroupLayout pnlMain1Layout = new javax.swing.GroupLayout(pnlMain1);
+        pnlMain1.setLayout(pnlMain1Layout);
+        pnlMain1Layout.setHorizontalGroup(
+            pnlMain1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlMain1Layout.createSequentialGroup()
+                .addGroup(pnlMain1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlMain1Layout.createSequentialGroup()
+                        .addGroup(pnlMain1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 1240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pnlMain1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 1240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pnlMain1Layout.createSequentialGroup()
+                                .addGap(309, 309, 309)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 537, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pnlMain1Layout.createSequentialGroup()
+                                .addGap(389, 389, 389)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlMain1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(pnlMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        pnlMain1Layout.setVerticalGroup(
+            pnlMain1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlMain1Layout.createSequentialGroup()
+                .addGap(113, 113, 113)
+                .addComponent(jLabel4)
+                .addGap(36, 36, 36)
+                .addComponent(jLabel3)
+                .addGap(27, 27, 27)
+                .addComponent(jLabel5)
+                .addGap(138, 138, 138)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        getContentPane().add(pnlMain1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        /**
+        * //Cach 1:
+        * try{
+            Runtime.getRuntime().exec("rund1132 url.dll, FileProtocolHandler" + "D:\\aGiaoTrinhIUH\\GiaoTrinhKy1_Nam3\\Help.pdf" );
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Check file detail");
+        }
+        */
+        try{
+            File file =new File ("D:\\Help.pdf");
+            if(file.exists()) {
+                if(Desktop.isDesktopSupported()){
+                    Desktop.getDesktop().open(file);
+                }else{
+                    JOptionPane.showMessageDialog(this, "Not Supported");
+                }
+            }else{
+                JOptionPane.showMessageDialog(this, "File Not Exist");
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel pnlMain;
+    private javax.swing.JPanel pnlMain1;
     // End of variables declaration//GEN-END:variables
 }
