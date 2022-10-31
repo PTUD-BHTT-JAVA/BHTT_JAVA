@@ -2,12 +2,14 @@ package gui;
 
 import connectDB.ConnectDB;
 import dao.DAO_ChiTietHoaDon;
+import dao.DAO_ChiTietHoanTra;
 import dao.DAO_HoaDon;
 import dao.DAO_HoaDonHoan;
 
 import dao.DAO_NhanVien;
 import dao.DAO_SanPham;
 import entity.ChiTietHoaDon;
+import entity.ChiTietHoanTra;
 import entity.HoaDon;
 import entity.HoaDonHoanTra;
 import entity.SanPham;
@@ -28,6 +30,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
     private DefaultTableModel modelCanHoan;
     private DefaultTableModel modelDonHoan;
     private DAO_ChiTietHoaDon cthd_dao;
+    private DAO_ChiTietHoanTra ctht_dao = new DAO_ChiTietHoanTra();
     private DAO_SanPham sp_dao = new DAO_SanPham();
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     private final DAO_HoaDon hd_dao;
@@ -68,6 +71,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
         spnSoLuong.setEnabled(b);
         btnSua.setEnabled(b);
         btnTaoHDHT.setEnabled(b);
+        btnXoaSPDH.setEnabled(b);
     }
 
     private void DocDSHoaDon() {
@@ -128,6 +132,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
         btnHuy = new javax.swing.JButton();
         spnSoLuong = new javax.swing.JSpinner();
         jLabel10 = new javax.swing.JLabel();
+        btnXoaSPDH = new javax.swing.JButton();
         pnlDonHoan = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         t = new javax.swing.JScrollPane();
@@ -443,20 +448,39 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel10.setText("Số lượng:");
 
+        btnXoaSPDH.setBackground(new java.awt.Color(94, 153, 94));
+        btnXoaSPDH.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
+        btnXoaSPDH.setForeground(new java.awt.Color(255, 255, 255));
+        btnXoaSPDH.setText("Xóa");
+        btnXoaSPDH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaSPDHActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlNutLayout = new javax.swing.GroupLayout(pnlNut);
         pnlNut.setLayout(pnlNutLayout);
         pnlNutLayout.setHorizontalGroup(
             pnlNutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlNutLayout.createSequentialGroup()
-                .addGap(9, 9, 9)
-                .addGroup(pnlNutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnHuy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSua, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
-                    .addComponent(btnHoan, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlNutLayout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(spnSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGroup(pnlNutLayout.createSequentialGroup()
+                .addGroup(pnlNutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlNutLayout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addGroup(pnlNutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnSua, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlNutLayout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(spnSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(pnlNutLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnHuy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnlNutLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnHoan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnlNutLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnXoaSPDH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         pnlNutLayout.setVerticalGroup(
@@ -466,13 +490,15 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
                 .addGroup(pnlNutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(spnSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
-                .addGap(56, 56, 56)
+                .addGap(18, 18, 18)
                 .addComponent(btnHoan, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
+                .addComponent(btnXoaSPDH, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17)
                 .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnHuy, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(188, Short.MAX_VALUE))
+                .addContainerGap(163, Short.MAX_VALUE))
         );
 
         pnlHoan.add(pnlNut);
@@ -484,6 +510,8 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
         jLabel7.setMaximumSize(new java.awt.Dimension(360, 20));
         jLabel7.setMinimumSize(new java.awt.Dimension(250, 20));
         pnlDonHoan.add(jLabel7);
+
+        t.setForeground(new java.awt.Color(255, 255, 255));
 
         tblDonHoan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -649,15 +677,15 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
     }
 
     private String maTuSinh() {
-        String ma = "HDH";
+        String ma = "HDHT";
         int tachMa;
         int i = 0, j = 1;
         int[] dem = new int[999];
         String id;
-        
-        for ( HoaDonHoanTra hdht: hdh_dao.getallDSHoaDonHoan()) {
+
+        for (HoaDonHoanTra hdht : hdh_dao.getallDSHoaDonHoan()) {
             id = hdht.getMaHDHT();
-            
+
             tachMa = Integer.parseInt(id.substring(4, 7));
             dem[i] = tachMa;
             i++;
@@ -689,17 +717,56 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
             return;
         }
         btnThem.setEnabled(true);
-        String maHDH = maTuSinh();
-        
+        String maHDHT = maTuSinh();
         String maHD = modelHoaDon.getValueAt(row, 0).toString();
+        Date ngayHT = new Date();
+        //lưu vào sql hóa đơn hoàn trả
+        HoaDonHoanTra hDHT = new HoaDonHoanTra(maHDHT, ngayHT, hd_dao.layHoaDonTheoMa(maHD));
+        hdh_dao.themHoaDonHon(hDHT);
+        //lưu vào sql chi tiết hoàn trả
+        for (int i = 0; i < modelDonHoan.getRowCount(); i++) {
+            SanPham sp = sp_dao.laySanPhamBangMa(modelDonHoan.getValueAt(i, 0).toString());
+            int soLuongHT = Integer.parseInt(modelDonHoan.getValueAt(i, 2).toString());
+            ChiTietHoanTra ctHT = new ChiTietHoanTra(soLuongHT, sp, hDHT);
+            //cập nhâp chi tiết sản phẩm
+            ctht_dao.themCTHoanTra(ctHT);
+            // cập nhập số lượng sản phẩm
+            sp_dao.capNhatSoLuong(sp.getMaSP(), soLuongHT + sp.getSoLuong());
+
+        }
+        btnThem.setEnabled(true);
+        DefaultTableModel fm = (DefaultTableModel) tblCanHoan.getModel();
+        fm.setRowCount(0);
+        DefaultTableModel fmm = (DefaultTableModel) tblDonHoan.getModel();
+        fmm.setRowCount(0);
+        moKhoaControls(false);
+        txtTTDonHang.setText(df.format(0));
+        txtTTDonHoan.setText(df.format(0));
         JOptionPane.showMessageDialog(null, "Hoàn đơn thành công");
-        Form_HoaDonHoan fHDH = new Form_HoaDonHoan(maHDH, maHD);
+        Form_HoaDonHoan fHDH = new Form_HoaDonHoan(maHDHT, maHD);
         fHDH.setLocationRelativeTo(null);
         fHDH.setVisible(true);
-        
+
     }//GEN-LAST:event_btnTaoHDHTActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        int hangChon = tblDonHoan.getSelectedRow();
+        int r = tblCanHoan.getSelectedRow();
+        int soLuongCoSan = (int) modelCanHoan.getValueAt(r, 2);
+        int slSua = (int) spnSoLuong.getValue();
+        if (hangChon == -1) {
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn sản phẩm cần sửa số lượng");
+            return;
+        }
+        if (slSua <= 0) {
+            JOptionPane.showMessageDialog(null, "Số lượng sửa phải lớn hơn 0.");
+            return;
+        }
+        if (slSua > soLuongCoSan) {
+            JOptionPane.showMessageDialog(null, "Số lượng không được vượt quá số lượng bán.");
+            return;
+        }
+        modelDonHoan.setValueAt(slSua, r, 2);
 
     }//GEN-LAST:event_btnSuaActionPerformed
 
@@ -767,6 +834,15 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
         // TODO add your handling code here:
     }//GEN-LAST:event_tblDSHDMouseClicked
 
+    private void btnXoaSPDHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaSPDHActionPerformed
+        int hangChon = tblDonHoan.getSelectedRow();
+        if (hangChon == -1) {
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn sản phẩm cần xóa");
+            return;
+        }
+        modelDonHoan.removeRow(hangChon);
+    }//GEN-LAST:event_btnXoaSPDHActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnChiTiet;
@@ -775,6 +851,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnTaoHDHT;
     private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnXoaSPDH;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
