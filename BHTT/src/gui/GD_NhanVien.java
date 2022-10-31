@@ -57,9 +57,13 @@ public class GD_NhanVien extends javax.swing.JFrame {
         int xsize = (int) tk.getScreenSize().getWidth();
         int ysize = (int) tk.getScreenSize().getHeight();
         this.setSize(xsize, ysize);
+        pnlGioiThieu.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlGioiThieu.setkStartColor(new java.awt.Color(164, 158, 213));
+        lblGioiThieu.setForeground(new Color(102,0,102));
+        icGioiThieu.setForeground(new Color(102,0,102));
         GD_GioiThieu frGioiThieu = new GD_GioiThieu(username);
         openComponent(frGioiThieu);
-
+        
         pnlTitleTaoDonHang.setVisible(false);
         pnlTitleDonHangHoan.setVisible(false);
         pnlTitleLichSuDonHang.setVisible(false);

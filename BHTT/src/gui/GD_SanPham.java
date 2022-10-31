@@ -143,8 +143,9 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
         btnLuu = new javax.swing.JButton();
         btnXoaSP = new javax.swing.JButton();
         btnSua = new javax.swing.JButton();
-        btnThemNhieu = new javax.swing.JButton();
         btnThem = new javax.swing.JButton();
+        btnIX = new javax.swing.JButton();
+        btnEX = new javax.swing.JButton();
         pnlGiua = new javax.swing.JPanel();
         cbxPLL = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
@@ -156,8 +157,6 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
         cbxKTL = new javax.swing.JComboBox<>();
         jLabel20 = new javax.swing.JLabel();
         txtTim = new swing.TextFieldAnimation();
-        btnIX = new javax.swing.JButton();
-        btnEX = new javax.swing.JButton();
         pnlDuoi = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtbSanPham = new javax.swing.JTable();
@@ -171,7 +170,7 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
 
         pnlTren.setMaximumSize(new java.awt.Dimension(2147483647, 310));
         pnlTren.setMinimumSize(new java.awt.Dimension(100, 300));
-        pnlTren.setPreferredSize(new java.awt.Dimension(1500, 300));
+        pnlTren.setPreferredSize(new java.awt.Dimension(1500, 340));
         pnlTren.setLayout(new java.awt.BorderLayout());
 
         pnlThongTin.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 204, 102)), "Thông tin sản phẩm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 3, 14))); // NOI18N
@@ -334,9 +333,11 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
                     .addComponent(cbxCLF, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnlThongTinLayout.createSequentialGroup()
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 62, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jLabel15.getAccessibleContext().setAccessibleName("a");
@@ -367,17 +368,17 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 215, Short.MAX_VALUE)
+            .addGap(0, 217, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(lblHinhAnh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(9, Short.MAX_VALUE)))
+                    .addContainerGap(11, Short.MAX_VALUE)))
         );
 
         pnlNut.add(jPanel1);
 
-        pnlNutSP.setLayout(new java.awt.GridLayout(3, 2));
+        pnlNutSP.setLayout(new java.awt.GridLayout(4, 2));
 
         btnChonAnh.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnChonAnh.setText("Chọn ảnh");
@@ -415,10 +416,6 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
         });
         pnlNutSP.add(btnSua);
 
-        btnThemNhieu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnThemNhieu.setText("Thêm nhiều");
-        pnlNutSP.add(btnThemNhieu);
-
         btnThem.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnThem.setText("Thêm");
         btnThem.addActionListener(new java.awt.event.ActionListener() {
@@ -427,6 +424,24 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
             }
         });
         pnlNutSP.add(btnThem);
+
+        btnIX.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnIX.setText("Thêm nhiều");
+        btnIX.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIXActionPerformed(evt);
+            }
+        });
+        pnlNutSP.add(btnIX);
+
+        btnEX.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnEX.setText("Xuất file");
+        btnEX.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEXActionPerformed(evt);
+            }
+        });
+        pnlNutSP.add(btnEX);
 
         pnlNut.add(pnlNutSP);
 
@@ -515,20 +530,6 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
             }
         });
 
-        btnIX.setText("Import");
-        btnIX.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIXActionPerformed(evt);
-            }
-        });
-
-        btnEX.setText("export");
-        btnEX.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEXActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout pnlGiuaLayout = new javax.swing.GroupLayout(pnlGiua);
         pnlGiua.setLayout(pnlGiuaLayout);
         pnlGiuaLayout.setHorizontalGroup(
@@ -553,15 +554,8 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
                 .addGap(132, 132, 132)
                 .addComponent(jLabel20)
                 .addGap(18, 18, 18)
-                .addGroup(pnlGiuaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlGiuaLayout.createSequentialGroup()
-                        .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(66, Short.MAX_VALUE))
-                    .addGroup(pnlGiuaLayout.createSequentialGroup()
-                        .addComponent(btnIX)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnEX)
-                        .addGap(44, 44, 44))))
+                .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(66, Short.MAX_VALUE))
         );
         pnlGiuaLayout.setVerticalGroup(
             pnlGiuaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -588,13 +582,9 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
                         .addGroup(pnlGiuaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel19)
                             .addComponent(cbxKTL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlGiuaLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(pnlGiuaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnIX)
-                    .addComponent(btnEX))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlGiuaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -792,7 +782,6 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
         btnXoaSP.setEnabled(b);
         btnThem.setEnabled(b);
         btnSua.setEnabled(b);
-        btnThemNhieu.setEnabled(b);
     }
 
     private void moKhoaTextfields(boolean b) {
@@ -1352,7 +1341,6 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnLuu;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
-    private javax.swing.JButton btnThemNhieu;
     private javax.swing.JButton btnXoaSP;
     private javax.swing.JComboBox<String> cbxCLF;
     private javax.swing.JComboBox<String> cbxCLL;
