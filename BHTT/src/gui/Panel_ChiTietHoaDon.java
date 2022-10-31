@@ -71,6 +71,7 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel{
     DecimalFormat df = new DecimalFormat("#,##0 VND");
     int soLuongTon;
     private ArrayList<SanPham> dstt = null;
+    private ArrayList<SanPham> ListSP;
     private double tongThanhTien;
     private double tienThoi;
     private DAO_KhachHang kh;
@@ -104,6 +105,7 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel{
         DocDuLieuVaoCombobox();
 //        moKhoaTextfields(false);
         dstt = new ArrayList<SanPham>();
+        ListSP = new ArrayList<SanPham>();
         tr = new TableRowSorter<DefaultTableModel>(modolSP);
         hd_dao = new DAO_HoaDon();
         cthd_dao = new DAO_ChiTietHoaDon();
@@ -142,6 +144,7 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel{
             cbxKT.addItem(kt.getTenKichThuoc());
         }
     }
+    
     private void DocDuLieuLenTable() {
         sp_dao = new DAO_SanPham();
         ArrayList<SanPham> ds = sp_dao.getAllSP();
@@ -299,7 +302,7 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel{
         }
     }
     
-    public void themSPVaoDonHang(){
+   public void themSPVaoDonHang(){
         int r = jtbSanPham.getSelectedRow();
             if (r != -1) {
                 soLuongTon = Integer.parseInt(modolSP.getValueAt(r, 2).toString());
@@ -834,12 +837,12 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel{
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
     private void btnXoaCTHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaCTHDActionPerformed
-
         int r = tableDonHang.getSelectedRow();
         if(r < 0){
             JOptionPane.showMessageDialog(null,"Chọn sản phẩm cần xóa");
         }else{
             modelDonHang.removeRow(r);
+            dstt.remove(r);
             tongTien();
         }
     }//GEN-LAST:event_btnXoaCTHDActionPerformed
@@ -849,15 +852,27 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel{
         int row = tableDonHang.getSelectedRow();
         if(row < 0){
             JOptionPane.showMessageDialog(null,"Chọn sản phẩm cần cập nhật");
-        }else{
+        } else {
             int slCapNhat = (int) jspSoLuong.getValue();
-            for(SanPham sp : dstt){
-                modelDonHang.setValueAt(jspSoLuong.getValue(),row,2);
-//                modelDonHang.setValueAt(Double.parseDouble(tableDonHang.getValueAt(row, 3).toString()) * slCapNhat , row, 4);
-                modelDonHang.setValueAt(sp.getGiaGoc() * slCapNhat, row, 4);
-                tongTien();
+            SanPham spConlai = sp_dao.laySanPhamBangMa(modelDonHang.getValueAt(row, 0).toString());
+            int soLuongConLai = spConlai.getSoLuong();
+            for (SanPham sp : dstt) {
+                if (slCapNhat > soLuongConLai) {
+                    JOptionPane.showMessageDialog(null, "Số lượng cập nhật không được lớn hơn số tồn");
+                    break;
+                }else{
+                    if (slCapNhat <= 0) {
+                        JOptionPane.showMessageDialog(null, "Số lượng cập nhật lớn hơn 0");
+                        break;
+                    }else{
+                        modelDonHang.setValueAt(jspSoLuong.getValue(), row, 2);
+                        modelDonHang.setValueAt(df.format(spConlai.getGiaGoc() * slCapNhat), row, 4);
+                        sp.setSoLuong(slCapNhat);
+                        tongTien();
+                        break;
+                    } 
+                }
             }
-            
         }
     }//GEN-LAST:event_btnCapNhatActionPerformed
 
@@ -874,12 +889,6 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel{
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        try {
-//            tienThoi = ParseDouble(txtTienKhachDua.getText().toString()) - tongThanhTien;
-//            lblTienThoi.setText(df.format(tienThoi));
-//        } catch (NumberFormatException e) {
-//            e.printStackTrace();
-//        }
     }//GEN-LAST:event_txtTienKhachDuaKeyReleased
 
     private void cbxKTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxKTActionPerformed
@@ -922,13 +931,13 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel{
 
     private void txtTimKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKeyReleased
         String search = txtTim.getText();
-        timKiemNhaCC(search);
+        timKiemSanPham(search);
     }//GEN-LAST:event_txtTimKeyReleased
     
-    public void timKiemNhaCC(String ten) {
-        TableRowSorter<DefaultTableModel> trs = new TableRowSorter<>(modolSP);
-        jtbSanPham.setRowSorter(trs);
-        trs.setRowFilter(RowFilter.regexFilter(ten));
+    public void timKiemSanPham(String ten) {
+        TableRowSorter<DefaultTableModel> tr=new TableRowSorter<DefaultTableModel>(modolSP);
+        jtbSanPham.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter("(?i)"+ten));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

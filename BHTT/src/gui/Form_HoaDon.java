@@ -79,9 +79,9 @@ public class Form_HoaDon extends javax.swing.JFrame {
         lblKhuyenMai.setText(km);
         
         txtTongCong.setText(""+df.format(tc));
-        txtTienKhachDua.setText(""+df.format(dao_HD.layHoaDonTheoMa(maHD).getTienKhachDua()));
+        lplTienKhachDua.setText("   "+df.format(dao_HD.layHoaDonTheoMa(maHD).getTienKhachDua()));
         double thoi= dao_HD.layHoaDonTheoMa(maHD).getTienKhachDua()-tc;
-        txtTienThoiLai.setText(""+df.format(thoi));
+        lplTienThoi.setText("  "+df.format(thoi));
     }
 
 
@@ -134,9 +134,9 @@ public class Form_HoaDon extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         txtTongCong = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        txtTienKhachDua = new javax.swing.JTextField();
+        lplTienKhachDua = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        txtTienThoiLai = new javax.swing.JTextField();
+        lplTienThoi = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         pnlDuoi = new javax.swing.JPanel();
@@ -382,15 +382,15 @@ public class Form_HoaDon extends javax.swing.JFrame {
         jLabel13.setText("Tiền khách đưa");
         jPanel2.add(jLabel13);
 
-        txtTienKhachDua.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
-        jPanel2.add(txtTienKhachDua);
+        lplTienKhachDua.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jPanel2.add(lplTienKhachDua);
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel14.setText("Tiền thối lại");
         jPanel2.add(jLabel14);
 
-        txtTienThoiLai.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
-        jPanel2.add(txtTienThoiLai);
+        lplTienThoi.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jPanel2.add(lplTienThoi);
 
         pnlGiua.add(jPanel2);
 
@@ -558,13 +558,13 @@ public class Form_HoaDon extends javax.swing.JFrame {
     private javax.swing.JLabel lblMaPhieu;
     private javax.swing.JLabel lblNgay;
     private javax.swing.JLabel lblThuNgan;
+    private javax.swing.JLabel lplTienKhachDua;
+    private javax.swing.JLabel lplTienThoi;
     private javax.swing.JPanel pblTren;
     private javax.swing.JPanel pnlDuoi;
     private javax.swing.JPanel pnlGiua;
     private javax.swing.JPanel pnlHoaDon;
     private javax.swing.JTable tableXuatHoaDon;
-    private javax.swing.JTextField txtTienKhachDua;
-    private javax.swing.JTextField txtTienThoiLai;
     private javax.swing.JLabel txtTongCong;
     private javax.swing.JLabel txtTongSoLuong;
     // End of variables declaration//GEN-END:variables
