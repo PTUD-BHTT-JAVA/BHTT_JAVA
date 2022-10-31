@@ -15,6 +15,7 @@ import entity.HoaDonHoanTra;
 import entity.SanPham;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -293,7 +294,11 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
 
         txtTim.setHintText("Tìm theo mã hóa đơn / tên khách hàng");
 
+        btnThem.setBackground(new java.awt.Color(51, 153, 0));
+        btnThem.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnThem.setForeground(new java.awt.Color(255, 255, 255));
         btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/donhangmoi.png"))); // NOI18N
+        btnThem.setText("Hoàn đơn");
         btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThemActionPerformed(evt);
@@ -309,21 +314,21 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
                 .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 361, Short.MAX_VALUE)
                 .addComponent(btnChiTiet, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(57, 57, 57)
-                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60))
+                .addGap(41, 41, 41)
+                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35))
         );
         pnlTimXemLayout.setVerticalGroup(
             pnlTimXemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlTimXemLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlTimXemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlTimXemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(pnlTimXemLayout.createSequentialGroup()
+                .addGroup(pnlTimXemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(pnlTimXemLayout.createSequentialGroup()
+                        .addGroup(pnlTimXemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnChiTiet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGap(6, 6, 6))
-                        .addComponent(txtTim, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(6, 6, 6))
+                    .addComponent(txtTim, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -820,15 +825,27 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
         if (row < 0) {
             JOptionPane.showMessageDialog(null, "Chọn đơn hàng cần hoàn", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         } else {
+            int sl;
+            int slDaHoan=0;
+            ArrayList<ChiTietHoanTra>  dsctht = new ArrayList<ChiTietHoanTra>();
             moKhoaControls(true);
             List<ChiTietHoaDon> hdCanHoan = cthd_dao.layDSHDBangMa(modelHoaDon.getValueAt(row, 0).toString());
             for (ChiTietHoaDon cthd : hdCanHoan) {
+                dsctht = ctht_dao.layCTHTBangMaSP(cthd.getSanPham().getMaSP());
+                for(ChiTietHoanTra ctht: dsctht){
+                    slDaHoan= slDaHoan+ctht.getSoLuong();
+                }
+                
+                
+                sl = cthd.getSoLuong()-slDaHoan;
                 modelCanHoan.addRow(new Object[]{
                     cthd.getSanPham().getMaSP(),
                     cthd.getSanPham().getTenSP(),
-                    cthd.getSoLuong(),
+                    sl,
                     cthd.getTongTien()
                 });
+                slDaHoan=0;
+                sl=0;
             }
             setTongThanhTien();
             btnThem.setEnabled(false);
