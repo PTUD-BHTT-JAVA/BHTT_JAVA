@@ -113,13 +113,16 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
         setFrameIcon(null);
         getContentPane().setLayout(new javax.swing.OverlayLayout(getContentPane()));
 
+        pnlMain.setBackground(new java.awt.Color(204, 204, 255));
         pnlMain.setLayout(new javax.swing.BoxLayout(pnlMain, javax.swing.BoxLayout.Y_AXIS));
 
-        pnlTren.setMaximumSize(new java.awt.Dimension(2147483647, 280));
+        pnlTren.setBackground(new java.awt.Color(204, 204, 255));
+        pnlTren.setMaximumSize(new java.awt.Dimension(2147483647, 340));
         pnlTren.setMinimumSize(new java.awt.Dimension(100, 200));
-        pnlTren.setPreferredSize(new java.awt.Dimension(1324, 270));
+        pnlTren.setPreferredSize(new java.awt.Dimension(1324, 340));
         pnlTren.setLayout(new java.awt.BorderLayout());
 
+        pnlThongTin.setBackground(new java.awt.Color(204, 204, 255));
         pnlThongTin.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 204, 102)), "Thông tin nhân viên", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 3, 14))); // NOI18N
         pnlThongTin.setToolTipText("");
         pnlThongTin.setMaximumSize(new java.awt.Dimension(841, 32767));
@@ -174,11 +177,13 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel10.setText("Giới tính :");
 
+        radNam.setBackground(new java.awt.Color(204, 204, 255));
         grbGioiTinh.add(radNam);
         radNam.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         radNam.setSelected(true);
         radNam.setText("Nam");
 
+        radNu.setBackground(new java.awt.Color(204, 204, 255));
         grbGioiTinh.add(radNu);
         radNu.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         radNu.setText("Nữ");
@@ -246,11 +251,12 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
                 .addGroup(pnlThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtLuongCoBan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
 
         pnlTren.add(pnlThongTin, java.awt.BorderLayout.WEST);
 
+        pnlNut.setBackground(new java.awt.Color(204, 204, 255));
         pnlNut.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         pnlNut.setMaximumSize(new java.awt.Dimension(300, 32767));
         pnlNut.setPreferredSize(new java.awt.Dimension(300, 270));
@@ -304,32 +310,33 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
         pnlNut.setLayout(pnlNutLayout);
         pnlNutLayout.setHorizontalGroup(
             pnlNutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnTaoTaiKhoanNV, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
             .addComponent(btnThemNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnXoaTrang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnSuaThongTinNV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnSuaThongTinNV, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
             .addComponent(btnXoaNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnXoaTrang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnTaoTaiKhoanNV, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
         );
         pnlNutLayout.setVerticalGroup(
             pnlNutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlNutLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnThemNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnXoaNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSuaThongTinNV, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnXoaTrang, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnTaoTaiKhoanNV, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(106, Short.MAX_VALUE))
         );
 
         pnlTren.add(pnlNut, java.awt.BorderLayout.CENTER);
 
         pnlMain.add(pnlTren);
 
+        pnlGiua.setBackground(new java.awt.Color(204, 204, 255));
         pnlGiua.setMaximumSize(new java.awt.Dimension(32767, 50));
         pnlGiua.setPreferredSize(new java.awt.Dimension(3666, 60));
 
@@ -359,9 +366,9 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
         jLabel13.setText("Tìm kiếm :");
 
         txtTimKiem.setHintText("Nhập vào thông tin");
-        txtTimKiem.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                txtTimKiemKiemMouseReleased(evt);
+        txtTimKiem.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTimKiemKeyReleased(evt);
             }
         });
 
@@ -402,8 +409,9 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
 
         pnlMain.add(pnlGiua);
 
+        pnlDuoi.setBackground(new java.awt.Color(204, 204, 255));
         pnlDuoi.setMaximumSize(new java.awt.Dimension(2147483647, 500));
-        pnlDuoi.setPreferredSize(new java.awt.Dimension(1314, 505));
+        pnlDuoi.setPreferredSize(new java.awt.Dimension(1314, 440));
 
         jScrollPane1.setPreferredSize(new java.awt.Dimension(452, 200));
 
@@ -478,8 +486,7 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
         if (checkData()){
             lnvDAO=new DAO_LoaiNhanVien();
             NhanVien s=nvDAO.layNhanVienBangMa(modelNhanVien.getValueAt(index, 0)+"");            
-            
-            s.setTenNV( txtTenNhanVien.getText());
+
             s.setCMND(txtCMND.getText());
             s.setSoDienThoai(txtSoDienThoai.getText());
             s.setGioiTinh(radNam.isSelected());
@@ -564,11 +571,6 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
             
     }//GEN-LAST:event_cmbLocGioiTinhActionPerformed
 
-    private void txtTimKiemKiemMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTimKiemKiemMouseReleased
-        String s=txtTimKiem.getText();
-        filter(s);
-    }//GEN-LAST:event_txtTimKiemKiemMouseReleased
-
     private void btnTaoTaiKhoanNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoTaiKhoanNVActionPerformed
                 int index= tblNhanVien.getSelectedRow();        
         if (index==-1){
@@ -591,6 +593,11 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
             } 
         } 
     }//GEN-LAST:event_btnTaoTaiKhoanNVActionPerformed
+
+    private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
+        String f=txtTimKiem.getText();
+        filter(f);
+    }//GEN-LAST:event_txtTimKiemKeyReleased
     private void filter(String s){
         TableRowSorter<DefaultTableModel> tr=new TableRowSorter<DefaultTableModel>(modelNhanVien);
         tblNhanVien.setRowSorter(tr);
