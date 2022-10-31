@@ -24,6 +24,7 @@ public class DAO_HoaDon {
 
     private ArrayList<HoaDon> dsHD;
     private DAO_KhachHang kh_dao = new DAO_KhachHang();
+    private DAO_NhanVien nv_dao = new DAO_NhanVien();
 
     public ArrayList<HoaDon> getallDSHoaDon() {
         dsHD = new ArrayList<HoaDon>();
@@ -111,7 +112,7 @@ public class DAO_HoaDon {
                     Date ngayLap = rs.getDate("ngayLap");
                     double tienKhachDua = rs.getDouble("tienKhachDua");
                     String diaChi = rs.getString("diaChi");
-                    NhanVien nv = new NhanVien(rs.getString("maNV"));
+                    NhanVien nv = nv_dao.layNhanVienBangMa(rs.getString("maNV"));
                     KhachHang kh = kh_dao.getKHBangMa(rs.getString("maKH"));
                     HoaDon hd = new HoaDon(maNV, ngayLap, tienKhachDua, diaChi, nv, kh);
                     return hd;

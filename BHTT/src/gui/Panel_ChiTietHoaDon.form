@@ -503,28 +503,28 @@
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="1" attributes="0">
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Component id="btnXoaCTHD" alignment="1" min="-2" pref="196" max="-2" attributes="0"/>
+                                              <Component id="btnCapNhat" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                                      </Group>
                                       <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                                          <Group type="102" attributes="0">
                                               <Component id="jLabel4" min="-2" pref="83" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="lblTienThoi" min="-2" pref="107" max="-2" attributes="0"/>
+                                              <Component id="lblTienThoi" pref="127" max="32767" attributes="0"/>
                                           </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="1" attributes="0">
-                                                  <Component id="btnXoaCTHD" alignment="1" min="-2" pref="196" max="-2" attributes="0"/>
-                                                  <Component id="btnCapNhat" alignment="1" min="-2" max="-2" attributes="0"/>
-                                              </Group>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="btnThanhToan" alignment="1" pref="225" max="32767" attributes="0"/>
+                                              <Component id="txtTienKhachDua" alignment="1" max="32767" attributes="0"/>
                                           </Group>
-                                      </Group>
-                                      <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="btnThanhToan" alignment="1" pref="225" max="32767" attributes="0"/>
-                                          <Component id="txtTienKhachDua" alignment="1" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>

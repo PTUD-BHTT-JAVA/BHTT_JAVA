@@ -346,7 +346,7 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
         pnlTren.setLayout(new java.awt.BorderLayout());
 
         pnlThongTin.setBackground(new java.awt.Color(204, 204, 255));
-        pnlThongTin.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 204, 102)), "Thông tin nhà cung cấp", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 3, 14))); // NOI18N
+        pnlThongTin.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 204, 102)), "Thông tin khách hàng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 3, 14))); // NOI18N
         pnlThongTin.setToolTipText("");
         pnlThongTin.setMaximumSize(new java.awt.Dimension(841, 32767));
         pnlThongTin.setPreferredSize(new java.awt.Dimension(980, 280));

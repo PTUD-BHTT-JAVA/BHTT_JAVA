@@ -13,6 +13,7 @@ import dao.DAO_NhanVien;
 import entity.ChiTietHoaDon;
 import entity.NhaCungCap;
 import entity.NhanVien;
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -29,6 +30,7 @@ public class Form_HoaDon extends javax.swing.JFrame {
     private DAO_ChiTietHoaDon dao_CTHD;
     private DAO_NhanVien dao_NV;
     private DAO_LoaiNhanVien dao_LNS;
+    DecimalFormat df = new DecimalFormat("#,##0 VND");
 
     /**
      * Creates new form Form_HoaDon
@@ -50,9 +52,11 @@ public class Form_HoaDon extends javax.swing.JFrame {
         dao_LNS=new DAO_LoaiNhanVien();
         int tongSL=0;
         List<ChiTietHoaDon> list=dao_CTHD.layDSHDBangMa(maHD);
+        modalXuatHoaDon.setRowCount(0);
         for (ChiTietHoaDon l:list){
             modalXuatHoaDon.addRow(new Object[]{
-                l.getSanPham().getTenSP(),l.getSoLuong(),l.getSanPham().getGiaGoc(),l.getTongTien()
+                l.getSanPham().getTenSP(),l.getSoLuong(),
+                l.getSanPham().getGiaGoc(),df.format(l.getTongTien())
             });
             tongSL+= l.getSoLuong();
         }
@@ -74,10 +78,10 @@ public class Form_HoaDon extends javax.swing.JFrame {
         }
         lblKhuyenMai.setText(km);
         
-        txtTongCong.setText(""+tc);
-        txtTienKhachDua.setText(""+dao_HD.layHoaDonTheoMa(maHD).getTienKhachDua());
+        txtTongCong.setText(""+df.format(tc));
+        txtTienKhachDua.setText(""+df.format(dao_HD.layHoaDonTheoMa(maHD).getTienKhachDua()));
         double thoi= dao_HD.layHoaDonTheoMa(maHD).getTienKhachDua()-tc;
-        txtTienThoiLai.setText(""+thoi);
+        txtTienThoiLai.setText(""+df.format(thoi));
     }
 
 
