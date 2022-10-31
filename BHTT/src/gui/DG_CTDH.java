@@ -364,7 +364,7 @@ public class DG_CTDH extends javax.swing.JFrame {
             tc = hd_dao.layHoaDonTheoMa(maHD).thanhTienThuong(hd_dao.layHoaDonTheoMa(maHD));   
         }
         lblTTGG.setText(km);
-        tc=tc- tc*5/100;
+        tc= tc+ tc*5/100;
         lblVAT.setText("5%");
         lblTTTT.setText(String.format("%,.1f", tc) + " VND");
     }
