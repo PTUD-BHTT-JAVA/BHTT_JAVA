@@ -209,18 +209,20 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel{
     public void tongTien() {
         tongThanhTien = 0;
 
-        if (kh.layKhachHangBangSDT(txtSDT).getLoaiKhachHang().getMaLoaiKH() == "LKH001") {
+        if ("LKH001".equals(kh.layKhachHangBangSDT(txtSDT).getLoaiKhachHang().getMaLoaiKH())) {
             for (SanPham s : dstt) {
                 tongThanhTien += (s.getSoLuong() * s.getGiaGoc());
             }
-            tongThanhTien = (tongThanhTien + tongThanhTien * 0.05) - (tongThanhTien + tongThanhTien * 0.1);
+            tongThanhTien = tongThanhTien-(tongThanhTien*10/100) + tongThanhTien*0.05;
+            txtTongTien.setText(df.format(tongThanhTien));
         } else {
             for (SanPham s : dstt) {
                 tongThanhTien += (s.getSoLuong() * s.getGiaGoc());
             }
-            tongThanhTien = tongThanhTien + tongThanhTien * 0.05;
+            tongThanhTien += tongThanhTien * 0.05;
+            txtTongTien.setText(df.format(tongThanhTien));
         }
-        txtTongTien.setText(df.format(tongThanhTien));
+       
     }
     
     public int vitriSP(SanPham sp) {
