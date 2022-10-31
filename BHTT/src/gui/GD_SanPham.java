@@ -67,7 +67,7 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
     private byte[] anhSP = null;
     private  DefaultTableModel modolSP;
     List<RowFilter<DefaultTableModel, Object>> filters = new ArrayList<>();
-    private TableRowSorter<DefaultTableModel> tr;
+    private TableRowSorter<DefaultTableModel> tr,tr1;
     int index = -1;
 
     int hangChon;
@@ -96,8 +96,9 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
         btnChonAnh.setEnabled(false);
         btnLuu.setEnabled(false);
         tr = new TableRowSorter<DefaultTableModel>(modolSP);
+        tr1=new TableRowSorter<DefaultTableModel>(modolSP);
 
-        jtbSanPham.setRowSorter(tr);
+        jtbSanPham.setRowSorter(tr1);
     }
 
     /**
@@ -935,6 +936,9 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
 //            ,sp.getNgayNhap()});
 //        }
 //THƯ
+       locPhanLoai();
+    }//GEN-LAST:event_cbxPLLActionPerformed
+    public void locPhanLoai(){
         String s = cbxPLL.getSelectedItem().toString();
         if (s.equals("Tất cả")) {
             s = "(Tất cả)";
@@ -950,11 +954,13 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
             filters.set(0, RowFilter.regexFilter(s, 5));
         }
         // Apply filters
-        tr.setRowFilter(RowFilter.andFilter(filters));
-    }//GEN-LAST:event_cbxPLLActionPerformed
-
+        tr1.setRowFilter(RowFilter.andFilter(filters));
+    }
     private void cbxKTLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxKTLActionPerformed
 
+        locKichThuoc();
+    }//GEN-LAST:event_cbxKTLActionPerformed
+    public void locKichThuoc(){
         String s = cbxKTL.getSelectedItem().toString();
         if (s.equals("Tất cả")) {
             s = "(Tất cả)";
@@ -970,11 +976,13 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
             filters.set(3, RowFilter.regexFilter(s, 9));
         }
         // Apply filters
-        tr.setRowFilter(RowFilter.andFilter(filters));
-    }//GEN-LAST:event_cbxKTLActionPerformed
-
+        tr1.setRowFilter(RowFilter.andFilter(filters));
+    }
     private void cbxCLLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCLLActionPerformed
 
+        locChatLieu();
+    }//GEN-LAST:event_cbxCLLActionPerformed
+    public void locChatLieu(){
         String s = cbxCLL.getSelectedItem().toString();
         if (s.equals("Tất cả")) {
             s = "(Tất cả )";
@@ -989,12 +997,14 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
             filters.set(2, RowFilter.regexFilter(s, 8));
         }
         // Apply filters
-        tr.setRowFilter(RowFilter.andFilter(filters));
-    }//GEN-LAST:event_cbxCLLActionPerformed
-
+        tr1.setRowFilter(RowFilter.andFilter(filters));
+    }
     private void cbxMLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxMLActionPerformed
+        locMau();
 
-        String s = cbxML.getSelectedItem().toString();
+    }//GEN-LAST:event_cbxMLActionPerformed
+    public void locMau(){
+                String s = cbxML.getSelectedItem().toString();
         if (s.equals("Tất cả")) {
             s = "(Tất cả)";
 
@@ -1008,9 +1018,8 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
             filters.set(1, RowFilter.regexFilter(s, 7));
         }
         // Apply filters
-        tr.setRowFilter(RowFilter.andFilter(filters));
-    }//GEN-LAST:event_cbxMLActionPerformed
-
+        tr1.setRowFilter(RowFilter.andFilter(filters));
+    }
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         int hangChon = jtbSanPham.getSelectedRow();
         if (hangChon == -1) {
@@ -1240,16 +1249,22 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnIXActionPerformed
 
     private void cbxCLLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbxCLLMouseClicked
-        txtTim.setText("");
-        
+        if(!txtTim.getText().isEmpty()){
+            txtTim.setText("");
+         tr1=new TableRowSorter<DefaultTableModel>(modolSP);
+        jtbSanPham.setRowSorter(tr1);
+            
+
+        }
     }//GEN-LAST:event_cbxCLLMouseClicked
 
     private void txtTimMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTimMouseClicked
-        filter("");
+        filters.removeAll(filters);
         cbxCLL.setSelectedIndex(0);
         cbxML.setSelectedIndex(0);
         cbxKTL.setSelectedIndex(0);
         cbxPLL.setSelectedIndex(0);
+        jtbSanPham.setRowSorter(tr);
         filters.removeAll(filters);
     }//GEN-LAST:event_txtTimMouseClicked
     private String maTuSinh() {
