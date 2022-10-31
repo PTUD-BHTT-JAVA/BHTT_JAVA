@@ -113,8 +113,7 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel{
         nv = new DAO_NhanVien();
         jtbSanPham.setRowSorter(tr);
     }
-    
-    
+
     private void DocDuLieuVaoCombobox() {
         lsp_dao = new DAO_LoaiSP();
         ArrayList<LoaiSanPham> listLSP = lsp_dao.getAllLSP();
@@ -209,8 +208,17 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel{
     
     public void tongTien() {
         tongThanhTien = 0;
-        for (SanPham s : dstt) {
-            tongThanhTien += (s.getSoLuong() * s.getGiaGoc());
+
+        if (kh.layKhachHangBangSDT(txtSDT).getLoaiKhachHang().getMaLoaiKH() == "LKH001") {
+            for (SanPham s : dstt) {
+                tongThanhTien += (s.getSoLuong() * s.getGiaGoc());
+            }
+            tongThanhTien = (tongThanhTien + tongThanhTien * 0.05) - (tongThanhTien + tongThanhTien * 0.1);
+        } else {
+            for (SanPham s : dstt) {
+                tongThanhTien += (s.getSoLuong() * s.getGiaGoc());
+            }
+            tongThanhTien = tongThanhTien + tongThanhTien * 0.05;
         }
         txtTongTien.setText(df.format(tongThanhTien));
     }
@@ -302,7 +310,7 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel{
         }
     }
     
-   public void themSPVaoDonHang(){
+    public void themSPVaoDonHang(){
         int r = jtbSanPham.getSelectedRow();
             if (r != -1) {
                 soLuongTon = Integer.parseInt(modolSP.getValueAt(r, 2).toString());
@@ -355,6 +363,24 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel{
         } else {
             JOptionPane.showMessageDialog(null, "Vui Lòng Chọn Sản Phẩm Trước Khi Mua");
         }
+    }
+    
+    public void xoaSPTrongDH(int r){
+        String maSP = modelDonHang.getValueAt(r, 0).toString();
+        int index = -1;
+        for (SanPham s : dstt) {
+            if (s.getMaSP().equalsIgnoreCase(maSP)) {
+                index = dstt.indexOf(s);
+                break;
+            }
+        }
+        ListSP = sp_dao.getAllSP();
+        modolSP.setValueAt(dstt.get(index).getSoLuong(), index, 4);
+        System.out.println(index);
+        // xóa trên table model
+        modelDonHang.removeRow(r);
+        // xóa trên ArrayList
+        dstt.remove(r);
     }
     
    
@@ -844,8 +870,9 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel{
         if(r < 0){
             JOptionPane.showMessageDialog(null,"Chọn sản phẩm cần xóa");
         }else{
-            modelDonHang.removeRow(r);
-            dstt.remove(r);
+//            modelDonHang.removeRow(r);
+//            dstt.remove(r);
+            xoaSPTrongDH(r);
             tongTien();
         }
     }//GEN-LAST:event_btnXoaCTHDActionPerformed
@@ -936,7 +963,6 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel{
         String search = txtTim.getText();
         timKiemSanPham(search);
     }//GEN-LAST:event_txtTimKeyReleased
-    
     public void timKiemSanPham(String ten) {
         TableRowSorter<DefaultTableModel> tr=new TableRowSorter<DefaultTableModel>(modolSP);
         jtbSanPham.setRowSorter(tr);

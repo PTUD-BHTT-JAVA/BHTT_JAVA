@@ -121,11 +121,9 @@ public class HoaDon {
         if (hd.getKhachHang().getLoaiKhachHang().getMaLoaiKH().equals("LKH001")){
                 for (ChiTietHoaDon ct:list){
                     tt+=ct.getTongTien();
-            }
-                 
-                
+            }   
         }
-            tt=tt-(tt*10/100);
+            tt=tt-(tt*10/100) + tt*0.05;
         return tt;
     }
     
@@ -137,9 +135,9 @@ public class HoaDon {
                 for (ChiTietHoaDon ct:list){
                     tt+=ct.getTongTien();
             }
-                 
-                
+
         }
+        tt += tt*0.05;
         return tt;
     }
 
