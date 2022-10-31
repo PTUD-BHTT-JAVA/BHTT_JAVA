@@ -146,6 +146,7 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
         btnSua = new javax.swing.JButton();
         btnThem = new javax.swing.JButton();
         btnIX = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
         btnEX = new javax.swing.JButton();
         pnlGiua = new javax.swing.JPanel();
         cbxPLL = new javax.swing.JComboBox<>();
@@ -167,13 +168,16 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
         setFrameIcon(null);
         getContentPane().setLayout(new javax.swing.OverlayLayout(getContentPane()));
 
+        pnlMain.setBackground(new java.awt.Color(204, 204, 255));
         pnlMain.setLayout(new javax.swing.BoxLayout(pnlMain, javax.swing.BoxLayout.Y_AXIS));
 
+        pnlTren.setBackground(new java.awt.Color(204, 204, 255));
         pnlTren.setMaximumSize(new java.awt.Dimension(2147483647, 310));
         pnlTren.setMinimumSize(new java.awt.Dimension(100, 300));
         pnlTren.setPreferredSize(new java.awt.Dimension(1500, 340));
         pnlTren.setLayout(new java.awt.BorderLayout());
 
+        pnlThongTin.setBackground(new java.awt.Color(204, 204, 255));
         pnlThongTin.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 204, 102)), "Thông tin sản phẩm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 3, 14))); // NOI18N
         pnlThongTin.setToolTipText("");
         pnlThongTin.setMaximumSize(new java.awt.Dimension(841, 32767));
@@ -346,10 +350,13 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
 
         pnlTren.add(pnlThongTin, java.awt.BorderLayout.WEST);
 
+        pnlNut.setBackground(new java.awt.Color(204, 204, 255));
         pnlNut.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         pnlNut.setMaximumSize(new java.awt.Dimension(300, 32767));
         pnlNut.setPreferredSize(new java.awt.Dimension(300, 300));
         pnlNut.setLayout(new javax.swing.BoxLayout(pnlNut, javax.swing.BoxLayout.Y_AXIS));
+
+        jPanel1.setBackground(new java.awt.Color(204, 204, 255));
 
         lblHinhAnh.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblHinhAnh.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -369,17 +376,18 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 217, Short.MAX_VALUE)
+            .addGap(0, 213, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(lblHinhAnh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(11, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         pnlNut.add(jPanel1);
 
-        pnlNutSP.setLayout(new java.awt.GridLayout(4, 2));
+        pnlNutSP.setBackground(new java.awt.Color(204, 204, 255));
+        pnlNutSP.setLayout(new java.awt.GridLayout(3, 2));
 
         btnChonAnh.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnChonAnh.setText("Chọn ảnh");
@@ -435,21 +443,30 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
         });
         pnlNutSP.add(btnIX);
 
+        pnlNut.add(pnlNutSP);
+
+        jPanel2.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel2.setLayout(new java.awt.GridLayout());
+
         btnEX.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnEX.setText("Xuất file");
+        btnEX.setMaximumSize(new java.awt.Dimension(200, 27));
+        btnEX.setMinimumSize(new java.awt.Dimension(100, 27));
+        btnEX.setPreferredSize(new java.awt.Dimension(200, 27));
         btnEX.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEXActionPerformed(evt);
             }
         });
-        pnlNutSP.add(btnEX);
+        jPanel2.add(btnEX);
 
-        pnlNut.add(pnlNutSP);
+        pnlNut.add(jPanel2);
 
         pnlTren.add(pnlNut, java.awt.BorderLayout.CENTER);
 
         pnlMain.add(pnlTren);
 
+        pnlGiua.setBackground(new java.awt.Color(204, 204, 255));
         pnlGiua.setMaximumSize(new java.awt.Dimension(32767, 50));
         pnlGiua.setPreferredSize(new java.awt.Dimension(3666, 100));
 
@@ -583,7 +600,7 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
                         .addGroup(pnlGiuaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel19)
                             .addComponent(cbxKTL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlGiuaLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(pnlGiuaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -594,6 +611,7 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
 
         pnlMain.add(pnlGiua);
 
+        pnlDuoi.setBackground(new java.awt.Color(204, 204, 255));
         pnlDuoi.setMaximumSize(new java.awt.Dimension(2147483647, 470));
         pnlDuoi.setMinimumSize(new java.awt.Dimension(1150, 300));
         pnlDuoi.setPreferredSize(new java.awt.Dimension(1314, 400));
@@ -1252,9 +1270,7 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
         if(!txtTim.getText().isEmpty()){
             txtTim.setText("");
          tr1=new TableRowSorter<DefaultTableModel>(modolSP);
-        jtbSanPham.setRowSorter(tr1);
-            
-
+        jtbSanPham.setRowSorter(tr1);         
         }
     }//GEN-LAST:event_cbxCLLMouseClicked
 
@@ -1303,10 +1319,7 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
     private void DocDuLieuLenTable() {
         sp_dao = new DAO_SanPham();
         ArrayList<SanPham> ds = sp_dao.getAllSP();
-//        if (ds==null){
-//            show
-//        }
-//
+
         int i = 1;
         for (SanPham sp : ds) {
             modolSP.addRow(new Object[]{i++,
@@ -1384,6 +1397,7 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jtbSanPham;

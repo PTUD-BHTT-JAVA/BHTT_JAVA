@@ -74,4 +74,29 @@ public class DAO_TaiKhoan {
         return false;
     }
 
+       public boolean capNhatTaiKhoan(String passNew, String username){
+       try (Connection con = ConnectDB.opConnection();
+               PreparedStatement ptm = con.prepareStatement("update TaiKhoan set matKhau = ? where tenDN = ?")){
+           ptm.setString(1, passNew);
+           ptm.setString(2, username);
+           
+           return  ptm.executeUpdate() > 0;
+       } catch (Exception e) {
+       }
+       return false;
+   }
+   public boolean taoTaiKhoan(TaiKhoan a){
+       try (Connection con = ConnectDB.opConnection();
+               PreparedStatement ptm = con.prepareStatement("INSERT INTO TAIKHOAN VALUES (?,?)")){
+           ptm.setString(1, a.getTenDN());
+           ptm.setString(2, a.getMatKhau());
+           
+           return  ptm.executeUpdate() > 0;
+       } catch (Exception e) {
+            System.err.println("insertAccount(): connect db fail");
+            e.printStackTrace();
+        }
+        return false;
+   }
+
 }
