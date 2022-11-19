@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package gui;
 
 import connectDB.ConnectDB;
@@ -16,15 +13,8 @@ import dao.DAO_MauSac;
 import dao.DAO_NhaCungCap;
 import dao.DAO_NhanVien;
 import dao.DAO_SanPham;
-import entity.ChatLieu;
-import entity.ChiTietHoaDon;
 import entity.HoaDon;
 import entity.KhachHang;
-import entity.KichThuoc;
-import entity.LoaiSanPham;
-import entity.MauSac;
-import entity.NhaCungCap;
-import entity.NhanVien;
 import entity.SanPham;
 import entity.TaiKhoan;
 import java.awt.Component;
@@ -33,27 +23,18 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
-/**
- *
- * @author ACER
- */
-public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnable{
 
-    
+public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnable {
+
     private String username;
-     private DAO_SanPham sp_dao;
+    private DAO_SanPham sp_dao;
     private DAO_LoaiSP lsp_dao;
     private DAO_MauSac mau_dao;
     private DAO_NhaCungCap ncc_dao;
@@ -69,7 +50,7 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
     public DefaultTableModel modelDonHang;
     DecimalFormat df = new DecimalFormat("#,##0 VND");
     private Thread thread = new Thread(this);
-    
+
     private double tongThanhTien;
     private double tienThoi;
     private DAO_KhachHang kh;
@@ -79,192 +60,33 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
     public TaiKhoan tkDN;
     private DAO_HoaDon hd_dao;
     private ArrayList<SanPham> dsSPTrongDonHang;
-    public void dongPanel(Component c){
+
+    public void dongPanel(Component c) {
         pnlTab.remove(c);
     }
+
     public GD_TaoDonHang(String _username) {
         thread.start();
         try {
             ConnectDB.getInstance().connect();
         } catch (Exception e) {
         }
-        
+
         this.setRootPaneCheckingEnabled(false);
         javax.swing.plaf.InternalFrameUI ui
                 = this.getUI();
         ((javax.swing.plaf.basic.BasicInternalFrameUI) ui).setNorthPane(null);
         initComponents();
         this.setFocusable(true);
-        username=_username;
-//        modolSP = (DefaultTableModel) jtbSanPham.getModel();
-
-//        DocDuLieuLenTable();
-//        DocDuLieuVaoCombobox();
-//        moKhoaTextfields(false);
-
-//        tr = new TableRowSorter<DefaultTableModel>(modolSP);
+        username = _username;
         hd_dao = new DAO_HoaDon();
         cthd_dao = new DAO_ChiTietHoaDon();
         kh = new DAO_KhachHang();
         nv = new DAO_NhanVien();
         lblTenNV.setText(nv.layNhanVienBangMa(username).getTenNV());
-//        jtbSanPham.setRowSorter(tr);
-        
-        
+
     }
-//    private void XoaHetDLTrenTbale() {
-//        DefaultTableModel fm = (DefaultTableModel) jtbSanPham.getModel();
-//        fm.getDataVector().removeAllElements();
-//    }
-//    private void DocDuLieuVaoCombobox() {
-//        lsp_dao = new DAO_LoaiSP();
-//        ArrayList<LoaiSanPham> listLSP = lsp_dao.getAllLSP();
-//        for (LoaiSanPham lsp : listLSP) {
-//            cbxPL.addItem(lsp.getTenLoaiSP());
-//            
-//        }
-//        mau_dao = new DAO_MauSac();
-//        ArrayList<MauSac> listMau = mau_dao.getAllMau();
-//        for (MauSac m : listMau) {
-//            cbxMS.addItem(m.getTenMau());
-//        }
-//        cl_dao = new DAO_ChatLieu();
-//        ArrayList<ChatLieu> listCL = cl_dao.getAllCL();
-//        for (ChatLieu cl : listCL) {
-//            cbxCL.addItem(cl.getTenChatLieu());
-//        }
-//    private void XoaHetDLTrenTbale() {
-//        DefaultTableModel fm = (DefaultTableModel) jtbSanPham.getModel();
-//        fm.getDataVector().removeAllElements();
-//    }
-//    private void DocDuLieuVaoCombobox() {
-//        lsp_dao = new DAO_LoaiSP();
-//        ArrayList<LoaiSanPham> listLSP = lsp_dao.getAllLSP();
-//        for (LoaiSanPham lsp : listLSP) {
-//            cbxPL.addItem(lsp.getTenLoaiSP());
-//            
-//        }
-//        mau_dao = new DAO_MauSac();
-//        ArrayList<MauSac> listMau = mau_dao.getAllMau();
-//        for (MauSac m : listMau) {
-//            cbxMS.addItem(m.getTenMau());
-//        }
-//        cl_dao = new DAO_ChatLieu();
-//        ArrayList<ChatLieu> listCL = cl_dao.getAllCL();
-//        for (ChatLieu cl : listCL) {
-//            cbxCL.addItem(cl.getTenChatLieu());
-//        }
 
-//        ncc_dao = new DAO_NhaCungCap();
-//        ArrayList<NhaCungCap> listNCC = ncc_dao.getalltbNhaCungCap();
-//        for (NhaCungCap ncc : listNCC) {
-//            cbxNCC.addItem(ncc.getTenNCC());
-//        }
-//        kt_dao = new DAO_KichThuoc();
-//        ArrayList<KichThuoc> listKT = kt_dao.getAllKT();
-//        for (KichThuoc kt : listKT) {
-//            cbxKT.addItem(kt.getTenKichThuoc());
-//        }
-
-    /**
-     *
-
-
-
-      public  void dongPanel(Component c){
-          pnlTab.remove(c);
-      }
-    
-//    private void DocDuLieuLenTable() {
-//        sp_dao = new DAO_SanPham();
-//        ArrayList<SanPham> ds = sp_dao.getAllSP();
-//        int i = 1;
-//        for (SanPham sp : ds) {
-//            modolSP.addRow(new Object[]{
-//                sp.getMaSP(), sp.getTenSP(), sp.getSoLuong(), sp.getGiaGoc(), sp.getLoaiSanPham().getTenLoaiSP(), sp.getMauSac().getTenMau(), sp.getChatLieu().getTenChatLieu(), sp.getKichThuoc().getTenKichThuoc(),
-//               });
-//        }
-//
-//    }
- 
-
-//    public double ParseDouble(String strNumber) {
-//        if (strNumber != null && strNumber.length() > 0) {
-//            try {
-//                return Double.parseDouble(strNumber);
-//            } catch (Exception e) {
-//                return -1;   // or some value to mark this field is wrong. or make a function validates field first ...
-//            }
-//        } else {
-//            return 0;
-//        }
-//    }
-    
-//    private void XoaHetDLTrenTbale(JTable table) {
-//        DefaultTableModel fm = (DefaultTableModel) table.getModel();
-//        fm.getDataVector().removeAllElements();
-//    }
-//    
-//    private void setTongThanhTien() {
-//        tongThanhTien = 0;
-//        for (int i = 0; i < modelDonHang.getRowCount(); i++) {
-//            tongThanhTien += Double.parseDouble(modelDonHang.getValueAt(i, 4).toString());
-//        }
-//        txtTongTien.setText(df.format(tongThanhTien));
-//    }
-//    public void thanhToan(){
-//        KhachHang khTT = kh.layKhachHangBangSDT(txtSDT.getText());
-//        NhanVien nvTT = nv.layNhanVienBangTen(txtTenNV.getText());
-//        String diaChi = "12 Nguyễn Văn Bảo,phường 4,Gò Vấp,Hồ Chí Minh";
-//        Date ngayLapHD = new Date();
-//        HoaDon hd = new HoaDon(maTuSinh(), ngayLapHD, Double.parseDouble(txtTienKhachDua.getText()),
-//                diaChi, new NhanVien(nvTT.getMaNV()), new KhachHang(khTT.getMaKH()));
-//        hd_dao.themHoaDon(hd);
-//        HoaDon hoaDonMoiThem = hd_dao.getHoaDonMoiNhat();
-//        for (int i = 0; i < modelDonHang.getRowCount(); i++) {
-//            double tongTien = ParseDouble(modelDonHang.getValueAt(i, 4).toString());
-//            dsSPTrongDonHang = sp_dao.layDSSPBangMa(modelDonHang.getValueAt(i, 0).toString());
-//            for (SanPham sp : dsSPTrongDonHang) {
-//                ChiTietHoaDon cthd = new ChiTietHoaDon(Integer.parseInt(modelDonHang.getValueAt(i, 2).toString()), 0.1, tongTien, tienThoi, hoaDonMoiThem, sp);
-//                cthd_dao.themCTHD(cthd);
-//            }
-//        }
-//        for (int i = 0; i < modelDonHang.getRowCount(); i++) {
-//            int soLuongMua = Integer.parseInt(modelDonHang.getValueAt(i, 2).toString());
-//            for (SanPham sp : dsSPTrongDonHang) {
-//                SanPham spCu = null;
-//                try {
-//                    spCu = sp_dao.laySanPhamBangMa(modelDonHang.getValueAt(i, 0).toString());
-//                } catch (Exception e) {
-//                    System.out.println("loi sql");
-//                    e.printStackTrace();
-//                }
-//                if (spCu != null) {
-//                    sp_dao.capNhatSoLuong(spCu.getMaSP(), spCu.getSoLuong() - soLuongMua);
-//                }
-//            }
-//        }
-//        if (khTT.getLoaiKhachHang().getMaLoaiKH().equals("LKH001")) {
-//            tongThanhTien = 0;
-//            for (int i = 0; i < modelDonHang.getRowCount(); i++) {
-//                tongThanhTien += Double.parseDouble(modelDonHang.getValueAt(i, 4).toString());
-//            }
-//            tongThanhTien *= 0.1;
-//            txtTongTien.setText(df.format(tongThanhTien));
-//           Thư khóa
-//   XoaHetDLTrenTbale(tableDonHang);
-//            XoaHetDLTrenTbale(jtbSanPham);
-//            DocDuLieuLenTable();
-//
-//        } else {
-//            setTongThanhTien();
-//            Thư khóa
-//            XoaHetDLTrenTbale(tableDonHang);
-//            XoaHetDLTrenTbale(jtbSanPham);
-//            DocDuLieuLenTable();
-//        }
-//    }
-   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -353,7 +175,7 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
                     .addComponent(txtNgay)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDongHo1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtSoDon, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -423,7 +245,7 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
                 .addGroup(pnlThongTinCuaHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(lblTenNV))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pnlDau.add(pnlThongTinCuaHang);
@@ -431,6 +253,7 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
         pnlKhachHang2.setBackground(new java.awt.Color(204, 204, 255));
         pnlKhachHang2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Thông tin khách hàng"));
 
+        txtSDT.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtSDT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtSDTActionPerformed(evt);
@@ -443,6 +266,7 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
         jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         jLabel14.setText("Tên khách hàng :");
 
+        txtTenKH.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtTenKH.setEnabled(false);
         txtTenKH.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -453,6 +277,7 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
         jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         jLabel15.setText("Loại khách hàng:");
 
+        txtLoaiKH.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtLoaiKH.setEnabled(false);
         txtLoaiKH.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -552,7 +377,7 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1747, Short.MAX_VALUE)
+            .addGap(0, 1742, Short.MAX_VALUE)
             .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel7Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -563,7 +388,7 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 852, Short.MAX_VALUE)
+            .addGap(0, 819, Short.MAX_VALUE)
             .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel7Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -617,45 +442,56 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
         frame.setVisible(true);
     }
     private void btnTimKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKHActionPerformed
-        kh_dao=new DAO_KhachHang();
-        String s=txtSDT.getText();
+        kh_dao = new DAO_KhachHang();
+        String s = txtSDT.getText();
         KhachHang kh = new KhachHang();
-        kh=kh_dao.layKhachHangBangSDT(s);
-        if(kh != null){
+        kh = kh_dao.layKhachHangBangSDT(s);
+        if (kh != null) {
             txtTenKH.setText(kh.getTenKH());
             txtLoaiKH.setText(kh.getLoaiKhachHang().getTenLoai());
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Không tìm thấy khách hàng");
             txtTenKH.setText("");
         }
     }//GEN-LAST:event_btnTimKHActionPerformed
 
     private void btnTaoDHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoDHActionPerformed
-        if (txtTenKH.getText().isEmpty()){
+        if (txtTenKH.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Hãy chọn khách hàng để tạo hóa đơn!");
-        }else{
-    
-        Panel_ChiTietHoaDon pnl=new Panel_ChiTietHoaDon(txtSDT.getText(),lblTenNV.getText());
-        pnlTab.add(txtTenKH.getText(),pnl);
-        pnlTab.setSelectedComponent(pnl);
-        txtSDT.setText("");
-        txtTenKH.setText("");
-        txtLoaiKH.setText("");
-        txtSoDon.setText(maTuSinh());
+        } else {
+
+            Panel_ChiTietHoaDon pnl = new Panel_ChiTietHoaDon(txtSDT.getText(), lblTenNV.getText());
+            pnlTab.add(txtTenKH.getText()+"-"+kh.layKhachHangBangSDT(txtSDT.getText()).getSoDienThoai(), pnl);
+            kh_dao = new DAO_KhachHang();
+            String s = txtSDT.getText();
+            KhachHang khTim = new KhachHang();
+            khTim = kh_dao.layKhachHangBangSDT(s);
+            if ("VIP".equals(khTim.getLoaiKhachHang().getTenLoai())) {
+                pnl.lblKhuyenMai.setText(10 +  "%");
+                System.out.println(khTim.getLoaiKhachHang().getTenLoai());
+            } else {
+                pnl.lblKhuyenMai.setText( 0 +  "%");
+                 System.out.println(khTim.getLoaiKhachHang().getTenLoai());
+            }
+            pnlTab.setSelectedComponent(pnl);
+            txtSDT.setText("");
+            txtTenKH.setText("");
+            txtLoaiKH.setText("");
+            txtSoDon.setText(maTuSinh());
+           
         }
     }//GEN-LAST:event_btnTaoDHActionPerformed
 
     private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed
-        if (pnlTab.getSelectedComponent()==null){
+        if (pnlTab.getSelectedComponent() == null) {
             JOptionPane.showMessageDialog(this, "Không tồn tại đơn hàng nào để hủy!");
-        }else
-        if (JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn đóng đơn hàng này?", "Xác nhận", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+        } else if (JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn đóng đơn hàng này?", "Xác nhận", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             pnlTab.remove(pnlTab.getSelectedComponent());
-            
-        txtSoDon.setText(maTuSinh());
+
+            txtSoDon.setText(maTuSinh());
         }
     }//GEN-LAST:event_btnHuyActionPerformed
-     private String maTuSinh() {
+    private String maTuSinh() {
         String ma = "HD";
         int tachMa;
         int i = 0, j = 1;
@@ -713,31 +549,32 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
     private javax.swing.JTextField txtLoaiKH;
     private javax.swing.JTextField txtNgay;
     private javax.swing.JTextField txtSDT;
-    private javax.swing.JTextField txtSoDon;
+    public javax.swing.JTextField txtSoDon;
     private javax.swing.JTextField txtTenKH;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public void run() {
         try {
-           txtGio =new JTextField();
-           txtNgay =new JTextField();
-			Date thoiGianHienTai = new Date();
-			SimpleDateFormat sdf_Gio = new SimpleDateFormat("hh:mm:ss");
-			SimpleDateFormat sdf_Ngay = new SimpleDateFormat("dd/MM/yyyy");
-			while (true) {
-				thoiGianHienTai = new Date(); // lấy thời gian hiện tại
-				String ngayTrongTuan = "";
-				if (thoiGianHienTai.getDay()== 0)
-					ngayTrongTuan = "Chủ nhật, ";
-				else
-					ngayTrongTuan = "Thứ " + (thoiGianHienTai.getDay() + 1) + ", ";// do getDay() tính từ 1.
-				txtGio.setText(sdf_Gio.format(thoiGianHienTai));
-				txtNgay.setText(ngayTrongTuan + sdf_Ngay.format(thoiGianHienTai));
-				thread.sleep(1000); // cho phép ngủ trong khoảng 1000 mns =1s
-			}
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+            txtGio = new JTextField();
+            txtNgay = new JTextField();
+            Date thoiGianHienTai = new Date();
+            SimpleDateFormat sdf_Gio = new SimpleDateFormat("hh:mm:ss");
+            SimpleDateFormat sdf_Ngay = new SimpleDateFormat("dd/MM/yyyy");
+            while (true) {
+                thoiGianHienTai = new Date(); // lấy thời gian hiện tại
+                String ngayTrongTuan = "";
+                if (thoiGianHienTai.getDay() == 0) {
+                    ngayTrongTuan = "Chủ nhật, ";
+                } else {
+                    ngayTrongTuan = "Thứ " + (thoiGianHienTai.getDay() + 1) + ", ";// do getDay() tính từ 1.
+                }
+                txtGio.setText(sdf_Gio.format(thoiGianHienTai));
+                txtNgay.setText(ngayTrongTuan + sdf_Ngay.format(thoiGianHienTai));
+                thread.sleep(1000); // cho phép ngủ trong khoảng 1000 mns =1s
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

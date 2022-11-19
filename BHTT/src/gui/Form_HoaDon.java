@@ -6,18 +6,15 @@ package gui;
 
 import dao.DAO_ChiTietHoaDon;
 import dao.DAO_HoaDon;
-import dao.DAO_LoaiKhachHang;
+import dao.DAO_KhachHang;
 import dao.DAO_LoaiNhanVien;
-import dao.DAO_NhaCungCap;
 import dao.DAO_NhanVien;
 import entity.ChiTietHoaDon;
-import entity.NhaCungCap;
+import entity.KhachHang;
 import entity.NhanVien;
 import java.text.DecimalFormat;
-import java.util.Date;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
-import org.apache.poi.ss.formula.functions.Days360;
 
 /**
  *
@@ -30,6 +27,7 @@ public class Form_HoaDon extends javax.swing.JFrame {
     private DAO_ChiTietHoaDon dao_CTHD;
     private DAO_NhanVien dao_NV;
     private DAO_LoaiNhanVien dao_LNS;
+    private DAO_KhachHang kh_dao;
     DecimalFormat df = new DecimalFormat("#,##0 VND");
 
     /**
@@ -45,7 +43,7 @@ public class Form_HoaDon extends javax.swing.JFrame {
         
     }
     
-    public void loadDL(){
+    private void loadDL(){
         dao_HD=new DAO_HoaDon();
         dao_CTHD=new DAO_ChiTietHoaDon();
         dao_NV=new DAO_NhanVien();
@@ -63,8 +61,9 @@ public class Form_HoaDon extends javax.swing.JFrame {
         lblNgay.setText(dao_HD.layHoaDonTheoMa(maHD).getNgayLap().toString());
         NhanVien nv=dao_HD.layHoaDonTheoMa(maHD).getNhanVien();
         lblThuNgan.setText(nv.getTenNV());
+        KhachHang kh = dao_HD.layHoaDonTheoMa(maHD).getKhachHang();
+        lblTenKH.setText(kh.getTenKH());
         lblMaPhieu.setText(maHD);
-        
         txtTongSoLuong.setText(""+tongSL);
         String km;
         double tc;
@@ -76,7 +75,7 @@ public class Form_HoaDon extends javax.swing.JFrame {
             tc=dao_HD.layHoaDonTheoMa(maHD).thanhTienThuong(dao_HD.layHoaDonTheoMa(maHD));  
 
         }
-        lblKhuyenMai.setText(km);
+        lblKhuyenMai.setText(km + "%");
         
         txtTongCong.setText(""+df.format(tc));
         lplTienKhachDua.setText("   "+df.format(dao_HD.layHoaDonTheoMa(maHD).getTienKhachDua()));
@@ -115,7 +114,8 @@ public class Form_HoaDon extends javax.swing.JFrame {
         jPanel11 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         lblMaPhieu = new javax.swing.JLabel();
-        lblGio = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        lblTenKH = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableXuatHoaDon = new javax.swing.JTable();
@@ -128,7 +128,6 @@ public class Form_HoaDon extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         lblKM = new javax.swing.JPanel();
         lblKhuyenMai = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -275,7 +274,12 @@ public class Form_HoaDon extends javax.swing.JFrame {
 
         lblMaPhieu.setText("jLabel20");
         jPanel11.add(lblMaPhieu);
-        jPanel11.add(lblGio);
+
+        jLabel9.setText("Khách hàng");
+        jPanel11.add(jLabel9);
+
+        lblTenKH.setText("jLabel17");
+        jPanel11.add(lblTenKH);
 
         jPanel10.add(jPanel11);
 
@@ -347,6 +351,7 @@ public class Form_HoaDon extends javax.swing.JFrame {
         jLabel10.setText("Tổng số lượng :");
         jPanel2.add(jLabel10);
 
+        txtTongSoLuong.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtTongSoLuong.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jPanel2.add(txtTongSoLuong);
 
@@ -356,15 +361,12 @@ public class Form_HoaDon extends javax.swing.JFrame {
 
         lblKM.setLayout(new javax.swing.BoxLayout(lblKM, javax.swing.BoxLayout.X_AXIS));
 
+        lblKhuyenMai.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblKhuyenMai.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         lblKhuyenMai.setMaximumSize(new java.awt.Dimension(700, 900));
         lblKhuyenMai.setMinimumSize(new java.awt.Dimension(80, 0));
         lblKhuyenMai.setPreferredSize(new java.awt.Dimension(80, 0));
         lblKM.add(lblKhuyenMai);
-
-        jLabel18.setText("%");
-        jLabel18.setPreferredSize(new java.awt.Dimension(20, 16));
-        lblKM.add(jLabel18);
 
         jPanel2.add(lblKM);
         jPanel2.add(jLabel15);
@@ -529,7 +531,6 @@ public class Form_HoaDon extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -537,6 +538,7 @@ public class Form_HoaDon extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -552,11 +554,11 @@ public class Form_HoaDon extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblGio;
     private javax.swing.JPanel lblKM;
     private javax.swing.JLabel lblKhuyenMai;
     private javax.swing.JLabel lblMaPhieu;
     private javax.swing.JLabel lblNgay;
+    private javax.swing.JLabel lblTenKH;
     private javax.swing.JLabel lblThuNgan;
     private javax.swing.JLabel lplTienKhachDua;
     private javax.swing.JLabel lplTienThoi;
