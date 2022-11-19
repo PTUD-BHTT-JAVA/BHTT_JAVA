@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package gui;
 
 import connectDB.ConnectDB;
@@ -155,7 +152,9 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
                     XSSFRow excelRow = excelSheet.createRow(i + 1);
                     for (int j = 0; j < modelKhachHang.getColumnCount(); j++) {
                         XSSFCell excelCell = excelRow.createCell(j);
-                        excelCell.setCellValue(modelKhachHang.getValueAt(i, j).toString());
+                        if(modelKhachHang.getValueAt(i, 5).toString().equals("VIP")){
+                             excelCell.setCellValue(modelKhachHang.getValueAt(i, j).toString());
+                        }
                     }
                 }
                 excelFOU = new FileOutputStream(excelFileChooser.getSelectedFile() + ".xlsx");
@@ -673,14 +672,18 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Nhập đầy đủ thông tin", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         } else {
             if (kiemTraThongTin()) {
-                KhachHang khachhang = new KhachHang(maTuSinh(), tenKH, soDienThoai, diemTichLuy, email, gioiTinh, new LoaiKhachHang(phanloai));
-                kh.themKhachHang(khachhang);
-                modelKhachHang.addRow(new Object[]{
-                    khachhang.getMaKH(), khachhang.getTenKH(), khachhang.getSoDienThoai(), khachhang.getEmail(), khachhang.isGioiTinh() == true ? "Nam" : "Nữ",
-                    khachhang.getLoaiKhachHang().getMaLoaiKH(), khachhang.getDiemTichLuy()
-                });
-                JOptionPane.showMessageDialog(null, "Thêm thành công");
-                xoaTrangTextField();
+                if(kh.layKhachHangBangSDT(soDienThoai) == null){
+                    KhachHang khachhang = new KhachHang(maTuSinh(), tenKH, soDienThoai, diemTichLuy, email, gioiTinh, new LoaiKhachHang(phanloai));
+                    kh.themKhachHang(khachhang);
+                    modelKhachHang.addRow(new Object[]{
+                        khachhang.getMaKH(), khachhang.getTenKH(), khachhang.getSoDienThoai(), khachhang.getEmail(), khachhang.isGioiTinh() == true ? "Nam" : "Nữ",
+                        khachhang.getLoaiKhachHang().getMaLoaiKH(), khachhang.getDiemTichLuy()
+                    });
+                     JOptionPane.showMessageDialog(null, "Thêm thành công");
+                    xoaTrangTextField();
+                }else{
+                    JOptionPane.showMessageDialog(null, "Số điện thoại khách hàng đã tồn tại");
+                }
             }
         }
     }//GEN-LAST:event_btnThemKHActionPerformed
@@ -715,12 +718,12 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
         try {
             int r = tableKhachHang.getSelectedRow();
             if (r >= 0) {
-                txtTenKH.setText(modelKhachHang.getValueAt(r, 1).toString());
-                txtSDT.setText(modelKhachHang.getValueAt(r, 2).toString());
-                txtEmail.setText(modelKhachHang.getValueAt(r, 3).toString());
-                txtLoaiKH.setText(modelKhachHang.getValueAt(r, 5).toString());
-                txtDiemTichLuy.setText(modelKhachHang.getValueAt(r, 6).toString());
-                if (modelKhachHang.getValueAt(r, 4).toString().equals("Nam")) {
+                txtTenKH.setText(tableKhachHang.getValueAt(r, 1).toString());
+                txtSDT.setText(tableKhachHang.getValueAt(r, 2).toString());
+                txtEmail.setText(tableKhachHang.getValueAt(r, 3).toString());
+                txtLoaiKH.setText(tableKhachHang.getValueAt(r, 5).toString());
+                txtDiemTichLuy.setText(tableKhachHang.getValueAt(r, 6).toString());
+                if (tableKhachHang.getValueAt(r, 4).toString().equals("Nam")) {
                     radNam.setSelected(true);
                 } else {
                     radNu.setSelected(true);

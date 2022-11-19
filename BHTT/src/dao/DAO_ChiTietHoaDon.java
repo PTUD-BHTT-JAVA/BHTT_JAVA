@@ -53,6 +53,8 @@ public class DAO_ChiTietHoaDon {
         return dsCTHD;
     }
     
+    
+    
     public ArrayList<ChiTietHoaDon> layDSHoaDonLenBang() {
       ArrayList<ChiTietHoaDon> dsCTHDX = new ArrayList<ChiTietHoaDon>();
         try {
