@@ -11,6 +11,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 
@@ -19,11 +20,13 @@ import java.util.List;
 import javax.swing.JFileChooser;
 
 import javax.swing.JOptionPane;
-
 import javax.swing.RowFilter;
+
+
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+
 
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -167,6 +170,17 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
 
     }
     
+    private void XoaHetDuLieuTrenTableModel() {
+        DefaultTableModel dm = (DefaultTableModel) tableNhaCC.getModel();
+        dm.getDataVector().removeAllElements();
+    }
+    
+     private  void timNhaCungCap(String search){
+        TableRowSorter<DefaultTableModel> tr=new TableRowSorter<DefaultTableModel>(modelNhaCungCap);
+        tableNhaCC.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter("(?i)"+search));
+    }
+    
     private String maTuSinh(){
         String ma="NCC";
         int tachMa;
@@ -205,12 +219,6 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
        txtSoDienThoai.setText("");
        txtDiaChi.setText("");
        txtEmail.setText("");
-    }
-    
-    private void timKiemNhaCC(String ten){
-        TableRowSorter<DefaultTableModel> tr=new TableRowSorter<DefaultTableModel>(modelNhaCungCap);
-        tableNhaCC.setRowSorter(tr);
-        tr.setRowFilter(RowFilter.regexFilter("(?i)"+ten));
     }
     
     public boolean kiemTraForm(){
@@ -384,9 +392,9 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
             }
         });
 
-        btnImport.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
+        btnImport.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         btnImport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/excel.png"))); // NOI18N
-        btnImport.setText("Import (Excel)");
+        btnImport.setText("Thêm danh sách ");
         btnImport.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnImport.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnImport.addActionListener(new java.awt.event.ActionListener() {
@@ -397,7 +405,7 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
 
         btnExport.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
         btnExport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-export-excel-32.png"))); // NOI18N
-        btnExport.setText("Export (Excel)");
+        btnExport.setText("Xuất danh sách");
         btnExport.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnExport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -410,14 +418,14 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
         pnlNutLayout.setHorizontalGroup(
             pnlNutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlNutLayout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addGroup(pnlNutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnImport, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
-                    .addComponent(btnXoaTrang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSuaNCC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnThemNCC, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
-                    .addComponent(btnExport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(pnlNutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btnThemNCC, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
+                    .addComponent(btnSuaNCC, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnXoaTrang, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnImport, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnExport, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         pnlNutLayout.setVerticalGroup(
             pnlNutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -429,7 +437,7 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnXoaTrang, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnImport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnImport, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnExport, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
@@ -564,10 +572,10 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
 
     private void tableNhaCCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableNhaCCMouseClicked
       int r = tableNhaCC.getSelectedRow();
-      txtTenNCC.setText(modelNhaCungCap.getValueAt(r, 1).toString());
-      txtDiaChi.setText(modelNhaCungCap.getValueAt(r, 2).toString());
-      txtSoDienThoai.setText(modelNhaCungCap.getValueAt(r, 3).toString());
-      txtEmail.setText(modelNhaCungCap.getValueAt(r, 4).toString());
+      txtTenNCC.setText(tableNhaCC.getValueAt(r, 1).toString());
+      txtDiaChi.setText(tableNhaCC.getValueAt(r, 2).toString());
+      txtSoDienThoai.setText(tableNhaCC.getValueAt(r, 3).toString());
+      txtEmail.setText(tableNhaCC.getValueAt(r, 4).toString());
     }//GEN-LAST:event_tableNhaCCMouseClicked
 
     private void btnImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportActionPerformed
@@ -575,8 +583,8 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnImportActionPerformed
 
     private void txtTimKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKeyReleased
-       String search = txtTim.getText();
-       timKiemNhaCC(search);
+        String search =  txtTim.getText();
+        timNhaCungCap(search);
     }//GEN-LAST:event_txtTimKeyReleased
 
     private void btnExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportActionPerformed

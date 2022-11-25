@@ -24,6 +24,7 @@ import entity.SanPham;
 import entity.TaiKhoan;
 
 import java.awt.Component;
+import java.awt.HeadlessException;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -74,8 +75,9 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
     private ArrayList<SanPham> dsSPTrongDonHang;
     private String txtSDT, txtTenNV;
     private JLabel lblHT;
-    private final double tienDeTangDTL = 1000000;
+    private final double tienDeTangDTL = 20000;
     private final int diemThanhVIP = 1000; 
+    private ArrayList<SanPham> ListTimSP;
 
     public Panel_ChiTietHoaDon(String sdt, String tenNV) {
 
@@ -92,11 +94,12 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
 
         modolSP = (DefaultTableModel) jtbSanPham.getModel();
         modelDonHang = (DefaultTableModel) tableDonHang.getModel();
-        DocDuLieuLenTable();
+//        DocDuLieuLenTable();
         DocDuLieuVaoCombobox();
 //        moKhoaTextfields(false);
         dstt = new ArrayList<SanPham>();
         ListSP = new ArrayList<SanPham>();
+        
         tr = new TableRowSorter<DefaultTableModel>(modolSP);
         hd_dao = new DAO_HoaDon();
         cthd_dao = new DAO_ChiTietHoaDon();
@@ -131,9 +134,8 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
 
     private void DocDuLieuLenTable() {
         sp_dao = new DAO_SanPham();
-        ArrayList<SanPham> ds = sp_dao.getAllSP();
-        int i = 1;
-        for (SanPham sp : ds) {
+        ListSP = sp_dao.getAllSP();
+        for (SanPham sp : ListSP) {
             modolSP.addRow(new Object[]{
                 sp.getMaSP(), sp.getTenSP(), sp.getSoLuong(), df.format(sp.getGiaGoc()),
                 sp.getLoaiSanPham().getTenLoaiSP(),
@@ -178,7 +180,7 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
         if (strNumber != null && strNumber.length() > 0) {
             try {
                 return Double.parseDouble(strNumber);
-            } catch (Exception e) {
+            } catch (NumberFormatException e) {
                 return -1;   // or some value to mark this field is wrong. or make a function validates field first ...
             }
         } else {
@@ -218,7 +220,7 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
     }
 
     public void thanhToan(String ma) {
-        if (dstt.size() > 0) {
+        if (!dstt.isEmpty()) {
             KhachHang khTT = kh.layKhachHangBangSDT(txtSDT);
             NhanVien nvTT = nv.layNhanVienBangTen(txtTenNV);
             String diaChi = "12 Nguyễn Văn Bảo,phường 4,Gò Vấp,Hồ Chí Minh";
@@ -270,7 +272,7 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
                 
 //                khTT.setDiemTichLuy(khTT.getDiemTichLuy() + 50);
                 kh_dao = new DAO_KhachHang();
-                int diemTichLuy = (int) (tongThanhTien / tienDeTangDTL * 50);
+                int diemTichLuy = (int) (tongThanhTien / tienDeTangDTL);
                 khTT.setDiemTichLuy(khTT.getDiemTichLuy() + diemTichLuy);
                 kh_dao.capNhatKhachHang(khTT);
                 System.out.println(khTT.getMaKH());
@@ -290,15 +292,14 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
             String maSP = (modolSP.getValueAt(r, 0).toString());
             SanPham sp = sp_dao.laySanPhamBangMa(maSP);
             int soluong = 0;
-            double dongia = 0;
             try {
                 soluong = (int) jspSoLuong.getValue();
-                dongia = sp.getGiaGoc();
+                sp.getGiaGoc();
             } catch (Exception e) {
 
             }
             if (soluong <= 0) {
-                JOptionPane.showMessageDialog(this, "Vui Lòng Chọn Số Lượng Sản Phẩm");
+                JOptionPane.showMessageDialog(this, "Số lượng phải lớn hơn 0");
                 return;
             }
             sp.setSoLuong(soluong);
@@ -318,8 +319,7 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
                 try {
                     dstt.add(sp);
                 } catch (Exception e) {
-                    System.out.println("loi");
-                    e.printStackTrace();
+                    System.out.println(e.getMessage());
                 }
                 modelDonHang = (DefaultTableModel) tableDonHang.getModel();
                 tien = sp.getSoLuong() * sp.getGiaGoc();
@@ -329,6 +329,7 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
                     df.format(sp.getGiaGoc()), df.format(tien)
                 });
             }
+            jspSoLuong.setValue(0);
             soLuongTon -= sp.getSoLuong();
             modolSP.setValueAt(soLuongTon, r, 2);
 
@@ -340,16 +341,36 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
     }
 
     public void xoaSPTrongDH(int r) {
-        String maSP = modelDonHang.getValueAt(r, 0).toString();
+        String maSP = dstt.get(r).getMaSP();
         int index = -1;
-        for (SanPham s : dstt) {
-            if (s.getMaSP().equalsIgnoreCase(maSP)) {
-                index = dstt.indexOf(s);
+        for (SanPham s : ListSP) {
+            if (s.getMaSP().endsWith(maSP)) {
+                index = ListSP.indexOf(s);
                 break;
             }
         }
-        ListSP = sp_dao.getAllSP();
-        modolSP.setValueAt(dstt.get(index).getSoLuong(), index, 4);
+
+        if (ListTimSP != null && ListTimSP.size() > 0) {
+            int soLuong = sp_dao.laySanPhamBangMa(maSP).getSoLuong();
+            System.out.println(ListTimSP);
+            for (SanPham s : ListTimSP) {
+                if (s.getMaSP().endsWith(maSP)) {
+                    index = ListTimSP.indexOf(s);
+                    System.out.println(index);
+                    break;
+                }
+            }
+            for (SanPham sp : ListTimSP) {
+                if (sp.getMaSP().equalsIgnoreCase(maSP)) {
+                    System.out.println(sp.getMaSP());
+                    modolSP.setValueAt(soLuong, index, 2);
+                    break;
+                }
+            }
+        } else {
+            ListSP = sp_dao.getAllSP();
+            modolSP.setValueAt(ListSP.get(index).getSoLuong(), index, 2);
+        }
         System.out.println(index);
         // xóa trên table model
         modelDonHang.removeRow(r);
@@ -424,33 +445,18 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
 
         cbxPL.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         cbxPL.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả" }));
-        cbxPL.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxPLActionPerformed(evt);
-            }
-        });
 
         jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel17.setText("Kích thước :");
 
         cbxKT.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         cbxKT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả" }));
-        cbxKT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxKTActionPerformed(evt);
-            }
-        });
 
         jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel18.setText("Chất liệu :");
 
         cbxCL.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         cbxCL.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả" }));
-        cbxCL.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxCLActionPerformed(evt);
-            }
-        });
 
         btnThemSP.setBackground(new java.awt.Color(0, 153, 51));
         btnThemSP.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -468,11 +474,6 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
 
         cbxMS.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         cbxMS.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả" }));
-        cbxMS.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxMSActionPerformed(evt);
-            }
-        });
 
         jspSoLuong.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
 
@@ -487,6 +488,13 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
         });
 
         btnTimSP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/tim.png"))); // NOI18N
+        btnTimSP.setColor1(new java.awt.Color(102, 102, 255));
+        btnTimSP.setColor2(new java.awt.Color(102, 0, 255));
+        btnTimSP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimSPActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlTKnSLLayout = new javax.swing.GroupLayout(pnlTKnSL);
         pnlTKnSL.setLayout(pnlTKnSLLayout);
@@ -803,52 +811,16 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
         add(pnlTB);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cbxCLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCLActionPerformed
-        String s = cbxCL.getSelectedItem().toString();
-        if (s.equals("Tất cả")) {
-            s = "(Tất cả )";
-
-            for (ChatLieu cl : cl_dao.getAllCL()) {
-                s += "|(" + cl.getTenChatLieu() + ")";
-            }
-        }
-        if (filters.size() < 3) {
-            filters.add(RowFilter.regexFilter(s, 6));
-        } else {
-            filters.set(2, RowFilter.regexFilter(s, 6));
-        }
-        // Apply filters
-        tr.setRowFilter(RowFilter.andFilter(filters));
-    }//GEN-LAST:event_cbxCLActionPerformed
-
     private void btnThemSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemSPActionPerformed
         themSPVaoDonHang();
     }//GEN-LAST:event_btnThemSPActionPerformed
-
-    private void cbxMSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxMSActionPerformed
-        String s = cbxMS.getSelectedItem().toString();
-        if (s.equals("Tất cả")) {
-            s = "(Tất cả)";
-
-            for (MauSac ms : mau_dao.getAllMau()) {
-                s += "|(" + ms.getTenMau() + ")";
-            }
-        }
-        if (filters.size() < 2) {
-            filters.add(RowFilter.regexFilter(s, 5));
-        } else {
-            filters.set(1, RowFilter.regexFilter(s, 5));
-        }
-        // Apply filters
-        tr.setRowFilter(RowFilter.andFilter(filters));
-    }//GEN-LAST:event_cbxMSActionPerformed
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
 
         if (txtTienKhachDua.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Cần nhập tiền khách đưa", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         } else if (txtSDT.equals("")) {
-            JOptionPane.showMessageDialog(null, "Không tin thấy khách hàng", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Không tìm thấy khách hàng", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         } else {
             if (tienThoi < 0) {
                 JOptionPane.showMessageDialog(null, "Số tiền không đủ");
@@ -935,52 +907,79 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtTienKhachDuaKeyReleased
 
-    private void cbxKTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxKTActionPerformed
-        String s = cbxKT.getSelectedItem().toString();
-        if (s.equals("Tất cả")) {
-            s = "(Tất cả)";
-
-            for (KichThuoc kt : kt_dao.getAllKT()) {
-                s += "|(" + kt.getTenKichThuoc() + ")";
-            }
-        }
-
-        if (filters.size() < 4) {
-            filters.add(RowFilter.regexFilter(s, 7));
-        } else {
-            filters.set(3, RowFilter.regexFilter(s, 7));
-        }
-        // Apply filters
-        tr.setRowFilter(RowFilter.andFilter(filters));
-    }//GEN-LAST:event_cbxKTActionPerformed
-
-    private void cbxPLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxPLActionPerformed
-        String s = cbxPL.getSelectedItem().toString();
-        if (s.equals("Tất cả")) {
-            s = "(Tất cả)";
-
-            for (LoaiSanPham lsp : lsp_dao.getAllLSP()) {
-                s += "|(" + lsp.getTenLoaiSP() + ")";
-            }
-        }
-
-        if (filters.isEmpty()) {
-            filters.add(RowFilter.regexFilter(s, 4));
-        } else {
-            filters.set(0, RowFilter.regexFilter(s, 4));
-        }
-        // Apply filters
-        tr.setRowFilter(RowFilter.andFilter(filters));
-    }//GEN-LAST:event_cbxPLActionPerformed
-
     private void txtTimKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKeyReleased
-        String search = txtTim.getText();
-        timKiemSanPham(search);
+        try {
+              timKiemSanPham();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }//GEN-LAST:event_txtTimKeyReleased
-    public void timKiemSanPham(String ten) {
-        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(modolSP);
-        jtbSanPham.setRowSorter(tr);
-        tr.setRowFilter(RowFilter.regexFilter("(?i)" + ten));
+    
+   
+//    Tìm sản phẩm với nhiều tiêu chí trên combobox
+    private void btnTimSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimSPActionPerformed
+        
+         XoaHetDLTrenTbale(jtbSanPham);
+        sp_dao = new DAO_SanPham();
+        ListTimSP = new ArrayList<SanPham>();
+       
+        ListTimSP = sp_dao.timSanPhamNhieuTieuChi(cbxPL.getSelectedItem().toString(), cbxKT.getSelectedItem().toString()
+                ,cbxMS.getSelectedItem().toString(), cbxCL.getSelectedItem().toString());
+        if(!ListTimSP.isEmpty()){
+            for (SanPham sp : ListTimSP) {
+               modolSP.addRow(new Object[]{
+                   sp.getMaSP(), sp.getTenSP(), sp.getSoLuong(),
+                    df.format(sp.getGiaGoc()),
+                    sp.getLoaiSanPham().getTenLoaiSP(),
+                    sp.getMauSac().getTenMau(),
+                    sp.getChatLieu().getTenChatLieu(),
+                    sp.getKichThuoc().getTenKichThuoc()
+               });
+            }
+        }else{
+            JOptionPane.showMessageDialog(null,"Không có sản phẩm cần tìm");
+            cbxCL.setSelectedItem("Tất cả");
+            cbxKT.setSelectedItem("Tất cả");
+            cbxMS.setSelectedItem("Tất cả");
+            cbxPL.setSelectedItem("Tất cả");
+            DocDuLieuLenTable();
+        }
+     
+        
+    }//GEN-LAST:event_btnTimSPActionPerformed
+    
+    public void timKiemSanPham() {
+        try {
+            sp_dao = new DAO_SanPham();
+            ArrayList<SanPham> spList = sp_dao.getSPTuongDoi(txtTim.getText());
+            XoaHetDLTrenTbale(jtbSanPham);
+//            Object[] row = new Object[8];
+            for (int i = 0; i < spList.size(); i++) {
+//                row[0] = spList.get(i).getMaSP();
+//                row[1] = spList.get(i).getTenSP();
+//                row[2] = spList.get(i).getSoLuong();
+//                row[3] = df.format(spList.get(i).getGiaGoc());
+//                row[4] = spList.get(i).getLoaiSanPham().getTenLoaiSP();
+//                row[5] = spList.get(i).getMauSac().getTenMau();
+//                row[6] = spList.get(i).getChatLieu().getTenChatLieu();
+//                row[7] = spList.get(i).getKichThuoc().getTenKichThuoc();
+              
+                modolSP.addRow(new Object[]{
+                    spList.get(i).getMaSP(),
+                    spList.get(i).getTenSP(),
+                    spList.get(i).getSoLuong(),
+                    df.format(spList.get(i).getGiaGoc()),
+                    spList.get(i).getLoaiSanPham().getTenLoaiSP(),
+                    spList.get(i).getMauSac().getTenMau(),
+                    spList.get(i).getChatLieu().getTenChatLieu(),
+                    spList.get(i).getKichThuoc().getTenKichThuoc(),
+                });
+            }
+            jtbSanPham.setModel(modolSP);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1030,7 +1029,7 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     Component setPreferredSize(JPanel pnlForm) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }

@@ -1,10 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package dao;
 
 import connectDB.ConnectDB;
+import entity.KhachHang;
+import entity.LoaiKhachHang;
 
 import entity.NhaCungCap;
 
@@ -69,7 +68,6 @@ public class DAO_NhaCungCap {
         }
         return n > 0;
     }
-
 
     public void xoaNhaCungCap(String maNCC) {
         Connection con = ConnectDB.getConnection();
@@ -148,6 +146,7 @@ public class DAO_NhaCungCap {
         }
         return dsNCC;
     }
+    
     public NhaCungCap layNhaCungCapBangMa(String maTim) {
       NhaCungCap ncc = new NhaCungCap();
         try(
@@ -166,8 +165,8 @@ public class DAO_NhaCungCap {
        return null;
    
     }
-      public NhaCungCap layNhaCungCapBangTen(String tenTim) {
-        
+    
+    public NhaCungCap layNhaCungCapBangTen(String tenTim) {
         try(
              java.sql.Connection con = ConnectDB.opConnection();
             PreparedStatement pts = con.prepareStatement("Select * from NhaCungCap where tenNCC=?  ")){
@@ -184,4 +183,27 @@ public class DAO_NhaCungCap {
        return null;
      }
    
+    
+    public  ArrayList<NhaCungCap> getDSNCCTuongDoi(String search){
+        ArrayList<NhaCungCap> nccList = new ArrayList<NhaCungCap>();
+        try {
+              ConnectDB.getInstance();
+               Connection con = ConnectDB.getConnection();
+               String sql = "select * from NhaCungCap where CONCAT(maNCC,tenNCC,diaChi,soDienThoai) LIKE '%"+search+"%' ";
+               Statement statement = con.createStatement();
+               ResultSet rs = statement.executeQuery(sql);
+               while(rs.next()){
+                   String maNCC = rs.getString("maNCC");
+                   String tenNCC = rs.getString("tenNCC");
+                   String diaChi = rs.getString("diaChi");
+                   String soDienThoai = rs.getString("soDienThoai");
+                   String email = rs.getString("email");
+                   NhaCungCap ncc = new NhaCungCap(maNCC, tenNCC, diaChi, soDienThoai, email);
+                   nccList.add(ncc);
+               }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return nccList;
+    }
 }
