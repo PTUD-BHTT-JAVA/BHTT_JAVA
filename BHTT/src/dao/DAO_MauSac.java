@@ -55,7 +55,7 @@ public class DAO_MauSac {
         try(
              java.sql.Connection con = ConnectDB.opConnection();
             PreparedStatement pts = con.prepareStatement("Select * from MauSac where tenMau=?  ")){
-            pts.setString(1,tenTim );
+            pts.setNString(1,tenTim );
                 try(ResultSet rs = pts.executeQuery()){
                     if (rs.next()){
                        MauSac ms = new MauSac(rs.getString("maMau"), rs.getString("tenMau"));

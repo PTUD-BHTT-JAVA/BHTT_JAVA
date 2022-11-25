@@ -11,16 +11,13 @@ import entity.LoaiSanPham;
 import entity.MauSac;
 import entity.NhaCungCap;
 import entity.SanPham;
-import java.beans.Statement;
+import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAccessor;
+import java.sql.PreparedStatement;
 import java.util.Date;
 
 /**
@@ -30,18 +27,23 @@ import java.util.Date;
 public class DAO_SanPham {
    
     private DAO_NhaCungCap dao_ncc= new DAO_NhaCungCap();
+    
     private DAO_LoaiSP dao_lsp= new DAO_LoaiSP();
+    
     private DAO_MauSac dao_ms= new DAO_MauSac();
+    
     private DAO_ChatLieu dao_cl= new DAO_ChatLieu();
-     private DAO_KichThuoc dao_kt= new DAO_KichThuoc();
+    
+    private DAO_KichThuoc dao_kt= new DAO_KichThuoc();
+    
     public  ArrayList<SanPham> getAllSP() {
         ArrayList<SanPham> dsSP = new ArrayList<SanPham>();
         try{
            
             Connection con = ConnectDB.getInstance().getConnection();
             String sql = "select * from SanPham";
-            java.sql.Statement statement = con.createStatement();
-            java.sql.ResultSet rs = statement.executeQuery(sql);
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
             while(rs.next()){
                 String maSP= rs.getString("maSP");
                 String tenSP= rs.getString("tenSP"); 
@@ -72,6 +74,7 @@ public class DAO_SanPham {
         }
         return dsSP;
     }
+    
     public SanPham laySanPhamBangMa(String maTim) {
         
         try(
@@ -110,6 +113,7 @@ public class DAO_SanPham {
        }
        return null;
      }
+    
     public boolean themSP(SanPham spNew){
         Connection con = ConnectDB.getInstance().getConnection();
         PreparedStatement stemnt = null;
@@ -147,6 +151,7 @@ public class DAO_SanPham {
         }
         return n>0;
     }
+    
     public boolean XoaSP(String ma){
          Connection con = ConnectDB.getInstance().getConnection();
         PreparedStatement stemnt = null;
@@ -167,6 +172,7 @@ public class DAO_SanPham {
         }
         return n>0;
     }
+    
     public void CapNhatSP(SanPham spNew){
         Connection con = ConnectDB.getInstance().getConnection();
         PreparedStatement stemnt = null;
@@ -201,6 +207,7 @@ public class DAO_SanPham {
             }
         }
     }
+    
     public ArrayList<SanPham> layDSSPBangMa(String maTim){
         ArrayList<SanPham> dsSP = new ArrayList<SanPham>();
         ConnectDB.getInstance();
@@ -246,6 +253,92 @@ public class DAO_SanPham {
             }
         }
         return dsSP;
+    }
+    
+    
+    public  ArrayList<SanPham> getSPTuongDoi(String search) {
+        ArrayList<SanPham> spList = new ArrayList<SanPham>();
+        try{
+            Connection con = ConnectDB.getConnection();
+            String sql = "select * from SanPham where CONCAT(maSP,tenSP,giaGoc,soLuong) LIKE  '%" + search + "%' ";
+            java.sql.Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            while(rs.next()){
+                String maSP= rs.getString("maSP");
+                String tenSP= rs.getString("tenSP"); 
+                double gia= rs.getDouble("giaGoc");
+                int sl= rs.getInt("soLuong");
+                byte[] hinhanh= rs.getBytes("hinhAnh");
+                String moTa= rs.getString("moTa");
+                java.sql.Date ngayN= rs.getDate("ngayNhap");
+                Date ngayNhap = new Date(ngayN.getTime());
+                 java.sql.Date han= rs.getDate("hanSD");
+                Date hanSD = new Date(han.getTime());
+                String maNCC= rs.getString("maNCC");
+                String kt= rs.getString("maKichThuoc");
+                String loiSP= rs.getString("maLoaiSP");
+                NhaCungCap ncc = dao_ncc.layNhaCungCapBangMa(maNCC);
+                LoaiSanPham lsp = dao_lsp.layLoaiSPBangMa(loiSP);
+                ChatLieu chatl= dao_cl.layChatLieuBangMa(rs.getString("maChatLieu"));
+                MauSac ms= dao_ms.layMauSacBangMa(rs.getString("maMau"));
+                KichThuoc kicht = dao_kt.layKichThuocBangMa(kt);
+                LoaiSanPham loaiSP= new LoaiSanPham(loiSP);
+                
+                SanPham sp = new SanPham(maSP, tenSP, gia, sl, 
+                        hinhanh, moTa, ngayNhap, hanSD, ncc, chatl, ms, kicht, lsp);
+                spList.add(sp);
+                
+            }
+        }catch (SQLException e) {
+        }
+        return spList;
+    }
+    
+    public ArrayList<SanPham> timSanPhamNhieuTieuChi(String loai,String kichThuoc, String mauSac,String chatLieu){
+        ArrayList<SanPham> spCanTim =  new ArrayList<SanPham>();
+        DAO_LoaiSP dao_loaisp = new DAO_LoaiSP();
+        DAO_KichThuoc dao_kichthuoc =  new DAO_KichThuoc();
+        DAO_MauSac dao_mausac = new DAO_MauSac();
+        DAO_ChatLieu dao_chatlieu = new DAO_ChatLieu();
+        String txtLoaiSP = dao_loaisp.layLoaiSPBangTen(loai) == null ? "" : ("" + dao_loaisp.layLoaiSPBangTen(loai).getMaLoaiSP());
+        String txtKichThuoc = dao_kichthuoc.layKichThuocBangTen(kichThuoc) == null ? "" : (""+ dao_kichthuoc.layKichThuocBangTen(kichThuoc).getMaKichThuoc());
+        String txtMauSac = dao_mausac.layMauSacBangTen(mauSac) == null ? "" : ("" + dao_mausac.layMauSacBangTen(mauSac).getMaMau());
+        String txtChatLieu = dao_chatlieu.layChatLieuBangTen(chatLieu) == null ? "" : (""+dao_chatlieu.layChatLieuBangTen(chatLieu).getMaChatLieu());
+         String sql = "select * from SanPham where maLoaiSP like N'%" + txtLoaiSP + "%' and maKichThuoc like N'%" 
+                + txtKichThuoc + "%' and maMau like N'%" + txtMauSac +  "%' and maChatLieu like N'%" + txtChatLieu + "%'";
+        try {
+            ConnectDB.getInstance();
+            Connection con  = ConnectDB.getConnection();
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            while(rs.next()){
+                SanPham sp = new SanPham();
+                sp.setMaSP(rs.getString("maSP"));
+                sp.setTenSP(rs.getString("tenSP"));
+                sp.setGiaGoc(rs.getDouble("giaGoc"));
+                sp.setSoLuong(rs.getInt("soLuong"));
+                sp.setMoTa(rs.getString("moTa"));
+                sp.setHinhAnh(rs.getBytes("hinhAnh"));
+                sp.setNgayNhap(rs.getDate("ngayNhap"));
+                sp.setHanSD(rs.getDate("hanSD"));
+                NhaCungCap ncc = dao_ncc.layNhaCungCapBangMa(rs.getString("maNCC"));
+                sp.setNhaCungCap(ncc);
+                ChatLieu cl =  dao_chatlieu.layChatLieuBangMa(rs.getString("maChatLieu"));
+                sp.setChatLieu(cl);
+                MauSac ms =  dao_mausac.layMauSacBangMa(rs.getString("maMau"));
+                sp.setMauSac(ms);
+                KichThuoc kt = dao_kichthuoc.layKichThuocBangMa(rs.getString("maKichThuoc"));
+                sp.setKichThuoc(kt);
+                LoaiSanPham lsp = dao_loaisp.layLoaiSPBangMa(rs.getString("maLoaiSP"));
+                sp.setLoaiSanPham(lsp);
+                spCanTim.add(sp);
+            }            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return spCanTim;
+        
     }
     
      public boolean capNhatSoLuong(String maSP, int soLuong) {

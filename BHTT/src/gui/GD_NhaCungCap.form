@@ -233,15 +233,15 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="btnImport" pref="247" max="32767" attributes="0"/>
-                              <Component id="btnXoaTrang" max="32767" attributes="0"/>
-                              <Component id="btnSuaNCC" max="32767" attributes="0"/>
-                              <Component id="btnThemNCC" pref="247" max="32767" attributes="0"/>
-                              <Component id="btnExport" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="btnThemNCC" alignment="0" pref="278" max="32767" attributes="0"/>
+                              <Component id="btnSuaNCC" alignment="0" max="32767" attributes="0"/>
+                              <Component id="btnXoaTrang" alignment="0" max="32767" attributes="0"/>
+                              <Component id="btnImport" alignment="0" max="32767" attributes="0"/>
+                              <Component id="btnExport" alignment="0" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="44" max="32767" attributes="0"/>
+                          <EmptySpace pref="40" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -255,7 +255,7 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="btnXoaTrang" min="-2" pref="38" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="btnImport" max="32767" attributes="0"/>
+                          <Component id="btnImport" min="-2" pref="41" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="btnExport" min="-2" pref="41" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
@@ -315,12 +315,12 @@
                 <Component class="javax.swing.JButton" name="btnImport">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Segoe UI" size="17" style="1"/>
+                      <Font name="Segoe UI" size="16" style="1"/>
                     </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/icon/excel.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Import (Excel)"/>
+                    <Property name="text" type="java.lang.String" value="Th&#xea;m danh s&#xe1;ch "/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="horizontalTextPosition" type="int" value="4"/>
                   </Properties>
@@ -336,7 +336,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/icon/icons8-export-excel-32.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Export (Excel)"/>
+                    <Property name="text" type="java.lang.String" value="Xu&#x1ea5;t danh s&#xe1;ch"/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                   </Properties>
                   <Events>

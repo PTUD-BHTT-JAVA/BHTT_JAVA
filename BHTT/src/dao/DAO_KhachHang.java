@@ -3,8 +3,6 @@ package dao;
 import connectDB.ConnectDB;
 import entity.KhachHang;
 import entity.LoaiKhachHang;
-import entity.LoaiNhanVien;
-import entity.NhanVien;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -57,6 +55,32 @@ public class DAO_KhachHang {
        }
        return null; 
     }
+//   Tìm kiếm tương đối
+    public  ArrayList<KhachHang> getDSKHTuongDoi(String search){
+        ArrayList<KhachHang> khList = new ArrayList<KhachHang>();
+        try {
+              ConnectDB.getInstance();
+               Connection con = ConnectDB.getConnection();
+               String sql = "select * from KhachHang where CONCAT(maKH,tenKH,soDienThoai,diemTichLuy,email,gioiTinh,maLoaiKH) LIKE  N'%"+search+"%' ";
+               Statement statement = con.createStatement();
+               ResultSet rs = statement.executeQuery(sql);
+               while(rs.next()){
+                   String maNV = rs.getString("maKH");
+                   String tenKH = rs.getString("tenKH");
+                   String soDienThoai = rs.getString("soDienThoai");
+                   int diemTichLuy = rs.getInt("diemTichLuy");
+                   String email = rs.getString("email");
+                   boolean gioiTinh = rs.getBoolean("gioiTinh");
+                   LoaiKhachHang loaiKhachHang = lkhDAO.timLoaiKHBangMa(rs.getString("maLoaiKH"));
+                   KhachHang kh = new KhachHang(maNV, tenKH, soDienThoai, diemTichLuy, email, gioiTinh, loaiKhachHang);
+                   khList.add(kh);
+               }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return khList;
+    }
+    
 
     public boolean themKhachHang(KhachHang kh) {
         ConnectDB.getInstance();
@@ -132,7 +156,7 @@ public class DAO_KhachHang {
         return n > 0;
     }
 
-    public ArrayList<KhachHang> getKhachHangTheoMaLoai(String maLKH) {
+    public ArrayList<KhachHang> getKhachHangTheoTenLoai(String maLoaiKH) {
         ArrayList<KhachHang> dsKH = new ArrayList<KhachHang>();
         ConnectDB.getInstance();
         Connection con = ConnectDB.getConnection();
@@ -140,7 +164,7 @@ public class DAO_KhachHang {
         try {
             String sql = "select * from KhachHang where maLoaiKH = ? ";
             statement = con.prepareStatement(sql);
-            statement.setString(1, maLKH);
+            statement.setString(1, maLoaiKH);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 String maNV = rs.getString("maKH");
@@ -164,6 +188,7 @@ public class DAO_KhachHang {
         }
         return dsKH;
     }
+    
     public KhachHang getKHBangMa(String maKH){
         try(
             Connection con = ConnectDB.opConnection();

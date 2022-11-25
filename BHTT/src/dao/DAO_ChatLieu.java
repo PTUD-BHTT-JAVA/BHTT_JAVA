@@ -31,12 +31,12 @@ public class DAO_ChatLieu {
         
         return dsCL;
     }
-    public ChatLieu layChatLieuBangMa(String maTim) {
+    public ChatLieu layChatLieuBangTen(String tenTim) {
         
         try(
              java.sql.Connection con = ConnectDB.opConnection();
-            PreparedStatement pts = con.prepareStatement("select *from ChatLieu where maChatLieu = ?")){
-            pts.setString(1,maTim );
+            PreparedStatement pts = con.prepareStatement("select *from ChatLieu where tenChatLieu = ?")){
+            pts.setNString(1,tenTim);
                 try(ResultSet rs = pts.executeQuery()){
                     if (rs.next()){
                         ChatLieu cl = new ChatLieu(rs.getString("maChatLieu"), rs.getString("tenChatLieu"));
@@ -57,6 +57,23 @@ public class DAO_ChatLieu {
                 try(ResultSet rs = pts.executeQuery()){
                     if (rs.next()){
                        ChatLieu cl = new ChatLieu(rs.getString("maChatLieu"), rs.getString("tenChatLieu"));
+                        return cl;
+                    }
+                }
+            }catch(Exception e){
+                e.printStackTrace();
+       }
+       return null;
+     }
+    public ChatLieu layChatLieuBangMa(String maTim) {
+        
+        try(
+             java.sql.Connection con = ConnectDB.opConnection();
+            PreparedStatement pts = con.prepareStatement("select *from ChatLieu where maChatLieu = ?")){
+            pts.setString(1,maTim);
+                try(ResultSet rs = pts.executeQuery()){
+                    if (rs.next()){
+                        ChatLieu cl = new ChatLieu(rs.getString("maChatLieu"), rs.getString("tenChatLieu"));
                         return cl;
                     }
                 }

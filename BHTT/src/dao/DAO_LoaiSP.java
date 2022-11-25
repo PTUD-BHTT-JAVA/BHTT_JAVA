@@ -60,7 +60,7 @@ public class DAO_LoaiSP {
         try(
              java.sql.Connection con = ConnectDB.opConnection();
             PreparedStatement pts = con.prepareStatement("Select * from LoaiSanPham where tenLoaiSP=?  ")){
-            pts.setString(1,tenTim );
+            pts.setNString(1,tenTim );
                 try(ResultSet rs = pts.executeQuery()){
                     if (rs.next()){
                        LoaiSanPham lsp= new LoaiSanPham(rs.getString("maLoaiSP"), rs.getString("tenLoaiSP"));
