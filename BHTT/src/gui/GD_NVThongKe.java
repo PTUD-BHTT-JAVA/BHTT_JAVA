@@ -75,7 +75,6 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
         btnQuy3 = new javax.swing.JButton();
         btnQuy4 = new javax.swing.JButton();
         pnlBottom = new javax.swing.JPanel();
-        tbpThongKe = new javax.swing.JTabbedPane();
         pnlDoanhThu = new javax.swing.JPanel();
         pnlTongHDDB = new javax.swing.JPanel();
         lblTongHDDB = new javax.swing.JLabel();
@@ -87,18 +86,6 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
         lblTongTienHoan = new javax.swing.JLabel();
         pnlKetToan = new javax.swing.JPanel();
         lblKetToan = new javax.swing.JLabel();
-        pnlTopSP = new javax.swing.JPanel();
-        pnlBieuDoTKTopSP = new javax.swing.JPanel();
-        scrTKTopSP = new javax.swing.JScrollPane();
-        tblTKTopSP = new javax.swing.JTable();
-        pnlTopNV = new javax.swing.JPanel();
-        pnlTKTopNV = new javax.swing.JPanel();
-        scrTKNVTop = new javax.swing.JScrollPane();
-        tblTKTopNV = new javax.swing.JTable();
-        pnlSPTon = new javax.swing.JPanel();
-        lblTieuDeTKSPT = new javax.swing.JLabel();
-        scrTKSPT = new javax.swing.JScrollPane();
-        tblTKSPT = new javax.swing.JTable();
 
         setBorder(null);
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -224,8 +211,7 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        tbpThongKe.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        tbpThongKe.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        pnlBottom.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         pnlTongHDDB.setBackground(new java.awt.Color(0, 204, 0));
 
@@ -378,197 +364,21 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
                 .addGap(161, 161, 161))
         );
 
-        tbpThongKe.addTab("Doanh Thu", pnlDoanhThu);
-
-        pnlTopSP.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-
-        pnlBieuDoTKTopSP.setBackground(new java.awt.Color(153, 153, 0));
-
-        javax.swing.GroupLayout pnlBieuDoTKTopSPLayout = new javax.swing.GroupLayout(pnlBieuDoTKTopSP);
-        pnlBieuDoTKTopSP.setLayout(pnlBieuDoTKTopSPLayout);
-        pnlBieuDoTKTopSPLayout.setHorizontalGroup(
-            pnlBieuDoTKTopSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 677, Short.MAX_VALUE)
-        );
-        pnlBieuDoTKTopSPLayout.setVerticalGroup(
-            pnlBieuDoTKTopSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        tblTKTopSP.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "Top", "Mã", "Tên sản phẩm ", "Số lượng bán", "Số lượng tồn"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        scrTKTopSP.setViewportView(tblTKTopSP);
-        if (tblTKTopSP.getColumnModel().getColumnCount() > 0) {
-            tblTKTopSP.getColumnModel().getColumn(0).setPreferredWidth(10);
-            tblTKTopSP.getColumnModel().getColumn(1).setPreferredWidth(23);
-            tblTKTopSP.getColumnModel().getColumn(2).setPreferredWidth(45);
-        }
-
-        javax.swing.GroupLayout pnlTopSPLayout = new javax.swing.GroupLayout(pnlTopSP);
-        pnlTopSP.setLayout(pnlTopSPLayout);
-        pnlTopSPLayout.setHorizontalGroup(
-            pnlTopSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlTopSPLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnlBieuDoTKTopSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(scrTKTopSP, javax.swing.GroupLayout.DEFAULT_SIZE, 515, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        pnlTopSPLayout.setVerticalGroup(
-            pnlTopSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlTopSPLayout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addGroup(pnlTopSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pnlBieuDoTKTopSP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(scrTKTopSP, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE))
-                .addContainerGap(14, Short.MAX_VALUE))
-        );
-
-        tbpThongKe.addTab("Top 10 sản phẩm bán chạy", pnlTopSP);
-
-        pnlTKTopNV.setBackground(new java.awt.Color(153, 153, 0));
-
-        javax.swing.GroupLayout pnlTKTopNVLayout = new javax.swing.GroupLayout(pnlTKTopNV);
-        pnlTKTopNV.setLayout(pnlTKTopNVLayout);
-        pnlTKTopNVLayout.setHorizontalGroup(
-            pnlTKTopNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 681, Short.MAX_VALUE)
-        );
-        pnlTKTopNVLayout.setVerticalGroup(
-            pnlTKTopNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        tblTKTopNV.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Top", "Mã", "Tên Nhân Viên", "Doanh Thu"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        scrTKNVTop.setViewportView(tblTKTopNV);
-
-        javax.swing.GroupLayout pnlTopNVLayout = new javax.swing.GroupLayout(pnlTopNV);
-        pnlTopNV.setLayout(pnlTopNVLayout);
-        pnlTopNVLayout.setHorizontalGroup(
-            pnlTopNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlTopNVLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnlTKTopNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(scrTKNVTop, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        pnlTopNVLayout.setVerticalGroup(
-            pnlTopNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTopNVLayout.createSequentialGroup()
-                .addGap(0, 32, Short.MAX_VALUE)
-                .addGroup(pnlTopNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pnlTKTopNV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(scrTKNVTop, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE))
-                .addGap(15, 15, 15))
-        );
-
-        tbpThongKe.addTab("Top 10 nhân viên xuất sắc", pnlTopNV);
-
-        lblTieuDeTKSPT.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lblTieuDeTKSPT.setText("Danh sách sản phẩm không có lượt mua");
-
-        tblTKSPT.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        tblTKSPT.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "STT", "Mã", "Tên Sản Phẩm", "Số lượng tồn"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        scrTKSPT.setViewportView(tblTKSPT);
-        if (tblTKSPT.getColumnModel().getColumnCount() > 0) {
-            tblTKSPT.getColumnModel().getColumn(0).setPreferredWidth(5);
-        }
-
-        javax.swing.GroupLayout pnlSPTonLayout = new javax.swing.GroupLayout(pnlSPTon);
-        pnlSPTon.setLayout(pnlSPTonLayout);
-        pnlSPTonLayout.setHorizontalGroup(
-            pnlSPTonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlSPTonLayout.createSequentialGroup()
-                .addGroup(pnlSPTonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlSPTonLayout.createSequentialGroup()
-                        .addGap(366, 366, 366)
-                        .addComponent(lblTieuDeTKSPT))
-                    .addGroup(pnlSPTonLayout.createSequentialGroup()
-                        .addGap(236, 236, 236)
-                        .addComponent(scrTKSPT, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(316, Short.MAX_VALUE))
-        );
-        pnlSPTonLayout.setVerticalGroup(
-            pnlSPTonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlSPTonLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(lblTieuDeTKSPT)
-                .addGap(38, 38, 38)
-                .addComponent(scrTKSPT, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
-        );
-
-        tbpThongKe.addTab("Sản phẩm tồn", pnlSPTon);
-
         javax.swing.GroupLayout pnlBottomLayout = new javax.swing.GroupLayout(pnlBottom);
         pnlBottom.setLayout(pnlBottomLayout);
         pnlBottomLayout.setHorizontalGroup(
             pnlBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlBottomLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(tbpThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 1224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 22, Short.MAX_VALUE)
+                .addComponent(pnlDoanhThu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 22, Short.MAX_VALUE))
         );
         pnlBottomLayout.setVerticalGroup(
             pnlBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlBottomLayout.createSequentialGroup()
-                .addComponent(tbpThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 60, Short.MAX_VALUE))
+                .addGap(0, 49, Short.MAX_VALUE)
+                .addComponent(pnlDoanhThu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 49, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnlMainLayout = new javax.swing.GroupLayout(pnlMain);
@@ -609,33 +419,20 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblNam;
     private javax.swing.JLabel lblQuy;
     private javax.swing.JLabel lblTieuDe;
-    private javax.swing.JLabel lblTieuDeTKSPT;
     private javax.swing.JLabel lblTongHDDB;
     private javax.swing.JLabel lblTongHDTra;
     private javax.swing.JLabel lblTongTienBan;
     private javax.swing.JLabel lblTongTienHoan;
     private javax.swing.JLabel lblTuNgay;
-    private javax.swing.JPanel pnlBieuDoTKTopSP;
     private javax.swing.JPanel pnlBottom;
     private javax.swing.JPanel pnlDoanhThu;
     private javax.swing.JPanel pnlKetToan;
     private javax.swing.JPanel pnlMain;
-    private javax.swing.JPanel pnlSPTon;
-    private javax.swing.JPanel pnlTKTopNV;
     private javax.swing.JPanel pnlTieuChi;
     private javax.swing.JPanel pnlTongHDDB;
     private javax.swing.JPanel pnlTongHDTra;
     private javax.swing.JPanel pnlTongTienBan;
     private javax.swing.JPanel pnlTongTienHoan;
     private javax.swing.JPanel pnlTop;
-    private javax.swing.JPanel pnlTopNV;
-    private javax.swing.JPanel pnlTopSP;
-    private javax.swing.JScrollPane scrTKNVTop;
-    private javax.swing.JScrollPane scrTKSPT;
-    private javax.swing.JScrollPane scrTKTopSP;
-    private javax.swing.JTable tblTKSPT;
-    private javax.swing.JTable tblTKTopNV;
-    private javax.swing.JTable tblTKTopSP;
-    private javax.swing.JTabbedPane tbpThongKe;
     // End of variables declaration//GEN-END:variables
 }
