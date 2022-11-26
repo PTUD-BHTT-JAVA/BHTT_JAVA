@@ -38,6 +38,7 @@ public class DAO_KhachHang {
         }
         return dsKH;
     }
+    
     public KhachHang layKhachHangBangSDT(String sdt) {
         try(
             Connection con = ConnectDB.opConnection();

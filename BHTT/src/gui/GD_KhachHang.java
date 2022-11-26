@@ -278,7 +278,7 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
         }
     }
     
-     private void xoaTrangTextField() {
+    private void xoaTrangTextField() {
         txtTenKH.setText("");
         txtEmail.setText("");
         txtSDT.setText("");

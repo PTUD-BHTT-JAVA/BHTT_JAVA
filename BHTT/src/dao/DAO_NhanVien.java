@@ -37,7 +37,7 @@ public class DAO_NhanVien {
                 boolean gioiTinh = rs.getBoolean("gioiTinh");
                 double luongCoBan = rs.getDouble("luongCoBan");
                 boolean trangThai = rs.getBoolean("trangThai");
-                LoaiNhanVien lnv=new LoaiNhanVien(rs.getString("maLoaiNV"));
+                LoaiNhanVien lnv = new LoaiNhanVien(rs.getString("maLoaiNV"));
                 NhanVien nv = new NhanVien(maNV, tenNV,CMND,SDT,gioiTinh,luongCoBan,trangThai,lnv);
                
                 ds.add(nv);
@@ -114,7 +114,7 @@ public class DAO_NhanVien {
        }
        return null; 
     }
-        public NhanVien layNhanVienBangCMND(String maNV) {
+    public NhanVien layNhanVienBangCMND(String maNV) {
         try(
             Connection con = ConnectDB.opConnection();
             PreparedStatement pts = con.prepareStatement("Select * from NhanVien where CMND =? ")){
@@ -132,23 +132,26 @@ public class DAO_NhanVien {
        return null; 
     }
     public boolean themNV(NhanVien nv) {
+        int n = 0;
         try(
-            Connection conn = ConnectDB.opConnection();  PreparedStatement pstmt = conn.prepareStatement("INSERT INTO NHANVIEN VALUES (?,?,?,?,?,?,?,?)");)
+            Connection conn = ConnectDB.opConnection();
+            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO NHANVIEN VALUES (?,?,?,?,?,?,?,?)");)
+            
             {
                 pstmt.setString(1, nv.getMaNV());
                 pstmt.setString(2, nv.getTenNV());
                 pstmt.setString(3, nv.getCMND());
                 pstmt.setString(4, nv.getSoDienThoai());
                 pstmt.setBoolean(5, nv.isGioiTinh());               
-                pstmt.setDouble(6, nv.getLuongCoBan());
-                 pstmt.setBoolean(7, nv.isTrangThai());
-                pstmt.setString(8, nv.getLoaiNhanVien().getMaLoaiNV());
-                return  pstmt.executeUpdate()>0;
+                pstmt.setDouble(6, nv.getLuongCoBan());    
+                pstmt.setString(7, nv.getLoaiNhanVien().getMaLoaiNV());
+                pstmt.setBoolean(8, nv.isTrangThai());
+                n = pstmt.executeUpdate();
             } catch (Exception e) {
             System.err.println("themNV(): connect db fail");
             e.printStackTrace();
         }
-        return false;
+        return n > 0;
     }
 
         
