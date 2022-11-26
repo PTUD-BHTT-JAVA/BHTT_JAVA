@@ -79,6 +79,7 @@ public class DG_CTDH extends javax.swing.JFrame {
         jLabel25 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         getContentPane().setLayout(new javax.swing.OverlayLayout(getContentPane()));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
