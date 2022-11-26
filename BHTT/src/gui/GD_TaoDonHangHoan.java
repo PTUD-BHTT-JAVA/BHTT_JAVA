@@ -5,6 +5,7 @@ import dao.DAO_ChiTietHoaDon;
 import dao.DAO_ChiTietHoanTra;
 import dao.DAO_HoaDon;
 import dao.DAO_HoaDonHoan;
+import dao.DAO_KhachHang;
 
 import dao.DAO_NhanVien;
 import dao.DAO_SanPham;
@@ -12,6 +13,7 @@ import entity.ChiTietHoaDon;
 import entity.ChiTietHoanTra;
 import entity.HoaDon;
 import entity.HoaDonHoanTra;
+import entity.KhachHang;
 import entity.SanPham;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -36,6 +38,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     private final DAO_HoaDon hd_dao;
     private final DAO_NhanVien nv_dao;
+    private final DAO_KhachHang kh_dao = new DAO_KhachHang();
     private dao.DAO_HoaDonHoan hdh_dao = new DAO_HoaDonHoan();
     private double tongThanhTien;
     DecimalFormat df = new DecimalFormat("#,##0 VND");
@@ -64,7 +67,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
         Date date = new Date();
         moKhoaControls(false);
         txtMaDHHT.setText(maTuSinh());
-        
+
         lblTenNV.setText(nv_dao.layNhanVienBangMa(username).getTenNV());
     }
 
@@ -293,6 +296,11 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
         });
 
         txtTim.setHintText("Tìm theo mã hóa đơn / tên khách hàng");
+        txtTim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTimActionPerformed(evt);
+            }
+        });
 
         btnThem.setBackground(new java.awt.Color(51, 153, 0));
         btnThem.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -748,7 +756,6 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
     }
     private void btnTaoHDHTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoHDHTActionPerformed
         int row = tblDSHD.getSelectedRow();
-
         if (tblDonHoan.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Đơn hàng trống");
             return;
@@ -758,7 +765,25 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
         String maHD = modelHoaDon.getValueAt(row, 0).toString();
         Date ngayHT = new Date();
         //lưu vào sql hóa đơn hoàn trả
-        HoaDonHoanTra hDHT = new HoaDonHoanTra(maHDHT, ngayHT, hd_dao.layHoaDonTheoMa(maHD));
+        HoaDonHoanTra hDHT = new HoaDonHoanTra();
+        HoaDon hd = hd_dao.layHoaDonTheoMa(maHD);
+        KhachHang kh = kh_dao.getKHBangMa(hd.getKhachHang().getMaKH());
+        double tienHoanTra = 0;
+        double tienHoanHT = 0;
+        for (int i = 0; i < modelDonHoan.getRowCount(); i++) {
+            tienHoanHT = (Double) modelDonHoan.getValueAt(i, 3);
+        }
+        System.out.println(tienHoanHT);
+        System.out.println(kh.getLoaiKhachHang().getTenLoai().toString());
+        if (kh.getLoaiKhachHang().getTenLoai().equals("VIP")) {
+            tienHoanTra = tienHoanHT + tienHoanHT * 0.15;
+            hDHT = new HoaDonHoanTra(maHDHT, ngayHT, tienHoanTra, hd_dao.layHoaDonTheoMa(maHD));
+            System.out.println(tienHoanHT);
+        } else {
+            tienHoanTra = tienHoanHT - tienHoanHT * 0.05;
+            hDHT = new HoaDonHoanTra(maHDHT, ngayHT, tienHoanTra, hd_dao.layHoaDonTheoMa(maHD));
+        }
+
         hdh_dao.themHoaDonHon(hDHT);
         //lưu vào sql chi tiết hoàn trả
         for (int i = 0; i < modelDonHoan.getRowCount(); i++) {
@@ -769,14 +794,18 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
             ctht_dao.themCTHoanTra(ctHT);
             // cập nhập số lượng sản phẩm
             sp_dao.capNhatSoLuong(sp.getMaSP(), soLuongHT + sp.getSoLuong());
-
         }
         btnThem.setEnabled(true);
+        //xóa 2 bảng con
         DefaultTableModel fm = (DefaultTableModel) tblCanHoan.getModel();
         fm.setRowCount(0);
         DefaultTableModel fmm = (DefaultTableModel) tblDonHoan.getModel();
         fmm.setRowCount(0);
         moKhoaControls(false);
+        //đọc bảng  danh sách đơn hàng
+        DefaultTableModel fmmn = (DefaultTableModel) tblDSHD.getModel();
+        fmmn.setRowCount(0);
+        DocDSHoaDon();
         txtTTDonHang.setText(df.format(0));
         txtTTDonHoan.setText(df.format(0));
         JOptionPane.showMessageDialog(null, "Hoàn đơn thành công");
@@ -787,7 +816,8 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
     }//GEN-LAST:event_btnTaoHDHTActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        int hangChon = tblDonHoan.getSelectedRow();
+        int hangChon;
+        hangChon = tblDonHoan.getSelectedRow();
         int r = tblCanHoan.getSelectedRow();
         int soLuongCoSan = (int) modelCanHoan.getValueAt(r, 2);
         int slSua = (int) spnSoLuong.getValue();
@@ -803,8 +833,12 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
             JOptionPane.showMessageDialog(null, "Số lượng không được vượt quá số lượng bán.");
             return;
         }
-        modelDonHoan.setValueAt(slSua, r, 2);
-
+        modelDonHoan.setValueAt(slSua, hangChon, 2);
+        SanPham sp;
+        sp = sp_dao.laySanPhamBangMa((String) modelDonHoan.getValueAt(hangChon, 0));
+        modelDonHoan.setValueAt(sp.getGiaGoc() * slSua, hangChon, 3);
+        tinhTongCong();
+        System.out.println(hangChon);
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void txtTTDonHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTTDonHangActionPerformed
@@ -820,38 +854,80 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
     }//GEN-LAST:event_txtGioActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-
+//
+//        int row = tblDSHD.getSelectedRow();
+//        if (row < 0) {
+//            JOptionPane.showMessageDialog(null, "Chọn đơn hàng cần hoàn", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+//        } else {
+//            int sl;
+//            int slDaHoan = 0;
+//            ArrayList<ChiTietHoanTra> dsctht = new ArrayList<ChiTietHoanTra>();
+//            ArrayList<HoaDonHoanTra> dsHDHT = new ArrayList<HoaDonHoanTra>();
+//            dsHDHT = hdh_dao.layHoaDonHoanTheoMaHD(modelHoaDon.getValueAt(row, 0).toString());
+//          
+//            moKhoaControls(true);
+//            List<ChiTietHoaDon> hdCanHoan = cthd_dao.layDSHDBangMa(modelHoaDon.getValueAt(row, 0).toString());
+//            for (ChiTietHoaDon cthd : hdCanHoan) {
+//                dsctht = ctht_dao.layCTHTBangMaSP(cthd.getSanPham().getMaSP());
+//                for(ChiTietHoanTra ctht: dsctht){
+//                    slDaHoan= slDaHoan+ctht.getSoLuong();
+//                }
+//                
+//                sl = cthd.getSoLuong()-slDaHoan;
+//                modelCanHoan.addRow(new Object[]{
+//                    cthd.getSanPham().getMaSP(),
+//                    cthd.getSanPham().getTenSP(),
+//                    sl,sl*
+//                    cthd.getSanPham().getGiaGoc()
+//                });
+//                slDaHoan=0;
+//                sl=0;
+//            }
+//
+//           
+//
+//                setTongThanhTien();
+//                btnThem.setEnabled(false);
+//            }
         int row = tblDSHD.getSelectedRow();
         if (row < 0) {
             JOptionPane.showMessageDialog(null, "Chọn đơn hàng cần hoàn", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         } else {
             int sl;
-            int slDaHoan=0;
-            ArrayList<ChiTietHoanTra>  dsctht = new ArrayList<ChiTietHoanTra>();
+            int slDaHoan = 0;
+            ArrayList<ChiTietHoanTra> dsctht = new ArrayList<ChiTietHoanTra>();
+            ArrayList<HoaDonHoanTra> dsHDHT = new ArrayList<HoaDonHoanTra>();
+            dsHDHT = hdh_dao.layHoaDonHoanTheoMaHD(modelHoaDon.getValueAt(row, 0).toString());
             moKhoaControls(true);
             List<ChiTietHoaDon> hdCanHoan = cthd_dao.layDSHDBangMa(modelHoaDon.getValueAt(row, 0).toString());
+            List<ChiTietHoaDon> ctHD = cthd_dao.layDSHDBangMa(modelHoaDon.getValueAt(row, 0).toString());
             for (ChiTietHoaDon cthd : hdCanHoan) {
-                dsctht = ctht_dao.layCTHTBangMaSP(cthd.getSanPham().getMaSP());
-                for(ChiTietHoanTra ctht: dsctht){
-                    slDaHoan= slDaHoan+ctht.getSoLuong();
+                sl = cthd.getSoLuong();
+
+                for (HoaDonHoanTra hdht : dsHDHT) {
+                    // System.out.println(hdht);
+                    dsctht = ctht_dao.layDSCTHTBangMa(hdht.getMaHDHT());
+                    for (ChiTietHoanTra ctht : dsctht) {
+                        //  System.out.println(ctht);
+                        //nếu là đúng mã sản phẩm thì trừ
+                        if (ctht.getSanPham().getMaSP().equals(cthd.getSanPham().getMaSP())) {
+                            sl = sl - ctht.getSoLuong();
+                        }
+                    }
                 }
-                
-                
-                sl = cthd.getSoLuong()-slDaHoan;
+
                 modelCanHoan.addRow(new Object[]{
                     cthd.getSanPham().getMaSP(),
                     cthd.getSanPham().getTenSP(),
-                    sl,sl*
-                    cthd.getSanPham().getGiaGoc()
+                    sl, sl
+                    * cthd.getSanPham().getGiaGoc()
                 });
-                slDaHoan=0;
-                sl=0;
             }
+
             setTongThanhTien();
             btnThem.setEnabled(false);
-        }
     }//GEN-LAST:event_btnThemActionPerformed
-
+    }
     private void btnChiTietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChiTietActionPerformed
         int hangChon = tblDSHD.getSelectedRow();
         if (hangChon == -1) {
@@ -890,7 +966,12 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
             return;
         }
         modelDonHoan.removeRow(hangChon);
+        tinhTongCong();
     }//GEN-LAST:event_btnXoaSPDHActionPerformed
+
+    private void txtTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTimActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
