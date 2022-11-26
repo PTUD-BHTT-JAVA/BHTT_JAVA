@@ -264,6 +264,7 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
         btnTaoTaiKhoanNV.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         btnTaoTaiKhoanNV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/themTK.png"))); // NOI18N
         btnTaoTaiKhoanNV.setText("Tạo tài khoản");
+        btnTaoTaiKhoanNV.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnTaoTaiKhoanNV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTaoTaiKhoanNVActionPerformed(evt);
@@ -273,6 +274,7 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
         btnThemNhanVien.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         btnThemNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/them.png"))); // NOI18N
         btnThemNhanVien.setText("Thêm nhân viên");
+        btnThemNhanVien.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnThemNhanVien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThemNhanVienActionPerformed(evt);
@@ -282,6 +284,7 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
         btnXoaTrang.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         btnXoaTrang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/xoaTrang.png"))); // NOI18N
         btnXoaTrang.setText("Xóa trắng");
+        btnXoaTrang.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnXoaTrang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnXoaTrangActionPerformed(evt);
@@ -291,6 +294,7 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
         btnSuaThongTinNV.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         btnSuaThongTinNV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/capNhat.png"))); // NOI18N
         btnSuaThongTinNV.setText("Cập nhật thông tin nhân viên");
+        btnSuaThongTinNV.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnSuaThongTinNV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSuaThongTinNVActionPerformed(evt);
@@ -299,7 +303,8 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
 
         btnXoaNhanVien.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         btnXoaNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/xoa.png"))); // NOI18N
-        btnXoaNhanVien.setText("Xóa nhân viên");
+        btnXoaNhanVien.setText("Cho thôi việc");
+        btnXoaNhanVien.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnXoaNhanVien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnXoaNhanVienActionPerformed(evt);
@@ -421,7 +426,7 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Mã ", "Tên nhân viên", "CMND", "Giới tính", "Số điện thoại", "Chức vụ", "Lương cơ bản", "Tài khoản"
+                "Mã ", "Tên nhân viên", "CMND", "Giới tính", "Số điện thoại", "Chức vụ", "Lương cơ bản", "Tài khoản", "Trạng thái"
             }
         ));
         tblNhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -627,7 +632,8 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
                 gt="Nữ";
             }
             dtm.addRow(new Object[]{
-                nv.getMaNV(),nv.getTenNV(),nv.getCMND(),gt,nv.getSoDienThoai(),cv,nv.getLuongCoBan(),taiKhoan
+                nv.getMaNV(),nv.getTenNV(),nv.getCMND(),gt,nv.getSoDienThoai(),cv,nv.getLuongCoBan(),taiKhoan,
+                nv.isTrangThai() == true  ? "Đang làm" : "Đã nghĩ việc"
             });
         }
     }
