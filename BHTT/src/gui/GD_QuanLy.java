@@ -51,6 +51,7 @@ public class GD_QuanLy extends javax.swing.JFrame {
         this.setVisible(true);
 
         initComponents();
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icon/tuisach.png")));
         setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         Toolkit tk = Toolkit.getDefaultToolkit();

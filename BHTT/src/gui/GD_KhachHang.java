@@ -258,21 +258,21 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
     
     private  void timKhachHang(){
         try {
-             ArrayList<KhachHang> emps = kh.getDSKHTuongDoi(txtTim.getText());
-        XoaHetDuLieuTrenTableModel();
-        Object[] row = new Object[7];
-        modelKhachHang.setRowCount(0);
-        for (int i = 0; i < emps.size(); i++) {
-            row[0] = emps.get(i).getMaKH();
-            row[1] = emps.get(i).getTenKH();
-            row[2] = emps.get(i).getSoDienThoai();
-            row[3] = emps.get(i).getEmail();
-            row[4] = emps.get(i).isGioiTinh();
-            row[5] = emps.get(i).getLoaiKhachHang().getTenLoai();
-            row[6] = emps.get(i).getDiemTichLuy();
-            modelKhachHang.addRow(row);
-        }
-        tableKhachHang.setModel(modelKhachHang);
+            ArrayList<KhachHang> emps = kh.getDSKHTuongDoi(txtTim.getText());
+            XoaHetDuLieuTrenTableModel();
+            Object[] row = new Object[7];
+            modelKhachHang.setRowCount(0);
+            for (int i = 0; i < emps.size(); i++) {
+                row[0] = emps.get(i).getMaKH();
+                row[1] = emps.get(i).getTenKH();
+                row[2] = emps.get(i).getSoDienThoai();
+                row[3] = emps.get(i).getEmail();
+                row[4] = emps.get(i).isGioiTinh() == true ? "Nam" : "Nữ";
+                row[5] = emps.get(i).getLoaiKhachHang().getTenLoai();
+                row[6] = emps.get(i).getDiemTichLuy();
+                modelKhachHang.addRow(row);
+            }
+            tableKhachHang.setModel(modelKhachHang);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -755,6 +755,7 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
 
     private void cboPhanLoaiItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboPhanLoaiItemStateChanged
        try {
+           txtTim.setText("");
             if (evt.getStateChange() == ItemEvent.SELECTED) {
             String selectItem = cboPhanLoai.getSelectedItem().toString();
             if(selectItem.equals("VIP")){

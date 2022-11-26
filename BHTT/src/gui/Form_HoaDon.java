@@ -54,7 +54,7 @@ public class Form_HoaDon extends javax.swing.JFrame {
         for (ChiTietHoaDon l:list){
             modalXuatHoaDon.addRow(new Object[]{
                 l.getSanPham().getTenSP(),l.getSoLuong(),
-                l.getSanPham().getGiaGoc(),df.format(l.getTongTien())
+               df.format( l.getSanPham().getGiaGoc()),df.format(l.getTongTien())
             });
             tongSL+= l.getSoLuong();
         }
