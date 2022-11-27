@@ -28,7 +28,7 @@ public class DAO_ChiTietHoaDon {
     private DAO_HoaDon hd_dao = new DAO_HoaDon();
     private DAO_SanPham sp_dao = new DAO_SanPham();
     private ArrayList<ChiTietHoaDon> dsCTHD;
-   
+
     public ArrayList<ChiTietHoaDon> getallDSHoaDon() {
         dsCTHD = new ArrayList<ChiTietHoaDon>();
         try {
@@ -40,7 +40,7 @@ public class DAO_ChiTietHoaDon {
             while (rs.next()) {
                 int soLuong = rs.getInt("soLuong");
                 double VAT = rs.getDouble("VAT");
-                HoaDon maHD =  hd_dao.layHoaDonTheoMa(rs.getString("maHD"));
+                HoaDon maHD = hd_dao.layHoaDonTheoMa(rs.getString("maHD"));
                 SanPham maSP = sp_dao.laySanPhamBangMa(rs.getString("maSP"));
                 double tongTien = rs.getDouble("tongTien");
                 double tienThoi = rs.getDouble("tienThoi");
@@ -52,20 +52,13 @@ public class DAO_ChiTietHoaDon {
         }
         return dsCTHD;
     }
-    
-    
-    
-    public ArrayList<ChiTietHoaDon> layDSHoaDonLenBang() {
-      ArrayList<ChiTietHoaDon> dsCTHDX = new ArrayList<ChiTietHoaDon>();
+//    Tìm kiếm theo mã hóa đơn
+    public ArrayList<ChiTietHoaDon> getallDSHoaDonTuongDoi(String search) {
+         ArrayList<ChiTietHoaDon> dsCTHDX = new ArrayList<ChiTietHoaDon>();
         try {
             ConnectDB.getInstance();
             Connection con = ConnectDB.getConnection();
-            String sql = """
-                         select hd.maHD,hd.ngayLap,SUM(cthd.soLuong) as TongSoLuong,SUM(cthd.tongTien) as TongThanhTien, nv.tenNV
-                                                  from HoaDon hd
-                                                  join ChiTietHoaDon cthd on cthd.maHD = hd.maHD
-                                                  join NhanVien nv on nv.maNV = hd.maNV
-                                                  group by hd.ngayLap,hd.maHD,nv.tenNV""";
+            String sql = "select maHD,SUM(soLuong) as TongSoLuong,SUM(tongTien) as TongThanhTien from ChiTietHoaDon  where maHD like '%" +search+"%' group by maHD";
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()) {
@@ -83,7 +76,31 @@ public class DAO_ChiTietHoaDon {
         }
         return dsCTHDX;
     }
-   
+    
+    public ArrayList<ChiTietHoaDon> layDSHoaDonLenBang() {
+        ArrayList<ChiTietHoaDon> dsCTHDX = new ArrayList<ChiTietHoaDon>();
+        try {
+            ConnectDB.getInstance();
+            Connection con = ConnectDB.getConnection();
+            String sql = "select maHD,SUM(soLuong) as TongSoLuong,SUM(tongTien) as TongThanhTien from ChiTietHoaDon group by maHD";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                int soLuong = rs.getInt("TongSoLuong");
+                double VAT = 0.1;
+                HoaDon maHD = hd_dao.layHoaDonTheoMa(rs.getString("maHD"));
+                SanPham maSP = new SanPham("SP001");
+                double tongTien = rs.getDouble("TongThanhTien");
+                double tienThoi = 1000;
+                ChiTietHoaDon cthd = new ChiTietHoaDon(soLuong, VAT, tongTien, tienThoi, maHD, maSP);
+                dsCTHDX.add(cthd);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return dsCTHDX;
+    }
+
     public boolean themCTHD(ChiTietHoaDon cthd) {
         ConnectDB.getInstance();
         Connection con = ConnectDB.getConnection();
@@ -112,7 +129,7 @@ public class DAO_ChiTietHoaDon {
 
     public SanPham laySanPhamBangMa(String maTim) {
         try (
-            java.sql.Connection con = ConnectDB.opConnection();  PreparedStatement pts = con.prepareStatement("Select * from SanPham where maSP = ?  ")) {
+                 java.sql.Connection con = ConnectDB.opConnection();  PreparedStatement pts = con.prepareStatement("Select * from SanPham where maSP = ?  ")) {
             pts.setString(1, maTim);
             try ( ResultSet rs = pts.executeQuery()) {
                 if (rs.next()) {
@@ -145,8 +162,8 @@ public class DAO_ChiTietHoaDon {
         }
         return null;
     }
-    
-    public ArrayList<ChiTietHoaDon> layDSHDBangMa(String maTim){
+
+    public ArrayList<ChiTietHoaDon> layDSHDBangMa(String maTim) {
         ArrayList<ChiTietHoaDon> dsHDHoan = new ArrayList<ChiTietHoaDon>();
         ConnectDB.getInstance();
         Connection con = ConnectDB.getConnection();
@@ -159,12 +176,12 @@ public class DAO_ChiTietHoaDon {
             while (rs.next()) {
                 int soLuong = rs.getInt("soLuong");
                 double VAT = rs.getDouble("VAT");
-                HoaDon maHD =  hd_dao.layHoaDonTheoMa(rs.getString("maHD"));
+                HoaDon maHD = hd_dao.layHoaDonTheoMa(rs.getString("maHD"));
                 SanPham maSP = sp_dao.laySanPhamBangMa(rs.getString("maSP"));
                 double tongTien = rs.getDouble("tongTien");
                 double tienThoi = rs.getDouble("tienThoi");
                 ChiTietHoaDon cthd = new ChiTietHoaDon(soLuong, VAT, tongTien, tienThoi, maHD, maSP);
-                dsHDHoan.add(cthd);  
+                dsHDHoan.add(cthd);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -178,4 +195,52 @@ public class DAO_ChiTietHoaDon {
         return dsHDHoan;
     }
 
-}
+    public ArrayList<ChiTietHoaDon> layDanhSachHoaDonTheoNgay(String ngayTim, String ngayCanTim) {
+        ArrayList<ChiTietHoaDon> dsCTHDNgay = new ArrayList<ChiTietHoaDon>();
+        try {
+            ConnectDB.getInstance();
+            Connection con = ConnectDB.getConnection();
+            String sql = "select hd.maHD,hd.ngayLap,SUM(cthd.soLuong) as TongSoLuong,SUM(cthd.tongTien) as TongThanhTien from HoaDon hd  join ChiTietHoaDon cthd on cthd.maHD = hd.maHD  where hd.ngayLap >= ' " + ngayTim + " 'AND hd.ngayLap <= ' " + ngayCanTim + " ' group by hd.ngayLap,hd.maHD";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                int soLuong = rs.getInt("TongSoLuong");
+                double VAT = 0.1;
+                HoaDon maHD = hd_dao.layHoaDonTheoMa(rs.getString("maHD"));
+                SanPham maSP = new SanPham("SP001");
+                double tongTien = rs.getDouble("TongThanhTien");
+                double tienThoi = 1000;
+                ChiTietHoaDon cthd = new ChiTietHoaDon(soLuong, VAT, tongTien, tienThoi, maHD, maSP);
+                dsCTHDNgay.add(cthd);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return dsCTHDNgay;
+    }
+
+//    Lấy danh sách hóa đơn theo Quý 
+    public  ArrayList<ChiTietHoaDon> layDSHoaDonTheoQuy(String dauQuy,String cuoiQuy){
+         ArrayList<ChiTietHoaDon> dsCTHDQuy = new ArrayList<ChiTietHoaDon>();
+        try {
+            ConnectDB.getInstance();
+            Connection con = ConnectDB.getConnection();
+            String sql = "select hd.maHD,hd.ngayLap,SUM(cthd.soLuong) as TongSoLuong,SUM(cthd.tongTien) as TongThanhTien from HoaDon hd  join ChiTietHoaDon cthd on cthd.maHD = hd.maHD  where hd.ngayLap >= ' " + dauQuy + " 'AND hd.ngayLap <= ' " + cuoiQuy + " ' group by hd.ngayLap,hd.maHD";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                int soLuong = rs.getInt("TongSoLuong");
+                double VAT = 0.1;
+                HoaDon maHD = hd_dao.layHoaDonTheoMa(rs.getString("maHD"));
+                SanPham maSP = new SanPham("SP001");
+                double tongTien = rs.getDouble("TongThanhTien");
+                double tienThoi = 1000;
+                ChiTietHoaDon cthd = new ChiTietHoaDon(soLuong, VAT, tongTien, tienThoi, maHD, maSP);
+                dsCTHDQuy.add(cthd);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return dsCTHDQuy;
+    }
+}   

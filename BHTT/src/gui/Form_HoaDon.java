@@ -14,6 +14,7 @@ import entity.KhachHang;
 import entity.NhanVien;
 import java.text.DecimalFormat;
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -34,6 +35,7 @@ public class Form_HoaDon extends javax.swing.JFrame {
      * Creates new form Form_HoaDon
      */
     public Form_HoaDon(String ma) {
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         maHD=ma;
         initComponents();
         setLocationRelativeTo(null);
