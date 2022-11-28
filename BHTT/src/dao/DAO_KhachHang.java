@@ -207,4 +207,20 @@ public class DAO_KhachHang {
        }
        return null; 
     }
+    public boolean capNhatDiemTL(String maKH, int diemTL) {
+        int n = -1;
+        String sql = "update KhachHang  set diemTichLuy = ? where maKH = ?";
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        try {
+            PreparedStatement pstmt = con.prepareCall(sql);
+            pstmt.setInt(1, diemTL);
+            pstmt.setString(2, maKH);
+            n = pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return n > 0;
+    }
 }
