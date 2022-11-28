@@ -41,7 +41,7 @@ public class DAO_HoaDonHoan {
                 String maHDH = rs.getString("maHDHT");
                 Date ngayLap = rs.getDate("ngayHoanTra");
                 HoaDon hd = hd_dao.layHoaDonTheoMa(rs.getString("maHD"));
-                HoaDonHoanTra hdht = new HoaDonHoanTra(maHDH, ngayLap,rs.getDouble("tienHoanTra"), hd);
+                HoaDonHoanTra hdht = new HoaDonHoanTra(maHDH, ngayLap, hd);
                 dsHDH.add(hdht);
             }
         } catch (Exception e) {
@@ -56,12 +56,11 @@ public class DAO_HoaDonHoan {
         PreparedStatement stmt = null;
         int n = 0;
         try {
-            stmt = con.prepareStatement("insert into HoaDonHoanTra values(?,?,?,?)");
+            stmt = con.prepareStatement("insert into HoaDonHoanTra values(?,?,?)");
             stmt.setString(1, hdHoan.getMaHDHT());
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             String ngayLap = sdf.format(hdHoan.getNgayHoanTra());
             stmt.setString(2, ngayLap);
-            stmt.setDouble(4, hdHoan.getTienHoanTra());
             stmt.setString(3, hdHoan.getHoaDon().getMaHD());
             
             n = stmt.executeUpdate();
@@ -86,7 +85,7 @@ public class DAO_HoaDonHoan {
                     Date ngayLap = rs.getDate("HoaDonHoanTra");
                     HoaDon hd = hd_dao.layHoaDonTheoMa(rs.getString("maHD"));
                     
-                    HoaDonHoanTra hdht = new HoaDonHoanTra(maHDH, ngayLap,rs.getDouble("tienHoanTra"), hd);
+                    HoaDonHoanTra hdht = new HoaDonHoanTra(maHDH, ngayLap, hd);
                     return hdht;
                 }
             }
@@ -109,7 +108,7 @@ public class DAO_HoaDonHoan {
             while (rs.next()) {
                 Date ngayLap = rs.getDate("ngayHoanTra");
                 HoaDon hd = hd_dao.layHoaDonTheoMa(rs.getString("maHD"));
-                HoaDonHoanTra hdht = new HoaDonHoanTra(rs.getString("maHDHT"), ngayLap,rs.getDouble("tienHoanTra"), hd);
+                HoaDonHoanTra hdht = new HoaDonHoanTra(rs.getString("maHDHT"), ngayLap, hd);
                 ds.add(hdht);
             }
         } catch (Exception e) {

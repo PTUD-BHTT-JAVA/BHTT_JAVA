@@ -17,6 +17,7 @@ import entity.NhanVien;
 import entity.SanPham;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -30,6 +31,7 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
      */
     private static String maHDH;
     private static String maHD;
+    private static double tienHoan;
     private DAO_HoaDonHoan hdh_dao = new DAO_HoaDonHoan();
     private DAO_ChiTietHoanTra ctht_dao = new DAO_ChiTietHoanTra();
     private dao.DAO_HoaDon hd_dao = new DAO_HoaDon();
@@ -38,9 +40,11 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
     private dao.DAO_NhanVien nv_dao = new DAO_NhanVien();
     private DefaultTableModel modelCTDonHoan;
 
-    public Form_HoaDonHoan(String HDH, String HD) {
+    public Form_HoaDonHoan(String HDH, String HD,double tienHoanTra) {
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         maHDH = HDH;
         maHD = HD;
+        tienHoan = tienHoanTra;
         initComponents();
         modelCTDonHoan = (DefaultTableModel) tableXuatHoaDonH.getModel();
         DocDL();
@@ -95,7 +99,7 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        //setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         pnlHoaDon.setPreferredSize(new java.awt.Dimension(515, 790));
         pnlHoaDon.setLayout(new javax.swing.BoxLayout(pnlHoaDon, javax.swing.BoxLayout.Y_AXIS));
@@ -417,7 +421,7 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
             tongSL  = tongSL+ ctht.getSoLuong();
             tongTien= tongTien+ ctht.getSoLuong()*sp.getGiaGoc();
         }
-        txtTongCong.setText(String.format("%,.1f", tongTien) + " VND");
+        txtTongCong.setText(String.format("%,.1f", tienHoan) + " VND");
         txtTongSoLuong.setText(tongSL+"");
     }
 
@@ -451,7 +455,7 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Form_HoaDonHoan(maHDH, maHD).setVisible(true);
+                new Form_HoaDonHoan(maHDH, maHD,tienHoan).setVisible(true);
             }
         });
     }

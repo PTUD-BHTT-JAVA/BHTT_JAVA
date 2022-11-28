@@ -15,13 +15,13 @@ import java.util.Objects;
 public class HoaDonHoanTra {
     private String maHDHT;
     private Date ngayHoanTra;
-    private double tienHoanTra;
     private HoaDon hoaDon;
 
-    public HoaDonHoanTra(String maHDHT, Date ngayHoanTra, double tienHoanTra, HoaDon hoaDon) {
+    public HoaDonHoanTra(String maHDHT, Date ngayHoanTra, HoaDon hoaDon) {
         this.maHDHT = maHDHT;
         this.ngayHoanTra = ngayHoanTra;
-        this.tienHoanTra = tienHoanTra;
+        
+        
         this.hoaDon = hoaDon;
     }
 
@@ -48,14 +48,7 @@ public class HoaDonHoanTra {
         this.ngayHoanTra = ngayHoanTra;
     }
 
-    public double getTienHoanTra() {
-        return tienHoanTra;
-    }
-
-    public void setTienHoanTra(double tienHoanTra) {
-        this.tienHoanTra = tienHoanTra;
-    }
-
+    
     public HoaDon getHoaDon() {
         return hoaDon;
     }
