@@ -13,6 +13,8 @@ import dao.DAO_SanPham;
 import entity.ChiTietHoaDon;
 import entity.ChiTietHoanTra;
 import entity.HoaDon;
+import entity.KhachHang;
+import entity.LoaiKhachHang;
 import entity.NhanVien;
 import entity.SanPham;
 import java.text.SimpleDateFormat;
@@ -32,6 +34,7 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
     private static String maHDH;
     private static String maHD;
     private static double tienHoan;
+    private static String lydo;
     private DAO_HoaDonHoan hdh_dao = new DAO_HoaDonHoan();
     private DAO_ChiTietHoanTra ctht_dao = new DAO_ChiTietHoanTra();
     private dao.DAO_HoaDon hd_dao = new DAO_HoaDon();
@@ -40,15 +43,19 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
     private dao.DAO_NhanVien nv_dao = new DAO_NhanVien();
     private DefaultTableModel modelCTDonHoan;
 
-    public Form_HoaDonHoan(String HDH, String HD,double tienHoanTra) {
+
+    public Form_HoaDonHoan(String HDH, String HD,double tienHoanTra, String lyDoHT) {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         maHDH = HDH;
         maHD = HD;
         tienHoan = tienHoanTra;
+        lydo=lyDoHT;
         initComponents();
         modelCTDonHoan = (DefaultTableModel) tableXuatHoaDonH.getModel();
         DocDL();
         DocDLTB();
+        
+        
     }
 
     /**
@@ -81,6 +88,12 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
         lblMaPhieu = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         lblKH = new javax.swing.JLabel();
+        jPanel17 = new javax.swing.JPanel();
+        jPanel16 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        lblLoaiKH = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        lblKH1 = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableXuatHoaDonH = new javax.swing.JTable();
@@ -88,8 +101,14 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
         pnlGiua = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        lblLyDo = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         txtTongSoLuong = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        txtVAT = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        txtKhuyenMai = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         txtTongCong = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
@@ -99,7 +118,7 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
 
-        //setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         pnlHoaDon.setPreferredSize(new java.awt.Dimension(515, 790));
         pnlHoaDon.setLayout(new javax.swing.BoxLayout(pnlHoaDon, javax.swing.BoxLayout.Y_AXIS));
@@ -167,7 +186,7 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 20, Short.MAX_VALUE)
+            .addGap(0, 19, Short.MAX_VALUE)
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -197,7 +216,7 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
         jPanel15.setLayout(jPanel15Layout);
         jPanel15Layout.setHorizontalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
+            .addGap(0, 49, Short.MAX_VALUE)
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,11 +232,39 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
         jPanel11.add(jLabel8);
         jPanel11.add(lblMaPhieu);
 
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel9.setText("Khách hàng: ");
         jPanel11.add(jLabel9);
         jPanel11.add(lblKH);
 
         jPanel10.add(jPanel11);
+
+        jPanel17.setMaximumSize(new java.awt.Dimension(20, 32767));
+        jPanel17.setPreferredSize(new java.awt.Dimension(20, 40));
+
+        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
+        jPanel17.setLayout(jPanel17Layout);
+        jPanel17Layout.setHorizontalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 19, Short.MAX_VALUE)
+        );
+        jPanel17Layout.setVerticalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+        );
+
+        jPanel10.add(jPanel17);
+
+        jPanel16.setLayout(new java.awt.GridLayout(2, 2));
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel11.setText("Loại khách:");
+        jPanel16.add(jLabel11);
+        jPanel16.add(lblLoaiKH);
+        jPanel16.add(jLabel13);
+        jPanel16.add(lblKH1);
+
+        jPanel10.add(jPanel16);
 
         jPanel13.setMaximumSize(new java.awt.Dimension(20, 32767));
         jPanel13.setPreferredSize(new java.awt.Dimension(20, 40));
@@ -226,7 +273,7 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 20, Short.MAX_VALUE)
+            .addGap(0, 19, Short.MAX_VALUE)
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -274,14 +321,21 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 102, Short.MAX_VALUE)
+            .addGap(0, 122, Short.MAX_VALUE)
         );
 
         pnlGiua.add(jPanel4);
 
         jPanel2.setMaximumSize(new java.awt.Dimension(500, 32767));
         jPanel2.setPreferredSize(new java.awt.Dimension(350, 122));
-        jPanel2.setLayout(new java.awt.GridLayout(2, 2));
+        jPanel2.setLayout(new java.awt.GridLayout(5, 2));
+
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel16.setText("Lý do hoàn trả:");
+        jPanel2.add(jLabel16);
+
+        lblLyDo.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jPanel2.add(lblLyDo);
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel10.setText("Tổng số lượng :");
@@ -289,6 +343,20 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
 
         txtTongSoLuong.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jPanel2.add(txtTongSoLuong);
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel15.setText("VAT của hóa đơn:");
+        jPanel2.add(jLabel15);
+
+        txtVAT.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jPanel2.add(txtVAT);
+
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel14.setText("Khuyến mãi của hóa đơn:");
+        jPanel2.add(jLabel14);
+
+        txtKhuyenMai.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jPanel2.add(txtKhuyenMai);
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel12.setText("Tổng Cộng");
@@ -308,7 +376,7 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 102, Short.MAX_VALUE)
+            .addGap(0, 122, Short.MAX_VALUE)
         );
 
         pnlGiua.add(jPanel9);
@@ -353,7 +421,7 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 43, Short.MAX_VALUE)
+            .addGap(0, 42, Short.MAX_VALUE)
         );
 
         pnlDuoi.add(jPanel1);
@@ -402,12 +470,22 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
     private void DocDL() {
         HoaDon hd = hd_dao.layHoaDonTheoMa(maHD);
         NhanVien nv = nv_dao.layNhanVienBangMa(hd.getNhanVien().getMaNV());
+        KhachHang kh=hd.getKhachHang();
+        LoaiKhachHang lkh=kh.getLoaiKhachHang();
+        String km="0%";
+        if(lkh.getMaLoaiKH().equals("LKH001"))
+            km="10%";
         lblThuNgan.setText(nv.getTenNV());
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         String ngay = sdf.format(hd.getNgayLap());
         lblNgay.setText(ngay);
         lblMaPhieu.setText(maHDH);
-        lblKH.setText(hd.getKhachHang().getTenKH());
+        lblKH.setText(kh.getTenKH());
+        lblLoaiKH.setText(lkh.getTenLoai());
+        txtVAT.setText("5%");
+        txtKhuyenMai.setText(km);
+        lblLyDo.setText(lydo);
+        
     }
 
     private void DocDLTB() {
@@ -455,7 +533,7 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Form_HoaDonHoan(maHDH, maHD,tienHoan).setVisible(true);
+                new Form_HoaDonHoan(maHDH, maHD,tienHoan,lydo).setVisible(true);
             }
         });
     }
@@ -465,7 +543,12 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -481,6 +564,8 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -489,6 +574,9 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblKH;
+    private javax.swing.JLabel lblKH1;
+    private javax.swing.JLabel lblLoaiKH;
+    private javax.swing.JLabel lblLyDo;
     private javax.swing.JLabel lblMaPhieu;
     private javax.swing.JLabel lblNgay;
     private javax.swing.JLabel lblThuNgan;
@@ -497,7 +585,9 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
     private javax.swing.JPanel pnlGiua;
     private javax.swing.JPanel pnlHoaDon;
     private javax.swing.JTable tableXuatHoaDonH;
+    private javax.swing.JLabel txtKhuyenMai;
     private javax.swing.JLabel txtTongCong;
     private javax.swing.JLabel txtTongSoLuong;
+    private javax.swing.JLabel txtVAT;
     // End of variables declaration//GEN-END:variables
 }
