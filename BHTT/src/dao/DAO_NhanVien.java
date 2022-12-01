@@ -21,12 +21,38 @@ import java.util.List;
 public class DAO_NhanVien {
     private final DAO_LoaiNhanVien lnvDAO = new DAO_LoaiNhanVien();
     private DAO_TaiKhoan tkDAO;
-    public List<NhanVien> layTatCaNhanVienVaoBang() {
+    public List<NhanVien> layTatCaNhanVienDangLamVaoBang() {
         List<NhanVien> ds = new ArrayList<>();
         try{
             ConnectDB.getInstance();
             Connection con = ConnectDB.getConnection();
-            String sql = "select * from NhanVien";
+            String sql = "select * from NhanVien where trangThai=1";
+            java.sql.Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                String maNV = rs.getString("maNV");
+                String tenNV = rs.getString("tenNV");
+                String CMND = rs.getString("CMND");
+                String SDT = rs.getString("soDienThoai");
+                boolean gioiTinh = rs.getBoolean("gioiTinh");
+                double luongCoBan = rs.getDouble("luongCoBan");
+                boolean trangThai = rs.getBoolean("trangThai");
+                LoaiNhanVien lnv = new LoaiNhanVien(rs.getString("maLoaiNV"));
+                NhanVien nv = new NhanVien(maNV, tenNV,CMND,SDT,gioiTinh,luongCoBan,trangThai,lnv);
+               
+                ds.add(nv);
+            }
+        }catch (SQLException e) {
+        }
+        return ds;
+    }
+    
+    public List<NhanVien> layTatCaNhanVienDaNghiVaoBang() {
+        List<NhanVien> ds = new ArrayList<>();
+        try{
+            ConnectDB.getInstance();
+            Connection con = ConnectDB.getConnection();
+            String sql = "select * from NhanVien where trangthai=0";
             java.sql.Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()) {
@@ -179,11 +205,16 @@ public class DAO_NhanVien {
     }
     
     public boolean xoaNV(NhanVien nv) {
-        try (Connection conn = ConnectDB.opConnection();
-                PreparedStatement pstmt = conn.prepareStatement("DELETE FROM NHANVIEN WHERE MANV=?;")) {
-            pstmt.setString(1, nv.getMaNV());
-            return pstmt.executeUpdate() > 0;
+        try(
+            Connection conn = ConnectDB.opConnection();  
+                PreparedStatement pstmt = conn.prepareStatement("UPDATE NHANVIEN SET TRANGTHAI=? WHERE MANV=?");)
+            {
+
+                pstmt.setInt(1, nv.isTrangThai()==true?0:1);         
+                pstmt.setString(2, nv.getMaNV());
+                return pstmt.executeUpdate() > 0;
         } catch (Exception e) {
+            System.err.println("choThoiViecNV(): connect db fail");
             e.printStackTrace();
         }
         return false;

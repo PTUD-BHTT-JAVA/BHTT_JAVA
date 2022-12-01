@@ -278,7 +278,7 @@ public class GD_TaiKhoan extends javax.swing.JInternalFrame {
         if (index==-1){
             JOptionPane.showMessageDialog(this, "Hãy chọn tài khoản cần xóa!");
         }else{
-            tk.xoaTK(tk.timTaiKhoan(modelTaiKhoan.getValueAt(index, 0)+""));
+            tk.xoaTK(modelTaiKhoan.getValueAt(index, 0)+"");
             
             DocDuLieuLenTable();
             JOptionPane.showMessageDialog(this, "Xóa thành công!");

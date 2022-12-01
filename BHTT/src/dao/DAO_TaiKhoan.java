@@ -62,11 +62,11 @@ public class DAO_TaiKhoan {
         }
         return null;
     }
-       public boolean xoaTK(TaiKhoan tk) {
-
+       public boolean xoaTK(String tk) {
+           
         try (Connection conn = ConnectDB.opConnection();
                 PreparedStatement pstmt = conn.prepareStatement("DELETE FROM TAIKHOAN WHERE tenDN=?")) {
-            pstmt.setString(1, tk.getTenDN());
+            pstmt.setString(1, tk);
             return pstmt.executeUpdate() > 0;
         } catch (Exception e) {
             e.printStackTrace();
