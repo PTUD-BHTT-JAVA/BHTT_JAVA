@@ -5,9 +5,11 @@
 package dao;
 
 import connectDB.ConnectDB;
+import entity.ChiTietHoaDon;
 import entity.HoaDon;
 import entity.KhachHang;
 import entity.NhanVien;
+import entity.SanPham;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,6 +25,7 @@ import java.util.Date;
 public class DAO_HoaDon {
 
     private ArrayList<HoaDon> dsHD;
+    private ArrayList<ChiTietHoaDon> dsCTHD;
     private DAO_KhachHang kh_dao = new DAO_KhachHang();
     private DAO_NhanVien nv_dao = new DAO_NhanVien();
 
@@ -49,6 +52,7 @@ public class DAO_HoaDon {
         }
         return dsHD;
     }
+
     public ArrayList<HoaDon> getallDSHoaDonConHoan() {
         dsHD = new ArrayList<HoaDon>();
         try {
@@ -146,5 +150,38 @@ public class DAO_HoaDon {
         }
         return null;
     }
+
+    public ArrayList<HoaDon> thongKeDoanhThu(String a, String b) {
+        dsHD = new ArrayList<HoaDon>();
+        Connection con = ConnectDB.getInstance().getConnection();
+        PreparedStatement stemnt = null;
+        int n = 0;
+        try {
+            ConnectDB.getInstance().connect();
+            String sql = "select maHD,ngayLap,tienKhachDua,diaChi,maNV,maKH\n"
+                    + "from HoaDon\n"
+                    + "where ngayLap >= ? and ngayLap <= ?";
+            stemnt = con.prepareStatement(sql);
+            stemnt.setString(1, a);
+            stemnt.setString(2, b);
+
+            ResultSet rs = stemnt.executeQuery();
+            while (rs.next()) {
+                String maNV = rs.getString("maHD");
+                Date ngayLap = rs.getDate("ngayLap");
+                double tienKhachDua = rs.getDouble("tienKhachDua");
+                String diaChi = rs.getString("diaChi");
+                NhanVien nv = new NhanVien(rs.getString("maNV"));
+                KhachHang kh = kh_dao.getKHBangMa(rs.getString("maKH"));
+                HoaDon hd = new HoaDon(maNV, ngayLap, tienKhachDua, diaChi, nv, kh);
+                dsHD.add(hd);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return dsHD;
+    }
+
+    
 
 }

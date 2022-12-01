@@ -6,6 +6,8 @@ package dao;
 
 import connectDB.ConnectDB;
 import entity.ChatLieu;
+import entity.ChiTietHoaDon;
+import entity.HoaDon;
 import entity.KichThuoc;
 import entity.LoaiSanPham;
 import entity.MauSac;
@@ -35,7 +37,8 @@ public class DAO_SanPham {
     private DAO_ChatLieu dao_cl= new DAO_ChatLieu();
     
     private DAO_KichThuoc dao_kt= new DAO_KichThuoc();
-    
+    private ArrayList<ChiTietHoaDon> dsCTHD ;
+    private ArrayList<thongKeSPBanChay> tkSPBC ;
     public  ArrayList<SanPham> getAllSP() {
         ArrayList<SanPham> dsSP = new ArrayList<SanPham>();
         try{
@@ -357,6 +360,75 @@ public class DAO_SanPham {
 
         return n > 0;
     }
+     
+     public class thongKeSPBanChay{
+         private int slBan ;
+         private String maSP;
+
+        public thongKeSPBanChay(int slBan, String maSP) {
+            this.slBan = slBan;
+            this.maSP = maSP;
+        }
+            public thongKeSPBanChay() {
+        }
+
+        public int getSlBan() {
+            return slBan;
+        }
+
+        public void setSlBan(int slBan) {
+            this.slBan = slBan;
+        }
+
+        public String getMaSP() {
+            return maSP;
+        }
+
+        public void setMaSP(String maSP) {
+            this.maSP = maSP;
+        }
+            
+     }
+     public ArrayList<thongKeSPBanChay> thongKeSPBanChay(String a, String b) {
+        tkSPBC = new ArrayList<thongKeSPBanChay>();
+        Connection con = ConnectDB.getInstance().getConnection();
+        PreparedStatement stemnt = null;
+        int n = 0;
+        try {
+            ConnectDB.getInstance().connect();
+            String sql = "SELECT Sum(soLuong) as slBan\n"
+                    + "      ,maSP\n"
+                    + "  FROM [BHTT].[dbo].[ChiTietHoaDon]\n"
+                    + "  where   maHD in   ( select maHD\n"
+                    + "                    from HoaDon\n"
+                    + "                    where HoaDon.ngayLap  >= ? and HoaDon.ngayLap  <= ?)\n"
+                    + "  Group by maSP\n"
+                    + "  Order by slBan desc	";
+            stemnt = con.prepareStatement(sql);
+            stemnt.setString(1, a);
+            stemnt.setString(2, b);
+
+            ResultSet rs = stemnt.executeQuery();
+            while (rs.next()) {
+                int slBan = rs.getInt("slBan");
+                String maSP = rs.getString("maSP");
+                thongKeSPBanChay spbc= new thongKeSPBanChay(slBan, maSP);
+                tkSPBC.add(spbc);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tkSPBC;
+    }
+     
+     
+     
+     
+     
+     
+     
+     
+     
 //    public ArrayList<SanPham> LocSP() {
 //        ArrayList<SanPham> dsSP = new ArrayList<SanPham>();
 //         try{

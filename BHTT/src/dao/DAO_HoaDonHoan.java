@@ -62,7 +62,7 @@ public class DAO_HoaDonHoan {
             String ngayLap = sdf.format(hdHoan.getNgayHoanTra());
             stmt.setString(2, ngayLap);
             stmt.setString(3, hdHoan.getHoaDon().getMaHD());
-            
+
             n = stmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -84,7 +84,7 @@ public class DAO_HoaDonHoan {
                 if (rs.next()) {
                     Date ngayLap = rs.getDate("HoaDonHoanTra");
                     HoaDon hd = hd_dao.layHoaDonTheoMa(rs.getString("maHD"));
-                    
+
                     HoaDonHoanTra hdht = new HoaDonHoanTra(maHDH, ngayLap, hd);
                     return hdht;
                 }
@@ -121,5 +121,38 @@ public class DAO_HoaDonHoan {
             }
         }
         return ds;
+    }
+
+    public ArrayList<HoaDonHoanTra> thongKeDoanhThu(String a, String b) {
+        dsHDH = new ArrayList<HoaDonHoanTra>();
+        Connection con = ConnectDB.getInstance().getConnection();
+        PreparedStatement stemnt = null;
+        int n = 0;
+        try {
+            ConnectDB.getInstance().connect();
+            String sql = "select * \n"
+                    + " from [HoaDonHoanTra] hdht join [dbo].[HoaDon] hd on hdht.maHD=hd.maHD\n"
+                    + "	join [dbo].[KhachHang] kh on kh.maKH=hd.maKH\n"
+                    + "join [dbo].[NhanVien] nv on nv.maNV=hd.maNV\n"
+                    + "where ngayHoanTra >= ? and ngayHoanTra <= ?";
+            stemnt = con.prepareStatement(sql);
+            stemnt.setString(1, a);
+            stemnt.setString(2, b);
+
+            ResultSet rs = stemnt.executeQuery();
+            while (rs.next()) {
+                String maHD = rs.getString("maHD");
+                String maHDH = rs.getString("maHDHT");
+                Date ngayHoanTra = rs.getDate("ngayHoanTra");
+                NhanVien nv = new NhanVien(rs.getString("maNV"));
+                KhachHang kh = new KhachHang(rs.getString("maKH"));
+                HoaDon hd = new HoaDon(maHD, rs.getDate("ngayLap"), rs.getDouble("tienKhachDua"), rs.getString("diaChi"), nv, kh);
+                HoaDonHoanTra hdht = new HoaDonHoanTra(maHDH, ngayHoanTra, hd);
+                dsHDH.add(hdht);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return dsHDH;
     }
 }
