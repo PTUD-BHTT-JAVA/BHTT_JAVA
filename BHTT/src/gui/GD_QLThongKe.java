@@ -25,7 +25,9 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Insets;
 import java.text.SimpleDateFormat;
+import java.time.Year;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 import org.jfree.chart.ChartFactory;
@@ -46,7 +48,7 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
     private DAO_ChiTietHoaDon cthd_dao = new DAO_ChiTietHoaDon();
     private DAO_ChiTietHoanTra ctht_dao = new DAO_ChiTietHoanTra();
     private DAO_SanPham sp_dao = new DAO_SanPham();
-    private DefaultTableModel modelTKTopSP;
+    private DefaultTableModel modelTKTopSP, modelTKSPT;
 
     private static class RoundedBorder implements Border {
 
@@ -86,6 +88,18 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
         this.setFocusable(true);
         username = _username;
         modelTKTopSP = (DefaultTableModel) tblTKTopSP.getModel();
+        modelTKSPT=(DefaultTableModel) tblTKSPT.getModel();
+        
+        //Thong ke san pham ton
+        DefaultTableModel fm1 = (DefaultTableModel) tblTKSPT.getModel();
+        fm1.setRowCount(0);
+        ArrayList<SanPham> listSPTon = sp_dao.layTatCaSPTon();
+        int stt = 1;
+        for (SanPham spT : listSPTon) {
+            
+            modelTKSPT.addRow(new Object[]{stt++, spT.getMaSP(), spT.getTenSP(),
+                spT.getSoLuong(),});
+        }
     }
 
     /**
@@ -106,7 +120,7 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
         btnThongKe = new javax.swing.JButton();
         lblNam = new javax.swing.JLabel();
         lblQuy = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnQuy1 = new javax.swing.JButton();
         btnQuy2 = new javax.swing.JButton();
         btnQuy3 = new javax.swing.JButton();
         btnQuy4 = new javax.swing.JButton();
@@ -180,13 +194,13 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
         lblQuy.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         lblQuy.setText("Quý: ");
 
-        jButton1.setBackground(new java.awt.Color(51, 119, 41));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Quý 1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnQuy1.setBackground(new java.awt.Color(51, 119, 41));
+        btnQuy1.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        btnQuy1.setForeground(new java.awt.Color(255, 255, 255));
+        btnQuy1.setText("Quý 1");
+        btnQuy1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnQuy1ActionPerformed(evt);
             }
         });
 
@@ -225,7 +239,7 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlTieuChiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnlTieuChiLayout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btnQuy1)
                         .addGap(35, 35, 35)
                         .addComponent(btnQuy2))
                     .addComponent(denNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -258,7 +272,7 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
                     .addGroup(pnlTieuChiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnQuy4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnQuy3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnQuy1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(pnlTieuChiLayout.createSequentialGroup()
                         .addComponent(btnQuy2)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -293,6 +307,12 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
 
         tbpThongKe.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         tbpThongKe.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+
+        pnlDoanhThu.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                pnlDoanhThuComponentShown(evt);
+            }
+        });
 
         pnlTongHDDB.setBackground(new java.awt.Color(0, 204, 0));
 
@@ -494,6 +514,11 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
         tbpThongKe.addTab("Doanh Thu", pnlDoanhThu);
 
         pnlTopSP.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        pnlTopSP.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                pnlTopSPComponentShown(evt);
+            }
+        });
 
         pnlBieuDoTKTopSP.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -554,6 +579,12 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
 
         tbpThongKe.addTab("Top 10 sản phẩm bán chạy", pnlTopSP);
 
+        pnlTopNV.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                pnlTopNVComponentShown(evt);
+            }
+        });
+
         pnlTKTopNV.setBackground(new java.awt.Color(153, 153, 0));
 
         javax.swing.GroupLayout pnlTKTopNVLayout = new javax.swing.GroupLayout(pnlTKTopNV);
@@ -611,8 +642,14 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
 
         tbpThongKe.addTab("Top 10 nhân viên xuất sắc", pnlTopNV);
 
+        pnlSPTon.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                pnlSPTonComponentShown(evt);
+            }
+        });
+
         lblTieuDeTKSPT.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lblTieuDeTKSPT.setText("Danh sách sản phẩm không có lượt mua");
+        lblTieuDeTKSPT.setText("Danh sách sản phẩm không có lượt mua đến hiện tại");
 
         tblTKSPT.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         tblTKSPT.setModel(new javax.swing.table.DefaultTableModel(
@@ -646,11 +683,11 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
             .addGroup(pnlSPTonLayout.createSequentialGroup()
                 .addGroup(pnlSPTonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlSPTonLayout.createSequentialGroup()
-                        .addGap(366, 366, 366)
-                        .addComponent(lblTieuDeTKSPT))
-                    .addGroup(pnlSPTonLayout.createSequentialGroup()
                         .addGap(236, 236, 236)
-                        .addComponent(scrTKSPT, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(scrTKSPT, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlSPTonLayout.createSequentialGroup()
+                        .addGap(294, 294, 294)
+                        .addComponent(lblTieuDeTKSPT)))
                 .addContainerGap(316, Short.MAX_VALUE))
         );
         pnlSPTonLayout.setVerticalGroup(
@@ -703,9 +740,9 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnQuy1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuy1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnQuy1ActionPerformed
 
     private void btnThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongKeActionPerformed
         DefaultTableModel fm = (DefaultTableModel) tblTKTopSP.getModel();
@@ -783,7 +820,53 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
         }
         lblKetToann.setText(s);
         ThongKeSPBanChay(TuNgay, DenNgay);
+        
+        
     }//GEN-LAST:event_btnThongKeActionPerformed
+
+    private void pnlDoanhThuComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_pnlDoanhThuComponentShown
+        tuNgay.setEnabled(true);
+        denNgay.setEnabled(true);
+        jYearChooser1.setEnabled(true);
+        btnThongKe.setEnabled(true);
+        btnQuy1.setEnabled(true);
+        btnQuy2.setEnabled(true);
+        btnQuy3.setEnabled(true);
+        btnQuy4.setEnabled(true);
+    }//GEN-LAST:event_pnlDoanhThuComponentShown
+
+    private void pnlSPTonComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_pnlSPTonComponentShown
+        tuNgay.setEnabled(false);
+        denNgay.setEnabled(false);
+        jYearChooser1.setEnabled(false);
+        btnThongKe.setEnabled(false);
+        btnQuy1.setEnabled(false);
+        btnQuy2.setEnabled(false);
+        btnQuy3.setEnabled(false);
+        btnQuy4.setEnabled(false);
+    }//GEN-LAST:event_pnlSPTonComponentShown
+
+    private void pnlTopSPComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_pnlTopSPComponentShown
+        tuNgay.setEnabled(true);
+        denNgay.setEnabled(true);
+        jYearChooser1.setEnabled(true);
+        btnThongKe.setEnabled(true);
+        btnQuy1.setEnabled(true);
+        btnQuy2.setEnabled(true);
+        btnQuy3.setEnabled(true);
+        btnQuy4.setEnabled(true);
+    }//GEN-LAST:event_pnlTopSPComponentShown
+
+    private void pnlTopNVComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_pnlTopNVComponentShown
+        tuNgay.setEnabled(true);
+        denNgay.setEnabled(true);
+        jYearChooser1.setEnabled(true);
+        btnThongKe.setEnabled(true);
+        btnQuy1.setEnabled(true);
+        btnQuy2.setEnabled(true);
+        btnQuy3.setEnabled(true);
+        btnQuy4.setEnabled(true);
+    }//GEN-LAST:event_pnlTopNVComponentShown
     public void ThongKeSPBanChay(String a,String b) {
         
         ArrayList<thongKeSPBanChay> dsTKSPBC = sp_dao.thongKeSPBanChay(a, b);
@@ -807,12 +890,12 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnQuy1;
     private javax.swing.JButton btnQuy2;
     private javax.swing.JButton btnQuy3;
     private javax.swing.JButton btnQuy4;
     private javax.swing.JButton btnThongKe;
     private com.toedter.calendar.JDateChooser denNgay;
-    private javax.swing.JButton jButton1;
     private com.toedter.calendar.JYearChooser jYearChooser1;
     private javax.swing.JLabel lblDenNgay;
     private javax.swing.JLabel lblKetToan;

@@ -360,6 +360,47 @@ public class DAO_SanPham {
 
         return n > 0;
     }
+
+    public ArrayList<SanPham> layTatCaSPTon() {
+        ArrayList<SanPham> dsSP = new ArrayList<SanPham>();
+        try{           
+            Connection con = ConnectDB.getInstance().getConnection();
+            String sql = "SELECT * from SanPham  \n"
+                    + "      where not exists (select 1 "
+                    + "             from  ChiTietHoaDon  "
+                    + "where   ChiTietHoaDon.maSP = SanPham.maSP  ); \n";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            while(rs.next()){
+                String maSP= rs.getString("maSP");
+                String tenSP= rs.getString("tenSP"); 
+                double gia= rs.getDouble("giaGoc");
+                int sl= rs.getInt("soLuong");
+                byte[] hinhanh= rs.getBytes("hinhAnh");
+                String moTa= rs.getString("moTa");
+                java.sql.Date ngayN= rs.getDate("ngayNhap");
+                Date ngayNhap = new Date(ngayN.getTime());
+                
+                 java.sql.Date han= rs.getDate("hanSD");
+                Date hanSD = new Date(han.getTime());
+                String maNCC= rs.getString("maNCC");
+                String mau= rs.getString("maMau");
+                String kt= rs.getString("maKichThuoc");
+                String loiSP= rs.getString("maLoaiSP");
+                NhaCungCap ncc = dao_ncc.layNhaCungCapBangMa(maNCC);
+                LoaiSanPham lsp = dao_lsp.layLoaiSPBangMa(loiSP);
+                ChatLieu chatl= dao_cl.layChatLieuBangMa(rs.getString("maChatLieu"));
+                MauSac ms= dao_ms.layMauSacBangMa(rs.getString("maMau"));
+                KichThuoc kicht = dao_kt.layKichThuocBangMa(kt);
+                LoaiSanPham loaiSP= new LoaiSanPham(loiSP);
+                SanPham sp = new SanPham(maSP, tenSP, gia, sl, hinhanh, moTa, ngayNhap, hanSD, ncc, chatl, ms, kicht, lsp)
+                        ;dsSP.add(sp);
+                
+            }
+        }catch (SQLException e) {
+        }
+        return dsSP;
+    }
      
      public class thongKeSPBanChay{
          private int slBan ;
