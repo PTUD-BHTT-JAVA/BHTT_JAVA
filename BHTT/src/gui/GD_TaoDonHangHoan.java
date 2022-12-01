@@ -806,13 +806,14 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
 
         double tienHoanHT = 0;
         for (int i = 0; i < modelDonHoan.getRowCount(); i++) {
-            tienHoanHT = (Double) modelDonHoan.getValueAt(i, 3);
+            tienHoanHT =tienHoanHT+ (Double) modelDonHoan.getValueAt(i, 3) ;
         }
+        System.out.println(tienHoanHT);
         if (kh.getLoaiKhachHang().getTenLoai().equals("VIP")) {
             tienHoanTra = tienHoanHT + tienHoanHT * 0.15;
             hDHT = new HoaDonHoanTra(maHDHT, ngayHT, hd_dao.layHoaDonTheoMa(maHD));
         } else {
-            tienHoanTra = tienHoanHT - tienHoanHT * 0.05;
+            tienHoanTra = tienHoanHT + tienHoanHT * 0.05;
             hDHT = new HoaDonHoanTra(maHDHT, ngayHT, hd_dao.layHoaDonTheoMa(maHD));
         }
 
@@ -822,7 +823,6 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
         diemTL= tienHoanHT/20000;
         int diemTLHT = kh.getDiemTichLuy();
         diemTL = diemTLHT- tienHoanHT /20000  ;
-        System.out.println(diemTL);
         kh_dao.capNhatDiemTL(kh.getMaKH(),(int) diemTL);
         //lưu vào sql chi tiết hoàn trả
         for (int i = 0; i < modelDonHoan.getRowCount(); i++) {
@@ -878,7 +878,6 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
         sp = sp_dao.laySanPhamBangMa((String) modelDonHoan.getValueAt(hangChon, 0));
         modelDonHoan.setValueAt(sp.getGiaGoc() * slSua, hangChon, 3);
         tinhTongCong();
-        System.out.println(hangChon);
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void txtTTDonHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTTDonHangActionPerformed
