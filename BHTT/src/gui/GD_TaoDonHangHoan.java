@@ -79,6 +79,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
         btnSua.setEnabled(b);
         btnTaoHDHT.setEnabled(b);
         btnXoaSPDH.setEnabled(b);
+        cmbLyDo.setEnabled(b);
     }
 
     private void DocDSHoaDon() {
@@ -122,9 +123,6 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
         lblTenNV = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
-        jPanel9 = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
-        cmbLyDo = new javax.swing.JComboBox<>();
         jPanel16 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
@@ -149,6 +147,10 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
         jPanel8 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         spnSoLuong = new javax.swing.JSpinner();
+        jPanel17 = new javax.swing.JPanel();
+        pnlComboboxLyDo = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        cmbLyDo = new javax.swing.JComboBox<>();
         jPanel14 = new javax.swing.JPanel();
         btnHoan = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
@@ -313,27 +315,10 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
         jPanel7.setPreferredSize(new java.awt.Dimension(450, 429));
         jPanel7.setLayout(new java.awt.BorderLayout());
 
-        jPanel9.setBackground(new java.awt.Color(204, 204, 255));
-        jPanel9.setMaximumSize(new java.awt.Dimension(1000, 60));
-        jPanel9.setMinimumSize(new java.awt.Dimension(137, 20));
-        jPanel9.setPreferredSize(new java.awt.Dimension(119, 60));
-        jPanel9.setLayout(new javax.swing.BoxLayout(jPanel9, javax.swing.BoxLayout.Y_AXIS));
-
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel13.setText("Lý do hoàn đơn:");
-        jLabel13.setAlignmentX(0.5F);
-        jPanel9.add(jLabel13);
-
-        cmbLyDo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn", "Nhu cầu khách hàng", "Lỗi nhà sản xuất" }));
-        jPanel9.add(cmbLyDo);
-
-        jPanel7.add(jPanel9, java.awt.BorderLayout.PAGE_END);
-
         jPanel16.setBackground(new java.awt.Color(204, 204, 255));
         jPanel16.setPreferredSize(new java.awt.Dimension(380, 388));
         jPanel16.setLayout(new javax.swing.BoxLayout(jPanel16, javax.swing.BoxLayout.Y_AXIS));
 
-        jTextArea1.setBackground(new java.awt.Color(255, 255, 255));
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         jTextArea1.setRows(5);
@@ -391,7 +376,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
             .addGroup(pnlTimXemLayout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
                 .addComponent(btnChiTiet, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
                 .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -519,7 +504,6 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
 
         pnlNut.setBackground(new java.awt.Color(204, 204, 255));
         pnlNut.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlNut.setAlignmentX(0.5F);
         pnlNut.setPreferredSize(new java.awt.Dimension(200, 300));
         pnlNut.setLayout(new javax.swing.BoxLayout(pnlNut, javax.swing.BoxLayout.Y_AXIS));
 
@@ -534,7 +518,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 95, Short.MAX_VALUE)
+            .addGap(0, 48, Short.MAX_VALUE)
         );
 
         pnlNut.add(jPanel15);
@@ -555,6 +539,39 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
         jPanel8.add(spnSoLuong);
 
         pnlNut.add(jPanel8);
+
+        jPanel17.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel17.setMaximumSize(new java.awt.Dimension(196, 33));
+        jPanel17.setPreferredSize(new java.awt.Dimension(196, 33));
+
+        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
+        jPanel17.setLayout(jPanel17Layout);
+        jPanel17Layout.setHorizontalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 195, Short.MAX_VALUE)
+        );
+        jPanel17Layout.setVerticalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 33, Short.MAX_VALUE)
+        );
+
+        pnlNut.add(jPanel17);
+
+        pnlComboboxLyDo.setBackground(new java.awt.Color(204, 204, 255));
+        pnlComboboxLyDo.setMaximumSize(new java.awt.Dimension(1000, 60));
+        pnlComboboxLyDo.setMinimumSize(new java.awt.Dimension(137, 20));
+        pnlComboboxLyDo.setPreferredSize(new java.awt.Dimension(119, 60));
+        pnlComboboxLyDo.setLayout(new javax.swing.BoxLayout(pnlComboboxLyDo, javax.swing.BoxLayout.Y_AXIS));
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel13.setText("Lý do hoàn đơn:");
+        jLabel13.setAlignmentX(0.5F);
+        pnlComboboxLyDo.add(jLabel13);
+
+        cmbLyDo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn", "Nhu cầu khách hàng", "Lỗi nhà sản xuất" }));
+        pnlComboboxLyDo.add(cmbLyDo);
+
+        pnlNut.add(pnlComboboxLyDo);
 
         jPanel14.setBackground(new java.awt.Color(204, 204, 255));
         jPanel14.setMaximumSize(new java.awt.Dimension(196, 33));
@@ -690,7 +707,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 95, Short.MAX_VALUE)
+            .addGap(0, 48, Short.MAX_VALUE)
         );
 
         pnlNut.add(jPanel13);
@@ -715,7 +732,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
 
             },
             new String [] {
-                "Mã ", "Tên sản phẩm", "Số lượng", "Thành tiền"
+                "Mã ", "Tên sản phẩm", "Số lượng", "Thành tiền", "Lý do hoàn"
             }
         ));
         t.setViewportView(tblDonHoan);
@@ -859,6 +876,10 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
             JOptionPane.showMessageDialog(null, "Vui lòng chọn sản phẩm cần hoàn");
             return;
         }
+        if (cmbLyDo.getSelectedIndex()==0){
+                      JOptionPane.showMessageDialog(null, "Hãy chọn đơn lý do hoàn", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+                      return;
+        }
         String ma;
         String ten;
         int sl;
@@ -880,7 +901,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
             sp = sp_dao.laySanPhamBangMa(ma);
             boolean kiemTra = false;
             for (int i = 0; i < modelDonHoan.getRowCount(); i++) {
-                if (modelDonHoan.getValueAt(i, 0).equals(ma)) {
+                if (modelDonHoan.getValueAt(i, 0).equals(ma) && modelDonHoan.getValueAt(i, 4).equals(cmbLyDo.getSelectedItem().toString())) {
                     int slMoi = soLuongHoan + (int) modelDonHoan.getValueAt(i, 2);
                     if (slMoi > sl) {
                         JOptionPane.showMessageDialog(null, "Số lượng hoàn không được lớn hơn số lượng bán");
@@ -894,7 +915,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
                 }
             }
             if (!kiemTra) {
-                modelDonHoan.addRow(new Object[]{ma, ten, soLuongHoan, sp.getGiaGoc() * soLuongHoan});
+                modelDonHoan.addRow(new Object[]{ma, ten, soLuongHoan, sp.getGiaGoc() * soLuongHoan, cmbLyDo.getSelectedItem().toString()});
                 tinhTongCong();
                 // tongTienHoan += (double)modelDonHoan.getValueAt(this, 3);
             }
@@ -981,7 +1002,8 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
         for (int i = 0; i < modelDonHoan.getRowCount(); i++) {
             SanPham sp = sp_dao.laySanPhamBangMa(modelDonHoan.getValueAt(i, 0).toString());
             int soLuongHT = Integer.parseInt(modelDonHoan.getValueAt(i, 2).toString());
-            ChiTietHoanTra ctHT = new ChiTietHoanTra(soLuongHT, sp, hDHT);
+            String lyDo= modelDonHoan.getValueAt(i, 4).toString();
+            ChiTietHoanTra ctHT = new ChiTietHoanTra(soLuongHT,lyDo, sp ,  hDHT);
             //cập nhâp chi tiết sản phẩm
             ctht_dao.themCTHoanTra(ctHT);
             // cập nhập số lượng sản phẩm
@@ -1004,7 +1026,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
         JOptionPane.showMessageDialog(null, "Hoàn đơn thành công");
         String lydo="";
         lydo=cmbLyDo.getSelectedItem().toString();
-        Form_HoaDonHoan fHDH = new Form_HoaDonHoan(maHDHT, maHD, tienHoanTra, lydo);
+        Form_HoaDonHoan fHDH = new Form_HoaDonHoan(maHDHT, maHD, tienHoanTra);
         fHDH.setLocationRelativeTo(null);
         fHDH.setVisible(true);
         cmbLyDo.setSelectedIndex(0);
@@ -1053,9 +1075,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
         int row = tblDSHD.getSelectedRow();
         if (row < 0) {
             JOptionPane.showMessageDialog(null, "Chọn đơn hàng cần hoàn", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-        } else if (cmbLyDo.getSelectedIndex()==0){
-                      JOptionPane.showMessageDialog(null, "Hãy chọn đơn lý do hoàn", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-        }
+        } 
         else
         {
             //
@@ -1180,6 +1200,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1187,14 +1208,13 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lblKM;
     private javax.swing.JLabel lblTenNV;
     private javax.swing.JLabel lblVAT;
+    private javax.swing.JPanel pnlComboboxLyDo;
     private javax.swing.JPanel pnlDanhSachHoaDon;
     private javax.swing.JPanel pnlDau;
     private javax.swing.JPanel pnlDonHang;

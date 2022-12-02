@@ -98,6 +98,7 @@ public class GD_TaiKhoan extends javax.swing.JInternalFrame {
         pnlThongTin.setPreferredSize(new java.awt.Dimension(980, 280));
 
         txtTenDN.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        txtTenDN.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtTenDN.setEnabled(false);
         txtTenDN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,6 +113,7 @@ public class GD_TaiKhoan extends javax.swing.JInternalFrame {
         jLabel6.setText("Mật khẩu :");
 
         txtMK.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        txtMK.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtMK.setEnabled(false);
         txtMK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -155,7 +157,9 @@ public class GD_TaiKhoan extends javax.swing.JInternalFrame {
         pnlNut.setMaximumSize(new java.awt.Dimension(300, 32767));
         pnlNut.setPreferredSize(new java.awt.Dimension(300, 300));
 
+        btnDatLaiMatKhau.setBackground(new java.awt.Color(51, 153, 0));
         btnDatLaiMatKhau.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
+        btnDatLaiMatKhau.setForeground(new java.awt.Color(255, 255, 255));
         btnDatLaiMatKhau.setText("Đặt lại mật khẩu");
         btnDatLaiMatKhau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -163,7 +167,9 @@ public class GD_TaiKhoan extends javax.swing.JInternalFrame {
             }
         });
 
+        btnXoaTK.setBackground(new java.awt.Color(255, 102, 102));
         btnXoaTK.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
+        btnXoaTK.setForeground(new java.awt.Color(255, 255, 255));
         btnXoaTK.setText("Xóa tài khoản");
         btnXoaTK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -278,12 +284,15 @@ public class GD_TaiKhoan extends javax.swing.JInternalFrame {
         if (index==-1){
             JOptionPane.showMessageDialog(this, "Hãy chọn tài khoản cần xóa!");
         }else{
-            tk.xoaTK(modelTaiKhoan.getValueAt(index, 0)+"");
+            int chon= JOptionPane.showConfirmDialog(this, "Bạn có chắn chắn muốn xóa tài khoản này?", "Hỏi",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+            if(chon==JOptionPane.YES_OPTION){
+                tk.xoaTK(modelTaiKhoan.getValueAt(index, 0)+"");
+                DocDuLieuLenTable();
+                JOptionPane.showMessageDialog(this, "Xóa thành công!");
+                txtTenDN.setText("");
+                txtMK.setText("");
+            }
             
-            DocDuLieuLenTable();
-            JOptionPane.showMessageDialog(this, "Xóa thành công!");
-            txtTenDN.setText("");
-            txtMK.setText("");
             }
     }//GEN-LAST:event_btnXoaTKActionPerformed
 

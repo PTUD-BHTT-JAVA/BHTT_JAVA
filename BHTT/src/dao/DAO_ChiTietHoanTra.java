@@ -147,9 +147,9 @@ public class DAO_ChiTietHoanTra {
         try {
             stmt = con.prepareStatement("insert into ChiTietHoanTra values(?,?,?,?)");
             stmt.setInt(1, ctHoanTra.getSoLuong());
-            stmt.setString(2, ctHoanTra.getLyDoHoanTra());
-            stmt.setString(3, ctHoanTra.getSanPham().getMaSP());
-            stmt.setString(4, ctHoanTra.getHoaDonHoanTra().getMaHDHT());
+            stmt.setString(2, ctHoanTra.getSanPham().getMaSP());
+            stmt.setString(3, ctHoanTra.getHoaDonHoanTra().getMaHDHT());            
+            stmt.setString(4, ctHoanTra.getLyDoHoanTra());
             n = stmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();

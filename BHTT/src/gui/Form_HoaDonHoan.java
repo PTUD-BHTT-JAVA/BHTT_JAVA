@@ -44,14 +44,13 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
     private DefaultTableModel modelCTDonHoan;
 
 
-    public Form_HoaDonHoan(String HDH, String HD,double tienHoanTra, String lyDoHT) {
+    public Form_HoaDonHoan(String HDH, String HD,double tienHoanTra) {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         maHDH = HDH;
         maHD = HD;
         tienHoan = tienHoanTra;
-        lydo=lyDoHT;
         initComponents();
-        modelCTDonHoan = (DefaultTableModel) tableXuatHoaDonH.getModel();
+        modelCTDonHoan = (DefaultTableModel) tableXuatHoaDonHoan.getModel();
         DocDL();
         DocDLTB();
         
@@ -96,13 +95,11 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
         lblKH1 = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableXuatHoaDonH = new javax.swing.JTable();
+        tableXuatHoaDonHoan = new javax.swing.JTable();
         jPanel8 = new javax.swing.JPanel();
         pnlGiua = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel16 = new javax.swing.JLabel();
-        lblLyDo = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         txtTongSoLuong = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -286,15 +283,15 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
 
         pnlHoaDon.add(pblTren);
 
-        tableXuatHoaDonH.setModel(new javax.swing.table.DefaultTableModel(
+        tableXuatHoaDonHoan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Sản phẩm", "Số lượng", "Giá", "Thành tiền"
+                "Sản phẩm", "Số lượng", "Giá", "Thành tiền", "Lý do hoàn"
             }
         ));
-        jScrollPane1.setViewportView(tableXuatHoaDonH);
+        jScrollPane1.setViewportView(tableXuatHoaDonHoan);
 
         pnlHoaDon.add(jScrollPane1);
 
@@ -321,21 +318,14 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 122, Short.MAX_VALUE)
+            .addGap(0, 115, Short.MAX_VALUE)
         );
 
         pnlGiua.add(jPanel4);
 
         jPanel2.setMaximumSize(new java.awt.Dimension(500, 32767));
         jPanel2.setPreferredSize(new java.awt.Dimension(350, 122));
-        jPanel2.setLayout(new java.awt.GridLayout(5, 2));
-
-        jLabel16.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel16.setText("Lý do hoàn trả:");
-        jPanel2.add(jLabel16);
-
-        lblLyDo.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jPanel2.add(lblLyDo);
+        jPanel2.setLayout(new java.awt.GridLayout(4, 2));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel10.setText("Tổng số lượng :");
@@ -376,7 +366,7 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 122, Short.MAX_VALUE)
+            .addGap(0, 115, Short.MAX_VALUE)
         );
 
         pnlGiua.add(jPanel9);
@@ -421,7 +411,7 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 42, Short.MAX_VALUE)
+            .addGap(0, 43, Short.MAX_VALUE)
         );
 
         pnlDuoi.add(jPanel1);
@@ -484,7 +474,6 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
         lblLoaiKH.setText(lkh.getTenLoai());
         txtVAT.setText("5%");
         txtKhuyenMai.setText(km);
-        lblLyDo.setText(lydo);
         
     }
 
@@ -495,7 +484,7 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
         double tongTien =0;
         for (ChiTietHoanTra ctht : dscthd) {
             sp =  sp_dao.laySanPhamBangMa(ctht.getSanPham().getMaSP());
-            modelCTDonHoan.addRow(new Object[]{ctht.getSanPham().getTenSP(),ctht.getSoLuong(),sp.getGiaGoc(),ctht.getSoLuong()*sp.getGiaGoc()});
+            modelCTDonHoan.addRow(new Object[]{ctht.getSanPham().getTenSP(),ctht.getSoLuong(),sp.getGiaGoc(),ctht.getSoLuong()*sp.getGiaGoc(),ctht.getLyDoHoanTra().toString()});
             tongSL  = tongSL+ ctht.getSoLuong();
             tongTien= tongTien+ ctht.getSoLuong()*sp.getGiaGoc();
         }
@@ -533,7 +522,7 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Form_HoaDonHoan(maHDH, maHD,tienHoan,lydo).setVisible(true);
+                new Form_HoaDonHoan(maHDH, maHD,tienHoan).setVisible(true);
             }
         });
     }
@@ -548,7 +537,6 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -576,7 +564,6 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
     private javax.swing.JLabel lblKH;
     private javax.swing.JLabel lblKH1;
     private javax.swing.JLabel lblLoaiKH;
-    private javax.swing.JLabel lblLyDo;
     private javax.swing.JLabel lblMaPhieu;
     private javax.swing.JLabel lblNgay;
     private javax.swing.JLabel lblThuNgan;
@@ -584,7 +571,7 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
     private javax.swing.JPanel pnlDuoi;
     private javax.swing.JPanel pnlGiua;
     private javax.swing.JPanel pnlHoaDon;
-    private javax.swing.JTable tableXuatHoaDonH;
+    private javax.swing.JTable tableXuatHoaDonHoan;
     private javax.swing.JLabel txtKhuyenMai;
     private javax.swing.JLabel txtTongCong;
     private javax.swing.JLabel txtTongSoLuong;

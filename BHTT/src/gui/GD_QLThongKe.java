@@ -157,6 +157,10 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
         lblTieuDeTKSPT = new javax.swing.JLabel();
         scrTKSPT = new javax.swing.JScrollPane();
         tblTKSPT = new javax.swing.JTable();
+        pnlSPLoi = new javax.swing.JPanel();
+        lblTieuDeTKSPT1 = new javax.swing.JLabel();
+        scrTKSPT1 = new javax.swing.JScrollPane();
+        tblTKSPT1 = new javax.swing.JTable();
 
         setBorder(null);
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -725,6 +729,65 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
 
         tbpThongKe.addTab("Sản phẩm tồn", pnlSPTon);
 
+        pnlSPLoi.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                pnlSPLoiComponentShown(evt);
+            }
+        });
+
+        lblTieuDeTKSPT1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblTieuDeTKSPT1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTieuDeTKSPT1.setText("Danh sách sản phẩm trả hàng vì lỗi nhà sản xuất");
+        lblTieuDeTKSPT1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        tblTKSPT1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        tblTKSPT1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "STT", "Mã", "Tên Sản Phẩm", "Số lượng", "Nhà sản xuất"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        scrTKSPT1.setViewportView(tblTKSPT1);
+        if (tblTKSPT1.getColumnModel().getColumnCount() > 0) {
+            tblTKSPT1.getColumnModel().getColumn(0).setPreferredWidth(5);
+        }
+
+        javax.swing.GroupLayout pnlSPLoiLayout = new javax.swing.GroupLayout(pnlSPLoi);
+        pnlSPLoi.setLayout(pnlSPLoiLayout);
+        pnlSPLoiLayout.setHorizontalGroup(
+            pnlSPLoiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlSPLoiLayout.createSequentialGroup()
+                .addGroup(pnlSPLoiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlSPLoiLayout.createSequentialGroup()
+                        .addGap(236, 236, 236)
+                        .addComponent(scrTKSPT1, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlSPLoiLayout.createSequentialGroup()
+                        .addGap(318, 318, 318)
+                        .addComponent(lblTieuDeTKSPT1)))
+                .addContainerGap(316, Short.MAX_VALUE))
+        );
+        pnlSPLoiLayout.setVerticalGroup(
+            pnlSPLoiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlSPLoiLayout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(lblTieuDeTKSPT1)
+                .addGap(18, 18, 18)
+                .addComponent(scrTKSPT1, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+
+        tbpThongKe.addTab("Sản phẩm lỗi", pnlSPLoi);
+
         javax.swing.GroupLayout pnlBottomLayout = new javax.swing.GroupLayout(pnlBottom);
         pnlBottom.setLayout(pnlBottomLayout);
         pnlBottomLayout.setHorizontalGroup(
@@ -1283,6 +1346,10 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
         }
         ThongKeSPBanChay(b, c);
     }//GEN-LAST:event_btnQuy4ActionPerformed
+
+    private void pnlSPLoiComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_pnlSPLoiComponentShown
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pnlSPLoiComponentShown
     public void ThongKeSPBanChay(String a, String b) {
 
         ArrayList<thongKeSPBanChay> dsTKSPBC = sp_dao.thongKeSPBanChay(a, b);
@@ -1321,6 +1388,7 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblSoHDH;
     private javax.swing.JLabel lblTieuDe;
     private javax.swing.JLabel lblTieuDeTKSPT;
+    private javax.swing.JLabel lblTieuDeTKSPT1;
     private javax.swing.JLabel lblTongHD;
     private javax.swing.JLabel lblTongHDDB;
     private javax.swing.JLabel lblTongHDTra;
@@ -1333,6 +1401,7 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
     private javax.swing.JPanel pnlDoanhThu;
     private javax.swing.JPanel pnlKetToan;
     private javax.swing.JPanel pnlMain;
+    private javax.swing.JPanel pnlSPLoi;
     private javax.swing.JPanel pnlSPTon;
     private javax.swing.JPanel pnlTKTopNV;
     private javax.swing.JPanel pnlTieuChi;
@@ -1345,8 +1414,10 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
     private javax.swing.JPanel pnlTopSP;
     private javax.swing.JScrollPane scrTKNVTop;
     private javax.swing.JScrollPane scrTKSPT;
+    private javax.swing.JScrollPane scrTKSPT1;
     private javax.swing.JScrollPane scrTKTopSP;
     private javax.swing.JTable tblTKSPT;
+    private javax.swing.JTable tblTKSPT1;
     private javax.swing.JTable tblTKTopNV;
     private javax.swing.JTable tblTKTopSP;
     private javax.swing.JTabbedPane tbpThongKe;
