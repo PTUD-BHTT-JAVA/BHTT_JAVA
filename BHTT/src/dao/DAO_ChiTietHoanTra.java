@@ -38,9 +38,10 @@ public class DAO_ChiTietHoanTra {
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()) {
                 int soLuong = rs.getInt("soLuong");
+                String lyDo= rs.getString("lyDoHoanTra");
                 HoaDonHoanTra hdht = hdht_dao.layHoaDonHoanTheoMa(rs.getString("maHDHT"));
                 SanPham maSP = sanPham_dao.laySanPhamBangMa(rs.getString("maSP"));
-                ChiTietHoanTra ctht = new ChiTietHoanTra(soLuong, maSP, hdht);
+                ChiTietHoanTra ctht = new ChiTietHoanTra(soLuong,lyDo, maSP, hdht);
                 dsCTHT.add(ctht);
             }
         } catch (Exception e) {
@@ -60,9 +61,10 @@ public class DAO_ChiTietHoanTra {
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 int soLuong = rs.getInt("soLuong");
+                String lyDo= rs.getString("lyDoHoanTra");
                 HoaDonHoanTra htdt = hdht_dao.layHoaDonHoanTheoMa(rs.getString("maHDHT"));
                 SanPham maSP = sanPham_dao.laySanPhamBangMa(m);
-                ChiTietHoanTra ctht = new ChiTietHoanTra(soLuong, maSP, htdt);
+                ChiTietHoanTra ctht = new ChiTietHoanTra(soLuong,lyDo, maSP, htdt);
                 dsCTHT.add(ctht);
             }
         } catch (Exception e) {
@@ -89,9 +91,10 @@ public class DAO_ChiTietHoanTra {
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 int soLuong = rs.getInt("soLuong");
+                String lyDo= rs.getString("lyDoHoanTra");
                 HoaDonHoanTra htdt = hdht_dao.layHoaDonHoanTheoMa(rs.getString("maHDHT"));
                 SanPham maSP = sanPham_dao.laySanPhamBangMa(m);
-                ChiTietHoanTra ctht = new ChiTietHoanTra(soLuong, maSP, htdt);
+                ChiTietHoanTra ctht = new ChiTietHoanTra(soLuong,lyDo, maSP, htdt);
                 dsCTHT.add(ctht);
             }
         } catch (Exception e) {
@@ -118,9 +121,10 @@ public class DAO_ChiTietHoanTra {
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 int soLuong = rs.getInt("soLuong");
+                String lyDo= rs.getString("lyDoHoanTra");
                 HoaDonHoanTra htdt = hdht_dao.layHoaDonHoanTheoMa(maTim);
                 SanPham maSP = sanPham_dao.laySanPhamBangMa(rs.getString("maSP"));
-                ChiTietHoanTra ctht = new ChiTietHoanTra(soLuong, maSP, htdt);
+                ChiTietHoanTra ctht = new ChiTietHoanTra(soLuong,lyDo, maSP, htdt);
                 dsCTHDHoan.add(ctht);
             }
         } catch (Exception e) {
@@ -141,10 +145,11 @@ public class DAO_ChiTietHoanTra {
         PreparedStatement stmt = null;
         int n = 0;
         try {
-            stmt = con.prepareStatement("insert into ChiTietHoanTra values(?,?,?)");
+            stmt = con.prepareStatement("insert into ChiTietHoanTra values(?,?,?,?)");
             stmt.setInt(1, ctHoanTra.getSoLuong());
-            stmt.setString(2, ctHoanTra.getSanPham().getMaSP());
-            stmt.setString(3, ctHoanTra.getHoaDonHoanTra().getMaHDHT());
+            stmt.setString(2, ctHoanTra.getLyDoHoanTra());
+            stmt.setString(3, ctHoanTra.getSanPham().getMaSP());
+            stmt.setString(4, ctHoanTra.getHoaDonHoanTra().getMaHDHT());
             n = stmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
