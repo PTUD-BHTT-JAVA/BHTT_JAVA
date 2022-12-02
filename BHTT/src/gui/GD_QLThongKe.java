@@ -48,7 +48,7 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
     private DAO_ChiTietHoaDon cthd_dao = new DAO_ChiTietHoaDon();
     private DAO_ChiTietHoanTra ctht_dao = new DAO_ChiTietHoanTra();
     private DAO_SanPham sp_dao = new DAO_SanPham();
-    private DefaultTableModel modelTKTopSP, modelTKSPT;
+    private DefaultTableModel modelTKTopSP, modelTKSPT,modelTKSPL;
 
     private static class RoundedBorder implements Border {
 
@@ -89,6 +89,7 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
         username = _username;
         modelTKTopSP = (DefaultTableModel) tblTKTopSP.getModel();
         modelTKSPT = (DefaultTableModel) tblTKSPT.getModel();
+        modelTKSPL = (DefaultTableModel) tblTKSPL.getModel();
 
         //Thong ke san pham ton
         DefaultTableModel fm1 = (DefaultTableModel) tblTKSPT.getModel();
@@ -100,6 +101,28 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
             modelTKSPT.addRow(new Object[]{stt++, spT.getMaSP(), spT.getTenSP(),
                 spT.getSoLuong(),});
         }
+        //Thong ke san pham loi
+        DefaultTableModel fm2 = (DefaultTableModel) tblTKSPL.getModel();
+        fm2.setRowCount(0);
+        ArrayList<SanPham> listSPLoi = sp_dao.layTatCaSPLoi();
+        int sttL = 1;
+        int tongSL;
+        for (SanPham spT : listSPLoi) {
+            boolean kt=false;
+            for(int i=0;i<modelTKSPL.getRowCount();i++){
+                int soLuong=spT.getSoLuong();
+                if(spT.getMaSP().equals(modelTKSPL.getValueAt(i, 1))){
+                    modelTKSPL.setValueAt(++soLuong, i, 3);
+                    kt=true;
+                }
+            }
+            if(!kt){
+                    modelTKSPL.addRow(new Object[]{sttL++, spT.getMaSP(), spT.getTenSP(),
+                    spT.getSoLuong(),spT.getNhaCungCap().getTenNCC()});
+            }   
+            }
+        
+        
     }
 
     /**
@@ -160,7 +183,7 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
         pnlSPLoi = new javax.swing.JPanel();
         lblTieuDeTKSPT1 = new javax.swing.JLabel();
         scrTKSPT1 = new javax.swing.JScrollPane();
-        tblTKSPT1 = new javax.swing.JTable();
+        tblTKSPL = new javax.swing.JTable();
 
         setBorder(null);
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -740,8 +763,8 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
         lblTieuDeTKSPT1.setText("Danh sách sản phẩm trả hàng vì lỗi nhà sản xuất");
         lblTieuDeTKSPT1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        tblTKSPT1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        tblTKSPT1.setModel(new javax.swing.table.DefaultTableModel(
+        tblTKSPL.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        tblTKSPL.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -757,9 +780,9 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
                 return types [columnIndex];
             }
         });
-        scrTKSPT1.setViewportView(tblTKSPT1);
-        if (tblTKSPT1.getColumnModel().getColumnCount() > 0) {
-            tblTKSPT1.getColumnModel().getColumn(0).setPreferredWidth(5);
+        scrTKSPT1.setViewportView(tblTKSPL);
+        if (tblTKSPL.getColumnModel().getColumnCount() > 0) {
+            tblTKSPL.getColumnModel().getColumn(0).setPreferredWidth(5);
         }
 
         javax.swing.GroupLayout pnlSPLoiLayout = new javax.swing.GroupLayout(pnlSPLoi);
@@ -1416,8 +1439,8 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane scrTKSPT;
     private javax.swing.JScrollPane scrTKSPT1;
     private javax.swing.JScrollPane scrTKTopSP;
+    private javax.swing.JTable tblTKSPL;
     private javax.swing.JTable tblTKSPT;
-    private javax.swing.JTable tblTKSPT1;
     private javax.swing.JTable tblTKTopNV;
     private javax.swing.JTable tblTKTopSP;
     private javax.swing.JTabbedPane tbpThongKe;
