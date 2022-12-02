@@ -322,7 +322,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         jTextArea1.setRows(5);
-        jTextArea1.setText("       1. TRƯỜNG HỢP HOÀN ĐƠN\n     - Khách hàng được trả hàng hoàn tiền theo nhu \ncầu của khách hàng.\n     - Khách hàng được trả hàng hoàn tiền trong \ntrường hợp có lỗi phát sinh từ nhà sản xuất. \nCác trường hợp lỗi do nhà sản xuất như: ố màu, \nphai màu, lỗi chất liệu, lỗi đường may, lỗi kiểu \ndáng, ... không đúng theo mô tả và tiêu chuẩn \nsản phẩm.\n\n       2. ĐIỀU KIỆN\n     - Sản phẩm phải có hóa đơn mua hàng.\n     - Chỉ chấp nhận hoàn trả trong vòng 7 ngày sau \nkhi mua tại cửa hàng.\n     - Sản phẩm phải còn nguyên trạng như lúc mua \nhàng.\n     - Chỉ áp dụng trả tại chính cửa hàng mà khách \nhàng đã mua.");
+        jTextArea1.setText("       1. TRƯỜNG HỢP HOÀN ĐƠN\n\n     - Khách hàng được trả hàng hoàn tiền theo nhu \ncầu của khách hàng.\n     - Khách hàng được trả hàng hoàn tiền trong \ntrường hợp có lỗi phát sinh từ nhà sản xuất. \nCác trường hợp lỗi do nhà sản xuất như: ố màu, \nphai màu, lỗi chất liệu, lỗi đường may, lỗi kiểu \ndáng, ... không đúng theo mô tả và tiêu chuẩn \nsản phẩm.\n\n       2. ĐIỀU KIỆN\n\n     - Sản phẩm phải có hóa đơn mua hàng.\n     - Chỉ chấp nhận hoàn trả trong vòng 7 ngày sau \nkhi mua tại cửa hàng.\n     - Sản phẩm phải còn nguyên trạng như lúc mua \nhàng.\n     - Chỉ áp dụng trả tại chính cửa hàng mà khách \nhàng đã mua.\n\n    *Lưu ý: mỗi hóa đơn chỉ được hoàn một lần duy \nnhất!");
         jTextArea1.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         jTextArea1.setEnabled(false);
         jScrollPane4.setViewportView(jTextArea1);
