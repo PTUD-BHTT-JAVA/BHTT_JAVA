@@ -155,4 +155,35 @@ public class DAO_HoaDonHoan {
         }
         return dsHDH;
     }
+    public ArrayList<HoaDonHoanTra> thongKeDoanhThuTheoNam(int a) {
+        dsHDH = new ArrayList<HoaDonHoanTra>();
+        Connection con = ConnectDB.getInstance().getConnection();
+        PreparedStatement stemnt = null;
+        int n = 0;
+        try {
+            ConnectDB.getInstance().connect();
+            String sql = "select * \n"
+                    + " from [HoaDonHoanTra] hdht join [dbo].[HoaDon] hd on hdht.maHD=hd.maHD\n"
+                    + "	join [dbo].[KhachHang] kh on kh.maKH=hd.maKH\n"
+                    + "join [dbo].[NhanVien] nv on nv.maNV=hd.maNV\n"
+                    + "where year(ngayHoanTra) =?";
+            stemnt = con.prepareStatement(sql);
+            stemnt.setInt(1, a);
+
+            ResultSet rs = stemnt.executeQuery();
+            while (rs.next()) {
+                String maHD = rs.getString("maHD");
+                String maHDH = rs.getString("maHDHT");
+                Date ngayHoanTra = rs.getDate("ngayHoanTra");
+                NhanVien nv = new NhanVien(rs.getString("maNV"));
+                KhachHang kh = new KhachHang(rs.getString("maKH"));
+                HoaDon hd = new HoaDon(maHD, rs.getDate("ngayLap"), rs.getDouble("tienKhachDua"), rs.getString("diaChi"), nv, kh);
+                HoaDonHoanTra hdht = new HoaDonHoanTra(maHDH, ngayHoanTra, hd);
+                dsHDH.add(hdht);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return dsHDH;
+    }
 }
