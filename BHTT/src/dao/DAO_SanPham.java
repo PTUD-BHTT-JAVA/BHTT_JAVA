@@ -461,6 +461,36 @@ public class DAO_SanPham {
         }
         return tkSPBC;
     }
+     public ArrayList<thongKeSPBanChay> thongKeSPBanChayTheoNam(int a) {
+        tkSPBC = new ArrayList<thongKeSPBanChay>();
+        Connection con = ConnectDB.getInstance().getConnection();
+        PreparedStatement stemnt = null;
+        int n = 0;
+        try {
+            ConnectDB.getInstance().connect();
+            String sql = "SELECT Sum(soLuong) as slBan\n"
+                    + "      ,maSP\n"
+                    + "  FROM [BHTT].[dbo].[ChiTietHoaDon]\n"
+                    + "  where   maHD in   ( select maHD\n"
+                    + "                    from HoaDon\n"
+                    + "                    where year(HoaDon.ngayLap)  =?)\n"
+                    + "  Group by maSP\n"
+                    + "  Order by slBan desc	";
+            stemnt = con.prepareStatement(sql);
+            stemnt.setInt(1, a);
+
+            ResultSet rs = stemnt.executeQuery();
+            while (rs.next()) {
+                int slBan = rs.getInt("slBan");
+                String maSP = rs.getString("maSP");
+                thongKeSPBanChay spbc= new thongKeSPBanChay(slBan, maSP);
+                tkSPBC.add(spbc);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tkSPBC;
+    }
      
      
      
