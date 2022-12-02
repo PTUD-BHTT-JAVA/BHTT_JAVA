@@ -12,14 +12,18 @@ import java.util.Objects;
  */
 public class ChiTietHoanTra {
     private int soLuong;
+    private String lyDoHoanTra;
     private SanPham sanPham;
     private HoaDonHoanTra hoaDonHoanTra;
 
-    public ChiTietHoanTra(int soLuong, SanPham sanPham, HoaDonHoanTra hoaDonHoanTra) {
+    public ChiTietHoanTra(int soLuong, String lyDoHoanTra, SanPham sanPham, HoaDonHoanTra hoaDonHoanTra) {
         this.soLuong = soLuong;
+        this.lyDoHoanTra = lyDoHoanTra;
         this.sanPham = sanPham;
         this.hoaDonHoanTra = hoaDonHoanTra;
     }
+
+    
 
     public ChiTietHoanTra() {
     }
@@ -51,6 +55,14 @@ public class ChiTietHoanTra {
 
     public void setHoaDonHoanTra(HoaDonHoanTra hoaDonHoanTra) {
         this.hoaDonHoanTra = hoaDonHoanTra;
+    }
+
+    public String getLyDoHoanTra() {
+        return lyDoHoanTra;
+    }
+
+    public void setLyDoHoanTra(String lyDoHoanTra) {
+        this.lyDoHoanTra = lyDoHoanTra;
     }
     
 //    public double tinhThanhTien(){
@@ -85,7 +97,9 @@ public class ChiTietHoanTra {
 
     @Override
     public String toString() {
-        return "ChiTietHoanTra{" + "soLuong=" + soLuong + ", sanPham=" + sanPham + ", hoaDonHoanTra=" + hoaDonHoanTra + '}';
+        return "ChiTietHoanTra{" + "soLuong=" + soLuong + ", lyDoHoanTra=" + lyDoHoanTra + ", sanPham=" + sanPham + ", hoaDonHoanTra=" + hoaDonHoanTra + '}';
     }
+
+    
     
 }
