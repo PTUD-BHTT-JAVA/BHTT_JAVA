@@ -996,7 +996,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
         double diemTL =0;
         diemTL= tienHoanHT/20000;
         int diemTLHT = kh.getDiemTichLuy();
-        diemTL = diemTLHT- tienHoanHT /20000  ;
+        diemTL = diemTLHT- tienHoanHT /20000;
         kh_dao.capNhatDiemTL(kh.getMaKH(),(int) diemTL);
         //lưu vào sql chi tiết hoàn trả
         for (int i = 0; i < modelDonHoan.getRowCount(); i++) {
@@ -1007,9 +1007,11 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
             //cập nhâp chi tiết sản phẩm
             ctht_dao.themCTHoanTra(ctHT);
             // cập nhập số lượng sản phẩm
-            sp_dao.capNhatSoLuong(sp.getMaSP(), soLuongHT + sp.getSoLuong());
+            if (!ctHT.getLyDoHoanTra().equals("Lỗi nhà sản xuất"))
+                sp_dao.capNhatSoLuong(sp.getMaSP(), soLuongHT + sp.getSoLuong());
             
         }
+        
         btnThem.setEnabled(true);
         //xóa 2 bảng con
         DefaultTableModel fm = (DefaultTableModel) tblCanHoan.getModel();

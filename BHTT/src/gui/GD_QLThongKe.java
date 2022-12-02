@@ -104,21 +104,23 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
         //Thong ke san pham loi
         DefaultTableModel fm2 = (DefaultTableModel) tblTKSPL.getModel();
         fm2.setRowCount(0);
-        ArrayList<SanPham> listSPLoi = sp_dao.layTatCaSPLoi();
+        ArrayList<ChiTietHoanTra> listSPLoi = ctht_dao.layTatCaSPLoi();
         int sttL = 1;
         int tongSL;
-        for (SanPham spT : listSPLoi) {
+        for (ChiTietHoanTra ctht : listSPLoi) {
             boolean kt=false;
+            DAO_ChiTietHoanTra daoctht=new DAO_ChiTietHoanTra();
             for(int i=0;i<modelTKSPL.getRowCount();i++){
-                int soLuong=spT.getSoLuong();
-                if(spT.getMaSP().equals(modelTKSPL.getValueAt(i, 1))){
+                
+                int soLuong=ctht.getSoLuong();
+                if(ctht.getSanPham().getMaSP().equals(modelTKSPL.getValueAt(i, 1))){
                     modelTKSPL.setValueAt(++soLuong, i, 3);
                     kt=true;
                 }
             }
             if(!kt){
-                    modelTKSPL.addRow(new Object[]{sttL++, spT.getMaSP(), spT.getTenSP(),
-                    spT.getSoLuong(),spT.getNhaCungCap().getTenNCC()});
+                    modelTKSPL.addRow(new Object[]{sttL++, ctht.getSanPham().getMaSP(), ctht.getSanPham().getTenSP(),
+                    ctht.getSoLuong(),ctht.getSanPham().getNhaCungCap().getTenNCC()});
             }   
             }
         
@@ -769,7 +771,7 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "STT", "Mã", "Tên Sản Phẩm", "Số lượng", "Nhà sản xuất"
+                "STT", "Mã", "Tên Sản Phẩm", "Số lượng", "Nhà cung cấp"
             }
         ) {
             Class[] types = new Class [] {
@@ -792,12 +794,12 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
             .addGroup(pnlSPLoiLayout.createSequentialGroup()
                 .addGroup(pnlSPLoiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlSPLoiLayout.createSequentialGroup()
-                        .addGap(236, 236, 236)
-                        .addComponent(scrTKSPT1, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlSPLoiLayout.createSequentialGroup()
                         .addGap(318, 318, 318)
-                        .addComponent(lblTieuDeTKSPT1)))
-                .addContainerGap(316, Short.MAX_VALUE))
+                        .addComponent(lblTieuDeTKSPT1))
+                    .addGroup(pnlSPLoiLayout.createSequentialGroup()
+                        .addGap(157, 157, 157)
+                        .addComponent(scrTKSPT1, javax.swing.GroupLayout.PREFERRED_SIZE, 822, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(243, Short.MAX_VALUE))
         );
         pnlSPLoiLayout.setVerticalGroup(
             pnlSPLoiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
