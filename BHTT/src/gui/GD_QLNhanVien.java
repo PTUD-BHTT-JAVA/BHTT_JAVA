@@ -60,6 +60,7 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
         docDuLieuLenTable(nvDAO.layTatCaNhanVienDangLamVaoBang(),modelNhanVien);
         tr=new TableRowSorter<DefaultTableModel>(modelNhanVien);
         tblNhanVien.setRowSorter(tr);
+        
     }
 
     /**
@@ -710,41 +711,42 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
             tLNV="Quản lý";
         }
         
-        NhanVien nv=new NhanVien(setMaNV(), tenNV,cmnd, sdt, gt,luongCoBan,trangThai, new LoaiNhanVien(lnv,tLNV));
+        NhanVien nv=new NhanVien(maTuSinh(), tenNV,cmnd, sdt, gt,luongCoBan,trangThai, new LoaiNhanVien(lnv,tLNV));
         return nv;
     }
     
-    private String setMaNV(){
-        String ma="NV";
+
+    
+    private String maTuSinh() {
+        String ma = "SP";
         int tachMa;
-        int i=0,j=1;
-        int[] dem=new int[999];
+        int i = 0, j = 1;
+        int[] dem = new int[999];
         String id;
-        for (NhanVien nv : nvDAO.layTatCaNhanVienDangLamVaoBang()) {
+        nvDAO = new DAO_NhanVien();
+        for (NhanVien nv : nvDAO.layTatCa()) {
             id = nv.getMaNV();
-            tachMa=Integer.parseInt(id.substring(2, 5));
-            dem[i] =tachMa;
+            tachMa = Integer.parseInt(id.substring(2, 5));
+            dem[i] = tachMa;
             i++;
         }
-        i=0;
-        while (j<999){
-            
-            if(dem[i]<j){
+        i = 0;
+        //gd:  String maPhatSinh= ("SP%3d",i);
+        while (j < 999) {
+            if (dem[i] < j) {
                 if (j <= 9) {
-                    ma +=  "00" + (j);
+                    ma += "00" + (j);
                 } else {
                     ma += "0" + (j);
                 }
                 break;
-            } else if(dem[i]>j){
-                j=dem[i];
-            }else{
-               
+            } else if (dem[i] > j) {
+                j = dem[i];
+            } else {
                 i++;
                 j++;
             }
-            
-        }    
+        }
         return ma;
     }
     private void clearInput(){
