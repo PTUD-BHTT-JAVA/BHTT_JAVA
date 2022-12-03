@@ -1,4 +1,3 @@
-
 package gui;
 
 import connectDB.ConnectDB;
@@ -11,10 +10,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-
-
-
 
 import java.util.List;
 import javax.swing.JFileChooser;
@@ -22,26 +17,22 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 
-
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
-
 
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-
 public class GD_NhaCungCap extends javax.swing.JInternalFrame {
+
     private DefaultTableModel modelNhaCungCap;
     private String username;
     private DAO_NhaCungCap nhacc;
     private XSSFRow rowCount;
-  
-  
-    
+
     public GD_NhaCungCap(String _username) {
         try {
             ConnectDB.getInstance().connect();
@@ -54,69 +45,74 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
         ((javax.swing.plaf.basic.BasicInternalFrameUI) ui).setNorthPane(null);
         initComponents();
         this.setFocusable(true);
-        username=_username;
+        username = _username;
         modelNhaCungCap = (DefaultTableModel) tableNhaCC.getModel();
         DocDuLieuDatabaseVaoTable();
     }
-    
-    private void importNhaCungCap(){
+
+    private void importNhaCungCap() {
         File excelFile;
         FileInputStream excelFIS = null;
         BufferedInputStream excelBIS = null;
-        XSSFWorkbook excelImportToJTable  = null;
+        XSSFWorkbook excelImportToJTable = null;
         String defaultCurrentDirectoryPath = "C:\\Users\\Trinh Cui Bap\\Desktop";
         JFileChooser excelFileChooser = new JFileChooser(defaultCurrentDirectoryPath);
         excelFileChooser.setDialogTitle("Chọn file để import");
-        FileNameExtensionFilter fnef = new FileNameExtensionFilter("EXCEL FILE", "xls","xlsx","xlsm");
+        FileNameExtensionFilter fnef = new FileNameExtensionFilter("EXCEL FILE", "xls", "xlsx", "xlsm");
         excelFileChooser.setFileFilter(fnef);
         int excelChooser = excelFileChooser.showOpenDialog(null);
-        if(excelChooser == JFileChooser.APPROVE_OPTION){
+        if (excelChooser == JFileChooser.APPROVE_OPTION) {
             try {
                 excelFile = excelFileChooser.getSelectedFile();
                 excelFIS = new FileInputStream(excelFile);
                 excelBIS = new BufferedInputStream(excelBIS);
                 excelImportToJTable = new XSSFWorkbook(excelFIS);
                 XSSFSheet excelSheet = excelImportToJTable.getSheetAt(0);
-                for(int row = 1;row < excelSheet.getLastRowNum();row++){
+                for (int row = 1; row < excelSheet.getLastRowNum(); row++) {
                     XSSFRow excelRow = excelSheet.getRow(row);
                     XSSFCell excelTen = excelRow.getCell(0);
                     XSSFCell excelDiaChi = excelRow.getCell(1);
                     XSSFCell excelSoDienThoai = excelRow.getCell(2);
-                    XSSFCell excelEmail =  excelRow.getCell(3);
+                    XSSFCell excelEmail = excelRow.getCell(3);
                     System.out.println(excelDiaChi.toString());
-                    NhaCungCap nccImport = new NhaCungCap(maTuSinh(),excelTen.toString(),excelDiaChi.toString(),excelSoDienThoai.toString(),excelEmail.toString());
-                    nhacc.themNhaCungCap(nccImport);
-                    modelNhaCungCap.addRow(new Object[]{
-                        nccImport.getMaNCC(),nccImport.getTenNCC(),nccImport.getDiaChi(),nccImport.getSoDienThoai(),nccImport.getEmail()
-                    });
-                    
+                    if (nhacc.layNhaCungCapBangSDT(excelSoDienThoai.toString()) == null) {
+                        NhaCungCap nccImport = new NhaCungCap(maTuSinh(), excelTen.toString(), excelDiaChi.toString(), excelSoDienThoai.toString(), excelEmail.toString());
+                        nhacc.themNhaCungCap(nccImport);
+                        modelNhaCungCap.addRow(new Object[]{
+                            nccImport.getMaNCC(), nccImport.getTenNCC(), nccImport.getDiaChi(), nccImport.getSoDienThoai(), nccImport.getEmail()
+                        });
+                        JOptionPane.showMessageDialog(null, "Thêm thành công");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Số điện thoại đã tồn tại");
+                    }
+
                 }
-                JOptionPane.showMessageDialog(null,"Import thành công");
+
             } catch (IOException iOException) {
-                JOptionPane.showMessageDialog(null,iOException.getMessage());
-            }finally{
+                JOptionPane.showMessageDialog(null, iOException.getMessage());
+            } finally {
                 try {
-                    if(excelFIS != null){
+                    if (excelFIS != null) {
                         excelFIS.close();
                     }
-                    if(excelBIS  != null){
+                    if (excelBIS != null) {
                         excelBIS.close();
                     }
-                    if(excelImportToJTable != null){
+                    if (excelImportToJTable != null) {
                         excelImportToJTable.close();
                     }
-                }catch (IOException ex) {
+                } catch (IOException ex) {
                     System.out.println(ex);
                 }
             }
         }
     }
 
-    public void exportNhaCungCap(){
+    public void exportNhaCungCap() {
         FileOutputStream excelFOU = null;
         BufferedOutputStream excelBOU = null;
         XSSFWorkbook excelJTableExporter = null;
-        
+
         JFileChooser excelFileChooser = new JFileChooser("C:\\Users\\Trinh Cui Bap\\Desktop");
         excelFileChooser.setDialogTitle("Save As");
         FileNameExtensionFilter fnef = new FileNameExtensionFilter("EXCEL FILES", "xls", "xlsx", "xlsm");
@@ -164,72 +160,77 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
                     ex.printStackTrace();
                 }
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Expor không thành công");
         }
 
     }
-    
+
     private void XoaHetDuLieuTrenTableModel() {
         DefaultTableModel dm = (DefaultTableModel) tableNhaCC.getModel();
         dm.getDataVector().removeAllElements();
     }
-    
-     private  void timNhaCungCap(String search){
-        TableRowSorter<DefaultTableModel> tr=new TableRowSorter<DefaultTableModel>(modelNhaCungCap);
+
+    private void timNhaCungCap(String search) {
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(modelNhaCungCap);
         tableNhaCC.setRowSorter(tr);
-        tr.setRowFilter(RowFilter.regexFilter("(?i)"+search));
+        tr.setRowFilter(RowFilter.regexFilter("(?i)" + search));
     }
-    
-    private String maTuSinh(){
-        String ma="NCC";
+
+    private String maTuSinh() {
+        String ma = "NCC";
         int tachMa;
-        int i=0,j=1;
-        int[] dem=new int[999];
+        int i = 0, j = 1;
+        int[] dem = new int[999];
         String id;
         for (NhaCungCap ncc : nhacc.getalltbNhaCungCap()) {
             id = ncc.getMaNCC();
-            tachMa=Integer.parseInt(id.substring(3, 6));
-            dem[i] =tachMa;
+            tachMa = Integer.parseInt(id.substring(3, 6));
+            dem[i] = tachMa;
             i++;
         }
-        i=0;
-        while (j<999){
-            
-            if(dem[i]<j){
+        i = 0;
+        while (j < 999) {
+
+            if (dem[i] < j) {
                 if (j <= 9) {
-                    ma +=  "00" + (j);
+                    ma += "00" + (j);
                 } else {
                     ma += "0" + (j);
                 }
                 break;
-            } else if(dem[i]>j){
-                j=dem[i];
-            }else{
+            } else if (dem[i] > j) {
+                j = dem[i];
+            } else {
                 i++;
                 j++;
             }
-            
-        }    
+
+        }
         return ma;
     }
-    
-    private void xoaTextField(){
-       txtTenNCC.setText("");
-       txtSoDienThoai.setText("");
-       txtDiaChi.setText("");
-       txtEmail.setText("");
+
+    private void xoaTextField() {
+        txtTenNCC.setText("");
+        txtSoDienThoai.setText("");
+        txtDiaChi.setText("");
+        txtEmail.setText("");
     }
-    
-    public boolean kiemTraForm(){
+
+    public boolean kiemTraForm() {
         String email = txtEmail.getText();
-        if(email.equals("") || !email.matches("^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$")){
-            JOptionPane.showMessageDialog(this, "Email không đúng định dạng","Cảnh báo",JOptionPane.WARNING_MESSAGE);
+        if (email.equals("") || !email.matches("^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$")) {
+            JOptionPane.showMessageDialog(this, "Email không đúng định dạng", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+        String soDT = txtSoDienThoai.getText();
+        if (soDT.equals("") || !soDT.matches("^0{1}[0-9]{9}$")) {
+            JOptionPane.showMessageDialog(null, "Số điện thoại gồm 10 số", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
             return false;
         }
         return true;
     }
-    
+
     private void DocDuLieuDatabaseVaoTable() {
         nhacc = new DAO_NhaCungCap();
         List<NhaCungCap> list = nhacc.getalltbNhaCungCap();
@@ -239,8 +240,7 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
             });
         }
     }
-    
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -525,31 +525,35 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnXoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrangActionPerformed
-       xoaTextField();
+        xoaTextField();
     }//GEN-LAST:event_btnXoaTrangActionPerformed
 
     private void btnThemNCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemNCCActionPerformed
-       String tenNCC = txtTenNCC.getText();
+        String tenNCC = txtTenNCC.getText();
         String diaChi = txtDiaChi.getText();
         String soDienThoai = txtSoDienThoai.getText();
         String email = txtEmail.getText();
-        if (tenNCC.equals("") || diaChi.equals("")|| soDienThoai.equals("") || email.equals("")) {
-            JOptionPane.showMessageDialog(null, "Nhập đầy đủ thông tin","Cảnh báo",JOptionPane.WARNING_MESSAGE);
+        if (tenNCC.equals("") || diaChi.equals("") || soDienThoai.equals("") || email.equals("")) {
+            JOptionPane.showMessageDialog(null, "Nhập đầy đủ thông tin", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         } else {
-            if(kiemTraForm()){
-                NhaCungCap ncc = new NhaCungCap(maTuSinh(), tenNCC, diaChi, soDienThoai, email);
-                nhacc.themNhaCungCap(ncc);
-                modelNhaCungCap.addRow(new Object[]{
-                    ncc.getMaNCC(), ncc.getTenNCC(), ncc.getDiaChi(), ncc.getSoDienThoai(), ncc.getEmail()
-                });
-                JOptionPane.showMessageDialog(null, "Thêm thành công");
-                xoaTextField();
+            if (kiemTraForm()) {
+                if (nhacc.layNhaCungCapBangSDT(soDienThoai) == null) {
+                    NhaCungCap ncc = new NhaCungCap(maTuSinh(), tenNCC, diaChi, soDienThoai, email);
+                    nhacc.themNhaCungCap(ncc);
+                    modelNhaCungCap.addRow(new Object[]{
+                        ncc.getMaNCC(), ncc.getTenNCC(), ncc.getDiaChi(), ncc.getSoDienThoai(), ncc.getEmail()
+                    });
+                    JOptionPane.showMessageDialog(null, "Thêm thành công");
+                    xoaTextField();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Số điện thoại đã tồn tại");
+                }
             }
         }
     }//GEN-LAST:event_btnThemNCCActionPerformed
 
     private void btnSuaNCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaNCCActionPerformed
-        if (JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn cập nhật khách hàng này ?", "Cập nhật khách hàng", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+        if (JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn cập nhật nhà cung cấp này ?", "Cập nhật nhà cung cấp", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             int row = tableNhaCC.getSelectedRow();
             String tenNCC = txtTenNCC.getText();
             String diaChi = txtDiaChi.getText();
@@ -571,19 +575,19 @@ public class GD_NhaCungCap extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSuaNCCActionPerformed
 
     private void tableNhaCCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableNhaCCMouseClicked
-      int r = tableNhaCC.getSelectedRow();
-      txtTenNCC.setText(tableNhaCC.getValueAt(r, 1).toString());
-      txtDiaChi.setText(tableNhaCC.getValueAt(r, 2).toString());
-      txtSoDienThoai.setText(tableNhaCC.getValueAt(r, 3).toString());
-      txtEmail.setText(tableNhaCC.getValueAt(r, 4).toString());
+        int r = tableNhaCC.getSelectedRow();
+        txtTenNCC.setText(tableNhaCC.getValueAt(r, 1).toString());
+        txtDiaChi.setText(tableNhaCC.getValueAt(r, 2).toString());
+        txtSoDienThoai.setText(tableNhaCC.getValueAt(r, 3).toString());
+        txtEmail.setText(tableNhaCC.getValueAt(r, 4).toString());
     }//GEN-LAST:event_tableNhaCCMouseClicked
 
     private void btnImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportActionPerformed
-       importNhaCungCap();
+        importNhaCungCap();
     }//GEN-LAST:event_btnImportActionPerformed
 
     private void txtTimKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKeyReleased
-        String search =  txtTim.getText();
+        String search = txtTim.getText();
         timNhaCungCap(search);
     }//GEN-LAST:event_txtTimKeyReleased
 

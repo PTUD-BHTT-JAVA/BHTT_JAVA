@@ -90,7 +90,7 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
         
         modolSP = (DefaultTableModel) jtbSanPham.getModel();
         modelDonHang = (DefaultTableModel) tableDonHang.getModel();
-//        DocDuLieuLenTable();
+        DocDuLieuLenTable();
         DocDuLieuVaoCombobox();
 //        moKhoaTextfields(false);
         dstt = new ArrayList<SanPham>();
@@ -1150,11 +1150,15 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTienKhachDuaKeyReleased
 
     private void txtTimKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKeyReleased
-        try {
-            timKiemSanPham();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+//        try {
+////            timKiemSanPham();
+//        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(modolSP);
+//            jtbSanPham.setRowSorter(tr);
+//            tr.setRowFilter(RowFilter.regexFilter("(?i)" + txtTim.getText()));
+//            
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
     }//GEN-LAST:event_txtTimKeyReleased
 
 //    Tìm sản phẩm với nhiều tiêu chí trên combobox

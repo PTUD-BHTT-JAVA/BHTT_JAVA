@@ -263,7 +263,7 @@ public class DAO_SanPham {
         ArrayList<SanPham> spList = new ArrayList<SanPham>();
         try{
             Connection con = ConnectDB.getConnection();
-            String sql = "select * from SanPham where CONCAT(maSP,tenSP,giaGoc,soLuong) LIKE  '%" + search + "%' ";
+            String sql = "select * from SanPham where CONCAT(maSP,tenSP,giaGoc,soLuong) LIKE  N'%" + search + "%' ";
             java.sql.Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sql);
             while(rs.next()){
