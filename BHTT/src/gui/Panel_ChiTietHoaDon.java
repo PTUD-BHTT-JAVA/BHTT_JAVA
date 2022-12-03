@@ -39,13 +39,9 @@ import javax.swing.table.TableRowSorter;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 import javax.swing.JLabel;
-
-/**
- *
- * @author Anh Thu
- */
+    
 public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
-
+    
     private String username;
     private DAO_SanPham sp_dao;
     private DAO_LoaiSP lsp_dao;
@@ -76,22 +72,22 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
     private String txtSDT, txtTenNV;
     private JLabel lblHT;
     private final double tienDeTangDTL = 20000;
-    private final int diemThanhVIP = 1000; 
+    private final int diemThanhVIP = 1000;    
     private ArrayList<SanPham> ListTimSP;
-
+    
     public Panel_ChiTietHoaDon(String sdt, String tenNV) {
-
+        
         txtSDT = sdt;
         txtTenNV = tenNV;
         initComponents();
         pnlTB.setVisible(false);
         this.setFocusable(true);
-
+        
         try {
             ConnectDB.getInstance().connect();
         } catch (Exception e) {
         }
-
+        
         modolSP = (DefaultTableModel) jtbSanPham.getModel();
         modelDonHang = (DefaultTableModel) tableDonHang.getModel();
 //        DocDuLieuLenTable();
@@ -107,13 +103,13 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
         nv = new DAO_NhanVien();
         jtbSanPham.setRowSorter(tr);
     }
-
+    
     private void DocDuLieuVaoCombobox() {
         lsp_dao = new DAO_LoaiSP();
         ArrayList<LoaiSanPham> listLSP = lsp_dao.getAllLSP();
         for (LoaiSanPham lsp : listLSP) {
             cbxPL.addItem(lsp.getTenLoaiSP());
-
+            
         }
         mau_dao = new DAO_MauSac();
         ArrayList<MauSac> listMau = mau_dao.getAllMau();
@@ -131,7 +127,7 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
             cbxKT.addItem(kt.getTenKichThuoc());
         }
     }
-
+    
     private void DocDuLieuLenTable() {
         sp_dao = new DAO_SanPham();
         ListSP = sp_dao.getAllSP();
@@ -141,9 +137,9 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
                 sp.getLoaiSanPham().getTenLoaiSP(),
                 sp.getMauSac().getTenMau(), sp.getChatLieu().getTenChatLieu(), sp.getKichThuoc().getTenKichThuoc(),});
         }
-
+        
     }
-
+    
     private String maTuSinh() {
         String ma = "HD";
         int tachMa;
@@ -168,14 +164,13 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
             } else if (dem[i] > j) {
                 j = dem[i];
             } else {
-
                 i++;
                 j++;
             }
         }
         return ma;
     }
-
+    
     public double ParseDouble(String strNumber) {
         if (strNumber != null && strNumber.length() > 0) {
             try {
@@ -187,12 +182,12 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
             return 0;
         }
     }
-
+    
     private void XoaHetDLTrenTbale(JTable table) {
         DefaultTableModel fm = (DefaultTableModel) table.getModel();
         fm.getDataVector().removeAllElements();
     }
-
+    
     public void tongTien() {
         tongThanhTien = 0;
         if ("LKH001".equals(kh.layKhachHangBangSDT(txtSDT).getLoaiKhachHang().getMaLoaiKH())) {
@@ -208,9 +203,9 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
             tongThanhTien += tongThanhTien * 0.05;
             txtTongTien.setText(df.format(tongThanhTien));
         }
-
+        
     }
-
+    
     public int vitriSP(SanPham sp) {
         int i = -1;
         if (dstt.contains(sp)) {
@@ -218,7 +213,7 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
         }
         return i;
     }
-
+    
     public void thanhToan(String ma) {
         if (!dstt.isEmpty()) {
             KhachHang khTT = kh.layKhachHangBangSDT(txtSDT);
@@ -270,7 +265,7 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
             }
             double tongTienThanhToan = 0;
             if (tongThanhTien >= tienDeTangDTL) {
-                 for (SanPham sp : dstt) {
+                for (SanPham sp : dstt) {
                     tongTienThanhToan += sp.getSoLuong() * sp.getGiaGoc();
                 }
                 kh_dao = new DAO_KhachHang();
@@ -279,14 +274,14 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
                 kh_dao.capNhatKhachHang(khTT);
                 System.out.println(khTT.getMaKH());
             }
-            if(khTT.getDiemTichLuy() >= diemThanhVIP){
+            if (khTT.getDiemTichLuy() >= diemThanhVIP) {
                 khTT.getLoaiKhachHang().setMaLoaiKH("LKH001");
                 kh_dao = new DAO_KhachHang();
                 kh_dao.capNhatKhachHang(khTT);
             }
         }
     }
-
+    
     public void themSPVaoDonHang() {
         int r = jtbSanPham.getSelectedRow();
         if (r != -1) {
@@ -298,7 +293,7 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
                 soluong = (int) jspSoLuong.getValue();
                 sp.getGiaGoc();
             } catch (Exception e) {
-
+                
             }
             if (soluong <= 0) {
                 JOptionPane.showMessageDialog(this, "Số lượng phải lớn hơn 0");
@@ -334,14 +329,14 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
             jspSoLuong.setValue(0);
             soLuongTon -= sp.getSoLuong();
             modolSP.setValueAt(soLuongTon, r, 2);
-
+            
             tongTien();
-
+            
         } else {
             JOptionPane.showMessageDialog(null, "Vui Lòng Chọn Sản Phẩm Trước Khi Mua");
         }
     }
-
+    
     public void xoaSPTrongDH(int r) {
         String maSP = dstt.get(r).getMaSP();
         int index = -1;
@@ -351,9 +346,9 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
                 break;
             }
         }
-         int soLuong = sp_dao.laySanPhamBangMa(maSP).getSoLuong();
+        int soLuong = sp_dao.laySanPhamBangMa(maSP).getSoLuong();
         if (ListTimSP != null && ListTimSP.size() > 0) {
-          
+            
             System.out.println(ListTimSP);
             for (SanPham s : ListTimSP) {
                 if (s.getMaSP().endsWith(maSP)) {
@@ -379,7 +374,7 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
         // xóa trên ArrayList
         dstt.remove(r);
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -1029,7 +1024,7 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
     }//GEN-LAST:event_btnThemSPActionPerformed
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
-
+        
         if (txtTienKhachDua.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Cần nhập tiền khách đưa", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         } else if (txtSDT.equals("")) {
@@ -1055,7 +1050,7 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
                 fHD.setVisible(true);
                 this.remove(jPanel6);
                 pnlTB.setVisible(true);
-
+                
             }
         }
     }//GEN-LAST:event_btnThanhToanActionPerformed
@@ -1073,8 +1068,8 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
     }//GEN-LAST:event_btnXoaCTHDActionPerformed
 
     private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
-       int row = tableDonHang.getSelectedRow();
-       String maSP = dstt.get(row).getMaSP();
+        int row = tableDonHang.getSelectedRow();
+        String maSP = dstt.get(row).getMaSP();
         int index = -1;
         for (SanPham s : ListSP) {
             if (s.getMaSP().endsWith(maSP)) {
@@ -1139,12 +1134,12 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
         tienThoi = 0;
         try {
             if (!"".equals(txtTienKhachDua.getText())) {
-                if(txtTienKhachDua.getText().matches("^\\d+")){
+                if (txtTienKhachDua.getText().matches("^\\d+")) {
                     double tien = Double.parseDouble(txtTienKhachDua.getText());
                     tienThoi = tien - tongThanhTien;
                     lblTienThoi.setText(df.format(tienThoi));
-                }else{
-                    JOptionPane.showMessageDialog(null,"Tiền khách đưa chỉ nhập số");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Tiền khách đưa chỉ nhập số");
                 }
             } else {
                 lblTienThoi.setText("");
@@ -1156,43 +1151,42 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
 
     private void txtTimKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKeyReleased
         try {
-              timKiemSanPham();
+            timKiemSanPham();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_txtTimKeyReleased
-    
-   
+
 //    Tìm sản phẩm với nhiều tiêu chí trên combobox
     private void btnTimSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimSPActionPerformed
-        
-         XoaHetDLTrenTbale(jtbSanPham);
+        txtTim.setText("");
+        XoaHetDLTrenTbale(jtbSanPham);
         sp_dao = new DAO_SanPham();
         ListTimSP = new ArrayList<SanPham>();
-       
-        ListTimSP = sp_dao.timSanPhamNhieuTieuChi(cbxPL.getSelectedItem().toString(), cbxKT.getSelectedItem().toString()
-                ,cbxMS.getSelectedItem().toString(), cbxCL.getSelectedItem().toString());
-        if(!ListTimSP.isEmpty()){
+        
+        ListTimSP = sp_dao.timSanPhamNhieuTieuChi(cbxPL.getSelectedItem().toString(), cbxKT.getSelectedItem().toString(),
+                 cbxMS.getSelectedItem().toString(), cbxCL.getSelectedItem().toString());
+        if (!ListTimSP.isEmpty()) {
             for (SanPham sp : ListTimSP) {
-               modolSP.addRow(new Object[]{
-                   sp.getMaSP(), sp.getTenSP(), sp.getSoLuong(),
+                modolSP.addRow(new Object[]{
+                    sp.getMaSP(), sp.getTenSP(), sp.getSoLuong(),
                     df.format(sp.getGiaGoc()),
                     sp.getLoaiSanPham().getTenLoaiSP(),
                     sp.getMauSac().getTenMau(),
                     sp.getChatLieu().getTenChatLieu(),
                     sp.getKichThuoc().getTenKichThuoc()
-               });
+                });
             }
-        }else{
-            JOptionPane.showMessageDialog(null,"Không có sản phẩm cần tìm");
+        } else {
+            JOptionPane.showMessageDialog(null, "Không có sản phẩm cần tìm");
             cbxCL.setSelectedItem("Tất cả");
             cbxKT.setSelectedItem("Tất cả");
             cbxMS.setSelectedItem("Tất cả");
             cbxPL.setSelectedItem("Tất cả");
             DocDuLieuLenTable();
         }
-     
         
+
     }//GEN-LAST:event_btnTimSPActionPerformed
     
     public void timKiemSanPham() {
@@ -1210,7 +1204,7 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
 //                row[5] = spList.get(i).getMauSac().getTenMau();
 //                row[6] = spList.get(i).getChatLieu().getTenChatLieu();
 //                row[7] = spList.get(i).getKichThuoc().getTenKichThuoc();
-              
+                
                 modolSP.addRow(new Object[]{
                     spList.get(i).getMaSP(),
                     spList.get(i).getTenSP(),
@@ -1219,11 +1213,10 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
                     spList.get(i).getLoaiSanPham().getTenLoaiSP(),
                     spList.get(i).getMauSac().getTenMau(),
                     spList.get(i).getChatLieu().getTenChatLieu(),
-                    spList.get(i).getKichThuoc().getTenKichThuoc(),
-                });
+                    spList.get(i).getKichThuoc().getTenKichThuoc(),});
             }
             jtbSanPham.setModel(modolSP);
-
+            
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -1295,5 +1288,5 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
     Component setPreferredSize(JPanel pnlForm) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-
+    
 }
