@@ -23,6 +23,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -45,12 +47,14 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
     DecimalFormat df = new DecimalFormat("#,##0 VND");
     private Thread thread = new Thread(this);
 
-    public GD_TaoDonHangHoan(String _username) {
+    public GD_TaoDonHangHoan(String _username) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
         thread.start();
         try {
             ConnectDB.getInstance().connect();
         } catch (Exception e) {
         }
+        
+        UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
         this.setRootPaneCheckingEnabled(false);
         javax.swing.plaf.InternalFrameUI ui
                 = this.getUI();

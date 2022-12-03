@@ -40,11 +40,16 @@ public class GD_NhanVien extends javax.swing.JFrame {
 
     private static String username;
     private final DAO_NhanVien dao_nv;
+    GD_KhachHang gd_KH;
+    GD_TaoDonHang gd_DH;
+    GD_NVThongKe gd_TK ;
+    GD_TaoDonHangHoan gd_DHH;
 
     /**
      * Creates new form MainEmployee
      */
-    public GD_NhanVien(String _username) {
+    public GD_NhanVien(String _username) throws ClassNotFoundException, IllegalAccessException, InstantiationException, UnsupportedLookAndFeelException {
+        this.gd_KH = new GD_KhachHang();
         username = _username;
         this.setUndecorated(true);
         this.setResizable(true);
@@ -70,7 +75,9 @@ public class GD_NhanVien extends javax.swing.JFrame {
         pnlTitleTaoDonHang.setVisible(false);
         pnlTitleDonHangHoan.setVisible(false);
         pnlTitleLichSuDonHang.setVisible(false);
-
+        gd_DHH = new GD_TaoDonHangHoan(username);
+        gd_DH = new GD_TaoDonHang(username,gd_KH);
+        gd_TK= new GD_NVThongKe(username);
     }
 
     /**
@@ -124,12 +131,20 @@ public class GD_NhanVien extends javax.swing.JFrame {
         pnlTroGiup = new keeptoo.KGradientPanel();
         lblTroGiup = new javax.swing.JLabel();
         icTroGiup = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        btnDoiMatKhau = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
         btnDangXuat = new javax.swing.JButton();
         kGradientPanel1 = new keeptoo.KGradientPanel();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(200, 200));
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                formMouseEntered(evt);
+            }
+        });
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -152,7 +167,7 @@ public class GD_NhanVien extends javax.swing.JFrame {
         pnlMenu.setBackground(new java.awt.Color(249, 234, 249));
         pnlMenu.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 0, 0), null));
         pnlMenu.setPreferredSize(new java.awt.Dimension(250, 200));
-        pnlMenu.setLayout(new java.awt.BorderLayout());
+        pnlMenu.setLayout(new javax.swing.BoxLayout(pnlMenu, javax.swing.BoxLayout.Y_AXIS));
 
         pnlNguoiDung.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -176,7 +191,7 @@ public class GD_NhanVien extends javax.swing.JFrame {
                 .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlNguoiDungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTen, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                    .addComponent(lblTen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(pnlNguoiDungLayout.createSequentialGroup()
                         .addComponent(lblChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
@@ -195,7 +210,7 @@ public class GD_NhanVien extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pnlMenu.add(pnlNguoiDung, java.awt.BorderLayout.PAGE_START);
+        pnlMenu.add(pnlNguoiDung);
 
         kGradientPanel2.setkEndColor(new java.awt.Color(80, 41, 158));
         kGradientPanel2.setkStartColor(new java.awt.Color(153, 0, 153));
@@ -498,21 +513,45 @@ public class GD_NhanVien extends javax.swing.JFrame {
 
         kGradientPanel2.add(pnlTroGiup);
 
-        pnlMenu.add(kGradientPanel2, java.awt.BorderLayout.LINE_END);
+        pnlMenu.add(kGradientPanel2);
+
+        jPanel1.setLayout(new java.awt.BorderLayout());
+
+        btnDoiMatKhau.setBackground(new java.awt.Color(157, 103, 157));
+        btnDoiMatKhau.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnDoiMatKhau.setForeground(new java.awt.Color(255, 255, 255));
+        btnDoiMatKhau.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/capnhatKH.png"))); // NOI18N
+        btnDoiMatKhau.setText("ĐỔI MẬT KHẨU");
+        btnDoiMatKhau.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 0, 153), 3, true));
+        btnDoiMatKhau.setMaximumSize(new java.awt.Dimension(254, 42));
+        btnDoiMatKhau.setPreferredSize(new java.awt.Dimension(254, 40));
+        btnDoiMatKhau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDoiMatKhauActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnDoiMatKhau, java.awt.BorderLayout.SOUTH);
+
+        pnlMenu.add(jPanel1);
+
+        jPanel2.setLayout(new java.awt.BorderLayout());
 
         btnDangXuat.setBackground(new java.awt.Color(252, 249, 250));
         btnDangXuat.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnDangXuat.setForeground(new java.awt.Color(102, 0, 102));
         btnDangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/dangXuat.png"))); // NOI18N
-        btnDangXuat.setText("Đăng xuất");
+        btnDangXuat.setText("ĐĂNG XUẤT");
         btnDangXuat.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 0, 153), 3, true));
-        btnDangXuat.setPreferredSize(new java.awt.Dimension(76, 40));
+        btnDangXuat.setMaximumSize(new java.awt.Dimension(254, 42));
+        btnDangXuat.setPreferredSize(new java.awt.Dimension(254, 40));
         btnDangXuat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDangXuatActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnDangXuat, java.awt.BorderLayout.PAGE_END);
+        jPanel2.add(btnDangXuat, java.awt.BorderLayout.PAGE_END);
+
+        pnlMenu.add(jPanel2);
 
         pnlMain.add(pnlMenu, java.awt.BorderLayout.WEST);
         pnlMenu.getAccessibleContext().setAccessibleParent(this);
@@ -540,8 +579,11 @@ public class GD_NhanVien extends javax.swing.JFrame {
 
     private void pnlTaoDonHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlTaoDonHangMousePressed
 
-        GD_TaoDonHang frame = new GD_TaoDonHang(username);
-        openComponent(frame);
+        if(gd_DH.isAncestorOf(gd_KH))
+           gd_DH.remove(gd_KH);
+        returnComponent();
+        openComponent(gd_DH);
+        
         pnlTaoDonHang.setkEndColor(new java.awt.Color(255, 204, 204));
         pnlTaoDonHang.setkStartColor(new java.awt.Color(164, 158, 213));
         lblTaoHoaDon.setForeground(new Color(102,0,102));
@@ -592,8 +634,8 @@ public class GD_NhanVien extends javax.swing.JFrame {
     }//GEN-LAST:event_pnlTaoDonHangMousePressed
 
     private void pnlKhachHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlKhachHangMousePressed
-        GD_KhachHang frKhachHang = new GD_KhachHang(username);
-        openComponent(frKhachHang);
+        
+        openComponent(gd_KH);
         pnlKhachHang.setkEndColor(new java.awt.Color(255, 204, 204));
         pnlKhachHang.setkStartColor(new java.awt.Color(164, 158, 213));
         lblKhachHang.setForeground(new Color(102,0,102));
@@ -641,10 +683,57 @@ public class GD_NhanVien extends javax.swing.JFrame {
         lblTraCuu.setForeground(new java.awt.Color(255, 255, 255));
         icTraCuu.setForeground(new java.awt.Color(255, 255, 255));
     }//GEN-LAST:event_pnlKhachHangMousePressed
+     void doiMau(){
+        pnlKhachHang.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlKhachHang.setkStartColor(new java.awt.Color(164, 158, 213));
+        lblKhachHang.setForeground(new Color(102,0,102));
+        icKhachHang.setForeground(new Color(102,0,102));
+        
+        // trả lại màu
+        pnlGioiThieu.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlGioiThieu.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblGioiThieu.setForeground(new java.awt.Color(255, 255, 255));
+        icGioiThieu.setForeground(new java.awt.Color(255, 255, 255));
 
+        
+        pnlDonHang.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlDonHang.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblDonHang.setForeground(new java.awt.Color(255, 255, 255));
+        icDonHang.setForeground(new java.awt.Color(255, 255, 255));
+        
+        pnlThongKe.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlThongKe.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblThongKe.setForeground(new java.awt.Color(255, 255, 255));
+        icThongKe.setForeground(new java.awt.Color(255, 255, 255));
+               
+        pnlTroGiup.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlTroGiup.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblTroGiup.setForeground(new java.awt.Color(255, 255, 255));
+        icTroGiup.setForeground(new java.awt.Color(255, 255, 255));
+        
+        pnlTaoDonHang.setkEndColor(new java.awt.Color(102, 0, 153));
+        pnlTaoDonHang.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblTaoHoaDon.setForeground(new java.awt.Color(255, 255, 255));
+        icTaoDonHang.setForeground(new java.awt.Color(255, 255, 255));
+        
+        pnlDonHangHoan.setkEndColor(new java.awt.Color(102, 0, 153));
+        pnlDonHangHoan.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblDonHangHoan.setForeground(new java.awt.Color(255, 255, 255));
+        icTaoDonHoan.setForeground(new java.awt.Color(255, 255, 255));
+        
+        pnlLichSuDonHang.setkEndColor(new java.awt.Color(102, 0, 153));
+        pnlLichSuDonHang.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblLichSuDonHang.setForeground(new java.awt.Color(255, 255, 255));
+        icLichSuDonHang.setForeground(new java.awt.Color(255, 255, 255));
+        
+        pnlTraCuu.setkEndColor(new java.awt.Color(255, 204, 204));
+        pnlTraCuu.setkStartColor(new java.awt.Color(102, 0, 153));
+        lblTraCuu.setForeground(new java.awt.Color(255, 255, 255));
+        icTraCuu.setForeground(new java.awt.Color(255, 255, 255));
+    }
     private void pnlThongKeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlThongKeMousePressed
-        GD_NVThongKe fNVThongKe = new GD_NVThongKe(username);
-        openComponent(fNVThongKe);
+        
+        openComponent(gd_TK);
         pnlThongKe.setkEndColor(new java.awt.Color(255, 204, 204));
         pnlThongKe.setkStartColor(new java.awt.Color(164, 158, 213));
         lblThongKe.setForeground(new Color(102,0,102));
@@ -747,8 +836,8 @@ public class GD_NhanVien extends javax.swing.JFrame {
     }//GEN-LAST:event_pnlTroGiupMousePressed
 
     private void pnlDonHangHoanMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlDonHangHoanMousePressed
-        GD_TaoDonHangHoan fLichSuDonHang = new GD_TaoDonHangHoan(username);
-        openComponent(fLichSuDonHang);
+        
+        openComponent(gd_DHH);
         pnlDonHangHoan.setkEndColor(new java.awt.Color(255, 204, 204));
         pnlDonHangHoan.setkStartColor(new java.awt.Color(164, 158, 213));
         lblDonHangHoan.setForeground(new Color(102,0,102));
@@ -845,25 +934,6 @@ public class GD_NhanVien extends javax.swing.JFrame {
         icTraCuu.setForeground(new java.awt.Color(255, 255, 255));
 
     }//GEN-LAST:event_pnlDonHangMouseClicked
-
-    private void btnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatActionPerformed
-        if (JOptionPane.showConfirmDialog(this, "Bạn có muốn đăng xuất ?", "Đăng xuất", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-            this.setVisible(false);
-            try {
-                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(GD_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (InstantiationException ex) {
-                Logger.getLogger(GD_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IllegalAccessException ex) {
-                Logger.getLogger(GD_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (UnsupportedLookAndFeelException ex) {
-                Logger.getLogger(GD_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            GD_DangNhap dn =new GD_DangNhap();
-            dn.setVisible(true);
-        }
-    }//GEN-LAST:event_btnDangXuatActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // TODO add your handling code here:
@@ -1037,6 +1107,35 @@ public class GD_NhanVien extends javax.swing.JFrame {
         
 
     }//GEN-LAST:event_pnlTraCuuMousePressed
+
+    private void btnDoiMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoiMatKhauActionPerformed
+        GD_DoiMatKhau gd=new GD_DoiMatKhau(username);
+        gd.setVisible(true);
+    }//GEN-LAST:event_btnDoiMatKhauActionPerformed
+
+    private void btnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatActionPerformed
+        if (JOptionPane.showConfirmDialog(this, "Bạn có muốn thoát ?", "Thoát", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            this.setVisible(false);
+            try {
+                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(GD_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InstantiationException ex) {
+                Logger.getLogger(GD_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                Logger.getLogger(GD_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (UnsupportedLookAndFeelException ex) {
+                Logger.getLogger(GD_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            GD_DangNhap dn =new GD_DangNhap();
+            dn.setVisible(true);
+        }
+    }//GEN-LAST:event_btnDangXuatActionPerformed
+
+    private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
+        if(gd_KH.isVisible())
+            doiMau();
+    }//GEN-LAST:event_formMouseEntered
     // open frame when click panel
     void openComponent(JInternalFrame frame) {
         Component[] components = pnlForm.getComponents();
@@ -1049,6 +1148,15 @@ public class GD_NhanVien extends javax.swing.JFrame {
         }
         pnlForm.add(frame);
         frame.setVisible(true);
+    }
+        void returnComponent() {
+        Component[] components = gd_DH.getComponents();
+        Component component = null;
+        for (int i = 0; i < components.length; i++) {
+            component = components[i];
+            component.setVisible(true);
+        }
+        this.setVisible(true);
     }
 
     // set color
@@ -1097,7 +1205,17 @@ public class GD_NhanVien extends javax.swing.JFrame {
         UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GD_NhanVien(username);
+                try {
+                    new GD_NhanVien(username);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(GD_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalAccessException ex) {
+                    Logger.getLogger(GD_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InstantiationException ex) {
+                    Logger.getLogger(GD_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (UnsupportedLookAndFeelException ex) {
+                    Logger.getLogger(GD_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -1105,6 +1223,7 @@ public class GD_NhanVien extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDangXuat;
+    private javax.swing.JButton btnDoiMatKhau;
     private javax.swing.JLabel icDonHang;
     private javax.swing.JLabel icGioiThieu;
     private javax.swing.JLabel icKhachHang;
@@ -1115,6 +1234,8 @@ public class GD_NhanVien extends javax.swing.JFrame {
     private javax.swing.JLabel icTraCuu;
     private javax.swing.JLabel icTroGiup;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private keeptoo.KGradientPanel kGradientPanel1;
     private keeptoo.KGradientPanel kGradientPanel2;
     private keeptoo.KGradientPanel kGradientPanel3;

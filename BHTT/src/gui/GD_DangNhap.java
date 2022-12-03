@@ -288,7 +288,18 @@ public class GD_DangNhap extends javax.swing.JFrame {
 
                 }else {
                         this.setVisible(false);
-                        GD_NhanVien gD_NhanVien=new GD_NhanVien(tkNhap);
+                        GD_NhanVien gD_NhanVien = null;
+                    try {
+                        gD_NhanVien = new GD_NhanVien(tkNhap);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(GD_DangNhap.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IllegalAccessException ex) {
+                        Logger.getLogger(GD_DangNhap.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (InstantiationException ex) {
+                        Logger.getLogger(GD_DangNhap.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (UnsupportedLookAndFeelException ex) {
+                        Logger.getLogger(GD_DangNhap.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                         gD_NhanVien.setVisible(true);
                     try {
                         UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");

@@ -27,6 +27,8 @@ import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -60,18 +62,20 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
     public TaiKhoan tkDN;
     private DAO_HoaDon hd_dao;
     private ArrayList<SanPham> dsSPTrongDonHang;
+    private final JInternalFrame gd_KH;
 
     public void dongPanel(Component c) {
         pnlTab.remove(c);
     }
 
-    public GD_TaoDonHang(String _username) {
+    public GD_TaoDonHang(String _username, JInternalFrame frame) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
         thread.start();
         try {
             ConnectDB.getInstance().connect();
         } catch (Exception e) {
         }
-
+        UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
+        gd_KH=frame;
         this.setRootPaneCheckingEnabled(false);
         javax.swing.plaf.InternalFrameUI ui
                 = this.getUI();
@@ -174,7 +178,6 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
 
         jPanel16.setBackground(new java.awt.Color(204, 204, 255));
         jPanel16.setMaximumSize(new java.awt.Dimension(600, 600));
-        jPanel16.setMinimumSize(new java.awt.Dimension(10, 10));
         jPanel16.setPreferredSize(new java.awt.Dimension(117, 23));
         jPanel16.setLayout(new javax.swing.BoxLayout(jPanel16, javax.swing.BoxLayout.X_AXIS));
 
@@ -221,7 +224,6 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
 
         jPanel24.setBackground(new java.awt.Color(204, 204, 255));
         jPanel24.setMaximumSize(new java.awt.Dimension(1000, 1000));
-        jPanel24.setMinimumSize(new java.awt.Dimension(10, 10));
         jPanel24.setPreferredSize(new java.awt.Dimension(5, 30));
 
         javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
@@ -243,7 +245,6 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
 
         jPanel17.setBackground(new java.awt.Color(204, 204, 255));
         jPanel17.setMaximumSize(new java.awt.Dimension(600, 600));
-        jPanel17.setMinimumSize(new java.awt.Dimension(10, 10));
         jPanel17.setPreferredSize(new java.awt.Dimension(223, 35));
         jPanel17.setLayout(new javax.swing.BoxLayout(jPanel17, javax.swing.BoxLayout.X_AXIS));
 
@@ -625,9 +626,9 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
         btnThemKH.setMaximumSize(new java.awt.Dimension(600, 600));
         btnThemKH.setMinimumSize(new java.awt.Dimension(10, 10));
         btnThemKH.setPreferredSize(new java.awt.Dimension(120, 17));
-        btnThemKH.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThemKHActionPerformed(evt);
+        btnThemKH.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnThemKHMousePressed(evt);
             }
         });
         jPanel9.add(btnThemKH, java.awt.BorderLayout.CENTER);
@@ -735,12 +736,6 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
     private void txtGioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtGioActionPerformed
-
-    private void btnThemKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemKHActionPerformed
-        GD_KhachHang frKhachHang = new GD_KhachHang(username);
-        openComponent(frKhachHang);
-
-    }//GEN-LAST:event_btnThemKHActionPerformed
     void openComponent(JInternalFrame frame) {
         Component[] components = this.getComponents();
         Component component = null;
@@ -803,6 +798,13 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
             txtSoDon.setText(maTuSinh());
         }
     }//GEN-LAST:event_btnHuyActionPerformed
+
+    private void btnThemKHMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemKHMousePressed
+
+        openComponent(gd_KH);
+        
+        
+    }//GEN-LAST:event_btnThemKHMousePressed
     private String maTuSinh() {
         String ma = "HD";
         int tachMa;

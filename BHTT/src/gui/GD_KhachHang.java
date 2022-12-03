@@ -25,6 +25,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 import javax.swing.RowFilter;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -42,7 +44,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class GD_KhachHang extends javax.swing.JInternalFrame {
    
     private DefaultTableModel modelKhachHang;
-    private String username;
     private DAO_KhachHang kh;
     private DAO_LoaiKhachHang lkh;
     private XSSFRow rowCount;
@@ -52,19 +53,20 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
      * Creates new form QuanLyHoaDon
      */
     
-    public GD_KhachHang(String _username) {
+    public GD_KhachHang() throws ClassNotFoundException, IllegalAccessException, InstantiationException, UnsupportedLookAndFeelException {
         try {
             ConnectDB.getInstance().connect();
         } catch (Exception e) {
             System.out.println(e);
         }
+        UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
         this.setRootPaneCheckingEnabled(false);
         javax.swing.plaf.InternalFrameUI ui
                 = this.getUI();
         ((javax.swing.plaf.basic.BasicInternalFrameUI) ui).setNorthPane(null);
         initComponents();
         this.setFocusable(true);
-        username=_username;
+
         lkh = new DAO_LoaiKhachHang();
         ArrayList<LoaiKhachHang> listLKH = lkh.getalltbLoaiKhachHang();
         for (LoaiKhachHang loaiKH : listLKH) {
@@ -819,4 +821,6 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtTenKH;
     private swing.TextFieldAnimation txtTim;
     // End of variables declaration//GEN-END:variables
+
+
 }

@@ -121,6 +121,9 @@ public class GD_QuanLy extends javax.swing.JFrame {
         pnlTroGiup = new keeptoo.KGradientPanel();
         lblTroGiup = new javax.swing.JLabel();
         icTroGiup = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        btnDoiMatKhau = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
         btnDangXuat = new javax.swing.JButton();
         kGradientPanel1 = new keeptoo.KGradientPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -145,7 +148,7 @@ public class GD_QuanLy extends javax.swing.JFrame {
         pnlMenu.setBackground(new java.awt.Color(249, 234, 249));
         pnlMenu.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         pnlMenu.setPreferredSize(new java.awt.Dimension(250, 200));
-        pnlMenu.setLayout(new java.awt.BorderLayout());
+        pnlMenu.setLayout(new javax.swing.BoxLayout(pnlMenu, javax.swing.BoxLayout.Y_AXIS));
 
         pnlNguoiDung.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -169,7 +172,7 @@ public class GD_QuanLy extends javax.swing.JFrame {
                 .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlNguoiDungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTen, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                    .addComponent(lblTen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(pnlNguoiDungLayout.createSequentialGroup()
                         .addComponent(lblChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
@@ -188,10 +191,11 @@ public class GD_QuanLy extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pnlMenu.add(pnlNguoiDung, java.awt.BorderLayout.PAGE_START);
+        pnlMenu.add(pnlNguoiDung);
 
         kGradientPanel2.setkEndColor(new java.awt.Color(80, 41, 158));
         kGradientPanel2.setkStartColor(new java.awt.Color(153, 0, 153));
+        kGradientPanel2.setMaximumSize(new java.awt.Dimension(999, 2000));
         kGradientPanel2.setPreferredSize(new java.awt.Dimension(245, 814));
         kGradientPanel2.setLayout(new javax.swing.BoxLayout(kGradientPanel2, javax.swing.BoxLayout.PAGE_AXIS));
 
@@ -363,21 +367,45 @@ public class GD_QuanLy extends javax.swing.JFrame {
 
         kGradientPanel2.add(pnlTroGiup);
 
-        pnlMenu.add(kGradientPanel2, java.awt.BorderLayout.LINE_END);
+        pnlMenu.add(kGradientPanel2);
+
+        jPanel1.setLayout(new java.awt.BorderLayout());
+
+        btnDoiMatKhau.setBackground(new java.awt.Color(157, 103, 157));
+        btnDoiMatKhau.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnDoiMatKhau.setForeground(new java.awt.Color(255, 255, 255));
+        btnDoiMatKhau.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/capnhatKH.png"))); // NOI18N
+        btnDoiMatKhau.setText("ĐỔI MẬT KHẨU");
+        btnDoiMatKhau.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 0, 153), 3, true));
+        btnDoiMatKhau.setMaximumSize(new java.awt.Dimension(254, 42));
+        btnDoiMatKhau.setPreferredSize(new java.awt.Dimension(254, 40));
+        btnDoiMatKhau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDoiMatKhauActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnDoiMatKhau, java.awt.BorderLayout.SOUTH);
+
+        pnlMenu.add(jPanel1);
+
+        jPanel2.setLayout(new java.awt.BorderLayout());
 
         btnDangXuat.setBackground(new java.awt.Color(252, 249, 250));
         btnDangXuat.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnDangXuat.setForeground(new java.awt.Color(102, 0, 102));
         btnDangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/dangXuat.png"))); // NOI18N
-        btnDangXuat.setText("Đăng xuất");
+        btnDangXuat.setText("ĐĂNG XUẤT");
         btnDangXuat.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 0, 153), 3, true));
-        btnDangXuat.setPreferredSize(new java.awt.Dimension(76, 40));
+        btnDangXuat.setMaximumSize(new java.awt.Dimension(254, 42));
+        btnDangXuat.setPreferredSize(new java.awt.Dimension(254, 40));
         btnDangXuat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDangXuatActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnDangXuat, java.awt.BorderLayout.PAGE_END);
+        jPanel2.add(btnDangXuat, java.awt.BorderLayout.PAGE_END);
+
+        pnlMenu.add(jPanel2);
 
         pnlMain.add(pnlMenu, java.awt.BorderLayout.WEST);
         pnlMenu.getAccessibleContext().setAccessibleParent(this);
@@ -732,6 +760,11 @@ public class GD_QuanLy extends javax.swing.JFrame {
             setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         }
     }//GEN-LAST:event_formWindowClosing
+
+    private void btnDoiMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoiMatKhauActionPerformed
+        GD_DoiMatKhau gd=new GD_DoiMatKhau(username);
+        gd.setVisible(true);
+    }//GEN-LAST:event_btnDoiMatKhauActionPerformed
     // open frame when click panel
     void openComponent(JInternalFrame frame) {
         Component[] components = pnlForm.getComponents();
@@ -774,6 +807,7 @@ public class GD_QuanLy extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDangXuat;
+    private javax.swing.JButton btnDoiMatKhau;
     private javax.swing.JLabel icGioiThieu;
     private javax.swing.JLabel icNhaCungCap;
     private javax.swing.JLabel icNhanVien;
@@ -782,6 +816,8 @@ public class GD_QuanLy extends javax.swing.JFrame {
     private javax.swing.JLabel icThongKe;
     private javax.swing.JLabel icTroGiup;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private keeptoo.KGradientPanel kGradientPanel1;
     private keeptoo.KGradientPanel kGradientPanel2;
     private javax.swing.JLabel lblChucVu;
