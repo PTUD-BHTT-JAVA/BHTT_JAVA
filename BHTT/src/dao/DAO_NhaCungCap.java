@@ -183,27 +183,45 @@ public class DAO_NhaCungCap {
        return null;
      }
    
+   public NhaCungCap layNhaCungCapBangSDT(String soDienThoai) {
+      NhaCungCap ncc = new NhaCungCap();
+        try(
+            Connection con = ConnectDB.opConnection();
+            PreparedStatement pts = con.prepareStatement("Select * from NhaCungCap where soDienThoai =? ")){
+            pts.setString(1,soDienThoai );
+                try(ResultSet rs = pts.executeQuery()){
+                    if (rs.next()){
+                        ncc=new NhaCungCap(rs.getString("maNCC"), rs.getString("tenNCC"), rs.getString("diaChi"), rs.getString("soDienThoai"), rs.getString("email"));
+                        return ncc;
+                    }
+                }
+            }catch(Exception e){
+           
+       }
+       return null;
+   }
     
-    public  ArrayList<NhaCungCap> getDSNCCTuongDoi(String search){
-        ArrayList<NhaCungCap> nccList = new ArrayList<NhaCungCap>();
-        try {
-              ConnectDB.getInstance();
-               Connection con = ConnectDB.getConnection();
-               String sql = "select * from NhaCungCap where CONCAT(maNCC,tenNCC,diaChi,soDienThoai) LIKE '%"+search+"%' ";
-               Statement statement = con.createStatement();
-               ResultSet rs = statement.executeQuery(sql);
-               while(rs.next()){
-                   String maNCC = rs.getString("maNCC");
-                   String tenNCC = rs.getString("tenNCC");
-                   String diaChi = rs.getString("diaChi");
-                   String soDienThoai = rs.getString("soDienThoai");
-                   String email = rs.getString("email");
-                   NhaCungCap ncc = new NhaCungCap(maNCC, tenNCC, diaChi, soDienThoai, email);
-                   nccList.add(ncc);
-               }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        return nccList;
-    }
+    
+//    public  ArrayList<NhaCungCap> getDSNCCTuongDoi(String search){
+//        ArrayList<NhaCungCap> nccList = new ArrayList<NhaCungCap>();
+//        try {
+//              ConnectDB.getInstance();
+//               Connection con = ConnectDB.getConnection();
+//               String sql = "select * from NhaCungCap where CONCAT(maNCC,tenNCC,diaChi,soDienThoai) LIKE '%"+search+"%' ";
+//               Statement statement = con.createStatement();
+//               ResultSet rs = statement.executeQuery(sql);
+//               while(rs.next()){
+//                   String maNCC = rs.getString("maNCC");
+//                   String tenNCC = rs.getString("tenNCC");
+//                   String diaChi = rs.getString("diaChi");
+//                   String soDienThoai = rs.getString("soDienThoai");
+//                   String email = rs.getString("email");
+//                   NhaCungCap ncc = new NhaCungCap(maNCC, tenNCC, diaChi, soDienThoai, email);
+//                   nccList.add(ncc);
+//               }
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//        return nccList;
+//    }
 }

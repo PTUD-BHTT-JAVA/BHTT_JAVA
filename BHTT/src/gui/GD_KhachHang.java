@@ -101,14 +101,19 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
                     XSSFCell excelSoDienThoai = excelRow.getCell(1);
                     XSSFCell excelEmail = excelRow.getCell(2);
                     XSSFCell excelGioiTinh =  excelRow.getCell(3);
-                    KhachHang khImport = new KhachHang(maTuSinh(), excelTen.toString(), excelSoDienThoai.toString(), 0, excelEmail.toString(),excelGioiTinh.getBooleanCellValue(),new LoaiKhachHang("LKH002"));
-                    kh.themKhachHang(khImport);
-                    modelKhachHang.addRow(new Object[]{
-                       khImport.getMaKH(),khImport.getTenKH(),khImport.getSoDienThoai(),khImport.getEmail(),
-                       khImport.isGioiTinh()==true ? "Nam" : "Nữ",khImport.getLoaiKhachHang().getMaLoaiKH(),khImport.getDiemTichLuy()
-                    });
+                    if(kh.layKhachHangBangSDT(excelSoDienThoai.toString())==null){
+                        KhachHang khImport = new KhachHang(maTuSinh(), excelTen.toString(), excelSoDienThoai.toString(), 0, excelEmail.toString(), excelGioiTinh.getBooleanCellValue(), new LoaiKhachHang("LKH002"));
+                        kh.themKhachHang(khImport);
+                        modelKhachHang.addRow(new Object[]{
+                            khImport.getMaKH(), khImport.getTenKH(), khImport.getSoDienThoai(), khImport.getEmail(),
+                            khImport.isGioiTinh() == true ? "Nam" : "Nữ", khImport.getLoaiKhachHang().getMaLoaiKH(), khImport.getDiemTichLuy()
+                        });
+                         JOptionPane.showMessageDialog(null,"Thêm thành công");
+                    }else{
+                        JOptionPane.showMessageDialog(null,"Số điện thoại đã tồn tại");
+                    }
                 }
-                JOptionPane.showMessageDialog(null,"Thêm thành công");
+               
             } catch (IOException iOException) {
                 JOptionPane.showMessageDialog(null,iOException.getMessage());
             }finally{
