@@ -108,18 +108,15 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
         jLabel1 = new javax.swing.JLabel();
         jPanel22 = new javax.swing.JPanel();
         txtSoDon = new javax.swing.JTextField();
-        jPanel24 = new javax.swing.JPanel();
-        jPanel17 = new javax.swing.JPanel();
-        jPanel20 = new javax.swing.JPanel();
-        txtGio = new javax.swing.JTextField();
         jPanel21 = new javax.swing.JPanel();
+        jPanel17 = new javax.swing.JPanel();
+        txtGio = new javax.swing.JTextField();
+        jPanel23 = new javax.swing.JPanel();
         jPanel18 = new javax.swing.JPanel();
-        jPanel28 = new javax.swing.JPanel();
         jPanel19 = new javax.swing.JPanel();
         jPanel26 = new javax.swing.JPanel();
         txtNgay = new javax.swing.JTextField();
         jPanel25 = new javax.swing.JPanel();
-        jPanel27 = new javax.swing.JPanel();
         pnlThongTinCuaHang = new javax.swing.JPanel();
         jPanel15 = new javax.swing.JPanel();
         jPanel30 = new javax.swing.JPanel();
@@ -201,7 +198,7 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 45, Short.MAX_VALUE)
+            .addGap(0, 35, Short.MAX_VALUE)
             .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel14Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -222,46 +219,31 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
         txtSoDon.setPreferredSize(new java.awt.Dimension(80, 28));
         jPanel22.add(txtSoDon);
 
-        jPanel24.setBackground(new java.awt.Color(204, 204, 255));
-        jPanel24.setMaximumSize(new java.awt.Dimension(1000, 1000));
-        jPanel24.setPreferredSize(new java.awt.Dimension(30, 30));
-
-        javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
-        jPanel24.setLayout(jPanel24Layout);
-        jPanel24Layout.setHorizontalGroup(
-            jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 30, Short.MAX_VALUE)
-        );
-        jPanel24Layout.setVerticalGroup(
-            jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 45, Short.MAX_VALUE)
-        );
-
-        jPanel22.add(jPanel24);
-
         jPanel16.add(jPanel22);
 
         pnlDongHo1.add(jPanel16);
+
+        jPanel21.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel21.setMaximumSize(new java.awt.Dimension(500, 500));
+        jPanel21.setPreferredSize(new java.awt.Dimension(367, 5));
+
+        javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
+        jPanel21.setLayout(jPanel21Layout);
+        jPanel21Layout.setHorizontalGroup(
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 367, Short.MAX_VALUE)
+        );
+        jPanel21Layout.setVerticalGroup(
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 15, Short.MAX_VALUE)
+        );
+
+        pnlDongHo1.add(jPanel21);
 
         jPanel17.setBackground(new java.awt.Color(204, 204, 255));
         jPanel17.setMaximumSize(new java.awt.Dimension(600, 600));
         jPanel17.setPreferredSize(new java.awt.Dimension(223, 35));
         jPanel17.setLayout(new javax.swing.BoxLayout(jPanel17, javax.swing.BoxLayout.X_AXIS));
-
-        jPanel20.setBackground(new java.awt.Color(204, 204, 255));
-
-        javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
-        jPanel20.setLayout(jPanel20Layout);
-        jPanel20Layout.setHorizontalGroup(
-            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 97, Short.MAX_VALUE)
-        );
-        jPanel20Layout.setVerticalGroup(
-            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 57, Short.MAX_VALUE)
-        );
-
-        jPanel17.add(jPanel20);
 
         txtGio.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
         txtGio.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -277,45 +259,30 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
         });
         jPanel17.add(txtGio);
 
-        jPanel21.setBackground(new java.awt.Color(204, 204, 255));
-
-        javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
-        jPanel21.setLayout(jPanel21Layout);
-        jPanel21Layout.setHorizontalGroup(
-            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 97, Short.MAX_VALUE)
-        );
-        jPanel21Layout.setVerticalGroup(
-            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 57, Short.MAX_VALUE)
-        );
-
-        jPanel17.add(jPanel21);
-
         pnlDongHo1.add(jPanel17);
+
+        jPanel23.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel23.setMaximumSize(new java.awt.Dimension(500, 500));
+        jPanel23.setPreferredSize(new java.awt.Dimension(367, 5));
+
+        javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
+        jPanel23.setLayout(jPanel23Layout);
+        jPanel23Layout.setHorizontalGroup(
+            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 367, Short.MAX_VALUE)
+        );
+        jPanel23Layout.setVerticalGroup(
+            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 15, Short.MAX_VALUE)
+        );
+
+        pnlDongHo1.add(jPanel23);
 
         jPanel18.setBackground(new java.awt.Color(204, 204, 255));
         jPanel18.setMaximumSize(new java.awt.Dimension(600, 600));
         jPanel18.setMinimumSize(new java.awt.Dimension(64, 10));
         jPanel18.setPreferredSize(new java.awt.Dimension(223, 24));
         jPanel18.setLayout(new javax.swing.BoxLayout(jPanel18, javax.swing.BoxLayout.X_AXIS));
-
-        jPanel28.setBackground(new java.awt.Color(204, 204, 255));
-        jPanel28.setMaximumSize(new java.awt.Dimension(200, 200));
-        jPanel28.setPreferredSize(new java.awt.Dimension(10, 0));
-
-        javax.swing.GroupLayout jPanel28Layout = new javax.swing.GroupLayout(jPanel28);
-        jPanel28.setLayout(jPanel28Layout);
-        jPanel28Layout.setHorizontalGroup(
-            jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 10, Short.MAX_VALUE)
-        );
-        jPanel28Layout.setVerticalGroup(
-            jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 46, Short.MAX_VALUE)
-        );
-
-        jPanel18.add(jPanel28);
 
         jPanel19.setBackground(new java.awt.Color(204, 204, 255));
         jPanel19.setLayout(new javax.swing.BoxLayout(jPanel19, javax.swing.BoxLayout.Y_AXIS));
@@ -326,7 +293,7 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
         jPanel26.setLayout(jPanel26Layout);
         jPanel26Layout.setHorizontalGroup(
             jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 344, Short.MAX_VALUE)
+            .addGap(0, 367, Short.MAX_VALUE)
         );
         jPanel26Layout.setVerticalGroup(
             jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -345,7 +312,7 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
         jPanel25.setLayout(jPanel25Layout);
         jPanel25Layout.setHorizontalGroup(
             jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 344, Short.MAX_VALUE)
+            .addGap(0, 367, Short.MAX_VALUE)
         );
         jPanel25Layout.setVerticalGroup(
             jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -355,23 +322,6 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
         jPanel19.add(jPanel25);
 
         jPanel18.add(jPanel19);
-
-        jPanel27.setBackground(new java.awt.Color(204, 204, 255));
-        jPanel27.setMaximumSize(new java.awt.Dimension(200, 200));
-        jPanel27.setPreferredSize(new java.awt.Dimension(10, 0));
-
-        javax.swing.GroupLayout jPanel27Layout = new javax.swing.GroupLayout(jPanel27);
-        jPanel27.setLayout(jPanel27Layout);
-        jPanel27Layout.setHorizontalGroup(
-            jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 10, Short.MAX_VALUE)
-        );
-        jPanel27Layout.setVerticalGroup(
-            jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 46, Short.MAX_VALUE)
-        );
-
-        jPanel18.add(jPanel27);
 
         pnlDongHo1.add(jPanel18);
 
@@ -864,14 +814,11 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
     private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel22;
-    private javax.swing.JPanel jPanel24;
+    private javax.swing.JPanel jPanel23;
     private javax.swing.JPanel jPanel25;
     private javax.swing.JPanel jPanel26;
-    private javax.swing.JPanel jPanel27;
-    private javax.swing.JPanel jPanel28;
     private javax.swing.JPanel jPanel29;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel30;
