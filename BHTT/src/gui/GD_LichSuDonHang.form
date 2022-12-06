@@ -99,7 +99,7 @@
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel1" min="-2" pref="231" max="-2" attributes="0"/>
+                                      <Component id="lblTenNV" min="-2" pref="231" max="-2" attributes="0"/>
                                       <Component id="jLabel11" min="-2" pref="463" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="32767" attributes="0"/>
@@ -123,7 +123,7 @@
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblTenNV" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="32767" attributes="0"/>
                               </Group>
@@ -168,7 +168,7 @@
                             <Property name="text" type="java.lang.String" value="12 Nguy&#x1ec5;n V&#x103;n B&#x1ea3;o, ph&#x1b0;&#x1edd;ng 4, qu&#x1ead;n G&#xf2; V&#x1ea5;p, th&#xe0;nh ph&#x1ed1; H&#x1ed3; Ch&#xed; Minh  "/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JLabel" name="jLabel1">
+                        <Component class="javax.swing.JLabel" name="lblTenNV">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="14" style="0"/>
@@ -866,15 +866,15 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTable" name="tblHoaDonBanHang1">
+                    <Component class="javax.swing.JTable" name="tblHoaDonHoan">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="5" rowCount="0">
                             <Column editable="true" title="M&#xe3; &#x111;&#x1a1;n ho&#xe0;n" type="java.lang.Object"/>
-                            <Column editable="true" title="Ng&#xe0;y l&#x1ead;p" type="java.lang.Object"/>
-                            <Column editable="true" title="T&#x1ed5;ng s&#x1ed1; l&#x1b0;&#x1ee3;ng s&#x1ea3;n ph&#x1ea7;m" type="java.lang.Object"/>
-                            <Column editable="true" title="T&#x1ed5;ng th&#xe0;nh ti&#x1ec1;n" type="java.lang.Object"/>
+                            <Column editable="true" title="Ng&#xe0;y ho&#xe0;n &#x111;&#x1a1;n" type="java.lang.Object"/>
+                            <Column editable="true" title="T&#x1ed5;ng s&#x1ea3;n ph&#x1ea9;m" type="java.lang.Object"/>
                             <Column editable="true" title="T&#xea;n kh&#xe1;ch h&#xe0;ng" type="java.lang.Object"/>
+                            <Column editable="true" title="L&#xfd; do ho&#xe0;n" type="java.lang.Object"/>
                           </Table>
                         </Property>
                         <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

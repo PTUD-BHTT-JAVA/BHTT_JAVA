@@ -29,6 +29,7 @@ public class DAO_ChiTietHoanTra {
     private DAO_SanPham sanPham_dao = new DAO_SanPham();
     private ArrayList<ChiTietHoanTra> dsCTHT;
 
+    
     public ArrayList<ChiTietHoanTra> getallDSCTHT() {
         dsCTHT = new ArrayList<ChiTietHoanTra>();
         try {
@@ -50,6 +51,7 @@ public class DAO_ChiTietHoanTra {
         }
         return dsCTHT;
     }
+    
     public ChiTietHoanTra timCTHoanTraTheoMaLyDo(String maSP,String maHDH, String lydo){
         try (Connection conn = ConnectDB.opConnection();
                 PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM ChiTietHoanTra WHERE maSP like ? and maHDH like ? and lyDoHoanTra like ? ")) {
@@ -128,7 +130,8 @@ public class DAO_ChiTietHoanTra {
         return dsCTHT;
         
     }
-     public ArrayList<ChiTietHoanTra> layCTHTBangMaHD(String m){
+    
+    public ArrayList<ChiTietHoanTra> layCTHTBangMaHD(String m){
         dsCTHT = new ArrayList<ChiTietHoanTra>();
         ConnectDB.getInstance();
         Connection con = ConnectDB.getConnection();
@@ -158,6 +161,7 @@ public class DAO_ChiTietHoanTra {
         return dsCTHT;
         
     }
+    
     public ArrayList<ChiTietHoanTra> layDSCTHTBangMa(String maTim) {
         ArrayList<ChiTietHoanTra> dsCTHDHoan = new ArrayList<ChiTietHoanTra>();
         ConnectDB.getInstance();

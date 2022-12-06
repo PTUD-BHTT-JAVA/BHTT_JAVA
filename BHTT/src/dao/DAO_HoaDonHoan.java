@@ -82,10 +82,10 @@ public class DAO_HoaDonHoan {
             pts.setString(1, maHDH);
             try ( ResultSet rs = pts.executeQuery()) {
                 if (rs.next()) {
-                    Date ngayLap = rs.getDate("HoaDonHoanTra");
+                    Date ngayLap = rs.getDate("ngayHoanTra");
                     HoaDon hd = hd_dao.layHoaDonTheoMa(rs.getString("maHD"));
-
-                    HoaDonHoanTra hdht = new HoaDonHoanTra(maHDH, ngayLap, hd);
+                    String maHDHT  = rs.getString("maHDHT");
+                    HoaDonHoanTra hdht = new HoaDonHoanTra(maHDHT, ngayLap, hd);
                     return hdht;
                 }
             }
