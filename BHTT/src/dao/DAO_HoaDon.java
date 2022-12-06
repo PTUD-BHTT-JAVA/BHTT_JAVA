@@ -211,5 +211,31 @@ public class DAO_HoaDon {
         }
         return dsHD;
     }
+    public ArrayList<HoaDon> getAllDSHDtheoMaNV(String a) {
+        dsHD = new ArrayList<HoaDon>();
+        Connection con = ConnectDB.getInstance().getConnection();
+        PreparedStatement stemnt = null;
+        int n = 0;
+        try {
+            ConnectDB.getInstance().connect();
+            String sql = "select *from HoaDon where maNV=?";
+            stemnt = con.prepareStatement(sql);
+            stemnt.setString(1, a);
 
+            ResultSet rs = stemnt.executeQuery();
+            while (rs.next()) {
+                String maNV = rs.getString("maHD");
+                Date ngayLap = rs.getDate("ngayLap");
+                double tienKhachDua = rs.getDouble("tienKhachDua");
+                String diaChi = rs.getString("diaChi");
+                NhanVien nv = new NhanVien(a);
+                KhachHang kh = kh_dao.getKHBangMa(rs.getString("maKH"));
+                HoaDon hd = new HoaDon(maNV, ngayLap, tienKhachDua, diaChi, nv, kh);
+                dsHD.add(hd);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return dsHD;
+    }
 }

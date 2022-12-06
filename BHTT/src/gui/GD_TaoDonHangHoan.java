@@ -926,11 +926,31 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
         }
     }//GEN-LAST:event_btnHoanActionPerformed
     public void tinhTongCong() {
-        double sum = 0;
-        for (int i = 0; i < modelDonHoan.getRowCount(); i++) {
-            sum = sum + (double) modelDonHoan.getValueAt(i, 3);
+        int row = tblDSHD.getSelectedRow();
+        if (tblDonHoan.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Lỗi: Đơn hàng hoàn trống");
+            return;
         }
-        txtTTDonHoan.setText(String.format("%,.1f", sum) + " VND");
+        btnThem.setEnabled(true);
+        
+        String maHDHT = maTuSinh();
+        String maHD = modelHoaDon.getValueAt(row, 0).toString();
+        Date ngayHT = new Date();
+        //lưu vào sql hóa đơn hoàn trả
+        HoaDonHoanTra hDHT = new HoaDonHoanTra();
+        HoaDon hd = hd_dao.layHoaDonTheoMa(maHD);
+        KhachHang kh = kh_dao.getKHBangMa(hd.getKhachHang().getMaKH());
+
+        double tienHoanHT = 0;
+        for (int i = 0; i < modelDonHoan.getRowCount(); i++) {
+            tienHoanHT =tienHoanHT+ (Double) modelDonHoan.getValueAt(i, 3) ;
+        }
+        if (kh.getLoaiKhachHang().getTenLoai().equals("VIP")) {
+            tienHoanTra = tienHoanHT + tienHoanHT * 0.15;
+        } else {
+            tienHoanTra = tienHoanHT + tienHoanHT * 0.05;
+        }
+        txtTTDonHoan.setText(String.format("%,.1f", tienHoanTra) + " VND");
     }
 
     private String maTuSinh() {
@@ -969,7 +989,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
     private void btnTaoHDHTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoHDHTActionPerformed
         int row = tblDSHD.getSelectedRow();
         if (tblDonHoan.getRowCount() == 0) {
-            JOptionPane.showMessageDialog(null, "Đơn hàng trống");
+            JOptionPane.showMessageDialog(null, "Lỗi: Đơn hàng hoàn trống");
             return;
         }
         btnThem.setEnabled(true);
@@ -986,7 +1006,6 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
         for (int i = 0; i < modelDonHoan.getRowCount(); i++) {
             tienHoanHT =tienHoanHT+ (Double) modelDonHoan.getValueAt(i, 3) ;
         }
-        System.out.println(tienHoanHT);
         if (kh.getLoaiKhachHang().getTenLoai().equals("VIP")) {
             tienHoanTra = tienHoanHT + tienHoanHT * 0.15;
             hDHT = new HoaDonHoanTra(maHDHT, ngayHT, hd_dao.layHoaDonTheoMa(maHD));

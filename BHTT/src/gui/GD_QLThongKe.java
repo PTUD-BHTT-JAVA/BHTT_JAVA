@@ -18,6 +18,7 @@ import entity.ChiTietHoanTra;
 import entity.HoaDon;
 import entity.HoaDonHoanTra;
 import entity.KhachHang;
+import entity.NhanVien;
 import entity.SanPham;
 import java.awt.CardLayout;
 import java.awt.Component;
@@ -28,6 +29,8 @@ import java.text.SimpleDateFormat;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 import org.jfree.chart.ChartFactory;
@@ -48,7 +51,8 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
     private DAO_ChiTietHoaDon cthd_dao = new DAO_ChiTietHoaDon();
     private DAO_ChiTietHoanTra ctht_dao = new DAO_ChiTietHoanTra();
     private DAO_SanPham sp_dao = new DAO_SanPham();
-    private DefaultTableModel modelTKTopSP, modelTKSPT,modelTKSPL;
+    private DefaultTableModel modelTKTopSP, modelTKSPT, modelTKSPL, modelTopNV;
+    private final Date today;
 
     private static class RoundedBorder implements Border {
 
@@ -90,6 +94,7 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
         modelTKTopSP = (DefaultTableModel) tblTKTopSP.getModel();
         modelTKSPT = (DefaultTableModel) tblTKSPT.getModel();
         modelTKSPL = (DefaultTableModel) tblTKSPL.getModel();
+        modelTopNV = (DefaultTableModel) tblTKTopNV.getModel();
 
         //Thong ke san pham ton
         DefaultTableModel fm1 = (DefaultTableModel) tblTKSPT.getModel();
@@ -108,23 +113,25 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
         int sttL = 1;
         int tongSL;
         for (ChiTietHoanTra ctht : listSPLoi) {
-            boolean kt=false;
-            DAO_ChiTietHoanTra daoctht=new DAO_ChiTietHoanTra();
-            for(int i=0;i<modelTKSPL.getRowCount();i++){
-                
-                int soLuong=ctht.getSoLuong();
-                if(ctht.getSanPham().getMaSP().equals(modelTKSPL.getValueAt(i, 1))){
+            boolean kt = false;
+            DAO_ChiTietHoanTra daoctht = new DAO_ChiTietHoanTra();
+            for (int i = 0; i < modelTKSPL.getRowCount(); i++) {
+
+                int soLuong = ctht.getSoLuong();
+                if (ctht.getSanPham().getMaSP().equals(modelTKSPL.getValueAt(i, 1))) {
                     modelTKSPL.setValueAt(++soLuong, i, 3);
-                    kt=true;
+                    kt = true;
                 }
             }
-            if(!kt){
-                    modelTKSPL.addRow(new Object[]{sttL++, ctht.getSanPham().getMaSP(), ctht.getSanPham().getTenSP(),
-                    ctht.getSoLuong(),ctht.getSanPham().getNhaCungCap().getTenNCC()});
-            }   
+            if (!kt) {
+                modelTKSPL.addRow(new Object[]{sttL++, ctht.getSanPham().getMaSP(), ctht.getSanPham().getTenSP(),
+                    ctht.getSoLuong(), ctht.getSanPham().getNhaCungCap().getTenNCC()});
             }
-        
-        
+        }
+        today = new Date();
+        tuNgay.setDate(new Date());
+        denNgay.setDate(new Date());
+        jSpTopSP.setValue(5);
     }
 
     /**
@@ -142,16 +149,17 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
         pnlTieuChi = new javax.swing.JPanel();
         lblTuNgay = new javax.swing.JLabel();
         lblDenNgay = new javax.swing.JLabel();
-        btnThongKe = new javax.swing.JButton();
         lblNam = new javax.swing.JLabel();
-        btnQuy1 = new javax.swing.JButton();
-        btnQuy2 = new javax.swing.JButton();
-        btnQuy3 = new javax.swing.JButton();
-        btnQuy4 = new javax.swing.JButton();
         tuNgay = new com.toedter.calendar.JDateChooser();
         denNgay = new com.toedter.calendar.JDateChooser();
         jycNam = new com.toedter.calendar.JYearChooser();
-        btnCaNam = new javax.swing.JButton();
+        btnThongKe = new swing.Button();
+        btnQuy4 = new swing.Button();
+        btnQuy3 = new swing.Button();
+        btnQuy2 = new swing.Button();
+        btnQuy1 = new swing.Button();
+        btnCaNam = new swing.Button();
+        jButton1 = new javax.swing.JButton();
         pnlBottom = new javax.swing.JPanel();
         tbpThongKe = new javax.swing.JTabbedPane();
         pnlDoanhThu = new javax.swing.JPanel();
@@ -174,10 +182,14 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
         pnlBieuDoTKTopSP = new javax.swing.JPanel();
         scrTKTopSP = new javax.swing.JScrollPane();
         tblTKTopSP = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jSpTopSP = new javax.swing.JSpinner();
         pnlTopNV = new javax.swing.JPanel();
         pnlTKTopNV = new javax.swing.JPanel();
         scrTKNVTop = new javax.swing.JScrollPane();
         tblTKTopNV = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        jSpTopNV = new javax.swing.JSpinner();
         pnlSPTon = new javax.swing.JPanel();
         lblTieuDeTKSPT = new javax.swing.JLabel();
         scrTKSPT = new javax.swing.JScrollPane();
@@ -207,63 +219,57 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
         lblDenNgay.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         lblDenNgay.setText("Đến ngày: ");
 
-        btnThongKe.setBackground(new java.awt.Color(51, 119, 41));
-        btnThongKe.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        btnThongKe.setForeground(new java.awt.Color(255, 255, 255));
+        lblNam.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        lblNam.setText("Năm: ");
+
         btnThongKe.setText("Thống kê");
+        btnThongKe.setColor1(new java.awt.Color(51, 0, 255));
+        btnThongKe.setColor2(new java.awt.Color(204, 0, 204));
         btnThongKe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThongKeActionPerformed(evt);
             }
         });
 
-        lblNam.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        lblNam.setText("Năm: ");
-
-        btnQuy1.setBackground(new java.awt.Color(51, 119, 41));
-        btnQuy1.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        btnQuy1.setForeground(new java.awt.Color(255, 255, 255));
-        btnQuy1.setText("Quý 1");
-        btnQuy1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnQuy1ActionPerformed(evt);
-            }
-        });
-
-        btnQuy2.setBackground(new java.awt.Color(51, 119, 41));
-        btnQuy2.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        btnQuy2.setForeground(new java.awt.Color(255, 255, 255));
-        btnQuy2.setText("Quý 2 ");
-        btnQuy2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnQuy2ActionPerformed(evt);
-            }
-        });
-
-        btnQuy3.setBackground(new java.awt.Color(51, 119, 41));
-        btnQuy3.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        btnQuy3.setForeground(new java.awt.Color(255, 255, 255));
-        btnQuy3.setText("Quý 3 ");
-        btnQuy3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnQuy3ActionPerformed(evt);
-            }
-        });
-
-        btnQuy4.setBackground(new java.awt.Color(51, 119, 41));
-        btnQuy4.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        btnQuy4.setForeground(new java.awt.Color(255, 255, 255));
-        btnQuy4.setText("Quý 4 ");
+        btnQuy4.setText("Quý 4");
+        btnQuy4.setColor1(new java.awt.Color(51, 0, 255));
+        btnQuy4.setColor2(new java.awt.Color(204, 0, 204));
         btnQuy4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnQuy4ActionPerformed(evt);
             }
         });
 
-        btnCaNam.setBackground(new java.awt.Color(51, 119, 41));
-        btnCaNam.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        btnCaNam.setForeground(new java.awt.Color(255, 255, 255));
+        btnQuy3.setText("Quý 3");
+        btnQuy3.setColor1(new java.awt.Color(51, 0, 255));
+        btnQuy3.setColor2(new java.awt.Color(204, 0, 204));
+        btnQuy3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuy3ActionPerformed(evt);
+            }
+        });
+
+        btnQuy2.setText("Quý 2");
+        btnQuy2.setColor1(new java.awt.Color(51, 0, 255));
+        btnQuy2.setColor2(new java.awt.Color(204, 0, 204));
+        btnQuy2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuy2ActionPerformed(evt);
+            }
+        });
+
+        btnQuy1.setText("Quý 1");
+        btnQuy1.setColor1(new java.awt.Color(51, 0, 255));
+        btnQuy1.setColor2(new java.awt.Color(204, 0, 204));
+        btnQuy1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuy1ActionPerformed(evt);
+            }
+        });
+
         btnCaNam.setText("Cả năm");
+        btnCaNam.setColor1(new java.awt.Color(51, 0, 255));
+        btnCaNam.setColor2(new java.awt.Color(204, 0, 204));
         btnCaNam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCaNamActionPerformed(evt);
@@ -281,75 +287,89 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
                     .addComponent(lblNam, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlTieuChiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tuNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jycNam, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6)
-                .addGroup(pnlTieuChiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblDenNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCaNam))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlTieuChiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnlTieuChiLayout.createSequentialGroup()
-                        .addComponent(btnQuy1)
-                        .addGap(35, 35, 35)
-                        .addComponent(btnQuy2))
-                    .addComponent(denNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(tuNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addComponent(lblDenNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlTieuChiLayout.createSequentialGroup()
+                        .addComponent(jycNam, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(58, 58, 58)
+                        .addComponent(btnCaNam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(13, 13, 13)
-                .addGroup(pnlTieuChiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(pnlTieuChiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlTieuChiLayout.createSequentialGroup()
-                        .addGap(88, 88, 88)
-                        .addComponent(btnThongKe))
+                        .addGap(6, 6, 6)
+                        .addComponent(btnQuy1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnQuy2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(denNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnlTieuChiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlTieuChiLayout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addComponent(btnQuy3)
+                        .addGap(6, 6, 6)
+                        .addComponent(btnQuy3, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnQuy4, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(14, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTieuChiLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnQuy4)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39))))
         );
         pnlTieuChiLayout.setVerticalGroup(
             pnlTieuChiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTieuChiLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(pnlTieuChiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblDenNgay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblTuNgay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tuNgay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(denNgay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(12, 12, 12)
+                .addGroup(pnlTieuChiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnlTieuChiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(lblDenNgay, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                        .addComponent(lblTuNgay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(tuNgay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(denNgay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlTieuChiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblNam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnlTieuChiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblNam, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jycNam, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(pnlTieuChiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnQuy4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnQuy3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(pnlTieuChiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnQuy1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCaNam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(pnlTieuChiLayout.createSequentialGroup()
-                        .addComponent(btnQuy2)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jycNam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnQuy4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnQuy3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnQuy2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnQuy1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnCaNam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(21, 21, 21))
         );
+
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlTopLayout = new javax.swing.GroupLayout(pnlTop);
         pnlTop.setLayout(pnlTopLayout);
         pnlTopLayout.setHorizontalGroup(
             pnlTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTopLayout.createSequentialGroup()
+            .addGroup(pnlTopLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTopLayout.createSequentialGroup()
                         .addComponent(lblTieuDe, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(530, 530, 530))
+                        .addGap(309, 309, 309)
+                        .addComponent(jButton1)
+                        .addGap(153, 153, 153))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTopLayout.createSequentialGroup()
                         .addComponent(pnlTieuChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(118, 118, 118))))
+                        .addGap(186, 186, 186))))
         );
         pnlTopLayout.setVerticalGroup(
             pnlTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlTopLayout.createSequentialGroup()
-                .addComponent(lblTieuDe, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTieuDe, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnlTopLayout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(jButton1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlTieuChi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -608,25 +628,43 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
             tblTKTopSP.getColumnModel().getColumn(2).setPreferredWidth(45);
         }
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel1.setText("Top:");
+
         javax.swing.GroupLayout pnlTopSPLayout = new javax.swing.GroupLayout(pnlTopSP);
         pnlTopSP.setLayout(pnlTopSPLayout);
         pnlTopSPLayout.setHorizontalGroup(
             pnlTopSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlTopSPLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnlBieuDoTKTopSP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlTopSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlTopSPLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(pnlBieuDoTKTopSP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(pnlTopSPLayout.createSequentialGroup()
+                        .addGap(266, 266, 266)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSpTopSP, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(scrTKTopSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         pnlTopSPLayout.setVerticalGroup(
             pnlTopSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlTopSPLayout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addGroup(pnlTopSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pnlBieuDoTKTopSP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(scrTKTopSP, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(pnlTopSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(pnlTopSPLayout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(scrTKTopSP, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlTopSPLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(pnlTopSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSpTopSP))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pnlBieuDoTKTopSP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         tbpThongKe.addTab("Top 10 sản phẩm bán chạy", pnlTopSP);
@@ -637,7 +675,7 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
             }
         });
 
-        pnlTKTopNV.setBackground(new java.awt.Color(153, 153, 0));
+        pnlTKTopNV.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout pnlTKTopNVLayout = new javax.swing.GroupLayout(pnlTKTopNV);
         pnlTKTopNV.setLayout(pnlTKTopNVLayout);
@@ -647,15 +685,12 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
         );
         pnlTKTopNVLayout.setVerticalGroup(
             pnlTKTopNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 468, Short.MAX_VALUE)
         );
 
         tblTKTopNV.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Top", "Mã", "Tên Nhân Viên", "Doanh Thu"
@@ -671,13 +706,23 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
         });
         scrTKNVTop.setViewportView(tblTKTopNV);
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel2.setText("Top:");
+
         javax.swing.GroupLayout pnlTopNVLayout = new javax.swing.GroupLayout(pnlTopNV);
         pnlTopNV.setLayout(pnlTopNVLayout);
         pnlTopNVLayout.setHorizontalGroup(
             pnlTopNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlTopNVLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnlTKTopNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlTopNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlTopNVLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(pnlTKTopNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlTopNVLayout.createSequentialGroup()
+                        .addGap(278, 278, 278)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSpTopNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(27, 27, 27)
                 .addComponent(scrTKNVTop, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
                 .addContainerGap())
@@ -685,10 +730,15 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
         pnlTopNVLayout.setVerticalGroup(
             pnlTopNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTopNVLayout.createSequentialGroup()
-                .addGap(0, 32, Short.MAX_VALUE)
-                .addGroup(pnlTopNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pnlTKTopNV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(scrTKNVTop, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE))
+                .addGap(0, 6, Short.MAX_VALUE)
+                .addGroup(pnlTopNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(scrTKNVTop, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnlTopNVLayout.createSequentialGroup()
+                        .addGroup(pnlTopNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel2)
+                            .addComponent(jSpTopNV))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pnlTKTopNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(15, 15, 15))
         );
 
@@ -851,162 +901,6 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnQuy1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuy1ActionPerformed
-        DefaultTableModel fm = (DefaultTableModel) tblTKTopSP.getModel();
-        fm.setRowCount(0);
-        int a = jycNam.getYear();
-        String b = a + "-01-01";
-        String c = a + "-03-31";
-        ArrayList<HoaDon> dsHD = hd_dao.thongKeDoanhThu(b, c);
-        ArrayList<ChiTietHoaDon> dsCTHD = new ArrayList<ChiTietHoaDon>();
-        lblTongHD.setText(dsHD.size() + "");
-        long tongThanhTien = 0;
-        double tongThanhTienVIP = 0;
-        double tongThanhTienThuong = 0;
-
-        for (HoaDon hd : dsHD) {
-            dsCTHD = cthd_dao.layDSHDBangMa(hd.getMaHD());
-            for (ChiTietHoaDon cthd : dsCTHD) {
-                if (hd.getKhachHang().getLoaiKhachHang().getTenLoai().equalsIgnoreCase("VIP")) {
-                    tongThanhTienVIP = tongThanhTienVIP + cthd.getTongTien();
-                } else {
-                    tongThanhTienThuong = tongThanhTienVIP + cthd.getTongTien();
-                }
-
-            }
-
-        }
-        tongThanhTienVIP = tongThanhTienVIP - tongThanhTienVIP * 0.05;
-        tongThanhTienThuong = tongThanhTienThuong + tongThanhTienThuong * 0.05;
-        tongThanhTien = (long) tongThanhTienVIP + (long) tongThanhTienThuong;
-        lblTongTienBanD.setText(String.format("%d", tongThanhTien) + " VND");
-        //hoàn
-        ArrayList<HoaDonHoanTra> dsHDHT = hdh_dao.thongKeDoanhThu(b, c);
-        ArrayList<ChiTietHoanTra> dsCTHT;
-        lblSoHDH.setText(dsHDHT.size() + "");
-        long tongThanhTienHoan = 0;
-        double tongThanhTienHoanVIP = 0;
-        double tongThanhTienHoanThuong = 0;
-        KhachHang kh;
-
-        for (HoaDonHoanTra hdht : dsHDHT) {
-            dsCTHT = ctht_dao.layDSCTHTBangMa(hdht.getMaHDHT());
-            for (ChiTietHoanTra ctht : dsCTHT) {
-                kh = kh_dao.getKHBangMa(hdht.getHoaDon().getKhachHang().getMaKH());
-                if (kh.getLoaiKhachHang().getTenLoai().equalsIgnoreCase("VIP")) {
-                    tongThanhTienHoanVIP = tongThanhTienHoanVIP + ctht.getSoLuong() * ctht.getSanPham().getGiaGoc();
-                } else {
-                    tongThanhTienHoanThuong = tongThanhTienHoanThuong + ctht.getSoLuong() * ctht.getSanPham().getGiaGoc();
-                }
-            }
-        }
-        tongThanhTienHoanVIP = tongThanhTienHoanVIP + tongThanhTienHoanVIP * 0.15;
-        tongThanhTienHoanThuong = tongThanhTienHoanThuong + tongThanhTienHoanThuong * 0.05;
-        tongThanhTienHoan = (long) tongThanhTienHoanVIP + (long) tongThanhTienHoanThuong;
-        tongTienHoann.setText(String.format("%d", tongThanhTienHoan) + " VND");
-        String s = "";
-        long thu = 0;
-        long chi = 0;
-        if (tongThanhTien > tongThanhTienHoan) {
-            thu = tongThanhTien - tongThanhTienHoan;
-            s += "Thu: " + thu + " VND";
-        } else {
-            chi = tongThanhTienHoan - tongThanhTien;
-            s += "Chi: " + chi + " VND";
-        }
-        lblKetToann.setText(s);
-        //Thống kê sản phẩm.thongKeSPBanChay
-        ArrayList<thongKeSPBanChay> dsSPBC = sp_dao.thongKeSPBanChay(b, c);
-        int i = 1;
-        SanPham sp;
-        for (thongKeSPBanChay spbc : dsSPBC) {
-            sp = sp_dao.laySanPhamBangMa(spbc.getMaSP());
-            modelTKTopSP.addRow(new Object[]{i++, spbc.getMaSP(), sp.getTenSP(),
-                spbc.getSlBan(), sp.getSoLuong(),});
-        }
-        ThongKeSPBanChay(b, c);
-    }//GEN-LAST:event_btnQuy1ActionPerformed
-
-    private void btnThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongKeActionPerformed
-        DefaultTableModel fm = (DefaultTableModel) tblTKTopSP.getModel();
-        fm.setRowCount(0);
-//Thống kê doanh thu
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String TuNgay = sdf.format(tuNgay.getDate());
-        String DenNgay = sdf.format(denNgay.getDate());
-        ArrayList<HoaDon> dsHD = hd_dao.thongKeDoanhThu(TuNgay, DenNgay);
-        ArrayList<ChiTietHoaDon> dsCTHD = new ArrayList<ChiTietHoaDon>();
-        lblTongHD.setText(dsHD.size() + "");
-        long tongThanhTien = 0;
-        double tongThanhTienVIP = 0;
-        double tongThanhTienThuong = 0;
-
-        for (HoaDon hd : dsHD) {
-            dsCTHD = cthd_dao.layDSHDBangMa(hd.getMaHD());
-            for (ChiTietHoaDon cthd : dsCTHD) {
-                if (hd.getKhachHang().getLoaiKhachHang().getTenLoai().equalsIgnoreCase("VIP")) {
-                    tongThanhTienVIP = tongThanhTienVIP + cthd.getTongTien();
-                } else {
-                    tongThanhTienThuong = tongThanhTienVIP + cthd.getTongTien();
-                }
-
-            }
-
-        }
-        tongThanhTienVIP = tongThanhTienVIP - tongThanhTienVIP * 0.05;
-        tongThanhTienThuong = tongThanhTienThuong + tongThanhTienThuong * 0.05;
-        tongThanhTien = (long) tongThanhTienVIP + (long) tongThanhTienThuong;
-        lblTongTienBanD.setText(String.format("%d", tongThanhTien) + " VND");
-
-        //Thống kê sản phẩm
-        ArrayList<thongKeSPBanChay> dsSPBC = sp_dao.thongKeSPBanChay(TuNgay, DenNgay);
-        int i = 1;
-        SanPham sp;
-        for (thongKeSPBanChay spbc : dsSPBC) {
-            sp = sp_dao.laySanPhamBangMa(spbc.getMaSP());
-            modelTKTopSP.addRow(new Object[]{i++, spbc.getMaSP(), sp.getTenSP(),
-                spbc.getSlBan(), sp.getSoLuong(),});
-        }
-        //Thống kê hoàn
-        ArrayList<HoaDonHoanTra> dsHDHT = hdh_dao.thongKeDoanhThu(TuNgay, DenNgay);
-        ArrayList<ChiTietHoanTra> dsCTHT;
-        lblSoHDH.setText(dsHDHT.size() + "");
-        long tongThanhTienHoan = 0;
-        double tongThanhTienHoanVIP = 0;
-        double tongThanhTienHoanThuong = 0;
-        KhachHang kh;
-
-        for (HoaDonHoanTra hdht : dsHDHT) {
-            dsCTHT = ctht_dao.layDSCTHTBangMa(hdht.getMaHDHT());
-            for (ChiTietHoanTra ctht : dsCTHT) {
-                kh = kh_dao.getKHBangMa(hdht.getHoaDon().getKhachHang().getMaKH());
-                if (kh.getLoaiKhachHang().getTenLoai().equalsIgnoreCase("VIP")) {
-                    tongThanhTienHoanVIP = tongThanhTienHoanVIP + ctht.getSoLuong() * ctht.getSanPham().getGiaGoc();
-                } else {
-                    tongThanhTienHoanThuong = tongThanhTienHoanThuong + ctht.getSoLuong() * ctht.getSanPham().getGiaGoc();
-                }
-            }
-        }
-        tongThanhTienHoanVIP = tongThanhTienHoanVIP + tongThanhTienHoanVIP * 0.15;
-        tongThanhTienHoanThuong = tongThanhTienHoanThuong + tongThanhTienHoanThuong * 0.05;
-        tongThanhTienHoan = (long) tongThanhTienHoanVIP + (long) tongThanhTienHoanThuong;
-        tongTienHoann.setText(String.format("%d", tongThanhTienHoan) + " VND");
-        String s = "";
-        long thu = 0;
-        long chi = 0;
-        if (tongThanhTien > tongThanhTienHoan) {
-            thu = tongThanhTien - tongThanhTienHoan;
-            s += "Thu: " + thu + " VND";
-        } else {
-            chi = tongThanhTienHoan - tongThanhTien;
-            s += "Chi: " + chi + " VND";
-        }
-        lblKetToann.setText(s);
-        ThongKeSPBanChay(TuNgay, DenNgay);
-
-
-    }//GEN-LAST:event_btnThongKeActionPerformed
-
     private void pnlDoanhThuComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_pnlDoanhThuComponentShown
         tuNgay.setEnabled(true);
         denNgay.setEnabled(true);
@@ -1050,82 +944,13 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
         btnQuy3.setEnabled(true);
         btnQuy4.setEnabled(true);
     }//GEN-LAST:event_pnlTopNVComponentShown
-
-    private void btnCaNamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCaNamActionPerformed
-        DefaultTableModel fm = (DefaultTableModel) tblTKTopSP.getModel();
-        fm.setRowCount(0);
-        //Thống ê theo năm
-        int a = jycNam.getYear();
-        ArrayList<HoaDon> dsHD = hd_dao.thongKeDoanhThuTheoNam(a);
-        ArrayList<ChiTietHoaDon> dsCTHD = new ArrayList<ChiTietHoaDon>();
-        lblTongHD.setText(dsHD.size() + "");
-        long tongThanhTien = 0;
-        double tongThanhTienVIP = 0;
-        double tongThanhTienThuong = 0;
-
-        for (HoaDon hd : dsHD) {
-            dsCTHD = cthd_dao.layDSHDBangMa(hd.getMaHD());
-            for (ChiTietHoaDon cthd : dsCTHD) {
-                if (hd.getKhachHang().getLoaiKhachHang().getTenLoai().equalsIgnoreCase("VIP")) {
-                    tongThanhTienVIP = tongThanhTienVIP + cthd.getTongTien();
-                } else {
-                    tongThanhTienThuong = tongThanhTienVIP + cthd.getTongTien();
-                }
-            }
-        }
-        tongThanhTienVIP = tongThanhTienVIP - tongThanhTienVIP * 0.05;
-        tongThanhTienThuong = tongThanhTienThuong + tongThanhTienThuong * 0.05;
-        tongThanhTien = (long) tongThanhTienVIP + (long) tongThanhTienThuong;
-        lblTongTienBanD.setText(String.format("%d", tongThanhTien) + " VND");
-        
-        //Thống kê hoàn
-        ArrayList<HoaDonHoanTra> dsHDHT = hdh_dao.thongKeDoanhThuTheoNam(a);
-        ArrayList<ChiTietHoanTra> dsCTHT;
-        lblSoHDH.setText(dsHDHT.size() + "");
-        long tongThanhTienHoan = 0;
-        double tongThanhTienHoanVIP = 0;
-        double tongThanhTienHoanThuong = 0;
-        KhachHang kh;
-
-        for (HoaDonHoanTra hdht : dsHDHT) {
-            dsCTHT = ctht_dao.layDSCTHTBangMa(hdht.getMaHDHT());
-            for (ChiTietHoanTra ctht : dsCTHT) {
-                kh = kh_dao.getKHBangMa(hdht.getHoaDon().getKhachHang().getMaKH());
-                if (kh.getLoaiKhachHang().getTenLoai().equalsIgnoreCase("VIP")) {
-                    tongThanhTienHoanVIP = tongThanhTienHoanVIP + ctht.getSoLuong() * ctht.getSanPham().getGiaGoc();
-                } else {
-                    tongThanhTienHoanThuong = tongThanhTienHoanThuong + ctht.getSoLuong() * ctht.getSanPham().getGiaGoc();
-                }
-            }
-        }
-        tongThanhTienHoanVIP = tongThanhTienHoanVIP + tongThanhTienHoanVIP * 0.15;
-        tongThanhTienHoanThuong = tongThanhTienHoanThuong + tongThanhTienHoanThuong * 0.05;
-        tongThanhTienHoan = (long) tongThanhTienHoanVIP + (long) tongThanhTienHoanThuong;
-        tongTienHoann.setText(String.format("%d", tongThanhTienHoan) + " VND");
-        String s = "";
-        long thu = 0;
-        long chi = 0;
-        if (tongThanhTien > tongThanhTienHoan) {
-            thu = tongThanhTien - tongThanhTienHoan;
-            s += "Thu: " + thu + " VND";
-        } else {
-            chi = tongThanhTienHoan - tongThanhTien;
-            s += "Chi: " + chi + " VND";
-        }
-        lblKetToann.setText(s);
-        //Thống kê sản phẩm
-        ArrayList<thongKeSPBanChay> dsSPBC = sp_dao.thongKeSPBanChayTheoNam(a);
-        int i = 1;
-        SanPham sp;
-        for (thongKeSPBanChay spbc : dsSPBC) {
-            sp = sp_dao.laySanPhamBangMa(spbc.getMaSP());
-            modelTKTopSP.addRow(new Object[]{i++, spbc.getMaSP(), sp.getTenSP(),
-                spbc.getSlBan(), sp.getSoLuong(),});
-        }
-        ThongKeSPBanChayTheoNam(a);
-    }//GEN-LAST:event_btnCaNamActionPerformed
     public void ThongKeSPBanChayTheoNam(int a) {
-        ArrayList<thongKeSPBanChay> dsTKSPBC = sp_dao.thongKeSPBanChayTheoNam(a);
+        int c = (int) jSpTopSP.getValue();
+        if (c <= 0) {
+            JOptionPane.showMessageDialog(null, "Top phải lớn hơn 0.");
+            return;
+        }
+        ArrayList<thongKeSPBanChay> dsTKSPBC = sp_dao.thongKeSPBanChayTheoNam(c,a);
         SanPham sp;
         if (dsTKSPBC != null) {
             DefaultCategoryDataset dataset = new DefaultCategoryDataset();
@@ -1144,157 +969,100 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
             pnlBieuDoTKTopSP.repaint();
         }
     }
-    private void btnQuy2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuy2ActionPerformed
-        DefaultTableModel fm = (DefaultTableModel) tblTKTopSP.getModel();
-        fm.setRowCount(0);
-        int a = jycNam.getYear();
-        String b = a + "-04-01";
-        String c = a + "-06-30";
-        ArrayList<HoaDon> dsHD = hd_dao.thongKeDoanhThu(b, c);
-        ArrayList<ChiTietHoaDon> dsCTHD = new ArrayList<ChiTietHoaDon>();
-        lblTongHD.setText(dsHD.size() + "");
-        long tongThanhTien = 0;
-        double tongThanhTienVIP = 0;
-        double tongThanhTienThuong = 0;
+    private void pnlSPLoiComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_pnlSPLoiComponentShown
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pnlSPLoiComponentShown
 
-        for (HoaDon hd : dsHD) {
-            dsCTHD = cthd_dao.layDSHDBangMa(hd.getMaHD());
-            for (ChiTietHoaDon cthd : dsCTHD) {
-                if (hd.getKhachHang().getLoaiKhachHang().getTenLoai().equalsIgnoreCase("VIP")) {
-                    tongThanhTienVIP = tongThanhTienVIP + cthd.getTongTien();
-                } else {
-                    tongThanhTienThuong = tongThanhTienVIP + cthd.getTongTien();
-                }
-
-            }
-
-        }
-        tongThanhTienVIP = tongThanhTienVIP - tongThanhTienVIP * 0.05;
-        tongThanhTienThuong = tongThanhTienThuong + tongThanhTienThuong * 0.05;
-        tongThanhTien = (long) tongThanhTienVIP + (long) tongThanhTienThuong;
-        lblTongTienBanD.setText(String.format("%d", tongThanhTien) + " VND");
-        //hoàn
-        ArrayList<HoaDonHoanTra> dsHDHT = hdh_dao.thongKeDoanhThu(b, c);
-        ArrayList<ChiTietHoanTra> dsCTHT;
-        lblSoHDH.setText(dsHDHT.size() + "");
-        long tongThanhTienHoan = 0;
-        double tongThanhTienHoanVIP = 0;
-        double tongThanhTienHoanThuong = 0;
-        KhachHang kh;
-
-        for (HoaDonHoanTra hdht : dsHDHT) {
-            dsCTHT = ctht_dao.layDSCTHTBangMa(hdht.getMaHDHT());
-            for (ChiTietHoanTra ctht : dsCTHT) {
-                kh = kh_dao.getKHBangMa(hdht.getHoaDon().getKhachHang().getMaKH());
-                if (kh.getLoaiKhachHang().getTenLoai().equalsIgnoreCase("VIP")) {
-                    tongThanhTienHoanVIP = tongThanhTienHoanVIP + ctht.getSoLuong() * ctht.getSanPham().getGiaGoc();
-                } else {
-                    tongThanhTienHoanThuong = tongThanhTienHoanThuong + ctht.getSoLuong() * ctht.getSanPham().getGiaGoc();
-                }
-            }
-        }
-        tongThanhTienHoanVIP = tongThanhTienHoanVIP + tongThanhTienHoanVIP * 0.15;
-        tongThanhTienHoanThuong = tongThanhTienHoanThuong + tongThanhTienHoanThuong * 0.05;
-        tongThanhTienHoan = (long) tongThanhTienHoanVIP + (long) tongThanhTienHoanThuong;
-        tongTienHoann.setText(String.format("%d", tongThanhTienHoan) + " VND");
-        String s = "";
-        long thu = 0;
-        long chi = 0;
-        if (tongThanhTien > tongThanhTienHoan) {
-            thu = tongThanhTien - tongThanhTienHoan;
-            s += "Thu: " + thu + " VND";
+    private void btnThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongKeActionPerformed
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date ngayTim = tuNgay.getDate();
+        Date ngayCanTim = denNgay.getDate();
+        String TuNgay = sdf.format(tuNgay.getDate());
+        String DenNgay = sdf.format(denNgay.getDate());
+        if (ngayTim.after(today) || ngayCanTim.after(today)) {
+            JOptionPane.showMessageDialog(null, "Thời gian tìm không lớn hơn thời gian hiện tại");
         } else {
-            chi = tongThanhTienHoan - tongThanhTien;
-            s += "Chi: " + chi + " VND";
-        }
-        lblKetToann.setText(s);
-        //Thống kê sản phẩm
-        ArrayList<thongKeSPBanChay> dsSPBC = sp_dao.thongKeSPBanChay(b, c);
-        int i = 1;
-        SanPham sp;
-        for (thongKeSPBanChay spbc : dsSPBC) {
-            sp = sp_dao.laySanPhamBangMa(spbc.getMaSP());
-            modelTKTopSP.addRow(new Object[]{i++, spbc.getMaSP(), sp.getTenSP(),
-                spbc.getSlBan(), sp.getSoLuong(),});
-        }
-        ThongKeSPBanChay(b, c);
-    }//GEN-LAST:event_btnQuy2ActionPerformed
+            if (ngayTim.after(ngayCanTim)) {
+                JOptionPane.showMessageDialog(null, "Ngày tìm không lớn hơn ngày cần tìm");
+            } else {
 
-    private void btnQuy3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuy3ActionPerformed
-        DefaultTableModel fm = (DefaultTableModel) tblTKTopSP.getModel();
-        fm.setRowCount(0);
-        int a = jycNam.getYear();
-        String b = a + "-07-01";
-        String c = a + "-09-30";
-        ArrayList<HoaDon> dsHD = hd_dao.thongKeDoanhThu(b, c);
-        ArrayList<ChiTietHoaDon> dsCTHD = new ArrayList<ChiTietHoaDon>();
-        lblTongHD.setText(dsHD.size() + "");
-        long tongThanhTien = 0;
-        double tongThanhTienVIP = 0;
-        double tongThanhTienThuong = 0;
+                DefaultTableModel fm = (DefaultTableModel) tblTKTopSP.getModel();
+                fm.setRowCount(0);
+                //Thống kê doanh thu
 
-        for (HoaDon hd : dsHD) {
-            dsCTHD = cthd_dao.layDSHDBangMa(hd.getMaHD());
-            for (ChiTietHoaDon cthd : dsCTHD) {
-                if (hd.getKhachHang().getLoaiKhachHang().getTenLoai().equalsIgnoreCase("VIP")) {
-                    tongThanhTienVIP = tongThanhTienVIP + cthd.getTongTien();
-                } else {
-                    tongThanhTienThuong = tongThanhTienVIP + cthd.getTongTien();
+                ArrayList<HoaDon> dsHD = hd_dao.thongKeDoanhThu(TuNgay, DenNgay);
+                ArrayList<ChiTietHoaDon> dsCTHD = new ArrayList<ChiTietHoaDon>();
+                lblTongHD.setText(dsHD.size() + "");
+                long tongThanhTien = 0;
+                double tongThanhTienVIP = 0;
+                double tongThanhTienThuong = 0;
+
+                for (HoaDon hd : dsHD) {
+                    dsCTHD = cthd_dao.layDSHDBangMa(hd.getMaHD());
+                    for (ChiTietHoaDon cthd : dsCTHD) {
+                        if (hd.getKhachHang().getLoaiKhachHang().getTenLoai().equalsIgnoreCase("VIP")) {
+                            tongThanhTienVIP = tongThanhTienVIP + cthd.getTongTien();
+                        } else {
+                            tongThanhTienThuong = tongThanhTienVIP + cthd.getTongTien();
+                        }
+
+                    }
+
                 }
+                tongThanhTienVIP = tongThanhTienVIP - tongThanhTienVIP * 0.05;
+                tongThanhTienThuong = tongThanhTienThuong + tongThanhTienThuong * 0.05;
+                tongThanhTien = (long) tongThanhTienVIP + (long) tongThanhTienThuong;
+                lblTongTienBanD.setText(String.format("%d", tongThanhTien) + " VND");
+
+                //Thống kê sản phẩm
+                ArrayList<thongKeSPBanChay> dsSPBC = sp_dao.thongKeSPBanChay(TuNgay, DenNgay);
+                int i = 1;
+                SanPham sp;
+                for (thongKeSPBanChay spbc : dsSPBC) {
+                    sp = sp_dao.laySanPhamBangMa(spbc.getMaSP());
+                    modelTKTopSP.addRow(new Object[]{i++, spbc.getMaSP(), sp.getTenSP(),
+                        spbc.getSlBan(), sp.getSoLuong(),});
+                }
+                //Thống kê hoàn
+                ArrayList<HoaDonHoanTra> dsHDHT = hdh_dao.thongKeDoanhThu(TuNgay, DenNgay);
+                ArrayList<ChiTietHoanTra> dsCTHT;
+                lblSoHDH.setText(dsHDHT.size() + "");
+                long tongThanhTienHoan = 0;
+                double tongThanhTienHoanVIP = 0;
+                double tongThanhTienHoanThuong = 0;
+                KhachHang kh;
+
+                for (HoaDonHoanTra hdht : dsHDHT) {
+                    dsCTHT = ctht_dao.layDSCTHTBangMa(hdht.getMaHDHT());
+                    for (ChiTietHoanTra ctht : dsCTHT) {
+                        kh = kh_dao.getKHBangMa(hdht.getHoaDon().getKhachHang().getMaKH());
+                        if (kh.getLoaiKhachHang().getTenLoai().equalsIgnoreCase("VIP")) {
+                            tongThanhTienHoanVIP = tongThanhTienHoanVIP + ctht.getSoLuong() * ctht.getSanPham().getGiaGoc();
+                        } else {
+                            tongThanhTienHoanThuong = tongThanhTienHoanThuong + ctht.getSoLuong() * ctht.getSanPham().getGiaGoc();
+                        }
+                    }
+                }
+                tongThanhTienHoanVIP = tongThanhTienHoanVIP + tongThanhTienHoanVIP * 0.15;
+                tongThanhTienHoanThuong = tongThanhTienHoanThuong + tongThanhTienHoanThuong * 0.05;
+                tongThanhTienHoan = (long) tongThanhTienHoanVIP + (long) tongThanhTienHoanThuong;
+                tongTienHoann.setText(String.format("%d", tongThanhTienHoan) + " VND");
+                String s = "";
+                long thu = 0;
+                long chi = 0;
+                if (tongThanhTien > tongThanhTienHoan) {
+                    thu = tongThanhTien - tongThanhTienHoan;
+                    s += "Thu: " + thu + " VND";
+                } else {
+                    chi = tongThanhTienHoan - tongThanhTien;
+                    s += "Chi: " + chi + " VND";
+                }
+                lblKetToann.setText(s);
+                ThongKeSPBanChay(TuNgay, DenNgay);
 
             }
-
         }
-        tongThanhTienVIP = tongThanhTienVIP - tongThanhTienVIP * 0.05;
-        tongThanhTienThuong = tongThanhTienThuong + tongThanhTienThuong * 0.05;
-        tongThanhTien = (long) tongThanhTienVIP + (long) tongThanhTienThuong;
-        lblTongTienBanD.setText(String.format("%d", tongThanhTien) + " VND");
-        //hoàn
-        ArrayList<HoaDonHoanTra> dsHDHT = hdh_dao.thongKeDoanhThu(b, c);
-        ArrayList<ChiTietHoanTra> dsCTHT;
-        lblSoHDH.setText(dsHDHT.size() + "");
-        long tongThanhTienHoan = 0;
-        double tongThanhTienHoanVIP = 0;
-        double tongThanhTienHoanThuong = 0;
-        KhachHang kh;
-
-        for (HoaDonHoanTra hdht : dsHDHT) {
-            dsCTHT = ctht_dao.layDSCTHTBangMa(hdht.getMaHDHT());
-            for (ChiTietHoanTra ctht : dsCTHT) {
-                kh = kh_dao.getKHBangMa(hdht.getHoaDon().getKhachHang().getMaKH());
-                if (kh.getLoaiKhachHang().getTenLoai().equalsIgnoreCase("VIP")) {
-                    tongThanhTienHoanVIP = tongThanhTienHoanVIP + ctht.getSoLuong() * ctht.getSanPham().getGiaGoc();
-                } else {
-                    tongThanhTienHoanThuong = tongThanhTienHoanThuong + ctht.getSoLuong() * ctht.getSanPham().getGiaGoc();
-                }
-            }
-        }
-        tongThanhTienHoanVIP = tongThanhTienHoanVIP + tongThanhTienHoanVIP * 0.15;
-        tongThanhTienHoanThuong = tongThanhTienHoanThuong + tongThanhTienHoanThuong * 0.05;
-        tongThanhTienHoan = (long) tongThanhTienHoanVIP + (long) tongThanhTienHoanThuong;
-        tongTienHoann.setText(String.format("%d", tongThanhTienHoan) + " VND");
-        String s = "";
-        long thu = 0;
-        long chi = 0;
-        if (tongThanhTien > tongThanhTienHoan) {
-            thu = tongThanhTien - tongThanhTienHoan;
-            s += "Thu: " + thu + " VND";
-        } else {
-            chi = tongThanhTienHoan - tongThanhTien;
-            s += "Chi: " + chi + " VND";
-        }
-        lblKetToann.setText(s);
-        //Thống kê sản phẩm
-        ArrayList<thongKeSPBanChay> dsSPBC = sp_dao.thongKeSPBanChay(b, c);
-        int i = 1;
-        SanPham sp;
-        for (thongKeSPBanChay spbc : dsSPBC) {
-            sp = sp_dao.laySanPhamBangMa(spbc.getMaSP());
-            modelTKTopSP.addRow(new Object[]{i++, spbc.getMaSP(), sp.getTenSP(),
-                spbc.getSlBan(), sp.getSoLuong(),});
-        }
-        ThongKeSPBanChay(b, c);
-    }//GEN-LAST:event_btnQuy3ActionPerformed
+    }//GEN-LAST:event_btnThongKeActionPerformed
 
     private void btnQuy4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuy4ActionPerformed
         DefaultTableModel fm = (DefaultTableModel) tblTKTopSP.getModel();
@@ -1315,7 +1083,7 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
                 if (hd.getKhachHang().getLoaiKhachHang().getTenLoai().equalsIgnoreCase("VIP")) {
                     tongThanhTienVIP = tongThanhTienVIP + cthd.getTongTien();
                 } else {
-                    tongThanhTienThuong = tongThanhTienVIP + cthd.getTongTien();
+                    tongThanhTienThuong = tongThanhTienThuong + cthd.getTongTien();
                 }
 
             }
@@ -1372,12 +1140,355 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
         ThongKeSPBanChay(b, c);
     }//GEN-LAST:event_btnQuy4ActionPerformed
 
-    private void pnlSPLoiComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_pnlSPLoiComponentShown
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pnlSPLoiComponentShown
-    public void ThongKeSPBanChay(String a, String b) {
+    private void btnQuy3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuy3ActionPerformed
+        DefaultTableModel fm = (DefaultTableModel) tblTKTopSP.getModel();
+        fm.setRowCount(0);
+        int a = jycNam.getYear();
+        String b = a + "-07-01";
+        String c = a + "-09-30";
+        ArrayList<HoaDon> dsHD = hd_dao.thongKeDoanhThu(b, c);
+        ArrayList<ChiTietHoaDon> dsCTHD = new ArrayList<ChiTietHoaDon>();
+        lblTongHD.setText(dsHD.size() + "");
+        long tongThanhTien = 0;
+        double tongThanhTienVIP = 0;
+        double tongThanhTienThuong = 0;
 
-        ArrayList<thongKeSPBanChay> dsTKSPBC = sp_dao.thongKeSPBanChay(a, b);
+        for (HoaDon hd : dsHD) {
+            dsCTHD = cthd_dao.layDSHDBangMa(hd.getMaHD());
+            for (ChiTietHoaDon cthd : dsCTHD) {
+                if (hd.getKhachHang().getLoaiKhachHang().getTenLoai().equalsIgnoreCase("VIP")) {
+                    tongThanhTienVIP = tongThanhTienVIP + cthd.getTongTien();
+                } else {
+                    tongThanhTienThuong = tongThanhTienThuong + cthd.getTongTien();
+                }
+
+            }
+
+        }
+        tongThanhTienVIP = tongThanhTienVIP - tongThanhTienVIP * 0.05;
+        tongThanhTienThuong = tongThanhTienThuong + tongThanhTienThuong * 0.05;
+        tongThanhTien = (long) tongThanhTienVIP + (long) tongThanhTienThuong;
+        lblTongTienBanD.setText(String.format("%d", tongThanhTien) + " VND");
+        //hoàn
+        ArrayList<HoaDonHoanTra> dsHDHT = hdh_dao.thongKeDoanhThu(b, c);
+        ArrayList<ChiTietHoanTra> dsCTHT;
+        lblSoHDH.setText(dsHDHT.size() + "");
+        long tongThanhTienHoan = 0;
+        double tongThanhTienHoanVIP = 0;
+        double tongThanhTienHoanThuong = 0;
+        KhachHang kh;
+
+        for (HoaDonHoanTra hdht : dsHDHT) {
+            dsCTHT = ctht_dao.layDSCTHTBangMa(hdht.getMaHDHT());
+            for (ChiTietHoanTra ctht : dsCTHT) {
+                kh = kh_dao.getKHBangMa(hdht.getHoaDon().getKhachHang().getMaKH());
+                if (kh.getLoaiKhachHang().getTenLoai().equalsIgnoreCase("VIP")) {
+                    tongThanhTienHoanVIP = tongThanhTienHoanVIP + ctht.getSoLuong() * ctht.getSanPham().getGiaGoc();
+                } else {
+                    tongThanhTienHoanThuong = tongThanhTienHoanThuong + ctht.getSoLuong() * ctht.getSanPham().getGiaGoc();
+                }
+            }
+        }
+        tongThanhTienHoanVIP = tongThanhTienHoanVIP + tongThanhTienHoanVIP * 0.15;
+        tongThanhTienHoanThuong = tongThanhTienHoanThuong + tongThanhTienHoanThuong * 0.05;
+        tongThanhTienHoan = (long) tongThanhTienHoanVIP + (long) tongThanhTienHoanThuong;
+        tongTienHoann.setText(String.format("%d", tongThanhTienHoan) + " VND");
+        String s = "";
+        long thu = 0;
+        long chi = 0;
+        if (tongThanhTien > tongThanhTienHoan) {
+            thu = tongThanhTien - tongThanhTienHoan;
+            s += "Thu: " + thu + " VND";
+        } else {
+            chi = tongThanhTienHoan - tongThanhTien;
+            s += "Chi: " + chi + " VND";
+        }
+        lblKetToann.setText(s);
+        //Thống kê sản phẩm
+        ArrayList<thongKeSPBanChay> dsSPBC = sp_dao.thongKeSPBanChay(b, c);
+        int i = 1;
+        SanPham sp;
+        for (thongKeSPBanChay spbc : dsSPBC) {
+            sp = sp_dao.laySanPhamBangMa(spbc.getMaSP());
+            modelTKTopSP.addRow(new Object[]{i++, spbc.getMaSP(), sp.getTenSP(),
+                spbc.getSlBan(), sp.getSoLuong(),});
+        }
+        ThongKeSPBanChay(b, c);
+    }//GEN-LAST:event_btnQuy3ActionPerformed
+
+    private void btnQuy2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuy2ActionPerformed
+        DefaultTableModel fm = (DefaultTableModel) tblTKTopSP.getModel();
+        fm.setRowCount(0);
+        int a = jycNam.getYear();
+        String b = a + "-04-01";
+        String c = a + "-06-30";
+        ArrayList<HoaDon> dsHD = hd_dao.thongKeDoanhThu(b, c);
+        ArrayList<ChiTietHoaDon> dsCTHD = new ArrayList<ChiTietHoaDon>();
+        lblTongHD.setText(dsHD.size() + "");
+        long tongThanhTien = 0;
+        double tongThanhTienVIP = 0;
+        double tongThanhTienThuong = 0;
+
+        for (HoaDon hd : dsHD) {
+            dsCTHD = cthd_dao.layDSHDBangMa(hd.getMaHD());
+            for (ChiTietHoaDon cthd : dsCTHD) {
+                if (hd.getKhachHang().getLoaiKhachHang().getTenLoai().equalsIgnoreCase("VIP")) {
+                    tongThanhTienVIP = tongThanhTienVIP + cthd.getTongTien();
+                } else {
+                    tongThanhTienThuong = tongThanhTienThuong + cthd.getTongTien();
+                }
+
+            }
+
+        }
+        tongThanhTienVIP = tongThanhTienVIP - tongThanhTienVIP * 0.05;
+        tongThanhTienThuong = tongThanhTienThuong + tongThanhTienThuong * 0.05;
+        tongThanhTien = (long) tongThanhTienVIP + (long) tongThanhTienThuong;
+        lblTongTienBanD.setText(String.format("%d", tongThanhTien) + " VND");
+        //hoàn
+        ArrayList<HoaDonHoanTra> dsHDHT = hdh_dao.thongKeDoanhThu(b, c);
+        ArrayList<ChiTietHoanTra> dsCTHT;
+        lblSoHDH.setText(dsHDHT.size() + "");
+        long tongThanhTienHoan = 0;
+        double tongThanhTienHoanVIP = 0;
+        double tongThanhTienHoanThuong = 0;
+        KhachHang kh;
+
+        for (HoaDonHoanTra hdht : dsHDHT) {
+            dsCTHT = ctht_dao.layDSCTHTBangMa(hdht.getMaHDHT());
+            for (ChiTietHoanTra ctht : dsCTHT) {
+                kh = kh_dao.getKHBangMa(hdht.getHoaDon().getKhachHang().getMaKH());
+                if (kh.getLoaiKhachHang().getTenLoai().equalsIgnoreCase("VIP")) {
+                    tongThanhTienHoanVIP = tongThanhTienHoanVIP + ctht.getSoLuong() * ctht.getSanPham().getGiaGoc();
+                } else {
+                    tongThanhTienHoanThuong = tongThanhTienHoanThuong + ctht.getSoLuong() * ctht.getSanPham().getGiaGoc();
+                }
+            }
+        }
+        tongThanhTienHoanVIP = tongThanhTienHoanVIP + tongThanhTienHoanVIP * 0.15;
+        tongThanhTienHoanThuong = tongThanhTienHoanThuong + tongThanhTienHoanThuong * 0.05;
+        tongThanhTienHoan = (long) tongThanhTienHoanVIP + (long) tongThanhTienHoanThuong;
+        tongTienHoann.setText(String.format("%d", tongThanhTienHoan) + " VND");
+        String s = "";
+        long thu = 0;
+        long chi = 0;
+        if (tongThanhTien > tongThanhTienHoan) {
+            thu = tongThanhTien - tongThanhTienHoan;
+            s += "Thu: " + thu + " VND";
+        } else {
+            chi = tongThanhTienHoan - tongThanhTien;
+            s += "Chi: " + chi + " VND";
+        }
+        lblKetToann.setText(s);
+        //Thống kê sản phẩm
+        ArrayList<thongKeSPBanChay> dsSPBC = sp_dao.thongKeSPBanChay(b, c);
+        int i = 1;
+        SanPham sp;
+        for (thongKeSPBanChay spbc : dsSPBC) {
+            sp = sp_dao.laySanPhamBangMa(spbc.getMaSP());
+            modelTKTopSP.addRow(new Object[]{i++, spbc.getMaSP(), sp.getTenSP(),
+                spbc.getSlBan(), sp.getSoLuong(),});
+        }
+        ThongKeSPBanChay(b, c);
+    }//GEN-LAST:event_btnQuy2ActionPerformed
+
+    private void btnQuy1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuy1ActionPerformed
+        DefaultTableModel fm = (DefaultTableModel) tblTKTopSP.getModel();
+        fm.setRowCount(0);
+        int a = jycNam.getYear();
+        String b = a + "-01-01";
+        String c = a + "-03-31";
+        ArrayList<HoaDon> dsHD = hd_dao.thongKeDoanhThu(b, c);
+        ArrayList<ChiTietHoaDon> dsCTHD = new ArrayList<ChiTietHoaDon>();
+        lblTongHD.setText(dsHD.size() + "");
+        long tongThanhTien = 0;
+        double tongThanhTienVIP = 0;
+        double tongThanhTienThuong = 0;
+
+        for (HoaDon hd : dsHD) {
+            dsCTHD = cthd_dao.layDSHDBangMa(hd.getMaHD());
+            for (ChiTietHoaDon cthd : dsCTHD) {
+                if (hd.getKhachHang().getLoaiKhachHang().getTenLoai().equalsIgnoreCase("VIP")) {
+                    tongThanhTienVIP = tongThanhTienVIP + cthd.getTongTien();
+                } else {
+                    tongThanhTienThuong = tongThanhTienThuong + cthd.getTongTien();
+                }
+
+            }
+
+        }
+        tongThanhTienVIP = tongThanhTienVIP - tongThanhTienVIP * 0.05;
+        tongThanhTienThuong = tongThanhTienThuong + tongThanhTienThuong * 0.05;
+        tongThanhTien = (long) tongThanhTienVIP + (long) tongThanhTienThuong;
+        lblTongTienBanD.setText(String.format("%d", tongThanhTien) + " VND");
+        //hoàn
+        ArrayList<HoaDonHoanTra> dsHDHT = hdh_dao.thongKeDoanhThu(b, c);
+        ArrayList<ChiTietHoanTra> dsCTHT;
+        lblSoHDH.setText(dsHDHT.size() + "");
+        long tongThanhTienHoan = 0;
+        double tongThanhTienHoanVIP = 0;
+        double tongThanhTienHoanThuong = 0;
+        KhachHang kh;
+
+        for (HoaDonHoanTra hdht : dsHDHT) {
+            dsCTHT = ctht_dao.layDSCTHTBangMa(hdht.getMaHDHT());
+            for (ChiTietHoanTra ctht : dsCTHT) {
+                kh = kh_dao.getKHBangMa(hdht.getHoaDon().getKhachHang().getMaKH());
+                if (kh.getLoaiKhachHang().getTenLoai().equalsIgnoreCase("VIP")) {
+                    tongThanhTienHoanVIP = tongThanhTienHoanVIP + ctht.getSoLuong() * ctht.getSanPham().getGiaGoc();
+                } else {
+                    tongThanhTienHoanThuong = tongThanhTienHoanThuong + ctht.getSoLuong() * ctht.getSanPham().getGiaGoc();
+                }
+            }
+        }
+        tongThanhTienHoanVIP = tongThanhTienHoanVIP + tongThanhTienHoanVIP * 0.15;
+        tongThanhTienHoanThuong = tongThanhTienHoanThuong + tongThanhTienHoanThuong * 0.05;
+        tongThanhTienHoan = (long) tongThanhTienHoanVIP + (long) tongThanhTienHoanThuong;
+        tongTienHoann.setText(String.format("%d", tongThanhTienHoan) + " VND");
+        String s = "";
+        long thu = 0;
+        long chi = 0;
+        if (tongThanhTien > tongThanhTienHoan) {
+            thu = tongThanhTien - tongThanhTienHoan;
+            s += "Thu: " + thu + " VND";
+        } else {
+            chi = tongThanhTienHoan - tongThanhTien;
+            s += "Chi: " + chi + " VND";
+        }
+        lblKetToann.setText(s);
+        //Thống kê sản phẩm.thongKeSPBanChay
+        ArrayList<thongKeSPBanChay> dsSPBC = sp_dao.thongKeSPBanChay(b, c);
+        int i = 1;
+        SanPham sp;
+        for (thongKeSPBanChay spbc : dsSPBC) {
+            sp = sp_dao.laySanPhamBangMa(spbc.getMaSP());
+            modelTKTopSP.addRow(new Object[]{i++, spbc.getMaSP(), sp.getTenSP(),
+                spbc.getSlBan(), sp.getSoLuong(),});
+        }
+        ThongKeSPBanChay(b, c);
+    }//GEN-LAST:event_btnQuy1ActionPerformed
+
+    private void btnCaNamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCaNamActionPerformed
+        DefaultTableModel fm = (DefaultTableModel) tblTKTopSP.getModel();
+        fm.setRowCount(0);
+        int c = (int) jSpTopSP.getValue();
+        if (c <= 0) {
+            JOptionPane.showMessageDialog(null, "Top phải lớn hơn 0.");
+            return;
+        }
+        //Thống ê theo năm
+        int a = jycNam.getYear();
+        ArrayList<HoaDon> dsHD = hd_dao.thongKeDoanhThuTheoNam(a);
+        ArrayList<ChiTietHoaDon> dsCTHD = new ArrayList<ChiTietHoaDon>();
+        lblTongHD.setText(dsHD.size() + "");
+        long tongThanhTien = 0;
+        double tongThanhTienVIP = 0;
+        double tongThanhTienThuong = 0;
+
+        for (HoaDon hd : dsHD) {
+            dsCTHD = cthd_dao.layDSHDBangMa(hd.getMaHD());
+            for (ChiTietHoaDon cthd : dsCTHD) {
+                if (hd.getKhachHang().getLoaiKhachHang().getTenLoai().equalsIgnoreCase("VIP")) {
+                    tongThanhTienVIP = tongThanhTienVIP + cthd.getTongTien();
+                } else {
+                    tongThanhTienThuong = tongThanhTienThuong + cthd.getTongTien();
+                }
+            }
+        }
+        tongThanhTienVIP = tongThanhTienVIP - tongThanhTienVIP * 0.05;
+        tongThanhTienThuong = tongThanhTienThuong + tongThanhTienThuong * 0.05;
+        tongThanhTien = (long) tongThanhTienVIP + (long) tongThanhTienThuong;
+        lblTongTienBanD.setText(String.format("%d", tongThanhTien) + " VND");
+
+        //Thống kê hoàn
+        ArrayList<HoaDonHoanTra> dsHDHT = hdh_dao.thongKeDoanhThuTheoNam(a);
+        ArrayList<ChiTietHoanTra> dsCTHT;
+        lblSoHDH.setText(dsHDHT.size() + "");
+        long tongThanhTienHoan = 0;
+        double tongThanhTienHoanVIP = 0;
+        double tongThanhTienHoanThuong = 0;
+        KhachHang kh;
+
+        for (HoaDonHoanTra hdht : dsHDHT) {
+            dsCTHT = ctht_dao.layDSCTHTBangMa(hdht.getMaHDHT());
+            for (ChiTietHoanTra ctht : dsCTHT) {
+                kh = kh_dao.getKHBangMa(hdht.getHoaDon().getKhachHang().getMaKH());
+                if (kh.getLoaiKhachHang().getTenLoai().equalsIgnoreCase("VIP")) {
+                    tongThanhTienHoanVIP = tongThanhTienHoanVIP + ctht.getSoLuong() * ctht.getSanPham().getGiaGoc();
+                } else {
+                    tongThanhTienHoanThuong = tongThanhTienHoanThuong + ctht.getSoLuong() * ctht.getSanPham().getGiaGoc();
+                }
+            }
+        }
+        tongThanhTienHoanVIP = tongThanhTienHoanVIP + tongThanhTienHoanVIP * 0.15;
+        tongThanhTienHoanThuong = tongThanhTienHoanThuong + tongThanhTienHoanThuong * 0.05;
+        tongThanhTienHoan = (long) tongThanhTienHoanVIP + (long) tongThanhTienHoanThuong;
+        tongTienHoann.setText(String.format("%d", tongThanhTienHoan) + " VND");
+        String s = "";
+        long thu = 0;
+        long chi = 0;
+        if (tongThanhTien > tongThanhTienHoan) {
+            thu = tongThanhTien - tongThanhTienHoan;
+            s += "Thu: " + thu + " VND";
+        } else {
+            chi = tongThanhTienHoan - tongThanhTien;
+            s += "Chi: " + chi + " VND";
+        }
+        lblKetToann.setText(s);
+        //Thống kê sản phẩm
+        ArrayList<SanPham>dsSP= sp_dao.getAllSP();
+        ArrayList<thongKeSPBanChay> dsSPBC = sp_dao.thongKeSPBanChayTheoNam(dsSP.size(),a);
+        int i = 1;
+        SanPham sp;
+        for (thongKeSPBanChay spbc : dsSPBC) {
+            sp = sp_dao.laySanPhamBangMa(spbc.getMaSP());
+            modelTKTopSP.addRow(new Object[]{i++, spbc.getMaSP(), sp.getTenSP(),
+                spbc.getSlBan(), sp.getSoLuong(),});
+        }
+        
+        ThongKeSPBanChayTheoNam(a);
+    }//GEN-LAST:event_btnCaNamActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        List<NhanVien> dsNV = nv_dao.layNhanVienVaoBang();
+        ArrayList<HoaDon> dsHD;
+        ArrayList<ChiTietHoaDon> dsCTHD = new ArrayList<ChiTietHoaDon>();
+        long tongThanhTien = 0;
+        double tongThanhTienVIP = 0;
+        double tongThanhTienThuong = 0;
+
+        for (NhanVien nv : dsNV) {
+            dsHD = hd_dao.getAllDSHDtheoMaNV(nv.getMaNV());
+            tongThanhTien = 0;
+            tongThanhTienVIP = 0;
+            tongThanhTienThuong = 0;
+            for (HoaDon hd : dsHD) {
+                dsCTHD = cthd_dao.layDSHDBangMa(hd.getMaHD());
+                for (ChiTietHoaDon cthd : dsCTHD) {
+                    if (hd.getKhachHang().getLoaiKhachHang().getTenLoai().equalsIgnoreCase("VIP")) {
+                        tongThanhTienVIP = tongThanhTienVIP + cthd.getTongTien();
+                    } else {
+                        tongThanhTienThuong = tongThanhTienVIP + cthd.getTongTien();
+                    }
+
+                }
+                tongThanhTienVIP = tongThanhTienVIP - tongThanhTienVIP * 0.05;
+                tongThanhTienThuong = tongThanhTienThuong + tongThanhTienThuong * 0.05;
+                tongThanhTien = (long) tongThanhTienVIP + (long) tongThanhTienThuong;
+            }
+            modelTopNV.addRow(new Object[]{1, nv.getMaNV(), nv.getTenNV(), tongThanhTien});
+            // System.out.println(dsHD+"\n");
+        }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+    
+    public void ThongKeSPBanChay(String a, String b) {
+        int c = (int) jSpTopSP.getValue();
+        if (c <= 0) {
+            JOptionPane.showMessageDialog(null, "Top phải lớn hơn 0.");
+            return;
+        }
+        ArrayList<thongKeSPBanChay> dsTKSPBC = sp_dao.thongKeSPBanChayTheoTop(c, a, b);
         SanPham sp;
         if (dsTKSPBC != null) {
             DefaultCategoryDataset dataset = new DefaultCategoryDataset();
@@ -1398,13 +1509,18 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCaNam;
-    private javax.swing.JButton btnQuy1;
-    private javax.swing.JButton btnQuy2;
-    private javax.swing.JButton btnQuy3;
-    private javax.swing.JButton btnQuy4;
-    private javax.swing.JButton btnThongKe;
+    private swing.Button btnCaNam;
+    private swing.Button btnQuy1;
+    private swing.Button btnQuy2;
+    private swing.Button btnQuy3;
+    private swing.Button btnQuy4;
+    private swing.Button btnThongKe;
     private com.toedter.calendar.JDateChooser denNgay;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JSpinner jSpTopNV;
+    private javax.swing.JSpinner jSpTopSP;
     private com.toedter.calendar.JYearChooser jycNam;
     private javax.swing.JLabel lblDenNgay;
     private javax.swing.JLabel lblKetToan;
