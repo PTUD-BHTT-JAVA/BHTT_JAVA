@@ -2,7 +2,9 @@ package gui;
 
 import connectDB.ConnectDB;
 import dao.DAO_ChiTietHoaDon;
+import dao.DAO_ChiTietHoanTra;
 import dao.DAO_HoaDon;
+import dao.DAO_NhanVien;
 
 import entity.ChiTietHoaDon;
 import entity.ChiTietHoanTra;
@@ -20,6 +22,7 @@ import java.util.List;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 import javax.swing.RowFilter;
 
@@ -33,15 +36,18 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
     private TableRowSorter<DefaultTableModel> tr;
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     SimpleDateFormat fday = new SimpleDateFormat("yyyy-MM-dd");
-    public DefaultTableModel modelDonHang;
+//    public DefaultTableModel modelDonHang;
     DecimalFormat df = new DecimalFormat("#,##0 VND");
     private Thread thread = new Thread(this);
     private DAO_ChiTietHoaDon cthd_dao;
     public TaiKhoan tkDN;
     private DAO_HoaDon hd_dao;
     private ArrayList<SanPham> dsSPTrongDonHang;
+    private  DAO_ChiTietHoanTra chiTietHoanTra;
     private final DefaultTableModel modelDSHoaDon;
+    private  DAO_NhanVien nhanvien_dao;
     private final Date today;
+    private final DefaultTableModel modelDSDonHoan;
 
     public GD_LichSuDonHang(String _username) {
         thread.start();
@@ -58,21 +64,46 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
         this.setFocusable(true);
         username = _username;
         cthd_dao = new DAO_ChiTietHoaDon();
+        chiTietHoanTra = new DAO_ChiTietHoanTra();
         modelDSHoaDon = (DefaultTableModel) tblHoaDonBanHang.getModel();
+        modelDSDonHoan = (DefaultTableModel)  tblHoaDonHoan.getModel();
         today = new Date();
         jdcNgayTim.setDate(new Date());
         jdcNgayMuonTim.setDate(new Date());
+        nhanvien_dao = new DAO_NhanVien();
         DocDSHoaDon();
+        DocDanhSachDonHoan();
     }
 
     private void DocDSHoaDon() {
-        List<ChiTietHoaDon> dsHD = cthd_dao.layDSHoaDonLenBang();
+        String maNV = nhanvien_dao.layNhanVienBangTen(lblTenNV.getText()).getMaNV();
+        System.out.println(maNV);
+        List<ChiTietHoaDon> dsHD = cthd_dao.layDSHoaDonLenBang(maNV);
         for (ChiTietHoaDon cthd : dsHD) {
             modelDSHoaDon.addRow(new Object[]{
                 cthd.getHoaDon().getMaHD(), sdf.format(cthd.getHoaDon().getNgayLap()),
                 cthd.getSoLuong(), df.format(cthd.getTongTien()), cthd.getHoaDon().getKhachHang().getTenKH()
             });
         }
+    }
+    
+    private void DocDanhSachDonHoan()
+    {
+        try {
+            List<ChiTietHoanTra> dsDonHoanTra = chiTietHoanTra.getallDSCTHT();
+            for (ChiTietHoanTra ctHoanTra : dsDonHoanTra) {
+                System.out.println(ctHoanTra.getHoaDonHoanTra());
+                modelDSDonHoan.addRow(new Object[]{
+                    ctHoanTra.getHoaDonHoanTra().getMaHDHT(),
+                    ctHoanTra.getHoaDonHoanTra().getNgayHoanTra(),
+                    ctHoanTra.getSoLuong(),
+                    ctHoanTra.getHoaDonHoanTra().getHoaDon().getKhachHang().getTenKH(),
+                    ctHoanTra.getLyDoHoanTra()
+                });
+            }
+        } catch (Exception e) {
+        }
+        
     }
     
     private void XoaHetDuLieuTrenTable(){
@@ -94,7 +125,7 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
         jLabel3 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lblTenNV = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         txtTim = new swing.TextFieldAnimation();
@@ -136,7 +167,7 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
         btnQuy7 = new swing.Button();
         btnQuy8 = new swing.Button();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tblHoaDonBanHang1 = new javax.swing.JTable();
+        tblHoaDonHoan = new javax.swing.JTable();
 
         setBorder(null);
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -173,8 +204,8 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel11.setText("12 Nguyễn Văn Bảo, phường 4, quận Gò Vấp, thành phố Hồ Chí Minh  ");
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel1.setText("Nguyễn Văn A");
+        lblTenNV.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblTenNV.setText("Nguyễn Văn A");
 
         javax.swing.GroupLayout pnlThongTinCuaHangLayout = new javax.swing.GroupLayout(pnlThongTinCuaHang);
         pnlThongTinCuaHang.setLayout(pnlThongTinCuaHangLayout);
@@ -187,7 +218,7 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pnlThongTinCuaHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTenNV, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(pnlThongTinCuaHangLayout.createSequentialGroup()
@@ -206,7 +237,7 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlThongTinCuaHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jLabel1))
+                    .addComponent(lblTenNV))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -628,17 +659,17 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
         jScrollPane3.setMinimumSize(new java.awt.Dimension(16, 100));
         jScrollPane3.setPreferredSize(new java.awt.Dimension(452, 200));
 
-        tblHoaDonBanHang1.setModel(new javax.swing.table.DefaultTableModel(
+        tblHoaDonHoan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Mã đơn hoàn", "Ngày lập", "Tổng số lượng sản phầm", "Tổng thành tiền", "Tên khách hàng"
+                "Mã đơn hoàn", "Ngày hoàn đơn", "Tổng sản phẩm", "Tên khách hàng", "Lý do hoàn"
             }
         ));
-        jScrollPane3.setViewportView(tblHoaDonBanHang1);
-        if (tblHoaDonBanHang1.getColumnModel().getColumnCount() > 0) {
-            tblHoaDonBanHang1.getColumnModel().getColumn(0).setResizable(false);
+        jScrollPane3.setViewportView(tblHoaDonHoan);
+        if (tblHoaDonHoan.getColumnModel().getColumnCount() > 0) {
+            tblHoaDonHoan.getColumnModel().getColumn(0).setResizable(false);
         }
 
         pnlLichSuDonHoan.add(jScrollPane3);
@@ -820,7 +851,6 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
     private swing.Button btnQuy8;
     private swing.Button btnTim;
     private swing.Button btnTim1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -849,6 +879,7 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
     private com.toedter.calendar.JDateChooser jdcNgayTim1;
     private com.toedter.calendar.JYearChooser jspNam;
     private com.toedter.calendar.JYearChooser jspNam1;
+    private javax.swing.JLabel lblTenNV;
     private javax.swing.JPanel pnlDau;
     private javax.swing.JPanel pnlDau2;
     private javax.swing.JPanel pnlLichSuDonHang;
@@ -857,7 +888,7 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
     private javax.swing.JPanel pnlThongTinCuaHang;
     private javax.swing.JPanel pnlThongTinCuaHang2;
     private javax.swing.JTable tblHoaDonBanHang;
-    private javax.swing.JTable tblHoaDonBanHang1;
+    private javax.swing.JTable tblHoaDonHoan;
     private swing.TextFieldAnimation txtTim;
     private swing.TextFieldAnimation txtTim1;
     // End of variables declaration//GEN-END:variables

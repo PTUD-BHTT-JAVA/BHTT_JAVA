@@ -14,6 +14,7 @@ import entity.ChiTietHoanTra;
 import entity.HoaDon;
 import entity.HoaDonHoanTra;
 import entity.KhachHang;
+import entity.NhanVien;
 import entity.SanPham;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -39,7 +40,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
     private DAO_SanPham sp_dao = new DAO_SanPham();
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     private final DAO_HoaDon hd_dao;
-    private final DAO_NhanVien nv_dao;
+    private DAO_NhanVien nv_dao;
     private double tienHoanTra = 0;
     private final DAO_KhachHang kh_dao = new DAO_KhachHang();
     private dao.DAO_HoaDonHoan hdh_dao = new DAO_HoaDonHoan();
@@ -89,7 +90,9 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
     private void DocDSHoaDon() {
         HoaDon hd = new HoaDon();
         KhachHang kh = new KhachHang();
-        List<ChiTietHoaDon> dsHD = cthd_dao.layDSHoaDonLenBang();
+//        nv_dao = new DAO_NhanVien();
+//        String maNV = nv_dao.layNhanVienBangTen(lblTenNV.getText()).getMaNV();
+        List<ChiTietHoaDon> dsHD = cthd_dao.layDSHoaDonTrongBayNgay();
         for (ChiTietHoaDon cthd : dsHD) {
             modelHoaDon.addRow(new Object[]{
                 cthd.getHoaDon().getMaHD(), sdf.format(cthd.getHoaDon().getNgayLap()),
