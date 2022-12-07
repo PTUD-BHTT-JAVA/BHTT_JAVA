@@ -82,9 +82,9 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
             double thanhTien;
             int soLuong=0;
             if(hd.getKhachHang().getLoaiKhachHang().getMaLoaiKH().equals("LKH001"))
-                thanhTien=hd.thanhTienVIP(hd);
+                thanhTien=hd.thanhTienVIP();
             else
-                thanhTien=hd.thanhTienThuong(hd);
+                thanhTien=hd.thanhTienThuong();
             for (ChiTietHoaDon ct: cthd_dao.layDSHDBangMa(hd.getMaHD()))
                 soLuong= soLuong+ct.getSoLuong();
             modelDSHoaDon.addRow(new Object[]{

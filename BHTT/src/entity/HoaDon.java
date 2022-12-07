@@ -114,11 +114,11 @@ public class HoaDon {
         return Objects.equals(this.maHD, other.maHD);
     }
     
-    public double thanhTienVIP(HoaDon hd){
+    public double thanhTienVIP(){
         double tt=0;
         DAO_ChiTietHoaDon dao_cthd = new DAO_ChiTietHoaDon();
-        List<ChiTietHoaDon> list=dao_cthd.layDSHDBangMa(hd.getMaHD());
-        if (hd.getKhachHang().getLoaiKhachHang().getMaLoaiKH().equals("LKH001")){
+        List<ChiTietHoaDon> list=dao_cthd.layDSHDBangMa(getMaHD());
+        if (getKhachHang().getLoaiKhachHang().getMaLoaiKH().equals("LKH001")){
                 for (ChiTietHoaDon ct:list){
                     tt+=ct.getTongTien();
             }   
@@ -127,11 +127,11 @@ public class HoaDon {
         return tt;
     }
     
-    public double thanhTienThuong(HoaDon hd){
+    public double thanhTienThuong(){
         double tt=0;
         DAO_ChiTietHoaDon dao_cthd = new DAO_ChiTietHoaDon();
-        List<ChiTietHoaDon> list=dao_cthd.layDSHDBangMa(hd.getMaHD());
-        if (hd.getKhachHang().getLoaiKhachHang().getMaLoaiKH().equals("LKH002")){
+        List<ChiTietHoaDon> list=dao_cthd.layDSHDBangMa(getMaHD());
+        if (getKhachHang().getLoaiKhachHang().getMaLoaiKH().equals("LKH002")){
                 for (ChiTietHoaDon ct:list){
                     tt+=ct.getTongTien();
             }
@@ -141,5 +141,11 @@ public class HoaDon {
         return tt;
     }
 
+    public double getThanhTien(){
+        if (getKhachHang().getLoaiKhachHang().getMaLoaiKH().equals("LKH001"))
+            return thanhTienVIP();
+        else
+            return thanhTienThuong();
+    }
     
 }

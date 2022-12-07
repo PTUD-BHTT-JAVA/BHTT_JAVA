@@ -28,6 +28,7 @@ import java.awt.Insets;
 import java.text.SimpleDateFormat;
 import java.time.Year;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -1329,7 +1330,7 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
         double tongThanhTienHoanVIP = 0;
         double tongThanhTienHoanThuong = 0;
         KhachHang kh;
-
+        
         for (HoaDonHoanTra hdht : dsHDHT) {
             dsCTHT = ctht_dao.layDSCTHTBangMa(hdht.getMaHDHT());
             for (ChiTietHoanTra ctht : dsCTHT) {
@@ -1450,13 +1451,16 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnCaNamActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        modelTopNV.setRowCount(0);
         List<NhanVien> dsNV = nv_dao.layNhanVienVaoBang();
+        ArrayList<NhanVien> ds=new ArrayList<NhanVien>();
         ArrayList<HoaDon> dsHD;
         ArrayList<ChiTietHoaDon> dsCTHD = new ArrayList<ChiTietHoaDon>();
         long tongThanhTien = 0;
         double tongThanhTienVIP = 0;
         double tongThanhTienThuong = 0;
-
+        int i=1;
+        dsNV.sort(Comparator.comparing(NhanVien::getDoanhThu).reversed());
         for (NhanVien nv : dsNV) {
             dsHD = hd_dao.getAllDSHDtheoMaNV(nv.getMaNV());
             tongThanhTien = 0;
@@ -1476,9 +1480,10 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
                 tongThanhTienThuong = tongThanhTienThuong + tongThanhTienThuong * 0.05;
                 tongThanhTien = (long) tongThanhTienVIP + (long) tongThanhTienThuong;
             }
-            modelTopNV.addRow(new Object[]{1, nv.getMaNV(), nv.getTenNV(), tongThanhTien});
-            // System.out.println(dsHD+"\n");
+            
+            modelTopNV.addRow(new Object[]{i++, nv.getMaNV(), nv.getTenNV(), tongThanhTien});
         }
+        
         
     }//GEN-LAST:event_jButton1ActionPerformed
     

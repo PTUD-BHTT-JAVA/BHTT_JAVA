@@ -82,10 +82,10 @@ public class GD_QLTraCuu extends javax.swing.JInternalFrame implements Runnable 
     private void DocDSHoaDon() {
         DAO_HoaDon hd_dao=new DAO_HoaDon();
         for (HoaDon hd : hd_dao.getallDSHoaDon()) {
-            double thanhTien=hd.thanhTienThuong(hd);
+            double thanhTien=hd.thanhTienThuong();
             int soLuong=0;
             if(hd.getKhachHang().getLoaiKhachHang().getMaLoaiKH().equals("LKH001"))
-                thanhTien=hd.thanhTienVIP(hd);
+                thanhTien=hd.thanhTienVIP();
             for (ChiTietHoaDon ct: cthd_dao.layDSHDBangMa(hd.getMaHD()))
                 soLuong= soLuong+ct.getSoLuong();
             modelDSHoaDon.addRow(new Object[]{

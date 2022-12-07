@@ -359,10 +359,10 @@ public class DG_CTDH extends javax.swing.JFrame {
         double tc;
         if (hd_dao.layHoaDonTheoMa(maHD).getKhachHang().getLoaiKhachHang().getMaLoaiKH().equals("LKH001")) {
             km = "10%";
-            tc = hd_dao.layHoaDonTheoMa(maHD).thanhTienVIP(hd_dao.layHoaDonTheoMa(maHD));            
+            tc = hd_dao.layHoaDonTheoMa(maHD).thanhTienVIP();            
         } else {
             km = "0%";
-            tc = hd_dao.layHoaDonTheoMa(maHD).thanhTienThuong(hd_dao.layHoaDonTheoMa(maHD));   
+            tc = hd_dao.layHoaDonTheoMa(maHD).thanhTienThuong();   
         }
         lblTTGG.setText(km);
         tc= tc+ tc*5/100;

@@ -4,6 +4,9 @@
  */
 package entity;
 
+import dao.DAO_ChiTietHoaDon;
+import dao.DAO_HoaDon;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -104,6 +107,15 @@ public class NhanVien {
         this.loaiNhanVien = loaiNhanVien;
     }
 
+    public double getDoanhThu(){
+        double dt=0;
+        DAO_HoaDon hd_dao=new DAO_HoaDon();
+        List<HoaDon> list=hd_dao.getAllDSHDtheoMaNV(getMaNV().toString());
+        for (HoaDon hd:list){
+            dt=dt+hd.getThanhTien();
+        }
+        return dt;
+    }
     @Override
     public String toString() {
         return "NhanVien{" + "maNV=" + maNV + ", tenNV=" + tenNV + ", CMND=" + CMND + ", soDienThoai=" + soDienThoai + ", gioiTinh=" + gioiTinh + ", luongCoBan=" + luongCoBan + ", trangThai=" + trangThai + ", loaiNhanVien=" + loaiNhanVien + '}';

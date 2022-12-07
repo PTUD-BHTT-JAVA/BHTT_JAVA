@@ -95,10 +95,10 @@ public class Form_HoaDon extends javax.swing.JFrame {
         double tc;
         if (dao_HD.layHoaDonTheoMa(maHD).getKhachHang().getLoaiKhachHang().getMaLoaiKH().equals("LKH001")) {
             km = "10";
-            tc = dao_HD.layHoaDonTheoMa(maHD).thanhTienVIP(dao_HD.layHoaDonTheoMa(maHD));
+            tc = dao_HD.layHoaDonTheoMa(maHD).thanhTienVIP();
         } else {
             km = "0";
-            tc = dao_HD.layHoaDonTheoMa(maHD).thanhTienThuong(dao_HD.layHoaDonTheoMa(maHD));
+            tc = dao_HD.layHoaDonTheoMa(maHD).thanhTienThuong();
 
         }
         lblKhuyenMai.setText(km + "%");
