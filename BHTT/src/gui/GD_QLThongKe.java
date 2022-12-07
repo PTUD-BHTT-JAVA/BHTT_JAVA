@@ -1462,26 +1462,26 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
         int i=1;
         dsNV.sort(Comparator.comparing(NhanVien::getDoanhThu).reversed());
         for (NhanVien nv : dsNV) {
-            dsHD = hd_dao.getAllDSHDtheoMaNV(nv.getMaNV());
-            tongThanhTien = 0;
-            tongThanhTienVIP = 0;
-            tongThanhTienThuong = 0;
-            for (HoaDon hd : dsHD) {
-                dsCTHD = cthd_dao.layDSHDBangMa(hd.getMaHD());
-                for (ChiTietHoaDon cthd : dsCTHD) {
-                    if (hd.getKhachHang().getLoaiKhachHang().getTenLoai().equalsIgnoreCase("VIP")) {
-                        tongThanhTienVIP = tongThanhTienVIP + cthd.getTongTien();
-                    } else {
-                        tongThanhTienThuong = tongThanhTienVIP + cthd.getTongTien();
-                    }
-
-                }
-                tongThanhTienVIP = tongThanhTienVIP - tongThanhTienVIP * 0.05;
-                tongThanhTienThuong = tongThanhTienThuong + tongThanhTienThuong * 0.05;
-                tongThanhTien = (long) tongThanhTienVIP + (long) tongThanhTienThuong;
-            }
+//            dsHD = hd_dao.getAllDSHDtheoMaNV(nv.getMaNV());
+//            tongThanhTien = 0;
+//            tongThanhTienVIP = 0;
+//            tongThanhTienThuong = 0;
+//            for (HoaDon hd : dsHD) {
+//                dsCTHD = cthd_dao.layDSHDBangMa(hd.getMaHD());
+//                for (ChiTietHoaDon cthd : dsCTHD) {
+//                    if (hd.getKhachHang().getLoaiKhachHang().getTenLoai().equalsIgnoreCase("VIP")) {
+//                        tongThanhTienVIP = tongThanhTienVIP + cthd.getTongTien();
+//                    } else {
+//                        tongThanhTienThuong = tongThanhTienVIP + cthd.getTongTien();
+//                    }
+//
+//                }
+//                tongThanhTienVIP = tongThanhTienVIP - tongThanhTienVIP * 0.05;
+//                tongThanhTienThuong = tongThanhTienThuong + tongThanhTienThuong * 0.05;
+//                tongThanhTien = (long) tongThanhTienVIP + (long) tongThanhTienThuong;
+//            }
             
-            modelTopNV.addRow(new Object[]{i++, nv.getMaNV(), nv.getTenNV(), tongThanhTien});
+            modelTopNV.addRow(new Object[]{i++, nv.getMaNV(), nv.getTenNV(), nv.getDoanhThu()});
         }
         
         
