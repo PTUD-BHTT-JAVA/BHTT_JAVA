@@ -31,7 +31,7 @@ import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
-public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runnable {
+public class GD_QLTraCuu extends javax.swing.JInternalFrame implements Runnable {
 
     private String username;
     List<RowFilter<DefaultTableModel, Object>> filters = new ArrayList<>();
@@ -43,6 +43,7 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
     private Thread thread = new Thread(this);
     private DAO_ChiTietHoaDon cthd_dao;
     public TaiKhoan tkDN;
+
     private ArrayList<SanPham> dsSPTrongDonHang;
     private  DAO_ChiTietHoanTra chiTietHoanTra;
     private final DefaultTableModel modelDSHoaDon;
@@ -50,7 +51,7 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
     private final Date today;
     private final DefaultTableModel modelDSDonHoan;
 
-    public GD_LichSuDonHang(String _username) {
+    public GD_QLTraCuu(String _username) {
         thread.start();
         try {
             ConnectDB.getInstance().connect();
@@ -64,6 +65,7 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
         initComponents();
         this.setFocusable(true);
         username = _username;
+        
         cthd_dao = new DAO_ChiTietHoaDon();
         chiTietHoanTra = new DAO_ChiTietHoanTra();
         modelDSHoaDon = (DefaultTableModel) tblHoaDonBanHang.getModel();
@@ -71,33 +73,34 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
         today = new Date();
         jdcNgayTim.setDate(new Date());
         jdcNgayMuonTim.setDate(new Date());
-        nhanvien_dao = new DAO_NhanVien();
+        nhanvien_dao=new DAO_NhanVien();
+        
         DocDSHoaDon();
         DocDanhSachDonHoan();
     }
 
     private void DocDSHoaDon() {
         DAO_HoaDon hd_dao=new DAO_HoaDon();
-        for (HoaDon hd : hd_dao.getAllDSHDtheoMaNV(username)) {
-            double thanhTien;
+        for (HoaDon hd : hd_dao.getallDSHoaDon()) {
+            double thanhTien=hd.thanhTienThuong(hd);
             int soLuong=0;
             if(hd.getKhachHang().getLoaiKhachHang().getMaLoaiKH().equals("LKH001"))
                 thanhTien=hd.thanhTienVIP(hd);
-            else
-                thanhTien=hd.thanhTienThuong(hd);
             for (ChiTietHoaDon ct: cthd_dao.layDSHDBangMa(hd.getMaHD()))
                 soLuong= soLuong+ct.getSoLuong();
             modelDSHoaDon.addRow(new Object[]{
                 hd.getMaHD(), sdf.format(hd.getNgayLap()),
-                soLuong, df.format(thanhTien), hd.getKhachHang().getTenKH()
+                soLuong, df.format(thanhTien), hd.getKhachHang().getTenKH(),
+                hd.getNhanVien().getTenNV(),
             });
         }
     }
     
     private void DocDanhSachDonHoan()
     {
+        
         DAO_HoaDonHoan hdh_dao=new DAO_HoaDonHoan();
-        for (HoaDonHoanTra hdht : hdh_dao.layHoaDonHoanTheoMaNV(username)) {
+        for (HoaDonHoanTra hdht : hdh_dao.getallDSHoaDonHoan()) {
             int soLuong=0;
                for (ChiTietHoanTra ct:chiTietHoanTra.layDSCTHTBangMa(hdht.getMaHDHT())){
                    soLuong=soLuong+ct.getSoLuong();
@@ -106,8 +109,9 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
                     hdht.getMaHDHT(),
                     hdht.getNgayHoanTra(),
                     soLuong,
-                    hdht.tongTienHoan(),
-                    hdht.getHoaDon().getKhachHang().getTenKH()
+                    df.format(hdht.tongTienHoan()),
+                    hdht.getHoaDon().getKhachHang().getTenKH(),
+                    hdht.getNhanVien().getTenNV(),
                 });
         }   
     }
@@ -421,7 +425,7 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
 
             },
             new String [] {
-                "Mã hóa đơn", "Ngày lập", "Tổng số lượng sản phầm", "Tổng thành tiền", "Tên khách hàng"
+                "Mã hóa đơn", "Ngày lập", "Tổng số lượng sản phầm", "Tổng thành tiền", "Tên khách hàng", "Tên nhân viên"
             }
         ));
         jScrollPane1.setViewportView(tblHoaDonBanHang);
@@ -670,7 +674,7 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
 
             },
             new String [] {
-                "Mã đơn hoàn", "Ngày hoàn đơn", "Tổng sản phẩm", "Tiền hoàn", "Tên khách hàng"
+                "Mã đơn hoàn", "Ngày hoàn đơn", "Tổng sản phẩm", "Tổng tiền hoàn", "Tên khách hàng", "Tên nhân viên"
             }
         ));
         jScrollPane3.setViewportView(tblHoaDonHoan);

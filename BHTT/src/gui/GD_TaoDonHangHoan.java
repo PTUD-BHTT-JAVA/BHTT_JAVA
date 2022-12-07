@@ -1011,10 +1011,10 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
         }
         if (kh.getLoaiKhachHang().getTenLoai().equals("VIP")) {
             tienHoanTra = tienHoanHT + tienHoanHT * 0.15;
-            hDHT = new HoaDonHoanTra(maHDHT, ngayHT, hd_dao.layHoaDonTheoMa(maHD));
+            hDHT = new HoaDonHoanTra(maHDHT, ngayHT, hd_dao.layHoaDonTheoMa(maHD),nv_dao.layNhanVienBangMa(username));
         } else {
             tienHoanTra = tienHoanHT + tienHoanHT * 0.05;
-            hDHT = new HoaDonHoanTra(maHDHT, ngayHT, hd_dao.layHoaDonTheoMa(maHD));
+            hDHT = new HoaDonHoanTra(maHDHT, ngayHT, hd_dao.layHoaDonTheoMa(maHD),nv_dao.layNhanVienBangMa(username));
         }
 
         hdh_dao.themHoaDonHon(hDHT);

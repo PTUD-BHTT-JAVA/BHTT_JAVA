@@ -42,7 +42,7 @@ public class DAO_HoaDon {
                 Date ngayLap = rs.getDate("ngayLap");
                 double tienKhachDua = rs.getDouble("tienKhachDua");
                 String diaChi = rs.getString("diaChi");
-                NhanVien nv = new NhanVien(rs.getString("maNV"));
+                NhanVien nv = nv_dao.layNhanVienBangMa(rs.getString("maNV"));
                 KhachHang kh = kh_dao.getKHBangMa(rs.getString("maKH"));
                 HoaDon hd = new HoaDon(maNV, ngayLap, tienKhachDua, diaChi, nv, kh);
                 dsHD.add(hd);
@@ -66,7 +66,7 @@ public class DAO_HoaDon {
                 Date ngayLap = rs.getDate("ngayLap");
                 double tienKhachDua = rs.getDouble("tienKhachDua");
                 String diaChi = rs.getString("diaChi");
-                NhanVien nv = new NhanVien(rs.getString("maNV"));
+                NhanVien nv = nv_dao.layNhanVienBangMa(rs.getString("maNV"));
                 KhachHang kh = kh_dao.getKHBangMa(rs.getString("maKH"));
                 HoaDon hd = new HoaDon(maNV, ngayLap, tienKhachDua, diaChi, nv, kh);
                 dsHD.add(hd);
@@ -171,7 +171,7 @@ public class DAO_HoaDon {
                 Date ngayLap = rs.getDate("ngayLap");
                 double tienKhachDua = rs.getDouble("tienKhachDua");
                 String diaChi = rs.getString("diaChi");
-                NhanVien nv = new NhanVien(rs.getString("maNV"));
+                NhanVien nv = nv_dao.layNhanVienBangMa(rs.getString("maNV"));
                 KhachHang kh = kh_dao.getKHBangMa(rs.getString("maKH"));
                 HoaDon hd = new HoaDon(maNV, ngayLap, tienKhachDua, diaChi, nv, kh);
                 dsHD.add(hd);
@@ -201,7 +201,7 @@ public class DAO_HoaDon {
                 Date ngayLap = rs.getDate("ngayLap");
                 double tienKhachDua = rs.getDouble("tienKhachDua");
                 String diaChi = rs.getString("diaChi");
-                NhanVien nv = new NhanVien(rs.getString("maNV"));
+                NhanVien nv = nv_dao.layNhanVienBangMa(rs.getString("maNV"));
                 KhachHang kh = kh_dao.getKHBangMa(rs.getString("maKH"));
                 HoaDon hd = new HoaDon(maNV, ngayLap, tienKhachDua, diaChi, nv, kh);
                 dsHD.add(hd);
@@ -228,7 +228,7 @@ public class DAO_HoaDon {
                 Date ngayLap = rs.getDate("ngayLap");
                 double tienKhachDua = rs.getDouble("tienKhachDua");
                 String diaChi = rs.getString("diaChi");
-                NhanVien nv = new NhanVien(a);
+                NhanVien nv = nv_dao.layNhanVienBangMa(rs.getString("maNV"));
                 KhachHang kh = kh_dao.getKHBangMa(rs.getString("maKH"));
                 HoaDon hd = new HoaDon(maNV, ngayLap, tienKhachDua, diaChi, nv, kh);
                 dsHD.add(hd);

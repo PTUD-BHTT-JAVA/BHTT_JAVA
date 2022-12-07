@@ -4,6 +4,7 @@
  */
 package entity;
 
+import dao.DAO_ChiTietHoanTra;
 import java.util.Objects;
 
 /**
@@ -65,9 +66,15 @@ public class ChiTietHoanTra {
         this.lyDoHoanTra = lyDoHoanTra;
     }
     
-//    public double tinhThanhTien(){
-//        
-//    }
+    public double tinhThanhTien(){
+        double tt=0 ;
+        tt=getSanPham().getGiaGoc() * getSoLuong();
+        if (getHoaDonHoanTra().getHoaDon().getKhachHang().getLoaiKhachHang().getMaLoaiKH().equals("LKH001"))
+            tt=tt-tt*0.1 + tt*0.05;
+        else
+            tt=tt+tt*0.05;
+        return tt;
+    }
 
     @Override
     public int hashCode() {

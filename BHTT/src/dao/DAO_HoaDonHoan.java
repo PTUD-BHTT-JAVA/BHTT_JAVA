@@ -28,6 +28,7 @@ public class DAO_HoaDonHoan {
 
     private ArrayList<HoaDonHoanTra> dsHDH;
     private DAO_HoaDon hd_dao = new DAO_HoaDon();
+    private DAO_NhanVien nv_dao=new DAO_NhanVien();
 
     public ArrayList<HoaDonHoanTra> getallDSHoaDonHoan() {
         dsHDH = new ArrayList<HoaDonHoanTra>();
@@ -41,7 +42,8 @@ public class DAO_HoaDonHoan {
                 String maHDH = rs.getString("maHDHT");
                 Date ngayLap = rs.getDate("ngayHoanTra");
                 HoaDon hd = hd_dao.layHoaDonTheoMa(rs.getString("maHD"));
-                HoaDonHoanTra hdht = new HoaDonHoanTra(maHDH, ngayLap, hd);
+                NhanVien nv= nv_dao.layNhanVienBangMa(rs.getString("maNV"));
+                HoaDonHoanTra hdht = new HoaDonHoanTra(maHDH, ngayLap, hd,nv);
                 dsHDH.add(hdht);
             }
         } catch (Exception e) {
@@ -56,12 +58,13 @@ public class DAO_HoaDonHoan {
         PreparedStatement stmt = null;
         int n = 0;
         try {
-            stmt = con.prepareStatement("insert into HoaDonHoanTra values(?,?,?)");
+            stmt = con.prepareStatement("insert into HoaDonHoanTra values(?,?,?,?)");
             stmt.setString(1, hdHoan.getMaHDHT());
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             String ngayLap = sdf.format(hdHoan.getNgayHoanTra());
             stmt.setString(2, ngayLap);
             stmt.setString(3, hdHoan.getHoaDon().getMaHD());
+            stmt.setString(4, hdHoan.getNhanVien().getMaNV());
 
             n = stmt.executeUpdate();
         } catch (Exception e) {
@@ -85,7 +88,8 @@ public class DAO_HoaDonHoan {
                     Date ngayLap = rs.getDate("ngayHoanTra");
                     HoaDon hd = hd_dao.layHoaDonTheoMa(rs.getString("maHD"));
                     String maHDHT  = rs.getString("maHDHT");
-                    HoaDonHoanTra hdht = new HoaDonHoanTra(maHDHT, ngayLap, hd);
+                    NhanVien nv= nv_dao.layNhanVienBangMa(rs.getString("maNV"));
+                    HoaDonHoanTra hdht = new HoaDonHoanTra(maHDHT, ngayLap, hd,nv);
                     return hdht;
                 }
             }
@@ -108,7 +112,36 @@ public class DAO_HoaDonHoan {
             while (rs.next()) {
                 Date ngayLap = rs.getDate("ngayHoanTra");
                 HoaDon hd = hd_dao.layHoaDonTheoMa(rs.getString("maHD"));
-                HoaDonHoanTra hdht = new HoaDonHoanTra(rs.getString("maHDHT"), ngayLap, hd);
+                NhanVien nv= nv_dao.layNhanVienBangMa(rs.getString("maNV"));
+                HoaDonHoanTra hdht = new HoaDonHoanTra(rs.getString("maHDHT"), ngayLap, hd,nv);
+                ds.add(hdht);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                statement.close();
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+        return ds;
+    }
+        public ArrayList<HoaDonHoanTra> layHoaDonHoanTheoMaNV(String maTim) {
+        ArrayList<HoaDonHoanTra> ds = new ArrayList<HoaDonHoanTra>();
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        PreparedStatement statement = null;
+        try {
+            String sql = "select * from HoaDonHoanTra where maNV =? ";
+            statement = con.prepareStatement(sql);
+            statement.setString(1, maTim);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Date ngayLap = rs.getDate("ngayHoanTra");
+                HoaDon hd = hd_dao.layHoaDonTheoMa(rs.getString("maHD"));
+                NhanVien nv= nv_dao.layNhanVienBangMa(rs.getString("maNV"));
+                HoaDonHoanTra hdht = new HoaDonHoanTra(rs.getString("maHDHT"), ngayLap, hd,nv);
                 ds.add(hdht);
             }
         } catch (Exception e) {
@@ -147,7 +180,8 @@ public class DAO_HoaDonHoan {
                 NhanVien nv = new NhanVien(rs.getString("maNV"));
                 KhachHang kh = new KhachHang(rs.getString("maKH"));
                 HoaDon hd = new HoaDon(maHD, rs.getDate("ngayLap"), rs.getDouble("tienKhachDua"), rs.getString("diaChi"), nv, kh);
-                HoaDonHoanTra hdht = new HoaDonHoanTra(maHDH, ngayHoanTra, hd);
+                
+                HoaDonHoanTra hdht = new HoaDonHoanTra(maHDH, ngayHoanTra, hd,nv);
                 dsHDH.add(hdht);
             }
         } catch (Exception e) {
@@ -178,7 +212,7 @@ public class DAO_HoaDonHoan {
                 NhanVien nv = new NhanVien(rs.getString("maNV"));
                 KhachHang kh = new KhachHang(rs.getString("maKH"));
                 HoaDon hd = new HoaDon(maHD, rs.getDate("ngayLap"), rs.getDouble("tienKhachDua"), rs.getString("diaChi"), nv, kh);
-                HoaDonHoanTra hdht = new HoaDonHoanTra(maHDH, ngayHoanTra, hd);
+                HoaDonHoanTra hdht = new HoaDonHoanTra(maHDH, ngayHoanTra, hd,nv);
                 dsHDH.add(hdht);
             }
         } catch (Exception e) {
