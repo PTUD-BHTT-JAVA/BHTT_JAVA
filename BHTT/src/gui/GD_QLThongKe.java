@@ -682,11 +682,11 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
         pnlTKTopNV.setLayout(pnlTKTopNVLayout);
         pnlTKTopNVLayout.setHorizontalGroup(
             pnlTKTopNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 681, Short.MAX_VALUE)
+            .addGap(0, 747, Short.MAX_VALUE)
         );
         pnlTKTopNVLayout.setVerticalGroup(
             pnlTKTopNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 468, Short.MAX_VALUE)
+            .addGap(0, 474, Short.MAX_VALUE)
         );
 
         tblTKTopNV.setModel(new javax.swing.table.DefaultTableModel(
@@ -717,15 +717,15 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
             .addGroup(pnlTopNVLayout.createSequentialGroup()
                 .addGroup(pnlTopNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlTopNVLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(pnlTKTopNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlTopNVLayout.createSequentialGroup()
                         .addGap(278, 278, 278)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSpTopNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(27, 27, 27)
-                .addComponent(scrTKNVTop, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
+                        .addComponent(jSpTopNV, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlTopNVLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(pnlTKTopNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addComponent(scrTKNVTop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         pnlTopNVLayout.setVerticalGroup(
@@ -733,11 +733,11 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTopNVLayout.createSequentialGroup()
                 .addGap(0, 6, Short.MAX_VALUE)
                 .addGroup(pnlTopNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(scrTKNVTop, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(scrTKNVTop, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnlTopNVLayout.createSequentialGroup()
                         .addGroup(pnlTopNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel2)
-                            .addComponent(jSpTopNV))
+                            .addComponent(jSpTopNV, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(pnlTKTopNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(15, 15, 15))
@@ -951,7 +951,7 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Top phải lớn hơn 0.");
             return;
         }
-        ArrayList<thongKeSPBanChay> dsTKSPBC = sp_dao.thongKeSPBanChayTheoNam(c,a);
+        ArrayList<thongKeSPBanChay> dsTKSPBC = sp_dao.thongKeSPBanChayTheoNam(c, a);
         SanPham sp;
         if (dsTKSPBC != null) {
             DefaultCategoryDataset dataset = new DefaultCategoryDataset();
@@ -1330,7 +1330,7 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
         double tongThanhTienHoanVIP = 0;
         double tongThanhTienHoanThuong = 0;
         KhachHang kh;
-        
+
         for (HoaDonHoanTra hdht : dsHDHT) {
             dsCTHT = ctht_dao.layDSCTHTBangMa(hdht.getMaHDHT());
             for (ChiTietHoanTra ctht : dsCTHT) {
@@ -1437,8 +1437,8 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
         }
         lblKetToann.setText(s);
         //Thống kê sản phẩm
-        ArrayList<SanPham>dsSP= sp_dao.getAllSP();
-        ArrayList<thongKeSPBanChay> dsSPBC = sp_dao.thongKeSPBanChayTheoNam(dsSP.size(),a);
+        ArrayList<SanPham> dsSP = sp_dao.getAllSP();
+        ArrayList<thongKeSPBanChay> dsSPBC = sp_dao.thongKeSPBanChayTheoNam(dsSP.size(), a);
         int i = 1;
         SanPham sp;
         for (thongKeSPBanChay spbc : dsSPBC) {
@@ -1446,47 +1446,52 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
             modelTKTopSP.addRow(new Object[]{i++, spbc.getMaSP(), sp.getTenSP(),
                 spbc.getSlBan(), sp.getSoLuong(),});
         }
-        
+
         ThongKeSPBanChayTheoNam(a);
     }//GEN-LAST:event_btnCaNamActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         modelTopNV.setRowCount(0);
         List<NhanVien> dsNV = nv_dao.layNhanVienVaoBang();
-        ArrayList<NhanVien> ds=new ArrayList<NhanVien>();
+        ArrayList<NhanVien> ds = new ArrayList<NhanVien>();
         ArrayList<HoaDon> dsHD;
         ArrayList<ChiTietHoaDon> dsCTHD = new ArrayList<ChiTietHoaDon>();
         long tongThanhTien = 0;
         double tongThanhTienVIP = 0;
         double tongThanhTienThuong = 0;
-        int i=1;
+        int i = 1;
         dsNV.sort(Comparator.comparing(NhanVien::getDoanhThu).reversed());
         for (NhanVien nv : dsNV) {
-//            dsHD = hd_dao.getAllDSHDtheoMaNV(nv.getMaNV());
-//            tongThanhTien = 0;
-//            tongThanhTienVIP = 0;
-//            tongThanhTienThuong = 0;
-//            for (HoaDon hd : dsHD) {
-//                dsCTHD = cthd_dao.layDSHDBangMa(hd.getMaHD());
-//                for (ChiTietHoaDon cthd : dsCTHD) {
-//                    if (hd.getKhachHang().getLoaiKhachHang().getTenLoai().equalsIgnoreCase("VIP")) {
-//                        tongThanhTienVIP = tongThanhTienVIP + cthd.getTongTien();
-//                    } else {
-//                        tongThanhTienThuong = tongThanhTienVIP + cthd.getTongTien();
-//                    }
-//
-//                }
-//                tongThanhTienVIP = tongThanhTienVIP - tongThanhTienVIP * 0.05;
-//                tongThanhTienThuong = tongThanhTienThuong + tongThanhTienThuong * 0.05;
-//                tongThanhTien = (long) tongThanhTienVIP + (long) tongThanhTienThuong;
-//            }
-            
             modelTopNV.addRow(new Object[]{i++, nv.getMaNV(), nv.getTenNV(), nv.getDoanhThu()});
         }
-        
-        
+        ThongKeSPNV();
+
     }//GEN-LAST:event_jButton1ActionPerformed
-    
+    public void ThongKeSPNV() {
+        int c = (int) jSpTopNV.getValue();
+        if (c <0) {
+            JOptionPane.showMessageDialog(null, "Top phải lớn hơn hoặc bằng 0.");
+            return;
+        }
+        if(c >modelTopNV.getRowCount()){
+            JOptionPane.showMessageDialog(null, "Hệ thống không đủ nhân viên.");
+            return;
+        }
+         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        for (int j = 0; j < c; j++) {
+            dataset.addValue((double) modelTopNV.getValueAt(j, 3), "VND", "" + modelTopNV.getValueAt(j, 2));
+        }
+
+        JFreeChart chart = ChartFactory.createBarChart("Thống Kê Nhân Viên Suất Xắc", "Tên sản phẩm", "VND ", dataset);
+        ChartPanel chartPanel = new ChartPanel(chart);
+        chartPanel.setPreferredSize(new Dimension(pnlTKTopNV.getWidth(), pnlTKTopNV.getHeight()));
+        pnlTKTopNV.removeAll();
+        pnlTKTopNV.setLayout(new CardLayout());
+        pnlTKTopNV.add(chartPanel);
+        pnlTKTopNV.validate();
+        pnlTKTopNV.repaint();
+    }
+
     public void ThongKeSPBanChay(String a, String b) {
         int c = (int) jSpTopSP.getValue();
         if (c <= 0) {
