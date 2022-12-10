@@ -106,7 +106,7 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
                         kh.themKhachHang(khImport);
                         modelKhachHang.addRow(new Object[]{
                             khImport.getMaKH(), khImport.getTenKH(), khImport.getSoDienThoai(), khImport.getEmail(),
-                            khImport.isGioiTinh() == true ? "Nam" : "Nữ", khImport.getLoaiKhachHang().getMaLoaiKH(), khImport.getDiemTichLuy()
+                            khImport.isGioiTinh() == true ? "Nam" : "Nữ", "LKH001".equals(khImport.getLoaiKhachHang().getMaLoaiKH()) ? "VIP" : "Thường", khImport.getDiemTichLuy()
                         });
                          JOptionPane.showMessageDialog(null,"Thêm thành công");
                     }else{
