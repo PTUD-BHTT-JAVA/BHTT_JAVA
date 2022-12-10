@@ -8,6 +8,7 @@ package gui;
 import javax.swing.JOptionPane;
 import dao.DAO_TaiKhoan;
 import dao.DAO_NhanVien;
+import java.awt.Toolkit;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,7 +19,7 @@ import javax.swing.UnsupportedLookAndFeelException;
  * @author ACER
  */
 public class GD_DangNhap extends javax.swing.JFrame {
-
+    
      DAO_TaiKhoan taiKhoanDAO;
      DAO_NhanVien nhanVienDAO;
 
@@ -26,7 +27,7 @@ public class GD_DangNhap extends javax.swing.JFrame {
      * Creates new form GiaoDienDangNhap
      */
     public GD_DangNhap() {
-      
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icon/tuisach.png")));
         initComponents();
         txtTenDN.setText("NV002");
         txtMatKhau.setText("123456");

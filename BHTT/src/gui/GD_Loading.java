@@ -1,6 +1,7 @@
 
 package gui;
 
+import java.awt.Toolkit;
 import javax.swing.UnsupportedLookAndFeelException;
 
 public class GD_Loading extends javax.swing.JFrame {
@@ -9,6 +10,7 @@ public class GD_Loading extends javax.swing.JFrame {
      * Creates new form GD_Loading
      */
     public GD_Loading() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icon/tuisach.png")));
         initComponents();
     }
 
