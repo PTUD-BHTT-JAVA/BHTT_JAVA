@@ -54,7 +54,7 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
     private byte[] anhSP = null;
     private final DefaultTableModel modolSP;
     List<RowFilter<DefaultTableModel, Object>> filters = new ArrayList<>();
-    private TableRowSorter<DefaultTableModel> tr;
+    private TableRowSorter<DefaultTableModel> tr,tr1;
     public DefaultTableModel modelDonHang;
     DecimalFormat df = new DecimalFormat("#,##0 VND");
     int soLuongTon;
@@ -97,6 +97,7 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
         ListSP = new ArrayList<SanPham>();
         
         tr = new TableRowSorter<DefaultTableModel>(modolSP);
+        tr1 = new TableRowSorter<DefaultTableModel>(modolSP);
         hd_dao = new DAO_HoaDon();
         cthd_dao = new DAO_ChiTietHoaDon();
         kh = new DAO_KhachHang();
@@ -285,8 +286,8 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
     public void themSPVaoDonHang() {
         int r = jtbSanPham.getSelectedRow();
         if (r != -1) {
-            soLuongTon = Integer.parseInt(modolSP.getValueAt(r, 2).toString());
-            String maSP = (modolSP.getValueAt(r, 0).toString());
+            soLuongTon = Integer.parseInt(jtbSanPham.getValueAt(r, 2).toString());
+            String maSP = (jtbSanPham.getValueAt(r, 0).toString());
             SanPham sp = sp_dao.laySanPhamBangMa(maSP);
             int soluong = 0;
             try {
@@ -462,6 +463,11 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
         jPanel7.setPreferredSize(new java.awt.Dimension(200, 140));
 
         txtTim.setPreferredSize(new java.awt.Dimension(250, 39));
+        txtTim.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtTimMouseClicked(evt);
+            }
+        });
         txtTim.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtTimKeyReleased(evt);
@@ -514,6 +520,11 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
         cbxPL.setMaximumSize(new java.awt.Dimension(200, 50));
         cbxPL.setMinimumSize(new java.awt.Dimension(79, 20));
         cbxPL.setPreferredSize(new java.awt.Dimension(170, 25));
+        cbxPL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxPLActionPerformed(evt);
+            }
+        });
         jPanel14.add(cbxPL);
 
         jPanel17.setBackground(new java.awt.Color(204, 204, 255));
@@ -547,6 +558,11 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
         cbxMS.setMaximumSize(new java.awt.Dimension(200, 50));
         cbxMS.setMinimumSize(new java.awt.Dimension(79, 20));
         cbxMS.setPreferredSize(new java.awt.Dimension(170, 25));
+        cbxMS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxMSActionPerformed(evt);
+            }
+        });
         jPanel14.add(cbxMS);
 
         jPanel8.add(jPanel14);
@@ -584,6 +600,11 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
         cbxCL.setMaximumSize(new java.awt.Dimension(200, 50));
         cbxCL.setMinimumSize(new java.awt.Dimension(79, 20));
         cbxCL.setPreferredSize(new java.awt.Dimension(170, 25));
+        cbxCL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxCLActionPerformed(evt);
+            }
+        });
         jPanel15.add(cbxCL);
 
         jPanel18.setBackground(new java.awt.Color(204, 204, 255));
@@ -617,6 +638,11 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
         cbxKT.setMaximumSize(new java.awt.Dimension(200, 50));
         cbxKT.setMinimumSize(new java.awt.Dimension(79, 20));
         cbxKT.setPreferredSize(new java.awt.Dimension(170, 25));
+        cbxKT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxKTActionPerformed(evt);
+            }
+        });
         jPanel15.add(cbxKT);
 
         jPanel8.add(jPanel15);
@@ -1150,48 +1176,119 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTienKhachDuaKeyReleased
 
     private void txtTimKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKeyReleased
-//        try {
-////            timKiemSanPham();
-//        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(modolSP);
-//            jtbSanPham.setRowSorter(tr);
-//            tr.setRowFilter(RowFilter.regexFilter("(?i)" + txtTim.getText()));
-//            
-//        } catch (Exception e) {
-//            System.out.println(e.getMessage());
-//        }
+        String s=txtTim.getText();
+        filter(s);
     }//GEN-LAST:event_txtTimKeyReleased
 
+    private void filter(String s) {
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(modolSP);
+        jtbSanPham.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter("(?i)" + s,1));
+
+    }
 //    Tìm sản phẩm với nhiều tiêu chí trên combobox
     private void btnTimSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimSPActionPerformed
-        txtTim.setText("");
-        XoaHetDLTrenTbale(jtbSanPham);
-        sp_dao = new DAO_SanPham();
-        ListTimSP = new ArrayList<SanPham>();
-        
-        ListTimSP = sp_dao.timSanPhamNhieuTieuChi(cbxPL.getSelectedItem().toString(), cbxKT.getSelectedItem().toString(),
-                 cbxMS.getSelectedItem().toString(), cbxCL.getSelectedItem().toString());
-        if (!ListTimSP.isEmpty()) {
-            for (SanPham sp : ListTimSP) {
-                modolSP.addRow(new Object[]{
-                    sp.getMaSP(), sp.getTenSP(), sp.getSoLuong(),
-                    df.format(sp.getGiaGoc()),
-                    sp.getLoaiSanPham().getTenLoaiSP(),
-                    sp.getMauSac().getTenMau(),
-                    sp.getChatLieu().getTenChatLieu(),
-                    sp.getKichThuoc().getTenKichThuoc()
-                });
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Không có sản phẩm cần tìm");
-            cbxCL.setSelectedItem("Tất cả");
-            cbxKT.setSelectedItem("Tất cả");
-            cbxMS.setSelectedItem("Tất cả");
-            cbxPL.setSelectedItem("Tất cả");
-            DocDuLieuLenTable();
+//        txtTim.setText("");
+//        XoaHetDLTrenTbale(jtbSanPham);
+//        sp_dao = new DAO_SanPham();
+//        ListTimSP = new ArrayList<SanPham>();
+//        
+//        ListTimSP = sp_dao.timSanPhamNhieuTieuChi(cbxPL.getSelectedItem().toString(), cbxKT.getSelectedItem().toString(),
+//                 cbxMS.getSelectedItem().toString(), cbxCL.getSelectedItem().toString());
+//        if (!ListTimSP.isEmpty()) {
+//            for (SanPham sp : ListTimSP) {
+//                modolSP.addRow(new Object[]{
+//                    sp.getMaSP(), sp.getTenSP(), sp.getSoLuong(),
+//                    df.format(sp.getGiaGoc()),
+//                    sp.getLoaiSanPham().getTenLoaiSP(),
+//                    sp.getMauSac().getTenMau(),
+//                    sp.getChatLieu().getTenChatLieu(),
+//                    sp.getKichThuoc().getTenKichThuoc()
+//                });
+//            }
+//        } else {
+//            JOptionPane.showMessageDialog(null, "Không có sản phẩm cần tìm");
+//            cbxCL.setSelectedIndex(0);
+//            cbxKT.setSelectedIndex(0);
+//            cbxMS.setSelectedIndex(0);
+//            cbxPL.setSelectedIndex(0);
+//            DocDuLieuLenTable();
+//        }
+
+    //Thu
+    jtbSanPham.setRowSorter(tr1);
+    String fCL,fKT,fPL,fMS;
+    if(cbxCL.getSelectedItem().toString().equals("Tất cả"))
+        fCL="";
+    else
+        fCL=cbxCL.getSelectedItem().toString();
+    if(cbxMS.getSelectedItem().toString().equals("Tất cả"))
+        fMS="";
+    else
+        fMS=cbxMS.getSelectedItem().toString();
+    if(cbxKT.getSelectedItem().toString().equals("Tất cả"))
+        fKT="";
+    else
+        fKT=cbxKT.getSelectedItem().toString();
+    if(cbxPL.getSelectedItem().toString().equals("Tất cả"))
+        fPL="";
+    else
+        fPL=cbxPL.getSelectedItem().toString();
+    
+     List<RowFilter<Object,Object>> filters = new ArrayList<RowFilter<Object,Object>>(4);
+     filters.add(RowFilter.regexFilter(fCL,6));
+     filters.add(RowFilter.regexFilter(fMS,5));
+     filters.add(RowFilter.regexFilter(fKT,7));
+     filters.add(RowFilter.regexFilter(fPL,4));
+     RowFilter<Object,Object> fooBarFilter = RowFilter.andFilter(filters);
+     
+     TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(modolSP);
+        jtbSanPham.setRowSorter(tr1);
+        tr1.setRowFilter(fooBarFilter);
+    
+    }//GEN-LAST:event_btnTimSPActionPerformed
+    
+    private void txtTimMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTimMouseClicked
+        jtbSanPham.setRowSorter(tr);
+        cbxCL.setSelectedIndex(0);
+       cbxKT.setSelectedIndex(0);
+       cbxMS.setSelectedIndex(0);
+       cbxPL.setSelectedIndex(0);
+    }//GEN-LAST:event_txtTimMouseClicked
+
+    private void cbxPLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxPLActionPerformed
+
+        if(!txtTim.getText().equals("")){
+            txtTim.setText("");
+            tr1 = new TableRowSorter<DefaultTableModel>(modolSP);
+            jtbSanPham.setRowSorter(tr1);
         }
         
+    }//GEN-LAST:event_cbxPLActionPerformed
 
-    }//GEN-LAST:event_btnTimSPActionPerformed
+    private void cbxMSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxMSActionPerformed
+        if(!txtTim.getText().equals("")){
+            txtTim.setText("");
+            tr1 = new TableRowSorter<DefaultTableModel>(modolSP);
+            jtbSanPham.setRowSorter(tr1);
+        }
+    }//GEN-LAST:event_cbxMSActionPerformed
+
+    private void cbxCLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCLActionPerformed
+        if(!txtTim.getText().equals("")){
+            txtTim.setText("");
+            tr1 = new TableRowSorter<DefaultTableModel>(modolSP);
+            jtbSanPham.setRowSorter(tr1);
+        }
+    }//GEN-LAST:event_cbxCLActionPerformed
+
+    private void cbxKTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxKTActionPerformed
+        if(!txtTim.getText().equals("")){
+            txtTim.setText("");
+            tr1 = new TableRowSorter<DefaultTableModel>(modolSP);
+            jtbSanPham.setRowSorter(tr1);
+        }
+    }//GEN-LAST:event_cbxKTActionPerformed
     
     public void timKiemSanPham() {
         try {

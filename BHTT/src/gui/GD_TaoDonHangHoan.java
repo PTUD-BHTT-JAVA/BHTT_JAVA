@@ -358,10 +358,10 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
             }
         });
 
-        txtTim.setHintText("Tìm theo mã hóa đơn / tên khách hàng");
-        txtTim.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTimActionPerformed(evt);
+        txtTim.setHintText("Tìm theo mã hóa đơn");
+        txtTim.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTimKeyReleased(evt);
             }
         });
 
@@ -874,7 +874,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
     private void filter(String s) {
         TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(modelHoaDon);
         tblDSHD.setRowSorter(tr);
-        tr.setRowFilter(RowFilter.regexFilter("(?i)" + s));
+        tr.setRowFilter(RowFilter.regexFilter("(?i)" + s,0));
 
     }
     private void btnHoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHoanActionPerformed
@@ -1193,9 +1193,11 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
         tinhTongCong();
     }//GEN-LAST:event_btnXoaSPDHActionPerformed
 
-    private void txtTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTimActionPerformed
+    private void txtTimKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKeyReleased
+            String f= txtTim.getText();
+        filter(f);                                         
+    
+    }//GEN-LAST:event_txtTimKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

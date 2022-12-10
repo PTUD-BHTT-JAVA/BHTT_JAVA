@@ -424,10 +424,10 @@
                     </Component>
                     <Component class="swing.TextFieldAnimation" name="txtTim">
                       <Properties>
-                        <Property name="hintText" type="java.lang.String" value="T&#xec;m theo m&#xe3; h&#xf3;a &#x111;&#x1a1;n / t&#xea;n kh&#xe1;ch h&#xe0;ng"/>
+                        <Property name="hintText" type="java.lang.String" value="T&#xec;m theo m&#xe3; h&#xf3;a &#x111;&#x1a1;n"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTimActionPerformed"/>
+                        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTimKeyReleased"/>
                       </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="btnThem">
