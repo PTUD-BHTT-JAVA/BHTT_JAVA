@@ -88,10 +88,39 @@ public class DAO_NhanVien {
                 boolean gioiTinh = rs.getBoolean("gioiTinh");
                 double luongCoBan = rs.getDouble("luongCoBan");
                 boolean trangThai = rs.getBoolean("trangThai");
-                LoaiNhanVien lnv = new LoaiNhanVien(rs.getString("maLoaiNV"));
+                LoaiNhanVien lnv = lnvDAO.timLoaiNVBangMa(rs.getString("maLoaiNV"));
                 NhanVien nv = new NhanVien(maNV, tenNV,CMND,SDT,gioiTinh,luongCoBan,trangThai,lnv);
                
                 ds.add(nv);
+            }
+        }catch (SQLException e) {
+        }
+        return ds;
+    }
+        public List<NhanVien> layNhanVienCoHoaDonTheoNgay(String tuNgay,String denNgay) {
+        List<NhanVien> ds = new ArrayList<>();
+        try{
+            ConnectDB.getInstance();
+            Connection con = ConnectDB.getConnection();
+            String sql = "select nv.maNV,nv.tenNV, nv.CMND,nv.soDienThoai,nv.gioiTinh,nv.luongCoBan,nv.maLoaiNV,nv.trangThai from NhanVien as nv\n" +
+"                    join HoaDon as hd on hd.maNV=nv.maNV\n" +
+"                    where hd.ngayLap >= ? and hd.ngayLap <= ?\n" +
+"					group by nv.maNV,nv.tenNV, nv.CMND,nv.soDienThoai,nv.gioiTinh,nv.luongCoBan,nv.maLoaiNV,nv.trangThai";
+            PreparedStatement statement = con.prepareStatement(sql);
+            statement.setString(1, tuNgay);
+            statement.setString(2, denNgay);
+            ResultSet rs=statement.executeQuery();
+            while (rs.next()) {
+                String maNV = rs.getString("maNV");
+                String tenNV = rs.getString("tenNV");
+                String CMND = rs.getString("CMND");
+                String SDT = rs.getString("soDienThoai");
+                boolean gioiTinh = rs.getBoolean("gioiTinh");
+                double luongCoBan = rs.getDouble("luongCoBan");
+                boolean trangThai = rs.getBoolean("trangThai");
+                LoaiNhanVien lnv = lnvDAO.timLoaiNVBangMa(rs.getString("maLoaiNV"));
+                NhanVien nv = new NhanVien(maNV, tenNV,CMND,SDT,gioiTinh,luongCoBan,trangThai,lnv);
+                    ds.add(nv);
             }
         }catch (SQLException e) {
         }

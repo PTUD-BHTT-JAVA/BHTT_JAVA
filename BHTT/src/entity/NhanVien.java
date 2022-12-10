@@ -108,6 +108,7 @@ public class NhanVien {
     }
 
     public double getDoanhThu(){
+
         double dt=0;
         DAO_HoaDon hd_dao=new DAO_HoaDon();
         List<HoaDon> list=hd_dao.getAllDSHDtheoMaNV(getMaNV().toString());

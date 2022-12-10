@@ -240,6 +240,7 @@ public class DAO_HoaDon {
         return dsHD;
     }
 
+
     public ArrayList<HoaDon> thongKeDoanhThuTheoNV(String a, String b, String ma) {
         dsHD = new ArrayList<HoaDon>();
         Connection con = ConnectDB.getInstance().getConnection();

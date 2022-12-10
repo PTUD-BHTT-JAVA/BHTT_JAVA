@@ -28,6 +28,8 @@ import java.awt.Insets;
 import java.text.SimpleDateFormat;
 import java.time.Year;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
@@ -54,6 +56,8 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
     private DAO_SanPham sp_dao = new DAO_SanPham();
     private DefaultTableModel modelTKTopSP, modelTKSPT, modelTKSPL, modelTopNV;
     private final Date today;
+    private Object sdf;
+    SimpleDateFormat fday=new SimpleDateFormat("yyyy-MM-dd");
 
     private static class RoundedBorder implements Border {
 
@@ -133,6 +137,10 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
         tuNgay.setDate(new Date());
         denNgay.setDate(new Date());
         jSpTopSP.setValue(5);
+        
+       
+//        tu = sdf.format(tuNgay.getDate());
+//        den = sdf.format(denNgay.getDate());
     }
 
     /**
@@ -975,11 +983,12 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_pnlSPLoiComponentShown
 
     private void btnThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongKeActionPerformed
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        
         Date ngayTim = tuNgay.getDate();
         Date ngayCanTim = denNgay.getDate();
-        String TuNgay = sdf.format(tuNgay.getDate());
-        String DenNgay = sdf.format(denNgay.getDate());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String tu=sdf.format(tuNgay);
+        String den=sdf.format(denNgay);
         if (ngayTim.after(today) || ngayCanTim.after(today)) {
             JOptionPane.showMessageDialog(null, "Thời gian tìm không lớn hơn thời gian hiện tại");
         } else {
@@ -991,7 +1000,7 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
                 fm.setRowCount(0);
                 //Thống kê doanh thu
 
-                ArrayList<HoaDon> dsHD = hd_dao.thongKeDoanhThu(TuNgay, DenNgay);
+                ArrayList<HoaDon> dsHD = hd_dao.thongKeDoanhThu(tu, den);
                 ArrayList<ChiTietHoaDon> dsCTHD = new ArrayList<ChiTietHoaDon>();
                 lblTongHD.setText(dsHD.size() + "");
                 long tongThanhTien = 0;
@@ -1016,7 +1025,7 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
                 lblTongTienBanD.setText(String.format("%d", tongThanhTien) + " VND");
 
                 //Thống kê sản phẩm
-                ArrayList<thongKeSPBanChay> dsSPBC = sp_dao.thongKeSPBanChay(TuNgay, DenNgay);
+                ArrayList<thongKeSPBanChay> dsSPBC = sp_dao.thongKeSPBanChay(tu, den);
                 int i = 1;
                 SanPham sp;
                 for (thongKeSPBanChay spbc : dsSPBC) {
@@ -1025,7 +1034,7 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
                         spbc.getSlBan(), sp.getSoLuong(),});
                 }
                 //Thống kê hoàn
-                ArrayList<HoaDonHoanTra> dsHDHT = hdh_dao.thongKeDoanhThu(TuNgay, DenNgay);
+                ArrayList<HoaDonHoanTra> dsHDHT = hdh_dao.thongKeDoanhThu(tu, den);
                 ArrayList<ChiTietHoanTra> dsCTHT;
                 lblSoHDH.setText(dsHDHT.size() + "");
                 long tongThanhTienHoan = 0;
@@ -1059,7 +1068,7 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
                     s += "Chi: " + chi + " VND";
                 }
                 lblKetToann.setText(s);
-                ThongKeSPBanChay(TuNgay, DenNgay);
+                ThongKeSPBanChay(tu, den);
 
             }
         }
@@ -1451,18 +1460,24 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnCaNamActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String tu,den;
+        tu=fday.format(tuNgay.getDate());
+        den=fday.format(denNgay.getDate());
         modelTopNV.setRowCount(0);
-        List<NhanVien> dsNV = nv_dao.layNhanVienVaoBang();
+        List<NhanVien> dsNV = nv_dao.layNhanVienCoHoaDonTheoNgay(tu, den);
         ArrayList<NhanVien> ds = new ArrayList<NhanVien>();
         ArrayList<HoaDon> dsHD;
         ArrayList<ChiTietHoaDon> dsCTHD = new ArrayList<ChiTietHoaDon>();
         long tongThanhTien = 0;
         double tongThanhTienVIP = 0;
         double tongThanhTienThuong = 0;
-        int i = 1;
+        int i=1;
+
+
         dsNV.sort(Comparator.comparing(NhanVien::getDoanhThu).reversed());
+        System.out.println(dsNV);
         for (NhanVien nv : dsNV) {
-            modelTopNV.addRow(new Object[]{i++, nv.getMaNV(), nv.getTenNV(), nv.getDoanhThu()});
+                modelTopNV.addRow(new Object[]{i++, nv.getMaNV(), nv.getTenNV(), nv.getDoanhThu()});
         }
         ThongKeSPNV();
 
