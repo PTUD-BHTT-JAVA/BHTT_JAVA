@@ -211,6 +211,7 @@ public class DAO_HoaDon {
         }
         return dsHD;
     }
+
     public ArrayList<HoaDon> getAllDSHDtheoMaNV(String a) {
         dsHD = new ArrayList<HoaDon>();
         Connection con = ConnectDB.getInstance().getConnection();
@@ -238,4 +239,68 @@ public class DAO_HoaDon {
         }
         return dsHD;
     }
+
+    public ArrayList<HoaDon> thongKeDoanhThuTheoNV(String a, String b, String ma) {
+        dsHD = new ArrayList<HoaDon>();
+        Connection con = ConnectDB.getInstance().getConnection();
+        PreparedStatement stemnt = null;
+        int n = 0;
+        try {
+            ConnectDB.getInstance().connect();
+            String sql = "select maHD,ngayLap,tienKhachDua,diaChi,maNV,maKH\n"
+                    + "                    from HoaDon\n"
+                    + "                    where maNV=? and ngayLap >= ? and ngayLap <= ?";
+            stemnt = con.prepareStatement(sql);
+            stemnt.setString(1, ma);
+            stemnt.setString(2, a);
+            stemnt.setString(3, b);
+
+            ResultSet rs = stemnt.executeQuery();
+            while (rs.next()) {
+                String maNV = rs.getString("maHD");
+                Date ngayLap = rs.getDate("ngayLap");
+                double tienKhachDua = rs.getDouble("tienKhachDua");
+                String diaChi = rs.getString("diaChi");
+                NhanVien nv = nv_dao.layNhanVienBangMa(rs.getString("maNV"));
+                KhachHang kh = kh_dao.getKHBangMa(rs.getString("maKH"));
+                HoaDon hd = new HoaDon(maNV, ngayLap, tienKhachDua, diaChi, nv, kh);
+                dsHD.add(hd);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return dsHD;
+    }
+
+    public ArrayList<HoaDon> thongKeDoanhThuNVTheoNam(int a, String ma) {
+        dsHD = new ArrayList<HoaDon>();
+        Connection con = ConnectDB.getInstance().getConnection();
+        PreparedStatement stemnt = null;
+        int n = 0;
+        try {
+            ConnectDB.getInstance().connect();
+            String sql = "select maHD,ngayLap,tienKhachDua,diaChi,maNV,maKH\n"
+                    + "from HoaDon\n"
+                    + "where maNV = ? and year(ngayLap)=?";
+            stemnt = con.prepareStatement(sql);
+            stemnt.setString(1, ma);
+            stemnt.setInt(2, a);
+
+            ResultSet rs = stemnt.executeQuery();
+            while (rs.next()) {
+                String maNV = rs.getString("maHD");
+                Date ngayLap = rs.getDate("ngayLap");
+                double tienKhachDua = rs.getDouble("tienKhachDua");
+                String diaChi = rs.getString("diaChi");
+                NhanVien nv = nv_dao.layNhanVienBangMa(rs.getString("maNV"));
+                KhachHang kh = kh_dao.getKHBangMa(rs.getString("maKH"));
+                HoaDon hd = new HoaDon(maNV, ngayLap, tienKhachDua, diaChi, nv, kh);
+                dsHD.add(hd);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return dsHD;
+    }
+
 }

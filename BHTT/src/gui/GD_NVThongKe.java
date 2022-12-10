@@ -27,6 +27,7 @@ import java.awt.Insets;
 import java.text.SimpleDateFormat;
 import java.time.Year;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
@@ -552,15 +553,15 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
         Date ngayCanTim = denNgay.getDate();
         String TuNgay = sdf.format(tuNgay.getDate());
         String DenNgay = sdf.format(denNgay.getDate());
-        if (ngayTim.after(today) || ngayCanTim.after(today)) {
-            JOptionPane.showMessageDialog(null, "Thời gian tìm không lớn hơn thời gian hiện tại");
+        if (ngayTim.after(today)) {
+            JOptionPane.showMessageDialog(null, "Từ ngày không lớn hơn thời gian hiện tại");
         } else {
             if (ngayTim.after(ngayCanTim)) {
                 JOptionPane.showMessageDialog(null, "Ngày tìm không lớn hơn ngày cần tìm");
             } else {
                 //Thống kê doanh thu
 
-                ArrayList<HoaDon> dsHD = hd_dao.thongKeDoanhThu(TuNgay, DenNgay);
+                ArrayList<HoaDon> dsHD = hd_dao.thongKeDoanhThuTheoNV(TuNgay, DenNgay, username);
                 ArrayList<ChiTietHoaDon> dsCTHD = new ArrayList<ChiTietHoaDon>();
                 lblTongHD.setText(dsHD.size() + "");
                 long tongThanhTien = 0;
@@ -585,7 +586,7 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
                 lblTongTienBanD.setText(String.format("%d", tongThanhTien) + " VND");
 
                 //Thống kê hoàn
-                ArrayList<HoaDonHoanTra> dsHDHT = hdh_dao.thongKeDoanhThu(TuNgay, DenNgay);
+                ArrayList<HoaDonHoanTra> dsHDHT = hdh_dao.thongKeHoanTraNV(TuNgay, DenNgay, username);
                 ArrayList<ChiTietHoanTra> dsCTHT;
                 lblSoHDH.setText(dsHDHT.size() + "");
                 long tongThanhTienHoan = 0;
@@ -625,11 +626,17 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnThongKeActionPerformed
 
     private void btnQuy4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuy4ActionPerformed
-
-        int a = jycNam.getYear();
-        String b = a + "-10-01";
-        String c = a + "-12-31";
-        ArrayList<HoaDon> dsHD = hd_dao.thongKeDoanhThu(b, c);
+        int year = jycNam.getYear();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(today);
+        int namHiemTai = cal.get(Calendar.YEAR);
+        if (year > namHiemTai) {
+            JOptionPane.showMessageDialog(null, "Năm được chọn không lớn hơn năm hiện tại", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        String b = year + "-10-01";
+        String c = year + "-12-31";
+        ArrayList<HoaDon> dsHD = hd_dao.thongKeDoanhThuTheoNV(b, c,username);
         ArrayList<ChiTietHoaDon> dsCTHD = new ArrayList<ChiTietHoaDon>();
         lblTongHD.setText(dsHD.size() + "");
         long tongThanhTien = 0;
@@ -653,7 +660,7 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
         tongThanhTien = (long) tongThanhTienVIP + (long) tongThanhTienThuong;
         lblTongTienBanD.setText(String.format("%d", tongThanhTien) + " VND");
         //hoàn
-        ArrayList<HoaDonHoanTra> dsHDHT = hdh_dao.thongKeDoanhThu(b, c);
+        ArrayList<HoaDonHoanTra> dsHDHT = hdh_dao.thongKeHoanTraNV(b, c, username);
         ArrayList<ChiTietHoanTra> dsCTHT;
         lblSoHDH.setText(dsHDHT.size() + "");
         long tongThanhTienHoan = 0;
@@ -691,10 +698,17 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnQuy4ActionPerformed
 
     private void btnQuy3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuy3ActionPerformed
-        int a = jycNam.getYear();
-        String b = a + "-07-01";
-        String c = a + "-09-30";
-        ArrayList<HoaDon> dsHD = hd_dao.thongKeDoanhThu(b, c);
+        int year = jycNam.getYear();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(today);
+        int namHiemTai = cal.get(Calendar.YEAR);
+        if (year > namHiemTai) {
+            JOptionPane.showMessageDialog(null, "Năm được chọn không lớn hơn năm hiện tại", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        String b = year + "-07-01";
+        String c = year + "-09-30";
+        ArrayList<HoaDon> dsHD = hd_dao.thongKeDoanhThuTheoNV(b, c, username);
         ArrayList<ChiTietHoaDon> dsCTHD = new ArrayList<ChiTietHoaDon>();
         lblTongHD.setText(dsHD.size() + "");
         long tongThanhTien = 0;
@@ -718,7 +732,7 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
         tongThanhTien = (long) tongThanhTienVIP + (long) tongThanhTienThuong;
         lblTongTienBanD.setText(String.format("%d", tongThanhTien) + " VND");
         //hoàn
-        ArrayList<HoaDonHoanTra> dsHDHT = hdh_dao.thongKeDoanhThu(b, c);
+        ArrayList<HoaDonHoanTra> dsHDHT = hdh_dao.thongKeHoanTraNV(b, c, username);
         ArrayList<ChiTietHoanTra> dsCTHT;
         lblSoHDH.setText(dsHDHT.size() + "");
         long tongThanhTienHoan = 0;
@@ -752,15 +766,22 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
             s += "Chi: " + chi + " VND";
         }
         lblKetToann.setText(s);
-       
+
     }//GEN-LAST:event_btnQuy3ActionPerformed
 
     private void btnQuy2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuy2ActionPerformed
-       
-        int a = jycNam.getYear();
-        String b = a + "-04-01";
-        String c = a + "-06-30";
-        ArrayList<HoaDon> dsHD = hd_dao.thongKeDoanhThu(b, c);
+
+        int year = jycNam.getYear();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(today);
+        int namHiemTai = cal.get(Calendar.YEAR);
+        if (year > namHiemTai) {
+            JOptionPane.showMessageDialog(null, "Năm được chọn không lớn hơn năm hiện tại", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        String b = year + "-04-01";
+        String c = year + "-06-30";
+        ArrayList<HoaDon> dsHD = hd_dao.thongKeDoanhThuTheoNV(b, c, username);
         ArrayList<ChiTietHoaDon> dsCTHD = new ArrayList<ChiTietHoaDon>();
         lblTongHD.setText(dsHD.size() + "");
         long tongThanhTien = 0;
@@ -784,7 +805,7 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
         tongThanhTien = (long) tongThanhTienVIP + (long) tongThanhTienThuong;
         lblTongTienBanD.setText(String.format("%d", tongThanhTien) + " VND");
         //hoàn
-        ArrayList<HoaDonHoanTra> dsHDHT = hdh_dao.thongKeDoanhThu(b, c);
+        ArrayList<HoaDonHoanTra> dsHDHT = hdh_dao.thongKeHoanTraNV(b, c, username);
         ArrayList<ChiTietHoanTra> dsCTHT;
         lblSoHDH.setText(dsHDHT.size() + "");
         long tongThanhTienHoan = 0;
@@ -818,15 +839,22 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
             s += "Chi: " + chi + " VND";
         }
         lblKetToann.setText(s);
-       
+
     }//GEN-LAST:event_btnQuy2ActionPerformed
 
     private void btnQuy1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuy1ActionPerformed
-        
-        int a = jycNam.getYear();
-        String b = a + "-01-01";
-        String c = a + "-03-31";
-        ArrayList<HoaDon> dsHD = hd_dao.thongKeDoanhThu(b, c);
+        int year = jycNam.getYear();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(today);
+        int namHiemTai = cal.get(Calendar.YEAR);
+        if (year > namHiemTai) {
+            JOptionPane.showMessageDialog(null, "Năm được chọn không lớn hơn năm hiện tại", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        String b = year + "-01-01";
+        String c = year + "-03-31";
+        ArrayList<HoaDon> dsHD = hd_dao.thongKeDoanhThuTheoNV(b, c, username);
         ArrayList<ChiTietHoaDon> dsCTHD = new ArrayList<ChiTietHoaDon>();
         lblTongHD.setText(dsHD.size() + "");
         long tongThanhTien = 0;
@@ -850,7 +878,7 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
         tongThanhTien = (long) tongThanhTienVIP + (long) tongThanhTienThuong;
         lblTongTienBanD.setText(String.format("%d", tongThanhTien) + " VND");
         //hoàn
-        ArrayList<HoaDonHoanTra> dsHDHT = hdh_dao.thongKeDoanhThu(b, c);
+        ArrayList<HoaDonHoanTra> dsHDHT = hdh_dao.thongKeHoanTraNV(b, c, username);
         ArrayList<ChiTietHoanTra> dsCTHT;
         lblSoHDH.setText(dsHDHT.size() + "");
         long tongThanhTienHoan = 0;
@@ -884,14 +912,21 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
             s += "Chi: " + chi + " VND";
         }
         lblKetToann.setText(s);
-       
+
     }//GEN-LAST:event_btnQuy1ActionPerformed
 
     private void btnCaNamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCaNamActionPerformed
-        
+
         //Thống ê theo năm
-        int a = jycNam.getYear();
-        ArrayList<HoaDon> dsHD = hd_dao.thongKeDoanhThuTheoNam(a);
+        int year = jycNam.getYear();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(today);
+        int namHiemTai = cal.get(Calendar.YEAR);
+        if (year > namHiemTai) {
+            JOptionPane.showMessageDialog(null, "Năm được chọn không lớn hơn năm hiện tại", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        ArrayList<HoaDon> dsHD = hd_dao.thongKeDoanhThuNVTheoNam(year, username);
         ArrayList<ChiTietHoaDon> dsCTHD = new ArrayList<ChiTietHoaDon>();
         lblTongHD.setText(dsHD.size() + "");
         long tongThanhTien = 0;
@@ -914,7 +949,7 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
         lblTongTienBanD.setText(String.format("%d", tongThanhTien) + " VND");
 
         //Thống kê hoàn
-        ArrayList<HoaDonHoanTra> dsHDHT = hdh_dao.thongKeDoanhThuTheoNam(a);
+        ArrayList<HoaDonHoanTra> dsHDHT = hdh_dao.thongKeDoanhThuNVTheoNam(year, username);
         ArrayList<ChiTietHoanTra> dsCTHT;
         lblSoHDH.setText(dsHDHT.size() + "");
         long tongThanhTienHoan = 0;
@@ -948,7 +983,7 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
             s += "Chi: " + chi + " VND";
         }
         lblKetToann.setText(s);
-        
+
     }//GEN-LAST:event_btnCaNamActionPerformed
 
     private void pnlDoanhThuComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_pnlDoanhThuComponentShown
