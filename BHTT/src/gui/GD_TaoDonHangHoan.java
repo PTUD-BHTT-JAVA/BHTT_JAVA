@@ -1104,7 +1104,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
         if (row < 0) {
             JOptionPane.showMessageDialog(null, "Chọn đơn hàng cần hoàn", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         } 
-        else if( hdh_dao.layHoaDonHoanTheoMa(tblDSHD.getValueAt(row, 0).toString())!=null){
+        else if( hdh_dao.layHoaDonHoanTheoMaHD(tblDSHD.getValueAt(row, 0).toString())!=null){
             JOptionPane.showMessageDialog(null, "Đơn hàng này đã được hoàn, không thể hoàn thêm sản phẩm nào nữa!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
 
         }else
