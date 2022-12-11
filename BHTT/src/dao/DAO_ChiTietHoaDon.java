@@ -222,14 +222,15 @@ public class DAO_ChiTietHoaDon {
         return dsHDHoan;
     }
 
-    public ArrayList<ChiTietHoaDon> layDanhSachHoaDonTheoNgay(String ngayTim, String ngayCanTim) {
+    public ArrayList<ChiTietHoaDon> layDanhSachHoaDonTheoNgay(String ngayTim, String ngayCanTim,String maNV) {
         ArrayList<ChiTietHoaDon> dsCTHDNgay = new ArrayList<ChiTietHoaDon>();
         try {
             ConnectDB.getInstance();
             Connection con = ConnectDB.getConnection();
-            String sql = "select hd.maHD,hd.ngayLap,SUM(cthd.soLuong) as TongSoLuong,SUM(cthd.tongTien) as TongThanhTien from HoaDon hd  join ChiTietHoaDon cthd on cthd.maHD = hd.maHD  where hd.ngayLap >= ' " + ngayTim + " 'AND hd.ngayLap <= ' " + ngayCanTim + " ' group by hd.ngayLap,hd.maHD";
-            Statement statement = con.createStatement();
-            ResultSet rs = statement.executeQuery(sql);
+            String sql = "select hd.maHD,hd.ngayLap,SUM(cthd.soLuong) as TongSoLuong,SUM(cthd.tongTien) as TongThanhTien from HoaDon hd  join ChiTietHoaDon cthd on cthd.maHD = hd.maHD inner join NhanVien nv on nv.maNV = hd.maHD  where nv.maNV = ? and  hd.ngayLap >= ' " + ngayTim + " 'AND hd.ngayLap <= ' " + ngayCanTim + " ' group by hd.ngayLap,hd.maHD";
+            PreparedStatement statement = con.prepareStatement(sql);
+            statement.setString(1, maNV);
+            ResultSet  rs = statement.executeQuery();
             while (rs.next()) {
                 int soLuong = rs.getInt("TongSoLuong");
                 double VAT = 0.1;
@@ -247,14 +248,15 @@ public class DAO_ChiTietHoaDon {
     }
 
 //    Lấy danh sách hóa đơn theo Quý 
-    public ArrayList<ChiTietHoaDon> layDSHoaDonTheoQuy(String dauQuy, String cuoiQuy) {
+    public ArrayList<ChiTietHoaDon> layDSHoaDonTheoQuy(String dauQuy, String cuoiQuy,String maNV) {
         ArrayList<ChiTietHoaDon> dsCTHDQuy = new ArrayList<ChiTietHoaDon>();
         try {
             ConnectDB.getInstance();
             Connection con = ConnectDB.getConnection();
-            String sql = "select hd.maHD,hd.ngayLap,SUM(cthd.soLuong) as TongSoLuong,SUM(cthd.tongTien) as TongThanhTien from HoaDon hd  join ChiTietHoaDon cthd on cthd.maHD = hd.maHD  where hd.ngayLap >= ' " + dauQuy + " 'AND hd.ngayLap <= ' " + cuoiQuy + " ' group by hd.ngayLap,hd.maHD";
-            Statement statement = con.createStatement();
-            ResultSet rs = statement.executeQuery(sql);
+            String sql = "select hd.maHD,hd.ngayLap,SUM(cthd.soLuong) as TongSoLuong,SUM(cthd.tongTien) as TongThanhTien from HoaDon hd inner join ChiTietHoaDon cthd on cthd.maHD = hd.maHD inner join NhanVien nv on nv.maNV = hd.maNV where nv.maNV =  ? AND  hd.ngayLap >= ' " + dauQuy + " 'AND hd.ngayLap <= ' " + cuoiQuy + " ' group by hd.ngayLap,hd.maHD";
+           PreparedStatement statement = con.prepareStatement(sql);
+           statement.setString(1, maNV);
+            ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 int soLuong = rs.getInt("TongSoLuong");
                 double VAT = 0.1;
@@ -265,6 +267,8 @@ public class DAO_ChiTietHoaDon {
                 ChiTietHoaDon cthd = new ChiTietHoaDon(soLuong, VAT, tongTien, tienThoi, maHD, maSP);
                 dsCTHDQuy.add(cthd);
             }
+            rs.close();
+            statement.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

@@ -717,7 +717,7 @@ public class GD_QLTraCuu extends javax.swing.JInternalFrame implements Runnable 
             if (ngayTim.after(ngayCanTim)) {
                 JOptionPane.showMessageDialog(null, "Ngày tìm không lớn hơn ngày cần tìm");
             }else{
-                ArrayList<ChiTietHoaDon> dsHoaDonTheoNgay = cthd_dao.layDanhSachHoaDonTheoNgay(dayTim, dayCanTim);
+                ArrayList<ChiTietHoaDon> dsHoaDonTheoNgay = cthd_dao.layDanhSachHoaDonTheoNgay(dayTim, dayCanTim,username);
                 XoaHetDuLieuTrenTable();
                 for (ChiTietHoaDon cthd : dsHoaDonTheoNgay) {
                     modelDSHoaDon.addRow(new Object[]{
@@ -732,7 +732,8 @@ public class GD_QLTraCuu extends javax.swing.JInternalFrame implements Runnable 
     }//GEN-LAST:event_btnTimActionPerformed
 
     private void TimKiemTheoQuy(String dauQuy,String cuoiQuy){
-        ArrayList<ChiTietHoaDon> dsHoaDonTheoQuy = cthd_dao.layDSHoaDonTheoQuy(dauQuy, cuoiQuy);
+        String maNV = username;
+        ArrayList<ChiTietHoaDon> dsHoaDonTheoQuy = cthd_dao.layDSHoaDonTheoQuy(dauQuy, cuoiQuy,maNV);
         XoaHetDuLieuTrenTable();
         for (ChiTietHoaDon cthd : dsHoaDonTheoQuy) {
             modelDSHoaDon.addRow(new Object[]{
