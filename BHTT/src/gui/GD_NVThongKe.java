@@ -139,17 +139,17 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
         lblTongTienBanD = new javax.swing.JLabel();
         jPanel24 = new javax.swing.JPanel();
         jPanel21 = new javax.swing.JPanel();
-        pnlTongTienHoan = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
-        lblTongTienHoan = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
-        tongTienHoann = new javax.swing.JLabel();
-        jPanel25 = new javax.swing.JPanel();
         pnlTongHDTra = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         lblTongHDTra = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         lblSoHDH = new javax.swing.JLabel();
+        jPanel25 = new javax.swing.JPanel();
+        pnlTongTienHoan = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
+        lblTongTienHoan = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        tongTienHoann = new javax.swing.JLabel();
         jPanel19 = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
@@ -538,7 +538,6 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
         jPanel15.add(jPanel22);
 
         jPanel24.setMaximumSize(new java.awt.Dimension(1000, 1000));
-        jPanel24.setMinimumSize(new java.awt.Dimension(10, 10));
         jPanel24.setPreferredSize(new java.awt.Dimension(30, 30));
 
         javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
@@ -555,6 +554,94 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
         jPanel15.add(jPanel24);
 
         jPanel21.setLayout(new javax.swing.BoxLayout(jPanel21, javax.swing.BoxLayout.X_AXIS));
+
+        pnlTongHDTra.setBackground(new java.awt.Color(102, 102, 255));
+        pnlTongHDTra.setMaximumSize(new java.awt.Dimension(2000, 2000));
+        pnlTongHDTra.setMinimumSize(new java.awt.Dimension(100, 100));
+        pnlTongHDTra.setPreferredSize(new java.awt.Dimension(300, 200));
+        pnlTongHDTra.setLayout(new java.awt.GridLayout(2, 1));
+
+        jPanel5.setBackground(new java.awt.Color(102, 102, 255));
+        jPanel5.setMaximumSize(new java.awt.Dimension(1000, 1000));
+        jPanel5.setMinimumSize(new java.awt.Dimension(50, 50));
+        jPanel5.setPreferredSize(new java.awt.Dimension(300, 100));
+
+        lblTongHDTra.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblTongHDTra.setForeground(new java.awt.Color(255, 255, 255));
+        lblTongHDTra.setText("Tổng số hóa đơn hoàn trả");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 305, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(lblTongHDTra)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(lblTongHDTra)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        pnlTongHDTra.add(jPanel5);
+
+        jPanel6.setBackground(new java.awt.Color(102, 102, 255));
+        jPanel6.setMaximumSize(new java.awt.Dimension(1000, 1000));
+        jPanel6.setMinimumSize(new java.awt.Dimension(50, 50));
+        jPanel6.setPreferredSize(new java.awt.Dimension(300, 100));
+
+        lblSoHDH.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblSoHDH.setForeground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel6Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(lblSoHDH)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel6Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(lblSoHDH)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        pnlTongHDTra.add(jPanel6);
+
+        jPanel21.add(pnlTongHDTra);
+
+        jPanel25.setMaximumSize(new java.awt.Dimension(2000, 2000));
+        jPanel25.setMinimumSize(new java.awt.Dimension(20, 20));
+        jPanel25.setPreferredSize(new java.awt.Dimension(30, 30));
+
+        javax.swing.GroupLayout jPanel25Layout = new javax.swing.GroupLayout(jPanel25);
+        jPanel25.setLayout(jPanel25Layout);
+        jPanel25Layout.setHorizontalGroup(
+            jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 35, Short.MAX_VALUE)
+        );
+        jPanel25Layout.setVerticalGroup(
+            jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 200, Short.MAX_VALUE)
+        );
+
+        jPanel21.add(jPanel25);
 
         pnlTongTienHoan.setBackground(new java.awt.Color(255, 0, 153));
         pnlTongTienHoan.setMaximumSize(new java.awt.Dimension(2000, 2000));
@@ -621,94 +708,6 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
         pnlTongTienHoan.add(jPanel7);
 
         jPanel21.add(pnlTongTienHoan);
-
-        jPanel25.setMaximumSize(new java.awt.Dimension(2000, 2000));
-        jPanel25.setMinimumSize(new java.awt.Dimension(20, 20));
-        jPanel25.setPreferredSize(new java.awt.Dimension(30, 30));
-
-        javax.swing.GroupLayout jPanel25Layout = new javax.swing.GroupLayout(jPanel25);
-        jPanel25.setLayout(jPanel25Layout);
-        jPanel25Layout.setHorizontalGroup(
-            jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 34, Short.MAX_VALUE)
-        );
-        jPanel25Layout.setVerticalGroup(
-            jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 200, Short.MAX_VALUE)
-        );
-
-        jPanel21.add(jPanel25);
-
-        pnlTongHDTra.setBackground(new java.awt.Color(102, 102, 255));
-        pnlTongHDTra.setMaximumSize(new java.awt.Dimension(2000, 2000));
-        pnlTongHDTra.setMinimumSize(new java.awt.Dimension(100, 100));
-        pnlTongHDTra.setPreferredSize(new java.awt.Dimension(300, 200));
-        pnlTongHDTra.setLayout(new java.awt.GridLayout(2, 1));
-
-        jPanel5.setBackground(new java.awt.Color(102, 102, 255));
-        jPanel5.setMaximumSize(new java.awt.Dimension(1000, 1000));
-        jPanel5.setMinimumSize(new java.awt.Dimension(50, 50));
-        jPanel5.setPreferredSize(new java.awt.Dimension(300, 100));
-
-        lblTongHDTra.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lblTongHDTra.setForeground(new java.awt.Color(255, 255, 255));
-        lblTongHDTra.setText("Tổng số hóa đơn hoàn trả");
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 303, Short.MAX_VALUE)
-            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel5Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(lblTongHDTra)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel5Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(lblTongHDTra)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-
-        pnlTongHDTra.add(jPanel5);
-
-        jPanel6.setBackground(new java.awt.Color(102, 102, 255));
-        jPanel6.setMaximumSize(new java.awt.Dimension(1000, 1000));
-        jPanel6.setMinimumSize(new java.awt.Dimension(50, 50));
-        jPanel6.setPreferredSize(new java.awt.Dimension(300, 100));
-
-        lblSoHDH.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lblSoHDH.setForeground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel6Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(lblSoHDH)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel6Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(lblSoHDH)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-
-        pnlTongHDTra.add(jPanel6);
-
-        jPanel21.add(pnlTongHDTra);
 
         jPanel15.add(jPanel21);
 
