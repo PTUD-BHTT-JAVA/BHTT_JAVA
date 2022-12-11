@@ -105,7 +105,7 @@ public class GD_TraCuuSanPham extends javax.swing.JInternalFrame {
         tr = new TableRowSorter<DefaultTableModel>(modolSP);
         tr1=new TableRowSorter<DefaultTableModel>(modolSP);
 
-        jtbSanPham.setRowSorter(tr1);
+        jtbSanPham.setRowSorter(tr);
         
     }
 
@@ -935,10 +935,10 @@ public class GD_TraCuuSanPham extends javax.swing.JInternalFrame {
         fPL=cbxPL.getSelectedItem().toString();
 
         List<RowFilter<Object,Object>> filters = new ArrayList<RowFilter<Object,Object>>(4);
-        filters.add(RowFilter.regexFilter(fCL,6));
-        filters.add(RowFilter.regexFilter(fMS,5));
-        filters.add(RowFilter.regexFilter(fKT,7));
-        filters.add(RowFilter.regexFilter(fPL,4));
+        filters.add(RowFilter.regexFilter(fCL,8));
+        filters.add(RowFilter.regexFilter(fMS,7));
+        filters.add(RowFilter.regexFilter(fKT,9));
+        filters.add(RowFilter.regexFilter(fPL,5));
         RowFilter<Object,Object> fooBarFilter = RowFilter.andFilter(filters);
 
         TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(modolSP);
