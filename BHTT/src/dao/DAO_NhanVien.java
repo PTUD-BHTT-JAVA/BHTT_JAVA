@@ -241,15 +241,16 @@ public class DAO_NhanVien {
     public boolean capNhatNV(NhanVien nv) {
         try(
             Connection conn = ConnectDB.opConnection();  
-                PreparedStatement pstmt = conn.prepareStatement("UPDATE NHANVIEN SET CMND=?, SODIENTHOAI=?, GIOITINH=?, LUONGCOBAN=? ,MALOAINV=? WHERE MANV=?");)
+                PreparedStatement pstmt = conn.prepareStatement("UPDATE NHANVIEN SET CMND=?, SODIENTHOAI=?, GIOITINH=?, LUONGCOBAN=? ,MALOAINV=?,tenNV=? WHERE MANV=?");)
             {
 
                 pstmt.setString(1, nv.getCMND());
                 pstmt.setString(2, nv.getSoDienThoai());
                 pstmt.setInt(3,nv.isGioiTinh()==true?1:0);               
                 pstmt.setFloat(4, (float)nv.getLuongCoBan()); 
-                pstmt.setString(5, nv.getLoaiNhanVien().getMaLoaiNV());            
-                pstmt.setString(6, nv.getMaNV());
+                pstmt.setString(5, nv.getLoaiNhanVien().getMaLoaiNV());
+                pstmt.setString(6, nv.getTenNV());
+                pstmt.setString(7, nv.getMaNV());
                 return pstmt.executeUpdate() > 0;
         } catch (Exception e) {
             System.err.println("capnhatNV(): connect db fail");

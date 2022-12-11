@@ -718,7 +718,7 @@ public class GD_QLNhanVien extends javax.swing.JInternalFrame {
 
     
     private String maTuSinh() {
-        String ma = "SP";
+        String ma = "NV";
         int tachMa;
         int i = 0, j = 1;
         int[] dem = new int[999];

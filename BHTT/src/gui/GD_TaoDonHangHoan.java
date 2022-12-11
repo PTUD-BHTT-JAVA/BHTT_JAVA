@@ -1104,11 +1104,14 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
         if (row < 0) {
             JOptionPane.showMessageDialog(null, "Chọn đơn hàng cần hoàn", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         } 
-        else
+        else if( hdh_dao.layHoaDonHoanTheoMa(tblDSHD.getValueAt(row, 0).toString())!=null){
+            JOptionPane.showMessageDialog(null, "Đơn hàng này đã được hoàn, không thể hoàn thêm sản phẩm nào nữa!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+
+        }else
         {
             //
           
-            HoaDon hd = hd_dao.layHoaDonTheoMa(modelHoaDon.getValueAt(row, 0).toString());
+            HoaDon hd = hd_dao.layHoaDonTheoMa(tblDSHD.getValueAt(row, 0).toString());
             KhachHang kh = kh_dao.getKHBangMa(hd.getKhachHang().getMaKH());
             if (kh.getLoaiKhachHang().getTenLoai().equals("VIP")) {
                 lblKM.setText("10%");
@@ -1121,10 +1124,10 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
             int slDaHoan = 0;
             ArrayList<ChiTietHoanTra> dsctht = new ArrayList<ChiTietHoanTra>();
             ArrayList<HoaDonHoanTra> dsHDHT = new ArrayList<HoaDonHoanTra>();
-            dsHDHT = hdh_dao.layHoaDonHoanTheoMaHD(modelHoaDon.getValueAt(row, 0).toString());
+            dsHDHT = hdh_dao.layHoaDonHoanTheoMaHD(tblDSHD.getValueAt(row, 0).toString());
             moKhoaControls(true);
-            List<ChiTietHoaDon> hdCanHoan = cthd_dao.layDSHDBangMa(modelHoaDon.getValueAt(row, 0).toString());
-            List<ChiTietHoaDon> ctHD = cthd_dao.layDSHDBangMa(modelHoaDon.getValueAt(row, 0).toString());
+            List<ChiTietHoaDon> hdCanHoan = cthd_dao.layDSHDBangMa(tblDSHD.getValueAt(row, 0).toString());
+            List<ChiTietHoaDon> ctHD = cthd_dao.layDSHDBangMa(tblDSHD.getValueAt(row, 0).toString());
             for (ChiTietHoaDon cthd : hdCanHoan) {
                 sl = cthd.getSoLuong();
 
