@@ -351,6 +351,7 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
         txtTim = new swing.TextFieldAnimation();
         jLabel2 = new javax.swing.JLabel();
         cboPhanLoai = new javax.swing.JComboBox<>();
+        btnLamMoi = new swing.Button();
         pnlDuoi = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableKhachHang = new javax.swing.JTable();
@@ -596,6 +597,13 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
             }
         });
 
+        btnLamMoi.setText("Làm mới dữ liệu");
+        btnLamMoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLamMoiActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlGiuaLayout = new javax.swing.GroupLayout(pnlGiua);
         pnlGiua.setLayout(pnlGiuaLayout);
         pnlGiuaLayout.setHorizontalGroup(
@@ -609,7 +617,9 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
                 .addComponent(jLabel13)
                 .addGap(18, 18, 18)
                 .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(2502, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addComponent(btnLamMoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(2349, Short.MAX_VALUE))
         );
         pnlGiuaLayout.setVerticalGroup(
             pnlGiuaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -619,7 +629,8 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
                     .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13)
                     .addComponent(jLabel2)
-                    .addComponent(cboPhanLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cboPhanLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLamMoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -792,11 +803,17 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_cboPhanLoaiItemStateChanged
 
+    private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
+       XoaHetDuLieuTrenTableModel();
+       DocDuLieuLenTable();
+    }//GEN-LAST:event_btnLamMoiActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCapNhat;
     private javax.swing.JButton btnExport;
     private javax.swing.JButton btnImport;
+    private swing.Button btnLamMoi;
     private javax.swing.JButton btnThemKH;
     private javax.swing.JButton btnXoaTrang;
     private javax.swing.ButtonGroup buttonGroup1;
