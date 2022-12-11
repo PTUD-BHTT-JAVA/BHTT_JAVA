@@ -104,6 +104,7 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
                }
                 modelDSDonHoan.addRow(new Object[]{
                     hdht.getMaHDHT(),
+                    hdht.getHoaDon().getMaHD(),
                     hdht.getNgayHoanTra(),
                     soLuong,
                     hdht.tongTienHoan(),
@@ -670,7 +671,7 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
 
             },
             new String [] {
-                "Mã đơn hoàn", "Ngày hoàn đơn", "Tổng sản phẩm", "Tiền hoàn", "Tên khách hàng"
+                "Mã đơn hoàn", "Hoàn từ hóa đơn", "Ngày hoàn đơn", "Tổng sản phẩm", "Tiền hoàn", "Tên khách hàng"
             }
         ));
         jScrollPane3.setViewportView(tblHoaDonHoan);
