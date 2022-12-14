@@ -738,8 +738,8 @@
                   </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                      <JTabbedPaneConstraints tabName="Top 10 s&#x1ea3;n ph&#x1ea9;m b&#xe1;n ch&#x1ea1;y">
-                        <Property name="tabTitle" type="java.lang.String" value="Top 10 s&#x1ea3;n ph&#x1ea9;m b&#xe1;n ch&#x1ea1;y"/>
+                      <JTabbedPaneConstraints tabName="Top s&#x1ea3;n ph&#x1ea9;m b&#xe1;n ch&#x1ea1;y">
+                        <Property name="tabTitle" type="java.lang.String" value="Top s&#x1ea3;n ph&#x1ea9;m b&#xe1;n ch&#x1ea1;y"/>
                       </JTabbedPaneConstraints>
                     </Constraint>
                   </Constraints>
@@ -883,8 +883,8 @@
                   </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                      <JTabbedPaneConstraints tabName="Top 10 nh&#xe2;n vi&#xea;n xu&#x1ea5;t s&#x1eaf;c">
-                        <Property name="tabTitle" type="java.lang.String" value="Top 10 nh&#xe2;n vi&#xea;n xu&#x1ea5;t s&#x1eaf;c"/>
+                      <JTabbedPaneConstraints tabName="Top nh&#xe2;n vi&#xea;n xu&#x1ea5;t s&#x1eaf;c">
+                        <Property name="tabTitle" type="java.lang.String" value="Top nh&#xe2;n vi&#xea;n xu&#x1ea5;t s&#x1eaf;c"/>
                       </JTabbedPaneConstraints>
                     </Constraint>
                   </Constraints>

@@ -99,33 +99,24 @@ public class DAO_HoaDonHoan {
         return null;
     }
 
-    public ArrayList<HoaDonHoanTra> layHoaDonHoanTheoMaHD(String maTim) {
-        ArrayList<HoaDonHoanTra> ds = new ArrayList<HoaDonHoanTra>();
-        ConnectDB.getInstance();
-        Connection con = ConnectDB.getConnection();
-        PreparedStatement statement = null;
-        try {
-            String sql = "select * from HoaDonHoanTra where maHD =? ";
-            statement = con.prepareStatement(sql);
-            statement.setString(1, maTim);
-            ResultSet rs = statement.executeQuery();
-            while (rs.next()) {
-                Date ngayLap = rs.getDate("ngayHoanTra");
-                HoaDon hd = hd_dao.layHoaDonTheoMa(rs.getString("maHD"));
-                NhanVien nv = nv_dao.layNhanVienBangMa(rs.getString("maNV"));
-                HoaDonHoanTra hdht = new HoaDonHoanTra(rs.getString("maHDHT"), ngayLap, hd, nv);
-                ds.add(hdht);
+    public HoaDonHoanTra layHoaDonHoanTheoMaHD(String maHD) {
+        try (
+                 Connection con = ConnectDB.opConnection();  PreparedStatement pts = con.prepareStatement("Select * from HoaDonHoanTra where maHD =? ")) {
+            pts.setString(1, maHD);
+            try ( ResultSet rs = pts.executeQuery()) {
+                if (rs.next()) {
+                    Date ngayLap = rs.getDate("ngayHoanTra");
+                    HoaDon hd = hd_dao.layHoaDonTheoMa(maHD);
+                    String maHDHT = rs.getString("maHDHT");
+                    NhanVien nv = nv_dao.layNhanVienBangMa(rs.getString("maNV"));
+                    HoaDonHoanTra hdht = new HoaDonHoanTra(maHDHT, ngayLap, hd, nv);
+                    return hdht;
+                }
             }
         } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                statement.close();
-            } catch (Exception e2) {
-                e2.printStackTrace();
-            }
+
         }
-        return ds;
+        return null;
     }
 
     public ArrayList<HoaDonHoanTra> layHoaDonHoanTheoMaNV(String maTim) {

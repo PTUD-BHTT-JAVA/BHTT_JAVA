@@ -554,7 +554,7 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
         });
 
         btnChiTietHoan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/donhangmoi.png"))); // NOI18N
-        btnChiTietHoan.setText("Xem chi tiết đơn hàng");
+        btnChiTietHoan.setText("Xem chi tiết đơn hoàn");
         btnChiTietHoan.setColor1(new java.awt.Color(204, 153, 0));
         btnChiTietHoan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -847,10 +847,10 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
             JOptionPane.showMessageDialog(null, "Vui lòng chọn hóa đơn cần xem chi tiết");
             return;
         }
-        String m = modelDSHoaDon.getValueAt(hangChon, 0).toString();
-        DG_CTDH dgCTDH = new DG_CTDH(m);
-        dgCTDH.setLocationRelativeTo(null);
-        dgCTDH.setVisible(true);
+        String m = modelDSDonHoan.getValueAt(hangChon, 0).toString();
+        DG_CTDHHT dgCTDHHT = new DG_CTDHHT(m);
+        dgCTDHHT.setLocationRelativeTo(null);
+        dgCTDHHT.setVisible(true);
     }//GEN-LAST:event_btnChiTietHoanActionPerformed
 
     private void btnTimDonHoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimDonHoanActionPerformed

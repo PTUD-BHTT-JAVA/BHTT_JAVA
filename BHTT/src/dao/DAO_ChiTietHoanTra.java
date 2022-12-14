@@ -99,7 +99,30 @@ public class DAO_ChiTietHoanTra {
         }
         return ctht;
     }
-    
+     public ArrayList<ChiTietHoanTra> layTheoMaHDHT(String ma) {
+  
+        ArrayList<ChiTietHoanTra> dsCTHT = new ArrayList<ChiTietHoanTra>();
+        try {
+            ConnectDB.getInstance();
+            Connection con = ConnectDB.getConnection();
+            PreparedStatement statement = null;
+            String sql = "select * from ChiTietHoanTra where maHDHT = ?";
+            statement = con.prepareStatement(sql);
+            statement.setString(1, ma);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                int soLuong = rs.getInt("soLuong");
+                String lyDo= rs.getString("lyDoHoanTra");
+                HoaDonHoanTra htdt = hdht_dao.layHoaDonHoanTheoMa(ma);
+                SanPham maSP = sanPham_dao.laySanPhamBangMa(rs.getString("maSP"));
+                ChiTietHoanTra ctht = new ChiTietHoanTra(soLuong,lyDo, maSP, htdt);
+                dsCTHT.add(ctht);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return dsCTHT;
+    }
     public ArrayList<ChiTietHoanTra> layCTHTBangMaSP(String m){
         dsCTHT = new ArrayList<ChiTietHoanTra>();
         ConnectDB.getInstance();
@@ -184,7 +207,7 @@ public class DAO_ChiTietHoanTra {
             e.printStackTrace();
         } finally {
             try {
-                statement.close();
+                
             } catch (Exception e2) {
                 e2.printStackTrace();
             }

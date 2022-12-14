@@ -1109,7 +1109,6 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
 
         }else
         {
-            //
           
             HoaDon hd = hd_dao.layHoaDonTheoMa(tblDSHD.getValueAt(row, 0).toString());
             KhachHang kh = kh_dao.getKHBangMa(hd.getKhachHang().getMaKH());
@@ -1123,7 +1122,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
             int sl;
             int slDaHoan = 0;
             ArrayList<ChiTietHoanTra> dsctht = new ArrayList<ChiTietHoanTra>();
-            ArrayList<HoaDonHoanTra> dsHDHT = new ArrayList<HoaDonHoanTra>();
+            HoaDonHoanTra dsHDHT = new HoaDonHoanTra();
             dsHDHT = hdh_dao.layHoaDonHoanTheoMaHD(tblDSHD.getValueAt(row, 0).toString());
             moKhoaControls(true);
             List<ChiTietHoaDon> hdCanHoan = cthd_dao.layDSHDBangMa(tblDSHD.getValueAt(row, 0).toString());
@@ -1131,17 +1130,15 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
             for (ChiTietHoaDon cthd : hdCanHoan) {
                 sl = cthd.getSoLuong();
 
-                for (HoaDonHoanTra hdht : dsHDHT) {
-                    // System.out.println(hdht);
-                    dsctht = ctht_dao.layDSCTHTBangMa(hdht.getMaHDHT());
-                    for (ChiTietHoanTra ctht : dsctht) {
-                        //  System.out.println(ctht);
-                        //nếu là đúng mã sản phẩm thì trừ
-                        if (ctht.getSanPham().getMaSP().equals(cthd.getSanPham().getMaSP())) {
-                            sl = sl - ctht.getSoLuong();
-                        }
-                    }
-                }
+//                    dsctht = ctht_dao.layDSCTHTBangMa(dsHDHT.getMaHDHT());
+//                    for (ChiTietHoanTra ctht : dsctht) {
+//                        //  System.out.println(ctht);
+//                        //nếu là đúng mã sản phẩm thì trừ
+//                        if (ctht.getSanPham().getMaSP().equals(cthd.getSanPham().getMaSP())) {
+//                            sl = sl - ctht.getSoLuong();
+//                        }
+//                    }
+                
 
                 modelCanHoan.addRow(new Object[]{
                     cthd.getSanPham().getMaSP(),
@@ -1153,8 +1150,9 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
 
             setTongThanhTien();
             btnThem.setEnabled(false);
+        }
     }//GEN-LAST:event_btnThemActionPerformed
-    }
+    
     private void btnChiTietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChiTietActionPerformed
         int hangChon = tblDSHD.getSelectedRow();
         if (hangChon == -1) {

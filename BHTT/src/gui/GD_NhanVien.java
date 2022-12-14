@@ -579,10 +579,8 @@ public class GD_NhanVien extends javax.swing.JFrame {
 
     private void pnlTaoDonHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlTaoDonHangMousePressed
 
-        if(gd_DH.isAncestorOf(gd_KH)){
-          
+        if(gd_DH.isAncestorOf(gd_KH))
            gd_DH.remove(gd_KH);
-        }
         returnComponent();
         openComponent(gd_DH);
         
@@ -636,17 +634,7 @@ public class GD_NhanVien extends javax.swing.JFrame {
     }//GEN-LAST:event_pnlTaoDonHangMousePressed
 
     private void pnlKhachHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlKhachHangMousePressed
-        try {
-            gd_KH=new GD_KhachHang();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(GD_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(GD_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(GD_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(GD_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
         openComponent(gd_KH);
         pnlKhachHang.setkEndColor(new java.awt.Color(255, 204, 204));
         pnlKhachHang.setkStartColor(new java.awt.Color(164, 158, 213));

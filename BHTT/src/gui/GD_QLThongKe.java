@@ -675,7 +675,7 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
                 .addContainerGap(34, Short.MAX_VALUE))
         );
 
-        tbpThongKe.addTab("Top 10 sản phẩm bán chạy", pnlTopSP);
+        tbpThongKe.addTab("Top sản phẩm bán chạy", pnlTopSP);
 
         pnlTopNV.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -735,7 +735,7 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
                 .addGap(15, 15, 15))
         );
 
-        tbpThongKe.addTab("Top 10 nhân viên xuất sắc", pnlTopNV);
+        tbpThongKe.addTab("Top nhân viên xuất sắc", pnlTopNV);
 
         pnlSPTon.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
