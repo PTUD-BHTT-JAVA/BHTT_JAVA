@@ -315,6 +315,8 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
         });
 
         btnQuy1.setText("Quý 1");
+        btnQuy1.setColor1(new java.awt.Color(51, 0, 255));
+        btnQuy1.setColor2(new java.awt.Color(204, 0, 204));
         btnQuy1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnQuy1ActionPerformed(evt);
@@ -322,6 +324,8 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
         });
 
         btnQuy2.setText("Quý 2");
+        btnQuy2.setColor1(new java.awt.Color(51, 0, 255));
+        btnQuy2.setColor2(new java.awt.Color(204, 0, 204));
         btnQuy2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnQuy2ActionPerformed(evt);
@@ -329,6 +333,8 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
         });
 
         btnQuy3.setText("Quý 3");
+        btnQuy3.setColor1(new java.awt.Color(51, 0, 255));
+        btnQuy3.setColor2(new java.awt.Color(204, 0, 204));
         btnQuy3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnQuy3ActionPerformed(evt);
@@ -336,6 +342,8 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
         });
 
         btnQuy4.setText("Quý 4");
+        btnQuy4.setColor1(new java.awt.Color(51, 0, 255));
+        btnQuy4.setColor2(new java.awt.Color(204, 0, 204));
         btnQuy4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnQuy4ActionPerformed(evt);
@@ -581,6 +589,8 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
         });
 
         btnQuy1Hoan.setText("Quý 1");
+        btnQuy1Hoan.setColor1(new java.awt.Color(51, 0, 255));
+        btnQuy1Hoan.setColor2(new java.awt.Color(204, 0, 204));
         btnQuy1Hoan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnQuy1HoanActionPerformed(evt);
@@ -588,6 +598,8 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
         });
 
         btnQuy2Hoan.setText("Quý 2");
+        btnQuy2Hoan.setColor1(new java.awt.Color(51, 0, 255));
+        btnQuy2Hoan.setColor2(new java.awt.Color(204, 0, 204));
         btnQuy2Hoan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnQuy2HoanActionPerformed(evt);
@@ -595,6 +607,8 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
         });
 
         btnQuy3Hoan.setText("Quý 3");
+        btnQuy3Hoan.setColor1(new java.awt.Color(51, 0, 255));
+        btnQuy3Hoan.setColor2(new java.awt.Color(204, 0, 204));
         btnQuy3Hoan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnQuy3HoanActionPerformed(evt);
@@ -602,6 +616,8 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
         });
 
         btnQuy4Hoan.setText("Quý 4");
+        btnQuy4Hoan.setColor1(new java.awt.Color(51, 0, 255));
+        btnQuy4Hoan.setColor2(new java.awt.Color(204, 0, 204));
         btnQuy4Hoan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnQuy4HoanActionPerformed(evt);
@@ -837,7 +853,7 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
     private void txtTimDHKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimDHKeyReleased
         String tim = txtTimDH.getText();
         TableRowSorter<DefaultTableModel> tr=new TableRowSorter<DefaultTableModel>(modelDSDonHoan);
-        tblHoaDonBanHang.setRowSorter(tr);
+        tblHoaDonHoan.setRowSorter(tr);
         tr.setRowFilter(RowFilter.regexFilter("(?i)"+tim));
     }//GEN-LAST:event_txtTimDHKeyReleased
 
