@@ -901,28 +901,42 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
             ten = modelCanHoan.getValueAt(r, 1).toString();
             sl = (int) modelCanHoan.getValueAt(r, 2);
             tt = (double) modelCanHoan.getValueAt(r, 3);
-            if (soLuongHoan > sl) {
-                JOptionPane.showMessageDialog(null, "Số lượng hoàn không được lớn hơn số lượng bán");
-                return;
-            }
             sp = sp_dao.laySanPhamBangMa(ma);
             boolean kiemTra = false;
-            for (int i = 0; i < modelDonHoan.getRowCount(); i++) {
-                if (modelDonHoan.getValueAt(i, 0).equals(ma) && modelDonHoan.getValueAt(i, 4).equals(cmbLyDo.getSelectedItem().toString())) {
-                    int slMoi = soLuongHoan + (int) modelDonHoan.getValueAt(i, 2);
-                    if (slMoi > sl) {
-                        JOptionPane.showMessageDialog(null, "Số lượng hoàn không được lớn hơn số lượng bán");
-                        kiemTra = true;
-                    } else {
-                        modelDonHoan.setValueAt(slMoi, i, 2);
-                        modelDonHoan.setValueAt(slMoi * sp.getGiaGoc(), i, 3);
-                        tinhTongCong();
-                        kiemTra = true;
+            if (soLuongHoan > sl) {
+                JOptionPane.showMessageDialog(null, "Số lượng hoàn không được lớn hơn số lượng bán");
+                kiemTra = true;
+            }else{ 
+                int tong=soLuongHoan;
+                for (int i = 0; i < modelDonHoan.getRowCount(); i++) {
+                    
+                    if(modelDonHoan.getValueAt(i, 0).equals(ma)){
+                        tong=tong+ (int)modelDonHoan.getValueAt(i, 2);
+                        for (int j = i+1; j < modelDonHoan.getRowCount(); j++) {
+                            if (modelDonHoan.getValueAt(j, 0).equals(ma)){
+                                tong = tong+ (int) modelDonHoan.getValueAt(j, 2); 
+                            }                                           
+                        }
+                        if (tong > sl) {
+                            JOptionPane.showMessageDialog(null, "Số lượng hoàn không được lớn hơn số lượng bán");
+                            kiemTra = true;
+                            return;
+                        }else{
+                            if ( modelDonHoan.getValueAt(i, 4).equals(cmbLyDo.getSelectedItem().toString()) ){
+                                int slMoi=soLuongHoan+ (int)modelDonHoan.getValueAt(i, 2);
+                                modelDonHoan.setValueAt(slMoi, i, 2);
+                                modelDonHoan.setValueAt(slMoi * sp.getGiaGoc(), i, 3);   
+                                tinhTongCong();  
+                                kiemTra=true;
+                            }
+                            
+                            
+                        }
+                        
                     }
                 }
-            
             }
-            if (!kiemTra) {
+            if (!kiemTra ) {
                 modelDonHoan.addRow(new Object[]{ma, ten, soLuongHoan, sp.getGiaGoc() * soLuongHoan, cmbLyDo.getSelectedItem().toString()});
                 tinhTongCong();
                 // tongTienHoan += (double)modelDonHoan.getValueAt(this, 3);
