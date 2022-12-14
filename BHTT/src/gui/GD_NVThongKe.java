@@ -24,6 +24,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Insets;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.Year;
 import java.util.ArrayList;
@@ -53,6 +54,8 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
     private DAO_ChiTietHoanTra ctht_dao = new DAO_ChiTietHoanTra();
     private DAO_SanPham sp_dao = new DAO_SanPham();
     private final Date today;
+
+    DecimalFormat df = new DecimalFormat("#,##0 VND");
 
     private static class RoundedBorder implements Border {
 
@@ -950,7 +953,7 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
                         if (hd.getKhachHang().getLoaiKhachHang().getTenLoai().equalsIgnoreCase("VIP")) {
                             tongThanhTienVIP = tongThanhTienVIP + cthd.getTongTien();
                         } else {
-                            tongThanhTienThuong = tongThanhTienVIP + cthd.getTongTien();
+                            tongThanhTienThuong = tongThanhTienThuong + cthd.getTongTien();
                         }
 
                     }
@@ -959,7 +962,7 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
                 tongThanhTienVIP = tongThanhTienVIP - tongThanhTienVIP * 0.05;
                 tongThanhTienThuong = tongThanhTienThuong + tongThanhTienThuong * 0.05;
                 tongThanhTien = (long) tongThanhTienVIP + (long) tongThanhTienThuong;
-                lblTongTienBanD.setText(String.format("%d", tongThanhTien) + " VND");
+                lblTongTienBanD.setText(df.format(tongThanhTien));
 
                 //Thống kê hoàn
                 ArrayList<HoaDonHoanTra> dsHDHT = hdh_dao.thongKeHoanTraNV(TuNgay, DenNgay, username);
@@ -984,16 +987,16 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
                 tongThanhTienHoanVIP = tongThanhTienHoanVIP + tongThanhTienHoanVIP * 0.15;
                 tongThanhTienHoanThuong = tongThanhTienHoanThuong + tongThanhTienHoanThuong * 0.05;
                 tongThanhTienHoan = (long) tongThanhTienHoanVIP + (long) tongThanhTienHoanThuong;
-                tongTienHoann.setText(String.format("%d", tongThanhTienHoan) + " VND");
+                tongTienHoann.setText(df.format(tongThanhTienHoan));
                 String s = "";
                 long thu = 0;
                 long chi = 0;
                 if (tongThanhTien > tongThanhTienHoan) {
                     thu = tongThanhTien - tongThanhTienHoan;
-                    s += "Thu: " + thu + " VND";
+                    s += "Thu: " + df.format(thu);
                 } else {
                     chi = tongThanhTienHoan - tongThanhTien;
-                    s += "Chi: " + chi + " VND";
+                    s += "Chi: " + df.format(chi);
                 }
                 lblKetToann.setText(s);
 
@@ -1012,7 +1015,7 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
         }
         String b = year + "-10-01";
         String c = year + "-12-31";
-        ArrayList<HoaDon> dsHD = hd_dao.thongKeDoanhThuTheoNV(b, c,username);
+        ArrayList<HoaDon> dsHD = hd_dao.thongKeDoanhThuTheoNV(b, c, username);
         ArrayList<ChiTietHoaDon> dsCTHD = new ArrayList<ChiTietHoaDon>();
         lblTongHD.setText(dsHD.size() + "");
         long tongThanhTien = 0;
@@ -1034,7 +1037,7 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
         tongThanhTienVIP = tongThanhTienVIP - tongThanhTienVIP * 0.05;
         tongThanhTienThuong = tongThanhTienThuong + tongThanhTienThuong * 0.05;
         tongThanhTien = (long) tongThanhTienVIP + (long) tongThanhTienThuong;
-        lblTongTienBanD.setText(String.format("%d", tongThanhTien) + " VND");
+        lblTongTienBanD.setText(df.format(tongThanhTien));
         //hoàn
         ArrayList<HoaDonHoanTra> dsHDHT = hdh_dao.thongKeHoanTraNV(b, c, username);
         ArrayList<ChiTietHoanTra> dsCTHT;
@@ -1058,17 +1061,18 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
         tongThanhTienHoanVIP = tongThanhTienHoanVIP + tongThanhTienHoanVIP * 0.15;
         tongThanhTienHoanThuong = tongThanhTienHoanThuong + tongThanhTienHoanThuong * 0.05;
         tongThanhTienHoan = (long) tongThanhTienHoanVIP + (long) tongThanhTienHoanThuong;
-        tongTienHoann.setText(String.format("%d", tongThanhTienHoan) + " VND");
+        tongTienHoann.setText(df.format(tongThanhTienHoan));
         String s = "";
         long thu = 0;
         long chi = 0;
         if (tongThanhTien > tongThanhTienHoan) {
             thu = tongThanhTien - tongThanhTienHoan;
-            s += "Thu: " + thu + " VND";
+            s += "Thu: " + df.format(thu);
         } else {
             chi = tongThanhTienHoan - tongThanhTien;
-            s += "Chi: " + chi + " VND";
+            s += "Chi: " + df.format(chi);
         }
+
         lblKetToann.setText(s);
 
     }//GEN-LAST:event_btnQuy4ActionPerformed
@@ -1106,7 +1110,7 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
         tongThanhTienVIP = tongThanhTienVIP - tongThanhTienVIP * 0.05;
         tongThanhTienThuong = tongThanhTienThuong + tongThanhTienThuong * 0.05;
         tongThanhTien = (long) tongThanhTienVIP + (long) tongThanhTienThuong;
-        lblTongTienBanD.setText(String.format("%d", tongThanhTien) + " VND");
+        lblTongTienBanD.setText(df.format(tongThanhTien));
         //hoàn
         ArrayList<HoaDonHoanTra> dsHDHT = hdh_dao.thongKeHoanTraNV(b, c, username);
         ArrayList<ChiTietHoanTra> dsCTHT;
@@ -1130,17 +1134,18 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
         tongThanhTienHoanVIP = tongThanhTienHoanVIP + tongThanhTienHoanVIP * 0.15;
         tongThanhTienHoanThuong = tongThanhTienHoanThuong + tongThanhTienHoanThuong * 0.05;
         tongThanhTienHoan = (long) tongThanhTienHoanVIP + (long) tongThanhTienHoanThuong;
-        tongTienHoann.setText(String.format("%d", tongThanhTienHoan) + " VND");
+        tongTienHoann.setText(df.format(tongThanhTienHoan));
         String s = "";
         long thu = 0;
         long chi = 0;
         if (tongThanhTien > tongThanhTienHoan) {
             thu = tongThanhTien - tongThanhTienHoan;
-            s += "Thu: " + thu + " VND";
+            s += "Thu: " + df.format(thu);
         } else {
             chi = tongThanhTienHoan - tongThanhTien;
-            s += "Chi: " + chi + " VND";
+            s += "Chi: " + df.format(chi);
         }
+
         lblKetToann.setText(s);
 
     }//GEN-LAST:event_btnQuy3ActionPerformed
@@ -1179,7 +1184,7 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
         tongThanhTienVIP = tongThanhTienVIP - tongThanhTienVIP * 0.05;
         tongThanhTienThuong = tongThanhTienThuong + tongThanhTienThuong * 0.05;
         tongThanhTien = (long) tongThanhTienVIP + (long) tongThanhTienThuong;
-        lblTongTienBanD.setText(String.format("%d", tongThanhTien) + " VND");
+        lblTongTienBanD.setText(df.format(tongThanhTien));
         //hoàn
         ArrayList<HoaDonHoanTra> dsHDHT = hdh_dao.thongKeHoanTraNV(b, c, username);
         ArrayList<ChiTietHoanTra> dsCTHT;
@@ -1203,17 +1208,18 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
         tongThanhTienHoanVIP = tongThanhTienHoanVIP + tongThanhTienHoanVIP * 0.15;
         tongThanhTienHoanThuong = tongThanhTienHoanThuong + tongThanhTienHoanThuong * 0.05;
         tongThanhTienHoan = (long) tongThanhTienHoanVIP + (long) tongThanhTienHoanThuong;
-        tongTienHoann.setText(String.format("%d", tongThanhTienHoan) + " VND");
+        tongTienHoann.setText(df.format(tongThanhTienHoan));
         String s = "";
         long thu = 0;
         long chi = 0;
         if (tongThanhTien > tongThanhTienHoan) {
             thu = tongThanhTien - tongThanhTienHoan;
-            s += "Thu: " + thu + " VND";
+            s += "Thu: " + df.format(thu);
         } else {
             chi = tongThanhTienHoan - tongThanhTien;
-            s += "Chi: " + chi + " VND";
+            s += "Chi: " + df.format(chi);
         }
+
         lblKetToann.setText(s);
 
     }//GEN-LAST:event_btnQuy2ActionPerformed
@@ -1252,7 +1258,7 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
         tongThanhTienVIP = tongThanhTienVIP - tongThanhTienVIP * 0.05;
         tongThanhTienThuong = tongThanhTienThuong + tongThanhTienThuong * 0.05;
         tongThanhTien = (long) tongThanhTienVIP + (long) tongThanhTienThuong;
-        lblTongTienBanD.setText(String.format("%d", tongThanhTien) + " VND");
+        lblTongTienBanD.setText(df.format(tongThanhTien));
         //hoàn
         ArrayList<HoaDonHoanTra> dsHDHT = hdh_dao.thongKeHoanTraNV(b, c, username);
         ArrayList<ChiTietHoanTra> dsCTHT;
@@ -1276,16 +1282,16 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
         tongThanhTienHoanVIP = tongThanhTienHoanVIP + tongThanhTienHoanVIP * 0.15;
         tongThanhTienHoanThuong = tongThanhTienHoanThuong + tongThanhTienHoanThuong * 0.05;
         tongThanhTienHoan = (long) tongThanhTienHoanVIP + (long) tongThanhTienHoanThuong;
-        tongTienHoann.setText(String.format("%d", tongThanhTienHoan) + " VND");
+        tongTienHoann.setText(df.format(tongThanhTienHoan));
         String s = "";
         long thu = 0;
         long chi = 0;
         if (tongThanhTien > tongThanhTienHoan) {
             thu = tongThanhTien - tongThanhTienHoan;
-            s += "Thu: " + thu + " VND";
+            s += "Thu: " + df.format(thu);
         } else {
             chi = tongThanhTienHoan - tongThanhTien;
-            s += "Chi: " + chi + " VND";
+            s += "Chi: " + df.format(chi);
         }
         lblKetToann.setText(s);
 
@@ -1322,7 +1328,7 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
         tongThanhTienVIP = tongThanhTienVIP - tongThanhTienVIP * 0.05;
         tongThanhTienThuong = tongThanhTienThuong + tongThanhTienThuong * 0.05;
         tongThanhTien = (long) tongThanhTienVIP + (long) tongThanhTienThuong;
-        lblTongTienBanD.setText(String.format("%d", tongThanhTien) + " VND");
+        lblTongTienBanD.setText(df.format(tongThanhTien));
 
         //Thống kê hoàn
         ArrayList<HoaDonHoanTra> dsHDHT = hdh_dao.thongKeDoanhThuNVTheoNam(year, username);
@@ -1347,17 +1353,18 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
         tongThanhTienHoanVIP = tongThanhTienHoanVIP + tongThanhTienHoanVIP * 0.15;
         tongThanhTienHoanThuong = tongThanhTienHoanThuong + tongThanhTienHoanThuong * 0.05;
         tongThanhTienHoan = (long) tongThanhTienHoanVIP + (long) tongThanhTienHoanThuong;
-        tongTienHoann.setText(String.format("%d", tongThanhTienHoan) + " VND");
+        tongTienHoann.setText(df.format(tongThanhTienHoan));
         String s = "";
         long thu = 0;
         long chi = 0;
         if (tongThanhTien > tongThanhTienHoan) {
             thu = tongThanhTien - tongThanhTienHoan;
-            s += "Thu: " + thu + " VND";
+            s += "Thu: " + df.format(thu);
         } else {
             chi = tongThanhTienHoan - tongThanhTien;
-            s += "Chi: " + chi + " VND";
+            s += "Chi: " + df.format(chi);
         }
+        //
         lblKetToann.setText(s);
 
     }//GEN-LAST:event_btnCaNamActionPerformed
