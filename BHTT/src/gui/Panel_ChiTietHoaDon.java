@@ -329,8 +329,7 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
             }
             jspSoLuong.setValue(0);
             soLuongTon -= sp.getSoLuong();
-            modolSP.setValueAt(soLuongTon, r, 2);
-
+            jtbSanPham.setValueAt(soLuongTon, r, 2);
             tongTien();
 
         } else {
@@ -1148,7 +1147,7 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
                                 }
                             } else {
                                 ListSP = sp_dao.getAllSP();
-                                modolSP.setValueAt(soLuongThayDoi, index, 2);
+//                                jtbSanPham.setValueAt(soLuongThayDoi, index, 2);
                             }
 //                        sp.setSoLuong(slCapNhat);
                             tongTien();

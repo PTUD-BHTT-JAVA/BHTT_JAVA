@@ -42,7 +42,8 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
     private DAO_KhachHang kh;
     private DAO_LoaiKhachHang lkh;
     private XSSFRow rowCount;
-
+    List<RowFilter<DefaultTableModel,Object>> filters = new ArrayList<>();
+    private TableRowSorter<DefaultTableModel> tr;
     /**
      * Creates new form QuanLyHoaDon
      */
@@ -68,6 +69,8 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
         modelKhachHang = (DefaultTableModel) tableKhachHang.getModel();
         modelKhachHang.setRowCount(0);
         DocDuLieuLenTable();
+        tr = new TableRowSorter<DefaultTableModel>(modelKhachHang);
+        tableKhachHang.setRowSorter(tr);
     }
 
     private void importKhachHang() {
@@ -243,7 +246,7 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Tên không chứa ký tự đặt biệt", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
             return false;
         }
-        if (!soDienThoai.matches("^0{1}[1-9]{9}")) {
+        if (!soDienThoai.matches("0{1}[0-9]{9}")) {
             JOptionPane.showMessageDialog(null, "Số điện thoại chỉ chứa 10 ký số", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
             return false;
         }
@@ -582,6 +585,7 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
         jLabel2.setText("Phân loại:");
 
+        cboPhanLoai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả" }));
         cboPhanLoai.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cboPhanLoaiItemStateChanged(evt);
@@ -771,9 +775,12 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
                     selectItem = "LKH001";
                 } else if (selectItem.equals("Thường")) {
                     selectItem = "LKH002";
+                }else {
+                      XoaHetDuLieuTrenTableModel();
+                      DocDuLieuLenTable();
                 }
                 List<KhachHang> khCanLoc = kh.getKhachHangTheoTenLoai(selectItem);
-                System.out.println(khCanLoc.toString());
+//                System.out.println(khCanLoc.toString());
                 if (!khCanLoc.isEmpty()) {
                      XoaHetDuLieuTrenTableModel();
                     for (KhachHang khachhang : khCanLoc) {
@@ -783,8 +790,8 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
                         });
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Không tìm thấy loại khách hàng cần tìm");
                     XoaHetDuLieuTrenTableModel();
+                    DocDuLieuLenTable();
                 }
 
             }
@@ -794,6 +801,7 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cboPhanLoaiItemStateChanged
 
     private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
+        cboPhanLoai.setSelectedItem("Tất cả");
         XoaHetDuLieuTrenTableModel();
         DocDuLieuLenTable();
     }//GEN-LAST:event_btnLamMoiActionPerformed
