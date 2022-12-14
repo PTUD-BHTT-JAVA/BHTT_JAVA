@@ -1364,6 +1364,7 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
             chi = tongThanhTienHoan - tongThanhTien;
             s += "Chi: " + df.format(chi);
         }
+        //
         lblKetToann.setText(s);
 
     }//GEN-LAST:event_btnCaNamActionPerformed
