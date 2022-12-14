@@ -1148,7 +1148,7 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
                                 }
                             } else {
                                 ListSP = sp_dao.getAllSP();
-                                modolSP.setValueAt(soLuongThayDoi, index, 2);
+//                                modolSP.setValueAt(soLuongThayDoi, index, 2);
                             }
 //                        sp.setSoLuong(slCapNhat);
                             tongTien();
