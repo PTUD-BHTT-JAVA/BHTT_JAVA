@@ -1,4 +1,3 @@
-
 package gui;
 
 import connectDB.ConnectDB;
@@ -15,9 +14,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-
-
-
 
 import java.util.List;
 import javax.swing.JFileChooser;
@@ -36,23 +32,20 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-
 /**
  *
  * @author ACER
  */
 public class GD_KhachHang extends javax.swing.JInternalFrame {
-   
+
     private DefaultTableModel modelKhachHang;
     private DAO_KhachHang kh;
     private DAO_LoaiKhachHang lkh;
     private XSSFRow rowCount;
-    
-  
+
     /**
      * Creates new form QuanLyHoaDon
      */
-    
     public GD_KhachHang() throws ClassNotFoundException, IllegalAccessException, InstantiationException, UnsupportedLookAndFeelException {
         try {
             ConnectDB.getInstance().connect();
@@ -76,69 +69,69 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
         modelKhachHang.setRowCount(0);
         DocDuLieuLenTable();
     }
-    
-    private void importKhachHang(){
+
+    private void importKhachHang() {
         File excelFile;
         FileInputStream excelFIS = null;
         BufferedInputStream excelBIS = null;
-        XSSFWorkbook excelImportToJTable  = null;
+        XSSFWorkbook excelImportToJTable = null;
         String defaultCurrentDirectoryPath = "C:\\Users\\Trinh Cui Bap\\Desktop";
         JFileChooser excelFileChooser = new JFileChooser(defaultCurrentDirectoryPath);
         excelFileChooser.setDialogTitle("Chọn file để import");
-        FileNameExtensionFilter fnef = new FileNameExtensionFilter("EXCEL FILE", "xls","xlsx","xlsm");
+        FileNameExtensionFilter fnef = new FileNameExtensionFilter("EXCEL FILE", "xls", "xlsx", "xlsm");
         excelFileChooser.setFileFilter(fnef);
         int excelChooser = excelFileChooser.showOpenDialog(null);
-        if(excelChooser == JFileChooser.APPROVE_OPTION){
+        if (excelChooser == JFileChooser.APPROVE_OPTION) {
             try {
                 excelFile = excelFileChooser.getSelectedFile();
                 excelFIS = new FileInputStream(excelFile);
                 excelBIS = new BufferedInputStream(excelBIS);
                 excelImportToJTable = new XSSFWorkbook(excelFIS);
                 XSSFSheet excelSheet = excelImportToJTable.getSheetAt(0);
-                for(int row = 1;row <= excelSheet.getLastRowNum();row++){
+                for (int row = 1; row <= excelSheet.getLastRowNum(); row++) {
                     XSSFRow excelRow = excelSheet.getRow(row);
                     XSSFCell excelTen = excelRow.getCell(0);
                     XSSFCell excelSoDienThoai = excelRow.getCell(1);
                     XSSFCell excelEmail = excelRow.getCell(2);
-                    XSSFCell excelGioiTinh =  excelRow.getCell(3);
-                    if(kh.layKhachHangBangSDT(excelSoDienThoai.toString())==null){
+                    XSSFCell excelGioiTinh = excelRow.getCell(3);
+                    if (kh.layKhachHangBangSDT(excelSoDienThoai.toString()) == null) {
                         KhachHang khImport = new KhachHang(maTuSinh(), excelTen.toString(), excelSoDienThoai.toString(), 0, excelEmail.toString(), excelGioiTinh.getBooleanCellValue(), new LoaiKhachHang("LKH002"));
                         kh.themKhachHang(khImport);
                         modelKhachHang.addRow(new Object[]{
                             khImport.getMaKH(), khImport.getTenKH(), khImport.getSoDienThoai(), khImport.getEmail(),
                             khImport.isGioiTinh() == true ? "Nam" : "Nữ", "LKH001".equals(khImport.getLoaiKhachHang().getMaLoaiKH()) ? "VIP" : "Thường", khImport.getDiemTichLuy()
                         });
-                         JOptionPane.showMessageDialog(null,"Thêm thành công");
-                    }else{
-                        JOptionPane.showMessageDialog(null,"Số điện thoại đã tồn tại");
+                        JOptionPane.showMessageDialog(null, "Thêm thành công");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Số điện thoại đã tồn tại");
                     }
                 }
-               
+
             } catch (IOException iOException) {
-                JOptionPane.showMessageDialog(null,iOException.getMessage());
-            }finally{
+                JOptionPane.showMessageDialog(null, iOException.getMessage());
+            } finally {
                 try {
-                    if(excelFIS != null){
+                    if (excelFIS != null) {
                         excelFIS.close();
                     }
-                    if(excelBIS  != null){
+                    if (excelBIS != null) {
                         excelBIS.close();
                     }
-                    if(excelImportToJTable != null){
+                    if (excelImportToJTable != null) {
                         excelImportToJTable.close();
                     }
-                }catch (IOException ex) {
+                } catch (IOException ex) {
                     System.out.println(ex);
                 }
             }
         }
     }
 
-    private void exportKhachHang(){
+    private void exportKhachHang() {
         FileOutputStream excelFOU = null;
         BufferedOutputStream excelBOU = null;
         XSSFWorkbook excelJTableExporter = null;
-       
+
         JFileChooser excelFileChooser = new JFileChooser("C:\\Users\\Trinh Cui Bap\\Desktop");
         excelFileChooser.setDialogTitle("Save As");
         FileNameExtensionFilter fnef = new FileNameExtensionFilter("EXCEL FILES", "xls", "xlsx", "xlsm");
@@ -159,10 +152,10 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
                     XSSFRow excelRow = excelSheet.createRow(i + 1);
                     for (int j = 0; j < modelKhachHang.getColumnCount(); j++) {
                         XSSFCell excelCell = excelRow.createCell(j);
-                        if(cboPhanLoai.getSelectedItem().toString().equals("VIP")){
-                              excelCell.setCellValue(modelKhachHang.getValueAt(i, j).toString());
-                        }else{
-                              excelCell.setCellValue(modelKhachHang.getValueAt(i, j).toString());
+                        if (cboPhanLoai.getSelectedItem().toString().equals("VIP")) {
+                            excelCell.setCellValue(modelKhachHang.getValueAt(i, j).toString());
+                        } else {
+                            excelCell.setCellValue(modelKhachHang.getValueAt(i, j).toString());
                         }
                     }
                 }
@@ -171,8 +164,7 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
                 excelBOU = new BufferedOutputStream(excelFOU);
                 excelJTableExporter.write(excelBOU);
                 JOptionPane.showMessageDialog(null, "Xuất thành công !!!........");
-             
-              
+
             } catch (FileNotFoundException ex) {
                 System.out.println(ex);
             } catch (IOException ex) {
@@ -192,11 +184,11 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
                     System.out.println(ex);
                 }
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Xuất không thành công");
         }
     }
-    
+
     private String maTuSinh() {
         String ma = "KH";
         int tachMa;
@@ -228,15 +220,15 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
         }
         return ma;
     }
-    
-    private void xoaTextField(){
-       txtTenKH.setText("");
-       txtEmail.setText("");
-       txtSDT.setText("");
-       txtLoaiKH.setText("");
-       txtDiemTichLuy.setText("");
+
+    private void xoaTextField() {
+        txtTenKH.setText("");
+        txtEmail.setText("");
+        txtSDT.setText("");
+        txtLoaiKH.setText("");
+        txtDiemTichLuy.setText("");
     }
-    
+
     private boolean kiemTraThongTin() {
         String tenKH = txtTenKH.getText();
         String soDienThoai = txtSDT.getText();
@@ -262,8 +254,8 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
         return true;
 
     }
-    
-    private  void timKhachHang(){
+
+    private void timKhachHang() {
         try {
             ArrayList<KhachHang> emps = kh.getDSKHTuongDoi(txtTim.getText());
             XoaHetDuLieuTrenTableModel();
@@ -284,7 +276,7 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
             System.out.println(e.getMessage());
         }
     }
-    
+
     private void xoaTrangTextField() {
         txtTenKH.setText("");
         txtEmail.setText("");
@@ -294,21 +286,21 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
         radNu.setSelected(false);
 
     }
-    
-    public boolean kiemTraForm(){
+
+    public boolean kiemTraForm() {
         String email = txtLoaiKH.getText();
-        if(email.equals("") || !email.matches("^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$")){
-            JOptionPane.showMessageDialog(this, "Email không đúng định dạng","Cảnh báo",JOptionPane.WARNING_MESSAGE);
+        if (email.equals("") || !email.matches("^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$")) {
+            JOptionPane.showMessageDialog(this, "Email không đúng định dạng", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
             return false;
         }
         return true;
     }
-    
+
     private void XoaHetDuLieuTrenTableModel() {
         DefaultTableModel dm = (DefaultTableModel) tableKhachHang.getModel();
         dm.getDataVector().removeAllElements();
     }
-    
+
     private void DocDuLieuLenTable() {
         kh = new DAO_KhachHang();
         List<KhachHang> list = kh.getalltbKhachHang();
@@ -318,7 +310,7 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
             });
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -590,7 +582,6 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
         jLabel2.setText("Phân loại:");
 
-        cboPhanLoai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả" }));
         cboPhanLoai.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cboPhanLoaiItemStateChanged(evt);
@@ -613,13 +604,13 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
                 .addComponent(jLabel2)
                 .addGap(34, 34, 34)
                 .addComponent(cboPhanLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(224, 224, 224)
+                .addGap(80, 80, 80)
+                .addComponent(btnLamMoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel13)
                 .addGap(18, 18, 18)
                 .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(btnLamMoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(2349, Short.MAX_VALUE))
+                .addContainerGap(2502, Short.MAX_VALUE))
         );
         pnlGiuaLayout.setVerticalGroup(
             pnlGiuaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -681,11 +672,11 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnXoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrangActionPerformed
-       xoaTextField();
+        xoaTextField();
     }//GEN-LAST:event_btnXoaTrangActionPerformed
 
     private void btnThemKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemKHActionPerformed
-       String tenKH = txtTenKH.getText();
+        String tenKH = txtTenKH.getText();
         String soDienThoai = txtSDT.getText();
         String email = txtEmail.getText();
         boolean gioiTinh = radNam.isSelected();
@@ -695,14 +686,14 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Nhập đầy đủ thông tin", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         } else {
             if (kiemTraThongTin()) {
-                if(kh.layKhachHangBangSDT(soDienThoai) == null){
+                if (kh.layKhachHangBangSDT(soDienThoai) == null) {
                     KhachHang khachhang = new KhachHang(maTuSinh(), tenKH, soDienThoai, diemTichLuy, email, gioiTinh, new LoaiKhachHang(phanloai));
                     kh.themKhachHang(khachhang);
                     XoaHetDuLieuTrenTableModel();
                     DocDuLieuLenTable();
-                     JOptionPane.showMessageDialog(null, "Thêm thành công");
+                    JOptionPane.showMessageDialog(null, "Thêm thành công");
                     xoaTrangTextField();
-                }else{
+                } else {
                     JOptionPane.showMessageDialog(null, "Số điện thoại khách hàng đã tồn tại");
                 }
             }
@@ -713,7 +704,7 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
         int row = tableKhachHang.getSelectedRow();
         if (row < 0) {
             JOptionPane.showMessageDialog(null, "Chọn khách hàng cần cần cập nhật", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-        }else{
+        } else {
             if (JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn cập nhật khách hàng này ?", "Cập nhật khách hàng", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 String tenKH = txtTenKH.getText();
                 String soDienThoai = txtSDT.getText();
@@ -731,7 +722,7 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
                     modelKhachHang.setValueAt(txtEmail.getText(), row, 3);
                     JOptionPane.showMessageDialog(this, "Cập nhật thành công");
                 }
-            }    
+            }
         }
     }//GEN-LAST:event_btnCapNhatActionPerformed
 
@@ -749,7 +740,7 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
                 } else {
                     radNu.setSelected(true);
                 }
-            }else{
+            } else {
                 return;
             }
 
@@ -759,53 +750,52 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tableKhachHangMouseClicked
 
     private void btnImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportActionPerformed
-       importKhachHang();
+        importKhachHang();
     }//GEN-LAST:event_btnImportActionPerformed
 
     private void txtTimKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKeyReleased
-      timKhachHang();
-        
+        timKhachHang();
+
     }//GEN-LAST:event_txtTimKeyReleased
 
     private void btnExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportActionPerformed
-       exportKhachHang();
+        exportKhachHang();
     }//GEN-LAST:event_btnExportActionPerformed
 
     private void cboPhanLoaiItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboPhanLoaiItemStateChanged
-       try {
-           txtTim.setText("");
+        try {
+            txtTim.setText("");
             if (evt.getStateChange() == ItemEvent.SELECTED) {
-            String selectItem = cboPhanLoai.getSelectedItem().toString();
-            if(selectItem.equals("VIP")){
-                selectItem = "LKH001";
-            }else if(selectItem.equals("Thường")){
-                selectItem = "LKH002";
-            }else{
-                selectItem = "Tất cả";
+                String selectItem = cboPhanLoai.getSelectedItem().toString();
+                if (selectItem.equals("VIP")) {
+                    selectItem = "LKH001";
+                } else if (selectItem.equals("Thường")) {
+                    selectItem = "LKH002";
+                }
+                List<KhachHang> khCanLoc = kh.getKhachHangTheoTenLoai(selectItem);
+                System.out.println(khCanLoc.toString());
+                if (!khCanLoc.isEmpty()) {
+                     XoaHetDuLieuTrenTableModel();
+                    for (KhachHang khachhang : khCanLoc) {
+                        modelKhachHang.addRow(new Object[]{
+                            khachhang.getMaKH(), khachhang.getTenKH(), khachhang.getSoDienThoai(), khachhang.getEmail(), khachhang.isGioiTinh() == true ? "Nam" : "Nữ",
+                            "LKH001".equals(khachhang.getLoaiKhachHang().getMaLoaiKH()) ? "VIP" : "Thường", khachhang.getDiemTichLuy()
+                        });
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Không tìm thấy loại khách hàng cần tìm");
+                    XoaHetDuLieuTrenTableModel();
+                }
+
             }
-            List<KhachHang> khCanLoc = kh.getKhachHangTheoTenLoai(selectItem);
-            if (!khCanLoc.isEmpty()) {
-                XoaHetDuLieuTrenTableModel();
-                for (KhachHang khachhang : khCanLoc) {
-                    modelKhachHang.addRow(new Object[]{
-                        khachhang.getMaKH(), khachhang.getTenKH(), khachhang.getSoDienThoai(), khachhang.getEmail(), khachhang.isGioiTinh() == true ? "Nam" : "Nữ",
-                        "LKH001".equals(khachhang.getLoaiKhachHang().getMaLoaiKH()) ? "VIP" : "Thường", khachhang.getDiemTichLuy()
-                    });
-                }      
-            } else {
-                XoaHetDuLieuTrenTableModel();
-                DocDuLieuLenTable();
-                return;
-            }
-        }
         } catch (Exception e) {
-           
+            System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_cboPhanLoaiItemStateChanged
 
     private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
-       XoaHetDuLieuTrenTableModel();
-       DocDuLieuLenTable();
+        XoaHetDuLieuTrenTableModel();
+        DocDuLieuLenTable();
     }//GEN-LAST:event_btnLamMoiActionPerformed
 
 
@@ -843,6 +833,5 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtTenKH;
     private swing.TextFieldAnimation txtTim;
     // End of variables declaration//GEN-END:variables
-
 
 }
