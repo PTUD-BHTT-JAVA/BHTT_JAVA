@@ -1156,7 +1156,7 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
 
         dsNV.sort(Comparator.comparing(NhanVien::getDoanhThu).reversed());
         for (NhanVien nv : dsNV) {
-            modelTopNV.addRow(new Object[]{i++, nv.getMaNV(), nv.getTenNV(), nv.getDoanhThu()});
+            modelTopNV.addRow(new Object[]{j++, nv.getMaNV(), nv.getTenNV(), nv.getDoanhThu()});
         }
         ThongKeSPNV();
     }//GEN-LAST:event_btnQuy4ActionPerformed
@@ -1249,7 +1249,7 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
 
         dsNV.sort(Comparator.comparing(NhanVien::getDoanhThu).reversed());
         for (NhanVien nv : dsNV) {
-            modelTopNV.addRow(new Object[]{i++, nv.getMaNV(), nv.getTenNV(), nv.getDoanhThu()});
+            modelTopNV.addRow(new Object[]{j++, nv.getMaNV(), nv.getTenNV(), nv.getDoanhThu()});
         }
         ThongKeSPNV();
     }//GEN-LAST:event_btnQuy3ActionPerformed
@@ -1342,7 +1342,7 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
 
         dsNV.sort(Comparator.comparing(NhanVien::getDoanhThu).reversed());
         for (NhanVien nv : dsNV) {
-            modelTopNV.addRow(new Object[]{i++, nv.getMaNV(), nv.getTenNV(), nv.getDoanhThu()});
+            modelTopNV.addRow(new Object[]{j++, nv.getMaNV(), nv.getTenNV(), nv.getDoanhThu()});
         }
         ThongKeSPNV();
     }//GEN-LAST:event_btnQuy2ActionPerformed
@@ -1536,7 +1536,7 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
 
         dsNV.sort(Comparator.comparing(NhanVien::getDoanhThu).reversed());
         for (NhanVien nv : dsNV) {
-            modelTopNV.addRow(new Object[]{i++, nv.getMaNV(), nv.getTenNV(), nv.getDoanhThu()});
+            modelTopNV.addRow(new Object[]{j++, nv.getMaNV(), nv.getTenNV(), nv.getDoanhThu()});
         }
         ThongKeSPNV();
 

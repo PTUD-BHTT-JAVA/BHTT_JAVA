@@ -771,6 +771,8 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
                     selectItem = "LKH001";
                 } else if (selectItem.equals("Thường")) {
                     selectItem = "LKH002";
+                }else {
+                    
                 }
                 List<KhachHang> khCanLoc = kh.getKhachHangTheoTenLoai(selectItem);
                 System.out.println(khCanLoc.toString());

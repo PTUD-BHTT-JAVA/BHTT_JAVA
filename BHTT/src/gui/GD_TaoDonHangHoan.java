@@ -920,6 +920,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
                         kiemTra = true;
                     }
                 }
+            
             }
             if (!kiemTra) {
                 modelDonHoan.addRow(new Object[]{ma, ten, soLuongHoan, sp.getGiaGoc() * soLuongHoan, cmbLyDo.getSelectedItem().toString()});
