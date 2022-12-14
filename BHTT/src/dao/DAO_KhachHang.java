@@ -38,50 +38,49 @@ public class DAO_KhachHang {
         }
         return dsKH;
     }
-    
+
     public KhachHang layKhachHangBangSDT(String sdt) {
-        try(
-            Connection con = ConnectDB.opConnection();
-            PreparedStatement pts = con.prepareStatement("Select * from KhachHang where soDienThoai =? ")){
-            pts.setString(1,sdt );
-                try(ResultSet rs = pts.executeQuery()){
-                    if (rs.next()){
-                        LoaiKhachHang lkh= lkhDAO.timLoaiKHBangMa(rs.getString("maLoaiKH"));
-                        KhachHang kh=new KhachHang(rs.getString("maKH"),rs.getString("tenKH"),rs.getString("SoDienThoai"),rs.getInt("diemTichLuy"),rs.getString("email"),rs.getBoolean("gioiTinh"),lkh);
-                        return kh;
-                    }
+        try (
+                 Connection con = ConnectDB.opConnection();  PreparedStatement pts = con.prepareStatement("Select * from KhachHang where soDienThoai =? ")) {
+            pts.setString(1, sdt);
+            try ( ResultSet rs = pts.executeQuery()) {
+                if (rs.next()) {
+                    LoaiKhachHang lkh = lkhDAO.timLoaiKHBangMa(rs.getString("maLoaiKH"));
+                    KhachHang kh = new KhachHang(rs.getString("maKH"), rs.getString("tenKH"), rs.getString("SoDienThoai"), rs.getInt("diemTichLuy"), rs.getString("email"), rs.getBoolean("gioiTinh"), lkh);
+                    return kh;
                 }
-            }catch(Exception e){
-           
-       }
-       return null; 
+            }
+        } catch (Exception e) {
+
+        }
+        return null;
     }
 //   Tìm kiếm tương đối
-    public  ArrayList<KhachHang> getDSKHTuongDoi(String search){
+
+    public ArrayList<KhachHang> getDSKHTuongDoi(String search) {
         ArrayList<KhachHang> khList = new ArrayList<KhachHang>();
         try {
-              ConnectDB.getInstance();
-               Connection con = ConnectDB.getConnection();
-               String sql = "select * from KhachHang where CONCAT(maKH,tenKH,soDienThoai,diemTichLuy,email,gioiTinh,maLoaiKH) LIKE  N'%"+search+"%' ";
-               Statement statement = con.createStatement();
-               ResultSet rs = statement.executeQuery(sql);
-               while(rs.next()){
-                   String maNV = rs.getString("maKH");
-                   String tenKH = rs.getString("tenKH");
-                   String soDienThoai = rs.getString("soDienThoai");
-                   int diemTichLuy = rs.getInt("diemTichLuy");
-                   String email = rs.getString("email");
-                   boolean gioiTinh = rs.getBoolean("gioiTinh");
-                   LoaiKhachHang loaiKhachHang = lkhDAO.timLoaiKHBangMa(rs.getString("maLoaiKH"));
-                   KhachHang kh = new KhachHang(maNV, tenKH, soDienThoai, diemTichLuy, email, gioiTinh, loaiKhachHang);
-                   khList.add(kh);
-               }
+            ConnectDB.getInstance();
+            Connection con = ConnectDB.getConnection();
+            String sql = "select * from KhachHang where CONCAT(maKH,tenKH,soDienThoai,diemTichLuy,email,gioiTinh,maLoaiKH) LIKE  N'%" + search + "%' ";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                String maNV = rs.getString("maKH");
+                String tenKH = rs.getString("tenKH");
+                String soDienThoai = rs.getString("soDienThoai");
+                int diemTichLuy = rs.getInt("diemTichLuy");
+                String email = rs.getString("email");
+                boolean gioiTinh = rs.getBoolean("gioiTinh");
+                LoaiKhachHang loaiKhachHang = lkhDAO.timLoaiKHBangMa(rs.getString("maLoaiKH"));
+                KhachHang kh = new KhachHang(maNV, tenKH, soDienThoai, diemTichLuy, email, gioiTinh, loaiKhachHang);
+                khList.add(kh);
+            }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         return khList;
     }
-    
 
     public boolean themKhachHang(KhachHang kh) {
         ConnectDB.getInstance();
@@ -178,35 +177,31 @@ public class DAO_KhachHang {
                 KhachHang kh = new KhachHang(maNV, ten, soDienThoai, diemTichLuy, email, gioiTinh, loaiKhachHang);
                 dsKH.add(kh);
             }
+            rs.close();
+            statement.close();
         } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                statement.close();
-            } catch (Exception e2) {
-                e2.printStackTrace();
-            }
+            System.out.println(e.getMessage());
         }
         return dsKH;
     }
-    
-    public KhachHang getKHBangMa(String maKH){
-        try(
-            Connection con = ConnectDB.opConnection();
-            PreparedStatement pts = con.prepareStatement("Select * from KhachHang where maKH =? ")){
-            pts.setString(1,maKH );
-                try(ResultSet rs = pts.executeQuery()){
-                    if (rs.next()){
-                        LoaiKhachHang lkh= lkhDAO.timLoaiKHBangMa(rs.getString("maLoaiKH"));
-                        KhachHang kh=new KhachHang(rs.getString("maKH"),rs.getString("tenKH"),rs.getString("SoDienThoai"),rs.getInt("diemTichLuy"),rs.getString("email"),rs.getBoolean("gioiTinh"),lkh);
-                        return kh;
-                    }
+
+    public KhachHang getKHBangMa(String maKH) {
+        try (
+                 Connection con = ConnectDB.opConnection();  PreparedStatement pts = con.prepareStatement("Select * from KhachHang where maKH =? ")) {
+            pts.setString(1, maKH);
+            try ( ResultSet rs = pts.executeQuery()) {
+                if (rs.next()) {
+                    LoaiKhachHang lkh = lkhDAO.timLoaiKHBangMa(rs.getString("maLoaiKH"));
+                    KhachHang kh = new KhachHang(rs.getString("maKH"), rs.getString("tenKH"), rs.getString("SoDienThoai"), rs.getInt("diemTichLuy"), rs.getString("email"), rs.getBoolean("gioiTinh"), lkh);
+                    return kh;
                 }
-            }catch(Exception e){
-           
-       }
-       return null; 
+            }
+        } catch (Exception e) {
+
+        }
+        return null;
     }
+
     public boolean capNhatDiemTL(String maKH, int diemTL) {
         int n = -1;
         String sql = "update KhachHang  set diemTichLuy = ? where maKH = ?";
