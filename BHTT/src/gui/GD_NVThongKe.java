@@ -993,10 +993,10 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
                 long chi = 0;
                 if (tongThanhTien > tongThanhTienHoan) {
                     thu = tongThanhTien - tongThanhTienHoan;
-                    s += "Thu: " + df.format(thu) ;
+                    s += "Thu: " + df.format(thu);
                 } else {
                     chi = tongThanhTienHoan - tongThanhTien;
-                    s += "Chi: " + df.format(chi) ;
+                    s += "Chi: " + df.format(chi);
                 }
                 lblKetToann.setText(s);
 
@@ -1066,12 +1066,12 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
         long thu = 0;
         long chi = 0;
         if (tongThanhTien > tongThanhTienHoan) {
-                    thu = tongThanhTien - tongThanhTienHoan;
-                    s += "Thu: " + df.format(thu) ;
-                } else {
-                    chi = tongThanhTienHoan - tongThanhTien;
-                    s += "Chi: " + df.format(chi) ;
-                }
+            thu = tongThanhTien - tongThanhTienHoan;
+            s += "Thu: " + df.format(thu);
+        } else {
+            chi = tongThanhTienHoan - tongThanhTien;
+            s += "Chi: " + df.format(chi);
+        }
 
         lblKetToann.setText(s);
 
@@ -1138,13 +1138,13 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
         String s = "";
         long thu = 0;
         long chi = 0;
-       if (tongThanhTien > tongThanhTienHoan) {
-                    thu = tongThanhTien - tongThanhTienHoan;
-                    s += "Thu: " + df.format(thu) ;
-                } else {
-                    chi = tongThanhTienHoan - tongThanhTien;
-                    s += "Chi: " + df.format(chi) ;
-                }
+        if (tongThanhTien > tongThanhTienHoan) {
+            thu = tongThanhTien - tongThanhTienHoan;
+            s += "Thu: " + df.format(thu);
+        } else {
+            chi = tongThanhTienHoan - tongThanhTien;
+            s += "Chi: " + df.format(chi);
+        }
 
         lblKetToann.setText(s);
 
@@ -1213,12 +1213,12 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
         long thu = 0;
         long chi = 0;
         if (tongThanhTien > tongThanhTienHoan) {
-                    thu = tongThanhTien - tongThanhTienHoan;
-                    s += "Thu: " + df.format(thu) ;
-                } else {
-                    chi = tongThanhTienHoan - tongThanhTien;
-                    s += "Chi: " + df.format(chi) ;
-                }
+            thu = tongThanhTien - tongThanhTienHoan;
+            s += "Thu: " + df.format(thu);
+        } else {
+            chi = tongThanhTienHoan - tongThanhTien;
+            s += "Chi: " + df.format(chi);
+        }
 
         lblKetToann.setText(s);
 
@@ -1287,12 +1287,12 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
         long thu = 0;
         long chi = 0;
         if (tongThanhTien > tongThanhTienHoan) {
-                    thu = tongThanhTien - tongThanhTienHoan;
-                    s += "Thu: " + df.format(thu) ;
-                } else {
-                    chi = tongThanhTienHoan - tongThanhTien;
-                    s += "Chi: " + df.format(chi) ;
-                }
+            thu = tongThanhTien - tongThanhTienHoan;
+            s += "Thu: " + df.format(thu);
+        } else {
+            chi = tongThanhTienHoan - tongThanhTien;
+            s += "Chi: " + df.format(chi);
+        }
         lblKetToann.setText(s);
 
     }//GEN-LAST:event_btnQuy1ActionPerformed
@@ -1358,12 +1358,12 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
         long thu = 0;
         long chi = 0;
         if (tongThanhTien > tongThanhTienHoan) {
-                    thu = tongThanhTien - tongThanhTienHoan;
-                    s += "Thu: " + df.format(thu) ;
-                } else {
-                    chi = tongThanhTienHoan - tongThanhTien;
-                    s += "Chi: " + df.format(chi) ;
-                }
+            thu = tongThanhTien - tongThanhTienHoan;
+            s += "Thu: " + df.format(thu);
+        } else {
+            chi = tongThanhTienHoan - tongThanhTien;
+            s += "Chi: " + df.format(chi);
+        }
         lblKetToann.setText(s);
 
     }//GEN-LAST:event_btnCaNamActionPerformed
