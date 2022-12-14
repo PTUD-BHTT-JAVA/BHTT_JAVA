@@ -764,8 +764,6 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
                 }
             }
         }
-        System.out.println(ngayCanTim);
-        System.out.println(ngayTim);
     }//GEN-LAST:event_btnTimActionPerformed
 
     private void TimKiemTheoQuy(String dauQuy,String cuoiQuy){
