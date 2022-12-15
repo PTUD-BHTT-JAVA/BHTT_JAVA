@@ -139,7 +139,7 @@ public class DAO_ChiTietHoaDon {
             stmt.setDouble(2, cthd.getVAT());
             stmt.setString(3, cthd.getHoaDon().getMaHD());
             stmt.setString(4, cthd.getSanPham().getMaSP());
-            stmt.setDouble(5, cthd.getTongTien());
+            stmt.setDouble(5, cthd.getSanPham().getGiaGoc()*cthd.getSoLuong());
             stmt.setDouble(6, cthd.getTienThoi());
             n = stmt.executeUpdate();
         } catch (SQLException e) {
