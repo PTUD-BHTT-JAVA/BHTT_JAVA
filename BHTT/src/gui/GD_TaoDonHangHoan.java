@@ -983,7 +983,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
             tienHoanHT =tienHoanHT+ (Double) modelDonHoan.getValueAt(i, 3) ;
         }
         if (kh.getLoaiKhachHang().getTenLoai().equals("VIP")) {
-            tienHoanTra = tienHoanHT + tienHoanHT * 0.15;
+            tienHoanTra = tienHoanHT - tienHoanHT * 0.05;
         } else {
             tienHoanTra = tienHoanHT + tienHoanHT * 0.05;
         }
@@ -1098,13 +1098,18 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         int hangChon;
         hangChon = tblDonHoan.getSelectedRow();
+        
+        
+        if (hangChon == -1) {
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn sản phẩm cần xóa");
+            return;
+        }
+        
         int r = tblCanHoan.getSelectedRow();
         int soLuongCoSan = (int) modelCanHoan.getValueAt(r, 2);
         int slSua = (int) spnSoLuong.getValue();
-        if (hangChon == -1) {
-            JOptionPane.showMessageDialog(null, "Vui lòng chọn sản phẩm cần sửa số lượng");
-            return;
-        }
+        
+        
         if (slSua <= 0) {
             JOptionPane.showMessageDialog(null, "Số lượng sửa phải lớn hơn 0.");
             return;
