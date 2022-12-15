@@ -268,7 +268,7 @@ public class DAO_ChiTietHoaDon {
         }
         return dsHDHoan;
     }
-
+//    Lấy danh sách hóa đơn theo nhân viên
     public ArrayList<ChiTietHoaDon> layDanhSachHoaDonTheoNgay(String ngayTim, String ngayCanTim,String maNV) {
         ArrayList<ChiTietHoaDon> dsCTHDNgay = new ArrayList<ChiTietHoaDon>();
         try {
@@ -293,8 +293,33 @@ public class DAO_ChiTietHoaDon {
         }
         return dsCTHDNgay;
     }
+//    Lấy danh sách hóa đơn của quản lý
+    public ArrayList<ChiTietHoaDon> layDSHDTheoNgayQL(String ngayTim,String ngayCanTim){
+        ArrayList<ChiTietHoaDon> dsCTHDNgayQL = new ArrayList<ChiTietHoaDon>();
+        try {
+            ConnectDB.getInstance();
+            Connection con = ConnectDB.getConnection();
+            Statement statement = con.createStatement();
+            String sql = "select hd.maHD,hd.ngayLap,SUM(cthd.soLuong) as TongSoLuong,SUM(cthd.tongTien) as TongThanhTien from HoaDon hd  join ChiTietHoaDon cthd on cthd.maHD = hd.maHD where hd.ngayLap >= ' " + ngayTim + " 'AND hd.ngayLap <= ' " + ngayCanTim + " ' group by hd.ngayLap,hd.maHD";
+            ResultSet  rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                int soLuong = rs.getInt("TongSoLuong");
+                double VAT = 0.1;
+                HoaDon maHD = hd_dao.layHoaDonTheoMa(rs.getString("maHD"));
+                SanPham maSP = new SanPham("SP001");
+                double tongTien = rs.getDouble("TongThanhTien");
+                double tienThoi = 1000;
+                ChiTietHoaDon cthd = new ChiTietHoaDon(soLuong, VAT, tongTien, tienThoi, maHD, maSP);
+                dsCTHDNgayQL.add(cthd);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return dsCTHDNgayQL;
+    }
 
-//    Lấy danh sách hóa đơn theo Quý 
+//    Lấy danh sách hóa đơn theo Quý  của nhân viên
+    
     public ArrayList<ChiTietHoaDon> layDSHoaDonTheoQuy(String dauQuy, String cuoiQuy,String maNV) {
         ArrayList<ChiTietHoaDon> dsCTHDQuy = new ArrayList<ChiTietHoaDon>();
         try {
@@ -321,4 +346,33 @@ public class DAO_ChiTietHoaDon {
         }
         return dsCTHDQuy;
     }
+    
+//    Lấy danh sách hóa đơn theo quý
+      public ArrayList<ChiTietHoaDon> layDSHoaDonTheoQuyQL(String dauQuy, String cuoiQuy){
+        ArrayList<ChiTietHoaDon> dsCTHDQL = new ArrayList<ChiTietHoaDon>();
+        try {
+            ConnectDB.getInstance();
+            Connection con = ConnectDB.getConnection();
+            Statement statement = con.createStatement();
+             String sql = "select hd.maHD,hd.ngayLap,SUM(cthd.soLuong) as TongSoLuong,SUM(cthd.tongTien) as TongThanhTien from HoaDon hd inner join ChiTietHoaDon cthd on cthd.maHD = hd.maHD where hd.ngayLap >= ' " + dauQuy + " 'AND hd.ngayLap <= ' " + cuoiQuy + " ' group by hd.ngayLap,hd.maHD";
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                int soLuong = rs.getInt("TongSoLuong");
+                double VAT = 0.1;
+                HoaDon maHD = hd_dao.layHoaDonTheoMa(rs.getString("maHD"));
+                SanPham maSP = new SanPham("SP001");
+                double tongTien = rs.getDouble("TongThanhTien");
+                double tienThoi = 1000;
+                ChiTietHoaDon cthd = new ChiTietHoaDon(soLuong, VAT, tongTien, tienThoi, maHD, maSP);
+                dsCTHDQL.add(cthd);
+            }
+            rs.close();
+            statement.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return dsCTHDQL;
+    }
+      
+      
 }

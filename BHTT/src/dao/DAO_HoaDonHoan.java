@@ -18,6 +18,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 
 /**
@@ -29,7 +30,7 @@ public class DAO_HoaDonHoan {
     private ArrayList<HoaDonHoanTra> dsHDH;
     private DAO_HoaDon hd_dao = new DAO_HoaDon();
     private DAO_NhanVien nv_dao = new DAO_NhanVien();
-
+    private DAO_KhachHang kh_dao = new DAO_KhachHang();
     public ArrayList<HoaDonHoanTra> getallDSHoaDonHoan() {
         dsHDH = new ArrayList<HoaDonHoanTra>();
         try {
@@ -249,6 +250,39 @@ public class DAO_HoaDonHoan {
         return dsHDH;
     }
 
+//    Lấy danh sách hóa đơn theo ngày của quản lý
+    
+    public ArrayList<HoaDonHoanTra> getDSHDHoanTheoNgayQL(String ngayTim,String ngayCanTim){
+        ArrayList<HoaDonHoanTra> dsHDHoanTheoNgayQL = new ArrayList<HoaDonHoanTra>();
+        Connection con = ConnectDB.getInstance().getConnection();
+        PreparedStatement stemnt = null;
+        int n = 0;
+        try {
+            ConnectDB.getInstance().connect();
+            String sql = "select *  from HoaDonHoanTra where ngayHoanTra >=?  and ngayHoanTra <= ?";
+            stemnt = con.prepareStatement(sql);
+            stemnt.setString(1, ngayTim);
+            stemnt.setString(2, ngayCanTim);
+            ResultSet rs = stemnt.executeQuery();
+            while (rs.next()) {
+//                String maHD = rs.getString("maHD");
+                String maHDH = rs.getString("maHDHT");
+                Date ngayHoanTra = rs.getDate("ngayHoanTra");
+                NhanVien nv = nv_dao.layNhanVienBangMa(rs.getString("maNV"));
+//                HoaDon hd = new HoaDon(maHD, rs.getDate("ngayLap"), rs.getDouble("tienKhachDua"), rs.getString("diaChi"), nv, kh);
+                HoaDon hd = hd_dao.layHoaDonTheoMa(rs.getString("maHD"));
+                HoaDonHoanTra hdht = new HoaDonHoanTra(maHDH, ngayHoanTra, hd, nv);
+               dsHDHoanTheoNgayQL.add(hdht);
+            }
+            rs.close();
+            stemnt.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return dsHDHoanTheoNgayQL;
+    }
+    
+    
     public ArrayList<HoaDonHoanTra> thongKeDoanhThuNVTheoNam(int a, String ma) {
         dsHDH = new ArrayList<HoaDonHoanTra>();
         Connection con = ConnectDB.getInstance().getConnection();

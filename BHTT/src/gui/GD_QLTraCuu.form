@@ -46,6 +46,11 @@
       </Layout>
       <SubComponents>
         <Container class="javax.swing.JTabbedPane" name="jTabbedPane1">
+          <Properties>
+            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="null"/>
+            </Property>
+          </Properties>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
           <SubComponents>
@@ -675,45 +680,45 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txtTim1" alignment="0" min="-2" pref="252" max="-2" attributes="0"/>
+                                  <Component id="txtTimDonHoan" alignment="0" min="-2" pref="252" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                                       <Component id="jLabel21" min="-2" pref="46" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="jspNam1" min="-2" pref="106" max="-2" attributes="0"/>
+                                      <Component id="jspNamHoan" min="-2" pref="106" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="btnQuy5" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnQuy1Hoan" alignment="1" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel19" alignment="1" min="-2" pref="60" max="-2" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                                      <Component id="btnQuy6" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnQuy2Hoan" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                                      <Component id="btnQuy7" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnQuy3Hoan" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="btnQuy8" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnQuy4Hoan" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jdcNgayTim1" min="-2" pref="261" max="-2" attributes="0"/>
+                                      <Component id="jdcNgayTimHoan" min="-2" pref="261" max="-2" attributes="0"/>
                                       <EmptySpace pref="30" max="32767" attributes="0"/>
                                       <Component id="jLabel20" min="-2" pref="69" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jdcNgayMuonTim1" alignment="0" min="-2" pref="227" max="-2" attributes="0"/>
+                                  <Component id="jdcNgayMuonTimHoan" alignment="0" min="-2" pref="227" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                                      <Component id="btnChiTiet1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnChiTietDonHoan" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                              <Component id="btnTim1" min="-2" pref="53" max="-2" attributes="0"/>
+                              <Component id="btnTimDonHoan" min="-2" pref="53" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="1386" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -722,7 +727,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace pref="24" max="32767" attributes="0"/>
-                              <Component id="btnTim1" min="-2" pref="50" max="-2" attributes="0"/>
+                              <Component id="btnTimDonHoan" min="-2" pref="50" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -730,9 +735,9 @@
                                   <Group type="102" alignment="1" attributes="0">
                                       <EmptySpace min="0" pref="9" max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jdcNgayTim1" alignment="0" min="-2" pref="31" max="-2" attributes="0"/>
+                                          <Component id="jdcNgayTimHoan" alignment="0" min="-2" pref="31" max="-2" attributes="0"/>
                                           <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                              <Component id="txtTim1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="txtTimDonHoan" alignment="3" min="-2" max="-2" attributes="0"/>
                                               <Component id="jLabel19" alignment="3" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
@@ -746,7 +751,7 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="jspNam1" alignment="1" min="-2" pref="28" max="-2" attributes="0"/>
+                                          <Component id="jspNamHoan" alignment="1" min="-2" pref="28" max="-2" attributes="0"/>
                                           <Component id="jLabel21" alignment="1" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
@@ -754,12 +759,12 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                              <Component id="btnQuy6" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="btnQuy7" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="btnQuy8" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="btnChiTiet1" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                                              <Component id="btnQuy2Hoan" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="btnQuy3Hoan" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="btnQuy4Hoan" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="btnChiTietDonHoan" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                                           </Group>
-                                          <Component id="btnQuy5" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="btnQuy1Hoan" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -767,36 +772,42 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                              <Component id="jdcNgayMuonTim1" min="-2" pref="31" max="-2" attributes="0"/>
+                              <Component id="jdcNgayMuonTimHoan" min="-2" pref="31" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="swing.TextFieldAnimation" name="txtTim1">
+                    <Component class="swing.TextFieldAnimation" name="txtTimDonHoan">
                       <Properties>
                         <Property name="hintText" type="java.lang.String" value="Nh&#x1ead;p m&#xe3; &#x111;&#x1a1;n ho&#xe0;n"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTim1KeyReleased"/>
+                        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTimDonHoanKeyReleased"/>
                       </Events>
                     </Component>
-                    <Component class="swing.Button" name="btnChiTiet1">
+                    <Component class="swing.Button" name="btnChiTietDonHoan">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/icon/donhangmoi.png"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Xem chi ti&#x1ebf;t &#x111;&#x1a1;n h&#xe0;ng"/>
+                        <Property name="text" type="java.lang.String" value="Xem chi ti&#x1ebf;t &#x111;&#x1a1;n ho&#xe0;n"/>
                         <Property name="color1" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="0" green="99" red="cc" type="rgb"/>
+                          <Color blue="ff" green="0" red="33" type="rgb"/>
+                        </Property>
+                        <Property name="color2" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="cc" green="0" red="cc" type="rgb"/>
+                        </Property>
+                        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="null"/>
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnChiTiet1ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnChiTietDonHoanActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="com.toedter.calendar.JDateChooser" name="jdcNgayTim1">
+                    <Component class="com.toedter.calendar.JDateChooser" name="jdcNgayTimHoan">
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel19">
                       <Properties>
@@ -814,9 +825,9 @@
                         <Property name="text" type="java.lang.String" value="&#x110;&#x1ebf;n ng&#xe0;y:"/>
                       </Properties>
                     </Component>
-                    <Component class="com.toedter.calendar.JDateChooser" name="jdcNgayMuonTim1">
+                    <Component class="com.toedter.calendar.JDateChooser" name="jdcNgayMuonTimHoan">
                     </Component>
-                    <Component class="com.toedter.calendar.JYearChooser" name="jspNam1">
+                    <Component class="com.toedter.calendar.JYearChooser" name="jspNamHoan">
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel21">
                       <Properties>
@@ -826,52 +837,88 @@
                         <Property name="text" type="java.lang.String" value="N&#x103;m"/>
                       </Properties>
                     </Component>
-                    <Component class="swing.Button" name="btnTim1">
+                    <Component class="swing.Button" name="btnTimDonHoan">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/icon/tim.png"/>
                         </Property>
                         <Property name="color1" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="99" green="99" red="ff" type="rgb"/>
+                          <Color blue="ff" green="0" red="33" type="rgb"/>
                         </Property>
                         <Property name="color2" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="ff" green="33" red="33" type="rgb"/>
+                          <Color blue="cc" green="0" red="cc" type="rgb"/>
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTim1ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTimDonHoanActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="swing.Button" name="btnQuy5">
+                    <Component class="swing.Button" name="btnQuy1Hoan">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Qu&#xfd; 1"/>
+                        <Property name="color1" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ff" green="0" red="33" type="rgb"/>
+                        </Property>
+                        <Property name="color2" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="cc" green="0" red="cc" type="rgb"/>
+                        </Property>
+                        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="null"/>
+                        </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnQuy5ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnQuy1HoanActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="swing.Button" name="btnQuy6">
+                    <Component class="swing.Button" name="btnQuy2Hoan">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Qu&#xfd; 2"/>
+                        <Property name="color1" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ff" green="0" red="33" type="rgb"/>
+                        </Property>
+                        <Property name="color2" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="cc" green="0" red="cc" type="rgb"/>
+                        </Property>
+                        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="null"/>
+                        </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnQuy6ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnQuy2HoanActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="swing.Button" name="btnQuy7">
+                    <Component class="swing.Button" name="btnQuy3Hoan">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Qu&#xfd; 3"/>
+                        <Property name="color1" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ff" green="0" red="33" type="rgb"/>
+                        </Property>
+                        <Property name="color2" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="cc" green="0" red="cc" type="rgb"/>
+                        </Property>
+                        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="null"/>
+                        </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnQuy7ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnQuy3HoanActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="swing.Button" name="btnQuy8">
+                    <Component class="swing.Button" name="btnQuy4Hoan">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Qu&#xfd; 4"/>
+                        <Property name="color1" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ff" green="0" red="33" type="rgb"/>
+                        </Property>
+                        <Property name="color2" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="cc" green="0" red="cc" type="rgb"/>
+                        </Property>
+                        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="null"/>
+                        </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnQuy8ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnQuy4HoanActionPerformed"/>
                       </Events>
                     </Component>
                   </SubComponents>
@@ -897,8 +944,9 @@
                     <Component class="javax.swing.JTable" name="tblHoaDonHoan">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="6" rowCount="0">
+                          <Table columnCount="7" rowCount="0">
                             <Column editable="true" title="M&#xe3; &#x111;&#x1a1;n ho&#xe0;n" type="java.lang.Object"/>
+                            <Column editable="true" title="M&#xe3; h&#xf3;a &#x111;&#x1a1;n" type="java.lang.Object"/>
                             <Column editable="true" title="Ng&#xe0;y ho&#xe0;n &#x111;&#x1a1;n" type="java.lang.Object"/>
                             <Column editable="true" title="T&#x1ed5;ng s&#x1ea3;n ph&#x1ea9;m" type="java.lang.Object"/>
                             <Column editable="true" title="T&#x1ed5;ng ti&#x1ec1;n ho&#xe0;n" type="java.lang.Object"/>
