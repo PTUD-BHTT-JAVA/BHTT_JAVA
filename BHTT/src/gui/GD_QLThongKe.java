@@ -1232,10 +1232,10 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
                 long chi = 0;
                 if (tongThanhTien > tongThanhTienHoan) {
                     thu = tongThanhTien - tongThanhTienHoan;
-                    s += "Thu: " + thu + " VND";
+                    s += "Thu: " + df.format(thu);
                 } else {
                     chi = tongThanhTienHoan - tongThanhTien;
-                    s += "Chi: " + chi + " VND";
+                    s += "Chi: " + df.format(chi);
                 }
                 lblKetToann.setText(s);
                 ThongKeSPBanChay(tu, den);
@@ -1319,10 +1319,10 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
         long chi = 0;
         if (tongThanhTien > tongThanhTienHoan) {
             thu = tongThanhTien - tongThanhTienHoan;
-            s += "Thu: " + thu + " VND";
+            s += "Thu: " + df.format(thu);
         } else {
             chi = tongThanhTienHoan - tongThanhTien;
-            s += "Chi: " + chi + " VND";
+            s += "Chi: " + df.format(chi);
         }
         lblKetToann.setText(s);
         //Thống kê sản phẩm
@@ -1412,10 +1412,10 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
         long chi = 0;
         if (tongThanhTien > tongThanhTienHoan) {
             thu = tongThanhTien - tongThanhTienHoan;
-            s += "Thu: " + thu + " VND";
+            s += "Thu: " + df.format(thu);
         } else {
             chi = tongThanhTienHoan - tongThanhTien;
-            s += "Chi: " + chi + " VND";
+            s += "Chi: " + df.format(chi);
         }
         lblKetToann.setText(s);
         //Thống kê sản phẩm
@@ -1505,10 +1505,10 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
         long chi = 0;
         if (tongThanhTien > tongThanhTienHoan) {
             thu = tongThanhTien - tongThanhTienHoan;
-            s += "Thu: " + thu + " VND";
+            s += "Thu: " + df.format(thu);
         } else {
             chi = tongThanhTienHoan - tongThanhTien;
-            s += "Chi: " + chi + " VND";
+            s += "Chi: " + df.format(chi);
         }
         lblKetToann.setText(s);
         //Thống kê sản phẩm
@@ -1598,10 +1598,10 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
         long chi = 0;
         if (tongThanhTien > tongThanhTienHoan) {
             thu = tongThanhTien - tongThanhTienHoan;
-            s += "Thu: " + thu + " VND";
+            s += "Thu: " + df.format(thu);
         } else {
             chi = tongThanhTienHoan - tongThanhTien;
-            s += "Chi: " + chi + " VND";
+            s += "Chi: " + df.format(chi);
         }
         lblKetToann.setText(s);
         //Thống kê sản phẩm.thongKeSPBanChay
@@ -1695,10 +1695,10 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
         long chi = 0;
         if (tongThanhTien > tongThanhTienHoan) {
             thu = tongThanhTien - tongThanhTienHoan;
-            s += "Thu: " + thu + " VND";
+            s += "Thu: " + df.format(thu);
         } else {
             chi = tongThanhTienHoan - tongThanhTien;
-            s += "Chi: " + chi + " VND";
+            s += "Chi: " + df.format(chi);
         }
         lblKetToann.setText(s);
         //Thống kê sản phẩm
