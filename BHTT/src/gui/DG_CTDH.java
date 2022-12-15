@@ -341,7 +341,7 @@ public class DG_CTDH extends javax.swing.JFrame {
         double tth = 0;
         ArrayList<ChiTietHoaDon> ds = cthd_dao.layDSHDBangMa(maHD);
         for (ChiTietHoaDon cthd : ds) {
-            tth += cthd.getTongTien();
+            tth += cthd.getSanPham().getGiaGoc()*cthd.getSoLuong();
         }
         HoaDon hd = hd_dao.layHoaDonTheoMa(maHD);
         lblMAHD.setText(hd.getMaHD());
