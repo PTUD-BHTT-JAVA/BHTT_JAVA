@@ -47,6 +47,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
     private double tongThanhTien;
     DecimalFormat df = new DecimalFormat("#,##0 VND");
     private Thread thread = new Thread(this);
+    private String maHD;
 
     public GD_TaoDonHangHoan(String _username) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
         thread.start();
@@ -73,7 +74,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
         Date date = new Date();
         moKhoaControls(false);
         txtMaDHHT.setText(maTuSinh());
-
+        
         lblTenNV.setText(nv_dao.layNhanVienBangMa(username).getTenNV());
     }
 
@@ -104,7 +105,8 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
     private void setTongThanhTien() {
         tongThanhTien = 0;
         for (int i = 0; i < modelCanHoan.getRowCount(); i++) {
-            tongThanhTien += Double.parseDouble(modelCanHoan.getValueAt(i, 3).toString());
+            ChiTietHoaDon ct=cthd_dao.timCTHoaDonTheoHoaDonSanPham((String)modelDonHoan.getValueAt(i, 0), maHD);
+            tongThanhTien += ct.getTongTien();
         }
         txtTTDonHang.setText(df.format(tongThanhTien));
     }
@@ -971,21 +973,18 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
         btnThem.setEnabled(true);
         
         String maHDHT = maTuSinh();
-        String maHD = modelHoaDon.getValueAt(row, 0).toString();
+         
         Date ngayHT = new Date();
         //lưu vào sql hóa đơn hoàn trả
         HoaDonHoanTra hDHT = new HoaDonHoanTra();
         HoaDon hd = hd_dao.layHoaDonTheoMa(maHD);
         KhachHang kh = kh_dao.getKHBangMa(hd.getKhachHang().getMaKH());
 
-        double tienHoanHT = 0;
+        tienHoanTra=0;
         for (int i = 0; i < modelDonHoan.getRowCount(); i++) {
-            tienHoanHT =tienHoanHT+ (Double) modelDonHoan.getValueAt(i, 3) ;
-        }
-        if (kh.getLoaiKhachHang().getTenLoai().equals("VIP")) {
-            tienHoanTra = tienHoanHT - tienHoanHT * 0.05;
-        } else {
-            tienHoanTra = tienHoanHT + tienHoanHT * 0.05;
+            ChiTietHoaDon ct=cthd_dao.timCTHoaDonTheoHoaDonSanPham((String)modelDonHoan.getValueAt(i, 0), maHD);
+            tienHoanTra =tienHoanTra+ ct.getTongTien()/ct.getSoLuong()* (int)modelDonHoan.getValueAt(i, 2);
+            
         }
         txtTTDonHoan.setText(String.format("%,.1f", tienHoanTra) + " VND");
     }
@@ -1140,6 +1139,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         
         int row = tblDSHD.getSelectedRow();
+        maHD = modelHoaDon.getValueAt(row, 0).toString();
         if (row < 0) {
             JOptionPane.showMessageDialog(null, "Chọn đơn hàng cần hoàn", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         } 
@@ -1151,11 +1151,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
           
             HoaDon hd = hd_dao.layHoaDonTheoMa(tblDSHD.getValueAt(row, 0).toString());
             KhachHang kh = kh_dao.getKHBangMa(hd.getKhachHang().getMaKH());
-            if (kh.getLoaiKhachHang().getTenLoai().equals("VIP")) {
-                lblKM.setText("10%");
-            } else {
-               lblKM.setText("0%");
-            }
+            
             lblVAT.setText("5%");
             //
             int sl;
@@ -1166,8 +1162,10 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
             moKhoaControls(true);
             List<ChiTietHoaDon> hdCanHoan = cthd_dao.layDSHDBangMa(tblDSHD.getValueAt(row, 0).toString());
             List<ChiTietHoaDon> ctHD = cthd_dao.layDSHDBangMa(tblDSHD.getValueAt(row, 0).toString());
+            
             for (ChiTietHoaDon cthd : hdCanHoan) {
                 sl = cthd.getSoLuong();
+                
 
 //                    dsctht = ctht_dao.layDSCTHTBangMa(dsHDHT.getMaHDHT());
 //                    for (ChiTietHoanTra ctht : dsctht) {
@@ -1182,8 +1180,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
                 modelCanHoan.addRow(new Object[]{
                     cthd.getSanPham().getMaSP(),
                     cthd.getSanPham().getTenSP(),
-                    sl, sl
-                    * cthd.getSanPham().getGiaGoc()
+                    sl, sl*cthd.getSanPham().getGiaGoc()
                 });
             }
 
