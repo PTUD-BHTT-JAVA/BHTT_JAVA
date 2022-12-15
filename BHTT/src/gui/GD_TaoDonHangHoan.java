@@ -164,9 +164,9 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
         jPanel10 = new javax.swing.JPanel();
         btnSua = new javax.swing.JButton();
         jPanel11 = new javax.swing.JPanel();
-        btnHuy = new javax.swing.JButton();
-        jPanel12 = new javax.swing.JPanel();
         btnXoaSPDH = new javax.swing.JButton();
+        jPanel12 = new javax.swing.JPanel();
+        btnHuy = new javax.swing.JButton();
         jPanel13 = new javax.swing.JPanel();
         pnlDonHoan = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -677,19 +677,18 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
 
         pnlNut.add(jPanel11);
 
-        btnHuy.setBackground(new java.awt.Color(224, 83, 83));
-        btnHuy.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
-        btnHuy.setForeground(new java.awt.Color(255, 255, 255));
-        btnHuy.setText("Hủy");
-        btnHuy.setAlignmentX(0.5F);
-        btnHuy.setFocusPainted(false);
-        btnHuy.setMaximumSize(new java.awt.Dimension(179, 31));
-        btnHuy.addActionListener(new java.awt.event.ActionListener() {
+        btnXoaSPDH.setBackground(new java.awt.Color(94, 153, 94));
+        btnXoaSPDH.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
+        btnXoaSPDH.setForeground(new java.awt.Color(255, 255, 255));
+        btnXoaSPDH.setText("Xóa");
+        btnXoaSPDH.setAlignmentX(0.5F);
+        btnXoaSPDH.setMaximumSize(new java.awt.Dimension(179, 31));
+        btnXoaSPDH.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHuyActionPerformed(evt);
+                btnXoaSPDHActionPerformed(evt);
             }
         });
-        pnlNut.add(btnHuy);
+        pnlNut.add(btnXoaSPDH);
 
         jPanel12.setBackground(new java.awt.Color(204, 204, 255));
         jPanel12.setMaximumSize(new java.awt.Dimension(196, 33));
@@ -708,18 +707,19 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
 
         pnlNut.add(jPanel12);
 
-        btnXoaSPDH.setBackground(new java.awt.Color(94, 153, 94));
-        btnXoaSPDH.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
-        btnXoaSPDH.setForeground(new java.awt.Color(255, 255, 255));
-        btnXoaSPDH.setText("Xóa");
-        btnXoaSPDH.setAlignmentX(0.5F);
-        btnXoaSPDH.setMaximumSize(new java.awt.Dimension(179, 31));
-        btnXoaSPDH.addActionListener(new java.awt.event.ActionListener() {
+        btnHuy.setBackground(new java.awt.Color(224, 83, 83));
+        btnHuy.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
+        btnHuy.setForeground(new java.awt.Color(255, 255, 255));
+        btnHuy.setText("Hủy");
+        btnHuy.setAlignmentX(0.5F);
+        btnHuy.setFocusPainted(false);
+        btnHuy.setMaximumSize(new java.awt.Dimension(179, 31));
+        btnHuy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXoaSPDHActionPerformed(evt);
+                btnHuyActionPerformed(evt);
             }
         });
-        pnlNut.add(btnXoaSPDH);
+        pnlNut.add(btnHuy);
 
         jPanel13.setBackground(new java.awt.Color(204, 204, 255));
         jPanel13.setPreferredSize(new java.awt.Dimension(196, 33));
