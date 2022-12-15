@@ -718,6 +718,8 @@ public class GD_TaoDonHang extends javax.swing.JInternalFrame implements Runnabl
             JOptionPane.showMessageDialog(null, "Không tìm thấy khách hàng");
             txtTenKH.setText("");
         }
+        
+        
     }//GEN-LAST:event_btnTimKHActionPerformed
 
     private void btnTaoDHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoDHActionPerformed

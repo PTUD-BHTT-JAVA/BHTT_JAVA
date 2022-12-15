@@ -332,7 +332,7 @@ public class DG_CTDH extends javax.swing.JFrame {
         ArrayList<ChiTietHoaDon> ds = cthd_dao.layDSHDBangMa(maHD);
         int i = 1;
         for (ChiTietHoaDon cthd : ds) {
-            modelHoaDon.addRow(new Object[]{i++, cthd.getSanPham().getMaSP(), cthd.getSanPham().getTenSP(), cthd.getSoLuong(), cthd.getSanPham().getGiaGoc(), cthd.getTongTien()});
+            modelHoaDon.addRow(new Object[]{i++, cthd.getSanPham().getMaSP(), cthd.getSanPham().getTenSP(), cthd.getSoLuong(), cthd.getSanPham().getGiaGoc(), cthd.getSanPham().getGiaGoc()*cthd.getSoLuong()});
         }
     }
     
@@ -359,10 +359,10 @@ public class DG_CTDH extends javax.swing.JFrame {
         double tc=0 ;
         if (hd_dao.layHoaDonTheoMa(maHD).getKhachHang().getLoaiKhachHang().getMaLoaiKH().equals("LKH001")) {
             km = "10%";
-            tc = tc+ hd_dao.layHoaDonTheoMa(maHD).thanhTienVIP();            
+            tc = tc+ hd_dao.layHoaDonTheoMa(maHD).getThanhTien();            
         } else {
             km = "0%";
-            tc = tc+ hd_dao.layHoaDonTheoMa(maHD).thanhTienThuong();   
+            tc = tc+ hd_dao.layHoaDonTheoMa(maHD).getThanhTien();   
         }
         lblTTGG.setText(km);
         lblVAT.setText("5%");

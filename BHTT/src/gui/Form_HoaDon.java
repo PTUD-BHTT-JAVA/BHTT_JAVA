@@ -82,7 +82,7 @@ public class Form_HoaDon extends javax.swing.JFrame {
         for (ChiTietHoaDon l : list) {
             modalXuatHoaDon.addRow(new Object[]{
                 l.getSanPham().getTenSP(), l.getSoLuong(),
-                df.format(l.getSanPham().getGiaGoc()), df.format(l.getTongTien())
+                df.format(l.getSanPham().getGiaGoc()), df.format(l.getSanPham().getGiaGoc()*l.getSoLuong())
             });
             tongSL += l.getSoLuong();
         }
@@ -97,10 +97,10 @@ public class Form_HoaDon extends javax.swing.JFrame {
         double tc;
         if (dao_HD.layHoaDonTheoMa(maHD).getKhachHang().getLoaiKhachHang().getMaLoaiKH().equals("LKH001")) {
             km = "10";
-            tc = dao_HD.layHoaDonTheoMa(maHD).thanhTienVIP();
+            tc = dao_HD.layHoaDonTheoMa(maHD).getThanhTien();
         } else {
             km = "0";
-            tc = dao_HD.layHoaDonTheoMa(maHD).thanhTienThuong();
+            tc = dao_HD.layHoaDonTheoMa(maHD).getThanhTien();
 
         }
         lblKhuyenMai.setText(km + "%");
