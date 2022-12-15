@@ -155,5 +155,14 @@ public class HoaDon {
         }
         return tong;
     }
+    public int getSoLuong(){
+        int soLuong=0;
+        DAO_ChiTietHoaDon cthd_dao=new DAO_ChiTietHoaDon();
+        ArrayList<ChiTietHoaDon> ds= cthd_dao.layDSHDBangMa(getMaHD());
+               for (ChiTietHoaDon ct:ds){
+                   soLuong=soLuong+ct.getSoLuong();
+               }
+        return soLuong;
+    }
     
 }

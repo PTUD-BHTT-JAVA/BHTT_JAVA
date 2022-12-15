@@ -328,7 +328,10 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="Xem chi ti&#x1ebf;t &#x111;&#x1a1;n h&#xe0;ng"/>
                         <Property name="color1" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="0" green="99" red="cc" type="rgb"/>
+                          <Color blue="ff" green="0" red="33" type="rgb"/>
+                        </Property>
+                        <Property name="color2" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="cc" green="0" red="cc" type="rgb"/>
                         </Property>
                       </Properties>
                       <Events>
@@ -371,10 +374,10 @@
                           <Image iconType="3" name="/icon/tim.png"/>
                         </Property>
                         <Property name="color1" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="99" green="99" red="ff" type="rgb"/>
+                          <Color blue="ff" green="0" red="33" type="rgb"/>
                         </Property>
                         <Property name="color2" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="ff" green="33" red="33" type="rgb"/>
+                          <Color blue="cc" green="0" red="cc" type="rgb"/>
                         </Property>
                       </Properties>
                       <Events>
@@ -384,6 +387,12 @@
                     <Component class="swing.Button" name="btnQuy1">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Qu&#xfd; 1"/>
+                        <Property name="color1" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ff" green="0" red="33" type="rgb"/>
+                        </Property>
+                        <Property name="color2" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="cc" green="0" red="cc" type="rgb"/>
+                        </Property>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnQuy1ActionPerformed"/>
@@ -392,6 +401,12 @@
                     <Component class="swing.Button" name="btnQuy2">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Qu&#xfd; 2"/>
+                        <Property name="color1" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ff" green="0" red="33" type="rgb"/>
+                        </Property>
+                        <Property name="color2" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="cc" green="0" red="cc" type="rgb"/>
+                        </Property>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnQuy2ActionPerformed"/>
@@ -400,6 +415,12 @@
                     <Component class="swing.Button" name="btnQuy3">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Qu&#xfd; 3"/>
+                        <Property name="color1" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ff" green="0" red="33" type="rgb"/>
+                        </Property>
+                        <Property name="color2" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="cc" green="0" red="cc" type="rgb"/>
+                        </Property>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnQuy3ActionPerformed"/>
@@ -408,6 +429,12 @@
                     <Component class="swing.Button" name="btnQuy4">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Qu&#xfd; 4"/>
+                        <Property name="color1" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ff" green="0" red="33" type="rgb"/>
+                        </Property>
+                        <Property name="color2" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="cc" green="0" red="cc" type="rgb"/>
+                        </Property>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnQuy4ActionPerformed"/>

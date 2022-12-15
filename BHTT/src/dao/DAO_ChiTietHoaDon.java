@@ -189,7 +189,54 @@ public class DAO_ChiTietHoaDon {
         }
         return null;
     }
-
+//    public ChiTietHoaDon lay1ChiTiet(String ma) {
+//        try(
+//            Connection con = ConnectDB.opConnection();
+//            PreparedStatement pts = con.prepareStatement("Select (1) * from ChiTietHoaDon where maHD =? ")){
+//            pts.setString(1,ma );
+//                try(ResultSet rs = pts.executeQuery()){
+//                    if (rs.next()){
+//                       int soLuong = rs.getInt("soLuong");
+//                double VAT = rs.getDouble("VAT");
+//                HoaDon maHD = hd_dao.layHoaDonTheoMa(rs.getString("maHD"));
+//                SanPham maSP = sp_dao.laySanPhamBangMa(rs.getString("maSP"));
+//                double tongTien = rs.getDouble("tongTien");
+//                double tienThoi = rs.getDouble("tienThoi");
+//                ChiTietHoaDon cthd = new ChiTietHoaDon(soLuong, VAT, tongTien, tienThoi, maHD, maSP);
+//                        return cthd;
+//                    }
+//                }
+//            }catch(Exception e){
+//           
+//       }
+//       return null; 
+//    }
+    
+        public ChiTietHoaDon timCTHoaDonTheoHoaDonSanPham(String maSP,String maHD){
+        try (Connection conn = ConnectDB.opConnection();
+                PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM ChiTietHoaDon WHERE maSP like ? and maHD like ?  ")) {
+                pstmt.setString(1, maSP);
+                pstmt.setString(2, maHD);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    int soLuong = rs.getInt("soLuong");
+                    double VAT = rs.getDouble("VAT");
+                    HoaDon hoaDon = hd_dao.layHoaDonTheoMa(rs.getString("maHD"));
+                    SanPham sanPham = sp_dao.laySanPhamBangMa(rs.getString("maSP"));
+                    double tongTien = rs.getDouble("tongTien");
+                    double tienThoi = rs.getDouble("tienThoi");
+                    ChiTietHoaDon ct = new ChiTietHoaDon(soLuong, VAT, tongTien, tienThoi, hoaDon, sanPham);
+                    return ct;
+                }
+            } catch (Exception e) {
+                System.err.println("timCTHoaDonHoan(): get data fail");
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            System.err.println("timCTHoaDonHoan(): connect db fail");
+        }
+        return null;
+    }
     public ArrayList<ChiTietHoaDon> layDSHDBangMa(String maTim) {
         ArrayList<ChiTietHoaDon> dsHDHoan = new ArrayList<ChiTietHoaDon>();
         ConnectDB.getInstance();

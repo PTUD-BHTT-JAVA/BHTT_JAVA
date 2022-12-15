@@ -940,7 +940,7 @@ public class GD_NhanVien extends javax.swing.JFrame {
         pnlTraCuu.setkStartColor(new java.awt.Color(102, 0, 153));
         lblTraCuu.setForeground(new java.awt.Color(255, 255, 255));
         icTraCuu.setForeground(new java.awt.Color(255, 255, 255));
-        gd_KH.setVisible(false);
+
     }//GEN-LAST:event_pnlDonHangMouseClicked
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed

@@ -281,7 +281,8 @@ public class GD_QLTraCuu extends javax.swing.JInternalFrame implements Runnable 
 
         btnChiTiet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/donhangmoi.png"))); // NOI18N
         btnChiTiet.setText("Xem chi tiết đơn hàng");
-        btnChiTiet.setColor1(new java.awt.Color(204, 153, 0));
+        btnChiTiet.setColor1(new java.awt.Color(51, 0, 255));
+        btnChiTiet.setColor2(new java.awt.Color(204, 0, 204));
         btnChiTiet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnChiTietActionPerformed(evt);
@@ -298,8 +299,8 @@ public class GD_QLTraCuu extends javax.swing.JInternalFrame implements Runnable 
         jLabel8.setText("Năm");
 
         btnTim.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/tim.png"))); // NOI18N
-        btnTim.setColor1(new java.awt.Color(255, 153, 153));
-        btnTim.setColor2(new java.awt.Color(51, 51, 255));
+        btnTim.setColor1(new java.awt.Color(51, 0, 255));
+        btnTim.setColor2(new java.awt.Color(204, 0, 204));
         btnTim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTimActionPerformed(evt);
@@ -307,6 +308,8 @@ public class GD_QLTraCuu extends javax.swing.JInternalFrame implements Runnable 
         });
 
         btnQuy1.setText("Quý 1");
+        btnQuy1.setColor1(new java.awt.Color(51, 0, 255));
+        btnQuy1.setColor2(new java.awt.Color(204, 0, 204));
         btnQuy1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnQuy1ActionPerformed(evt);
@@ -314,6 +317,8 @@ public class GD_QLTraCuu extends javax.swing.JInternalFrame implements Runnable 
         });
 
         btnQuy2.setText("Quý 2");
+        btnQuy2.setColor1(new java.awt.Color(51, 0, 255));
+        btnQuy2.setColor2(new java.awt.Color(204, 0, 204));
         btnQuy2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnQuy2ActionPerformed(evt);
@@ -321,6 +326,8 @@ public class GD_QLTraCuu extends javax.swing.JInternalFrame implements Runnable 
         });
 
         btnQuy3.setText("Quý 3");
+        btnQuy3.setColor1(new java.awt.Color(51, 0, 255));
+        btnQuy3.setColor2(new java.awt.Color(204, 0, 204));
         btnQuy3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnQuy3ActionPerformed(evt);
@@ -328,6 +335,8 @@ public class GD_QLTraCuu extends javax.swing.JInternalFrame implements Runnable 
         });
 
         btnQuy4.setText("Quý 4");
+        btnQuy4.setColor1(new java.awt.Color(51, 0, 255));
+        btnQuy4.setColor2(new java.awt.Color(204, 0, 204));
         btnQuy4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnQuy4ActionPerformed(evt);

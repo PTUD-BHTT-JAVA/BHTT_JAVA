@@ -341,7 +341,7 @@ public class DG_CTDHHT extends javax.swing.JFrame {
         ArrayList<ChiTietHoanTra> ds = cthdht.layDSCTHTBangMa(maHD);
         int i = 1;
         for (ChiTietHoanTra cthd : ds) {
-            modelHoaDon.addRow(new Object[]{i++, cthd.getSanPham().getMaSP(), cthd.getSanPham().getTenSP(), cthd.getSoLuong(), cthd.getSanPham().getGiaGoc(), cthd.tinhThanhTien(),cthd.getLyDoHoanTra()});
+            modelHoaDon.addRow(new Object[]{i++, cthd.getSanPham().getMaSP(), cthd.getSanPham().getTenSP(), cthd.getSoLuong(), cthd.getSanPham().getGiaGoc(), cthd.tinhTien(),cthd.getLyDoHoanTra()});
         }
     }
     
@@ -356,21 +356,25 @@ public class DG_CTDHHT extends javax.swing.JFrame {
         lblNV.setText(nv.getTenNV());
         lblKH.setText(hdht.getHoaDon().getKhachHang().getTenKH());
         lblSDT.setText(hdht.getHoaDon().getKhachHang().getSoDienThoai());
-        lblTTH.setText(String.format("%,.1f", hdht.tongTienHoan()) + " VND");
+        lblTTH.setText(String.format("%,.1f", hdht.tongTienHang()) + " VND");
         
-        String km;
-        double tc;
-        if (hdht.getHoaDon().getKhachHang().getLoaiKhachHang().getMaLoaiKH().equals("LKH001")) {
-            km = "10%";
-            tc = hdht.tongTienHoan();            
-        } else {
-            km = "0%";
-            tc = hdht.tongTienHoan(); 
-        }
+        String km= "0%";
+//        double tc;
+//        if (hdht.getHoaDon().getKhachHang().getLoaiKhachHang().getMaLoaiKH().equals("LKH001")) {
+//            km = "10%";
+//            tc = hdht.tongTienHoan();            
+//        } else {
+//            km = "0%";
+//            tc = hdht.tongTienHoan(); 
+//        }
+        
+        if(Double.parseDouble(hdht.khuyenMai())==0.1)
+            km="10%";
+    
         lblTTGG.setText(km);
-        tc= tc+ tc*5/100;
+//        tc= tc+ tc*5/100;
         lblVAT.setText("5%");
-        lblTTTT.setText(String.format("%,.1f", tc) + " VND");
+        lblTTTT.setText(String.format("%,.1f", hdht.tongTienHoan()) + " VND");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

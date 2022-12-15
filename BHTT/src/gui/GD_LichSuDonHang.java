@@ -41,6 +41,8 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
 //    public DefaultTableModel modelDonHang;
     DecimalFormat df = new DecimalFormat("#,##0 VND");
     private Thread thread = new Thread(this);
+    private DAO_HoaDon hd_dao;
+    private DAO_HoaDonHoan hdh_dao;
     private DAO_ChiTietHoaDon cthd_dao;
     public TaiKhoan tkDN;
     private ArrayList<SanPham> dsSPTrongDonHang;
@@ -68,7 +70,9 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
         nv_dao = new DAO_NhanVien();
         lblTenNVTT.setText(nv_dao.layNhanVienBangMa(username).getTenNV());
         lblTenNVHoan.setText(nv_dao.layNhanVienBangMa(username).getTenNV());
-        cthd_dao = new DAO_ChiTietHoaDon();
+        hd_dao = new DAO_HoaDon();
+        hdh_dao=new DAO_HoaDonHoan();
+        cthd_dao=new DAO_ChiTietHoaDon();
         chiTietHoanTra = new DAO_ChiTietHoanTra();
         modelDSHoaDon = (DefaultTableModel) tblHoaDonBanHang.getModel();
         modelDSDonHoan = (DefaultTableModel)  tblHoaDonHoan.getModel();
@@ -78,24 +82,21 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
         jdcNgayTimHoan.setDate(new Date());
         jdcNgayMuonTimHoan.setDate(new Date());
         nhanvien_dao = new DAO_NhanVien();
-        DocDSHoaDon();
-        DocDanhSachDonHoan();
+//        DocDSHoaDon();
+//        DocDanhSachDonHoan();
     }
 
     private void DocDSHoaDon() {
-        DAO_HoaDon hd_dao=new DAO_HoaDon();
         for (HoaDon hd : hd_dao.getAllDSHDtheoMaNV(username)) {
             double thanhTien;
-            int soLuong=0;
             if(hd.getKhachHang().getLoaiKhachHang().getMaLoaiKH().equals("LKH001"))
                 thanhTien=hd.thanhTienVIP();
             else
                 thanhTien=hd.thanhTienThuong();
-            for (ChiTietHoaDon ct: cthd_dao.layDSHDBangMa(hd.getMaHD()))
-                soLuong= soLuong+ct.getSoLuong();
+            
             modelDSHoaDon.addRow(new Object[]{
                 hd.getMaHD(), sdf.format(hd.getNgayLap()),
-                soLuong, df.format(hd.getThanhTien()), hd.getKhachHang().getTenKH()
+                hd.getSoLuong(), df.format(hd.getThanhTien()), hd.getKhachHang().getTenKH()
             });
         }
     }
@@ -104,17 +105,13 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
     {
         DAO_HoaDonHoan hdh_dao=new DAO_HoaDonHoan();
         for (HoaDonHoanTra hdht : hdh_dao.layHoaDonHoanTheoMaNV(username)) {
-            int soLuong=0;
-               for (ChiTietHoanTra ct:chiTietHoanTra.layDSCTHTBangMa(hdht.getMaHDHT())){
-                   soLuong=soLuong+ct.getSoLuong();
-               }
-                       modelDSHoaDon.setRowCount(0);
+                modelDSHoaDon.setRowCount(0);
 
                 modelDSDonHoan.addRow(new Object[]{
                     hdht.getMaHDHT(),
                     hdht.getHoaDon().getMaHD(),
                     hdht.getNgayHoanTra(),
-                    soLuong,
+                    hdht.getSoLuong(),
                     hdht.tongTienHoan(),
                     hdht.getHoaDon().getKhachHang().getTenKH()
                 });
@@ -768,31 +765,37 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
             if (ngayTim.after(ngayCanTim)) {
                 JOptionPane.showMessageDialog(null, "Ngày tìm không lớn hơn ngày cần tìm");
             }else{
-                ArrayList<ChiTietHoaDon> dsHoaDonTheoNgay = cthd_dao.layDanhSachHoaDonTheoNgay(dayTim, dayCanTim,username);
                 XoaHetDuLieuTrenTable();
-                for (ChiTietHoaDon cthd : dsHoaDonTheoNgay) {
-                    modelDSHoaDon.addRow(new Object[]{
-                        cthd.getHoaDon().getMaHD(), sdf.format(cthd.getHoaDon().getNgayLap()),
-                        cthd.getSoLuong(), df.format(cthd.getTongTien()), cthd.getHoaDon().getKhachHang().getTenKH()
-                    });
-                }
-            }
+                TimKiemTheoQuy(dayTim, dayCanTim);
+        
         }
-        System.out.println(ngayCanTim);
-        System.out.println(ngayTim);
+        }
     }//GEN-LAST:event_btnTimActionPerformed
 
     private void TimKiemTheoQuy(String dauQuy,String cuoiQuy){
         String maNV = username;
-        ArrayList<ChiTietHoaDon> dsHoaDonTheoQuy = cthd_dao.layDSHoaDonTheoQuy(dauQuy, cuoiQuy, maNV);
-//         modelDSHoaDon.setRowCount(0);
-        for (ChiTietHoaDon cthd : dsHoaDonTheoQuy) {
+        ArrayList<HoaDon> dsHoaDonTheoQuy = hd_dao.thongKeDoanhThuTheoNV(dauQuy, cuoiQuy, maNV);
+         modelDSHoaDon.setRowCount(0);
+        for (HoaDon hd : dsHoaDonTheoQuy) {
             modelDSHoaDon.addRow(new Object[]{
-                cthd.getHoaDon().getMaHD(), sdf.format(cthd.getHoaDon().getNgayLap()),
-                cthd.getSoLuong(), df.format(cthd.getTongTien()), cthd.getHoaDon().getKhachHang().getTenKH()
+                hd.getMaHD(), sdf.format(hd.getNgayLap()),
+                hd.getSoLuong(), df.format(hd.getThanhTien()), hd.getKhachHang().getTenKH().toString()
             });
         }
-        System.out.println(maNV);
+
+    }
+    private void TimKiemHoanTheoQuy(String dauQuy,String cuoiQuy){
+        String maNV = username;
+        ArrayList<HoaDonHoanTra> ds = hdh_dao.thongKeHoanTraNV(dauQuy, cuoiQuy, maNV);
+//         modelDSHoaDon.setRowCount(0);
+        DAO_HoaDon hd_dao=new DAO_HoaDon();
+        for (HoaDonHoanTra hdht : ds) {
+            HoaDon hd=hd_dao.layHoaDonTheoMa(hdht.getHoaDon().getMaHD().toString());
+            modelDSDonHoan.addRow(new Object[]{
+                hdht.getMaHDHT(), hdht.getHoaDon().getMaHD(),sdf.format(hdht.getNgayHoanTra()),
+                hdht.getSoLuong(), df.format(hdht.tongTienHang()), hd.getKhachHang().getTenKH().toString()
+            });
+        }
 
     }
     
@@ -895,15 +898,10 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
             if (ngayTim.after(ngayCanTim)) {
                 JOptionPane.showMessageDialog(null, "Ngày tìm không lớn hơn ngày cần tìm");
             }else{
-                ArrayList<ChiTietHoaDon> dsHoaDonTheoNgay = cthd_dao.layDanhSachHoaDonTheoNgay(dayTim, dayCanTim,username);
-                XoaHetDuLieuTrenTable();
-                for (ChiTietHoaDon cthd : dsHoaDonTheoNgay) {
-                    modelDSHoaDon.addRow(new Object[]{
-                        cthd.getHoaDon().getMaHD(), sdf.format(cthd.getHoaDon().getNgayLap()),
-                        cthd.getSoLuong(), df.format(cthd.getTongTien()), cthd.getHoaDon().getKhachHang().getTenKH()
-                    });
-                }
+                     XoaDuLieuDonHoan();
+                    TimKiemHoanTheoQuy(dayTim, dayCanTim);
             }
+            
         }
     }//GEN-LAST:event_btnTimDonHoanActionPerformed
 
@@ -918,7 +916,7 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
             String dauQuy1 = String.valueOf(year).concat("-01-01");
             String cuoiQuy1 = String.valueOf(year).concat("-03-31");
             XoaDuLieuDonHoan();
-            TimKiemTheoQuy(dauQuy1, cuoiQuy1);
+            TimKiemHoanTheoQuy(dauQuy1, cuoiQuy1);
         }
     }//GEN-LAST:event_btnQuy1HoanActionPerformed
 
@@ -933,7 +931,7 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
             JOptionPane.showMessageDialog(null, "Năm được chọn không lớn hơn năm hiện tại", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         } else {
              XoaDuLieuDonHoan();
-            TimKiemTheoQuy(dauQuy2, cuoiQuy2);
+            TimKiemHoanTheoQuy(dauQuy2, cuoiQuy2);
         }
     }//GEN-LAST:event_btnQuy2HoanActionPerformed
 
@@ -948,7 +946,7 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
             JOptionPane.showMessageDialog(null, "Năm được chọn không lớn hơn năm hiện tại", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         } else {
              XoaDuLieuDonHoan();
-            TimKiemTheoQuy(dauQuy3, cuoiQuy3);
+            TimKiemHoanTheoQuy(dauQuy3, cuoiQuy3);
         }
     }//GEN-LAST:event_btnQuy3HoanActionPerformed
 
@@ -963,15 +961,15 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
             JOptionPane.showMessageDialog(null, "Năm được chọn không lớn hơn năm hiện tại", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         } else {
              XoaDuLieuDonHoan();
-            TimKiemTheoQuy(dauQuy4, cuoiQuy4);
+            TimKiemHoanTheoQuy(dauQuy4, cuoiQuy4);
         }
     }//GEN-LAST:event_btnQuy4HoanActionPerformed
 
     private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
         XoaDuLieuDonHoan();
         XoaHetDuLieuTrenTable();
-        DocDSHoaDon();
-        DocDanhSachDonHoan();
+//        DocDSHoaDon();
+//        DocDanhSachDonHoan();
     }//GEN-LAST:event_btnLamMoiActionPerformed
     
     void openComponent(JInternalFrame frame) {

@@ -54,7 +54,7 @@ public class DAO_ChiTietHoanTra {
     
     public ChiTietHoanTra timCTHoanTraTheoMaLyDo(String maSP,String maHDH, String lydo){
         try (Connection conn = ConnectDB.opConnection();
-                PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM ChiTietHoanTra WHERE maSP like ? and maHDH like ? and lyDoHoanTra like ? ")) {
+                PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM ChiTietHoanTra WHERE maSP like ? and maHDHT like ? and lyDoHoanTra like ? ")) {
                 pstmt.setString(1, maSP);
                 pstmt.setString(2, maHDH);
                 pstmt.setString(3, lydo);
@@ -160,7 +160,7 @@ public class DAO_ChiTietHoanTra {
         Connection con = ConnectDB.getConnection();
         PreparedStatement statement = null;
         try {
-            String sql = "select * from ChiTietHoanTra where maHD = ? ";
+            String sql = "select  * from ChiTietHoanTra where maHD = ? ";
             statement = con.prepareStatement(sql);
             statement.setString(1, m);
             ResultSet rs = statement.executeQuery();

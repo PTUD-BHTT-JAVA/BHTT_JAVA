@@ -1044,7 +1044,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
             tienHoanHT =tienHoanHT+ (Double) modelDonHoan.getValueAt(i, 3) ;
         }
         if (kh.getLoaiKhachHang().getTenLoai().equals("VIP")) {
-            tienHoanTra = tienHoanHT + tienHoanHT * 0.15;
+            tienHoanTra = tienHoanHT + tienHoanHT * 0.05 - tienHoanHT*0.1;
             hDHT = new HoaDonHoanTra(maHDHT, ngayHT, hd_dao.layHoaDonTheoMa(maHD),nv_dao.layNhanVienBangMa(username));
         } else {
             tienHoanTra = tienHoanHT + tienHoanHT * 0.05;
