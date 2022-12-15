@@ -20,6 +20,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -41,7 +42,7 @@ public class DG_CTDHHT extends javax.swing.JFrame {
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     
     public DG_CTDHHT(String m) {
-        
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         maHD = m;
         initComponents();
         modelHoaDon = (DefaultTableModel) tblHD.getModel();
@@ -86,7 +87,7 @@ public class DG_CTDHHT extends javax.swing.JFrame {
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        //setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new javax.swing.OverlayLayout(getContentPane()));
 
