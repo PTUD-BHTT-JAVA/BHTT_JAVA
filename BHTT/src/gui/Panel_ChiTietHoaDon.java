@@ -396,8 +396,8 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
                 });
             }
             jspSoLuong.setValue(0);
-            soLuongTon -= sp.getSoLuong();
-            modolSP.setValueAt(soLuongTon, r, 2);
+//            soLuongTon -= sp.getSoLuong();
+//            modolSP.setValueAt(soLuongTon, r, 2);
 
             tongTien();
 
@@ -481,6 +481,7 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
         jPanel11 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
         btnThemSP = new javax.swing.JButton();
+        jPanel24 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtbSanPham = new javax.swing.JTable();
         pnlLast = new javax.swing.JPanel();
@@ -510,13 +511,15 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 204, 255));
+        setMaximumSize(new java.awt.Dimension(2000, 2000));
+        setPreferredSize(new java.awt.Dimension(1700, 890));
         setLayout(new javax.swing.OverlayLayout(this));
 
         jPanel6.setLayout(new javax.swing.BoxLayout(jPanel6, javax.swing.BoxLayout.Y_AXIS));
 
         pnlCenter.setMaximumSize(new java.awt.Dimension(2147483647, 450));
         pnlCenter.setPreferredSize(new java.awt.Dimension(780, 370));
-        pnlCenter.setLayout(new java.awt.BorderLayout());
+        pnlCenter.setLayout(new javax.swing.BoxLayout(pnlCenter, javax.swing.BoxLayout.Y_AXIS));
 
         pnlTKnSL.setBackground(new java.awt.Color(204, 204, 255));
         pnlTKnSL.setMaximumSize(new java.awt.Dimension(32767, 100));
@@ -870,11 +873,14 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
 
         pnlTKnSL.add(jPanel9);
 
-        pnlCenter.add(pnlTKnSL, java.awt.BorderLayout.PAGE_START);
+        pnlCenter.add(pnlTKnSL);
 
-        jScrollPane1.setMaximumSize(new java.awt.Dimension(32767, 300));
-        jScrollPane1.setMinimumSize(new java.awt.Dimension(16, 100));
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(452, 200));
+        jPanel24.setMaximumSize(new java.awt.Dimension(2000, 1000));
+        jPanel24.setLayout(new java.awt.BorderLayout());
+
+        jScrollPane1.setMaximumSize(new java.awt.Dimension(2000, 300));
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(500, 100));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(1000, 200));
 
         jtbSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -884,9 +890,14 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
                 "Mã sản phẩm", "Tên sản phẩm", "Số lượng tồn", "Giá", "Phân loại", "Màu sắc", "Chất liệu", "Kích thước"
             }
         ));
+        jtbSanPham.setMaximumSize(new java.awt.Dimension(2000, 1000));
+        jtbSanPham.setMinimumSize(new java.awt.Dimension(300, 200));
+        jtbSanPham.setPreferredSize(new java.awt.Dimension(600, 300));
         jScrollPane1.setViewportView(jtbSanPham);
 
-        pnlCenter.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+        jPanel24.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        pnlCenter.add(jPanel24);
 
         jPanel6.add(pnlCenter);
 
@@ -895,7 +906,8 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
         pnlLast.setLayout(new javax.swing.BoxLayout(pnlLast, javax.swing.BoxLayout.Y_AXIS));
 
         pnlDonHang.setBackground(new java.awt.Color(204, 204, 255));
-        pnlDonHang.setPreferredSize(new java.awt.Dimension(800, 350));
+        pnlDonHang.setMaximumSize(new java.awt.Dimension(2000, 300));
+        pnlDonHang.setPreferredSize(new java.awt.Dimension(800, 80));
         pnlDonHang.setLayout(new java.awt.GridLayout(1, 3));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -927,6 +939,7 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
 
         jPanel5.setBackground(new java.awt.Color(204, 204, 255));
         jPanel5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel5.setPreferredSize(new java.awt.Dimension(1424, 50));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel9.setText("TỔNG CỘNG:");
@@ -956,31 +969,35 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                .addGap(255, 255, 255)
+                .addComponent(lblKhuyenMai)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addGap(31, 31, 31)
                 .addComponent(jLabel6)
-                .addGap(18, 18, 18)
-                .addComponent(lblKhuyenMai)
-                .addGap(47, 47, 47)
+                .addGap(65, 65, 65)
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addComponent(txtTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(13619, Short.MAX_VALUE))
+                .addContainerGap(13334, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtTongTien)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel6)
-                    .addComponent(lblKhuyenMai))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(lblKhuyenMai))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtTongTien)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel6))))
                 .addContainerGap())
         );
 
@@ -1052,7 +1069,7 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
                         .addGroup(jPanel3Layout.createSequentialGroup()
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
-                            .addComponent(lblTienThoi, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE))
+                            .addComponent(lblTienThoi, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE))
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnThanhToan, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
                             .addComponent(txtTienKhachDua, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -1088,7 +1105,7 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 374, Short.MAX_VALUE)
+            .addGap(0, 417, Short.MAX_VALUE)
         );
 
         pnlForm.add(jPanel4);
@@ -1469,6 +1486,7 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel22;
     private javax.swing.JPanel jPanel23;
+    private javax.swing.JPanel jPanel24;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
