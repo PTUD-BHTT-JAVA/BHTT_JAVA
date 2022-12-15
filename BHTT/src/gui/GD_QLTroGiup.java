@@ -114,7 +114,7 @@ public class GD_QLTroGiup extends javax.swing.JInternalFrame {
         }
          */
        try{
-           File file =new File ("D:\\aGiaoTrinhIUH\\GiaoTrinhKy1_Nam3\\PTUD\\Help.pdf");
+           File file =new File ("D:\\Help.pdf");
            if(file.exists()) {
                if(Desktop.isDesktopSupported()){
                    Desktop.getDesktop().open(file);
