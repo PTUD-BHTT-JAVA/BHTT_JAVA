@@ -96,6 +96,11 @@ public class HoaDonHoanTra {
         for (ChiTietHoanTra ct:list){
             tt= tt+ct.tinhThanhTien();
         }
+        if(getHoaDon().getKhachHang().getLoaiKhachHang().getMaLoaiKH().equals("LKH001")){
+            tt=tt-tt*0.1 + tt*0.05;
+        }else{
+            tt=tt+tt*0.05;
+        }
         return tt;
         
     }
