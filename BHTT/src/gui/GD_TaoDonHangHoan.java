@@ -48,6 +48,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
     DecimalFormat df = new DecimalFormat("#,##0 VND");
     private Thread thread = new Thread(this);
     private String maHD;
+    private int km;
 
     public GD_TaoDonHangHoan(String _username) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
         thread.start();
@@ -977,13 +978,15 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
         KhachHang kh = kh_dao.getKHBangMa(hd.getKhachHang().getMaKH());
 
         tienHoanTra=0;
+        double tt=0;
         for (int i = 0; i < modelDonHoan.getRowCount(); i++) {
             ChiTietHoaDon ct=cthd_dao.timCTHoaDonTheoHoaDonSanPham((String)modelDonHoan.getValueAt(i, 0), maHD);
             tienHoanTra =tienHoanTra+ ct.getTongTien()/ct.getSoLuong()* (int)modelDonHoan.getValueAt(i, 2);
-            
+            tt=tt+(double) modelDonHoan.getValueAt(i, 3);
             
         }
-//        ChiTietHoanTra ctht=new ChiTietHoanTra(row, maHDHT, sanPham, hDHT)
+         km= (int) ((tt+tt*0.05-tienHoanTra)/(tt));
+        lblKM.setText(""+km*100+"%");
         txtTTDonHoan.setText(String.format("%,.1f", tienHoanTra) + " VND");
     }
 
@@ -1085,7 +1088,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
         JOptionPane.showMessageDialog(null, "Hoàn đơn thành công");
         String lydo="";
         lydo=cmbLyDo.getSelectedItem().toString();
-        Form_HoaDonHoan fHDH = new Form_HoaDonHoan(maHDHT, maHD, tienHoanTra);
+        Form_HoaDonHoan fHDH = new Form_HoaDonHoan(maHDHT, maHD, tienHoanTra,km);
         fHDH.setLocationRelativeTo(null);
         fHDH.setVisible(true);
         cmbLyDo.setSelectedIndex(0);

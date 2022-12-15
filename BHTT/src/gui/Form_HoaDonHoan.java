@@ -58,13 +58,15 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
     private dao.DAO_KhachHang kh_dao = new DAO_KhachHang();
     private dao.DAO_NhanVien nv_dao = new DAO_NhanVien();
     private DefaultTableModel modelCTDonHoan;
+    private static int khuyenMai;
 
 
-    public Form_HoaDonHoan(String HDH, String HD,double tienHoanTra) {
+    public Form_HoaDonHoan(String HDH, String HD,double tienHoanTra, int km) {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         maHDH = HDH;
         maHD = HD;
         tienHoan = tienHoanTra;
+        khuyenMai=km;
         initComponents();
         modelCTDonHoan = (DefaultTableModel) tableXuatHoaDonHoan.getModel();
         DocDL();
@@ -639,9 +641,6 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
         NhanVien nv = nv_dao.layNhanVienBangMa(hd.getNhanVien().getMaNV());
         KhachHang kh=hd.getKhachHang();
         LoaiKhachHang lkh=kh.getLoaiKhachHang();
-        String km="0%";
-        if(lkh.getMaLoaiKH().equals("LKH001"))
-            km="10%";
         lblThuNgan.setText(nv.getTenNV());
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         String ngay = sdf.format(hd.getNgayLap());
@@ -650,7 +649,7 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
         lblKH.setText(kh.getTenKH());
         lblLoaiKH.setText(lkh.getTenLoai());
         txtVAT.setText("5%");
-        txtKhuyenMai.setText(km);
+        txtKhuyenMai.setText(""+khuyenMai+"%");
         
     }
 
@@ -699,7 +698,7 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Form_HoaDonHoan(maHDH, maHD,tienHoan).setVisible(true);
+                new Form_HoaDonHoan(maHDH, maHD,tienHoan,khuyenMai).setVisible(true);
             }
         });
     }
