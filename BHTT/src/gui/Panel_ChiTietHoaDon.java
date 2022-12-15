@@ -57,6 +57,7 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
     private TableRowSorter<DefaultTableModel> tr, tr1;
     public DefaultTableModel modelDonHang;
     DecimalFormat df = new DecimalFormat("#,##0 VND");
+    DecimalFormat pmTT = new DecimalFormat("###.###");
     int soLuongTon;
     private ArrayList<SanPham> dstt = null;
     private ArrayList<SanPham> ListSP;
@@ -204,7 +205,74 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
             tongThanhTien += tongThanhTien * 0.05;
             txtTongTien.setText(df.format(tongThanhTien));
         }
-
+    }
+    
+    
+    private void capNhatSP(int row){
+        if(row < 0 ){
+            JOptionPane.showMessageDialog(null, "Chọn sản phẩm cần cập nhật");
+        }else{
+            String maSP = dstt.get(row).getMaSP();
+            int index = -1;
+            int slCapNhat = (int) jspSoLuong.getValue();
+            SanPham spConlai = sp_dao.laySanPhamBangMa(modelDonHang.getValueAt(row, 0).toString()); // Lấy sản phẩm cần cập nhật
+             int soLuongConLai = spConlai.getSoLuong();
+             if(slCapNhat > soLuongConLai){
+                 JOptionPane.showMessageDialog(null, "Số lượng cập nhật không lớn hơn số lượng tồn");
+             }else{
+                 if(slCapNhat <= 0){
+                     JOptionPane.showMessageDialog(null, "Số lượng cập nhất phải lớn hơn 0");
+                 }else{
+                     modelDonHang.setValueAt(slCapNhat, row, 2);
+                     modelDonHang.setValueAt(df.format(spConlai.getGiaGoc() * slCapNhat), row, 4);
+                     int soLuongThayDoi = sp_dao.laySanPhamBangMa(maSP).getSoLuong() - slCapNhat;
+                     if (ListTimSP != null && !ListTimSP.isEmpty()) {
+                            System.out.println(ListTimSP);
+                            for (SanPham s : ListTimSP) {
+                                if (s.getMaSP().endsWith(maSP)) {
+                                    index = ListTimSP.indexOf(s);
+                                    System.out.println(index);
+                                    break;
+                                }
+                            }
+//                                Thay đổi số lượng  trên table
+                            for (SanPham spCapNhat : ListTimSP) {
+                                if (spCapNhat.getMaSP().equalsIgnoreCase(maSP)) {
+                                    System.out.println(spCapNhat.getMaSP());
+                                    jtbSanPham.setValueAt(soLuongThayDoi, index, 2);
+                                    System.out.println(index);
+                                    break;
+                                }
+                            }
+                        }else{
+                         ListSP = sp_dao.getAllSP();
+//                                modolSP.setValueAt(soLuongThayDoi, index, 2);
+                            System.out.println(index);
+                            tongThanhTien = 0;
+                            for (SanPham spCTT : dstt) {
+//                                    Cập nhật số lượng sản phẩm khi kiếm được
+                                if (spCTT.getMaSP().equals(tableDonHang.getValueAt(row, 0).toString())) {
+                                    spCTT.setSoLuong(slCapNhat);
+                                    if (kh.layKhachHangBangSDT(txtSDT).getLoaiKhachHang().getMaLoaiKH().equals("LKH001")) {
+                                        for (SanPham s : dstt) {
+                                            tongThanhTien += (s.getSoLuong() * s.getGiaGoc());
+                                        }
+                                        tongThanhTien = tongThanhTien - (tongThanhTien * 10 / 100) + tongThanhTien * 0.05;
+                                        txtTongTien.setText(df.format(tongThanhTien));
+                                    } else {
+                                        for (SanPham s : dstt) {
+                                            tongThanhTien += (s.getSoLuong() * s.getGiaGoc());
+                                        }
+                                        tongThanhTien += tongThanhTien * 0.05;
+                                        txtTongTien.setText(df.format(tongThanhTien));
+                                    }
+                                }
+                           }
+                     }
+                 }
+             }
+           tongTien();
+        }   
     }
 
     public int vitriSP(SanPham sp) {
@@ -1062,8 +1130,10 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
                 String ma = maTuSinh();
                 try {
                     thanhToan(ma);
+
                 } catch (Exception ex) {
-                    Logger.getLogger(GD_TaoDonHang.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(GD_TaoDonHang.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
                 tienThoi = 0;
                 tongThanhTien = 0;
@@ -1095,69 +1165,97 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
 
     private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
         int row = tableDonHang.getSelectedRow();
-        if (row < 0) {
-            JOptionPane.showMessageDialog(null, "Chọn sản phẩm cần cập nhật");
-        } else {
-            String maSP = dstt.get(row).getMaSP();
-            int index = -1;
-            for (SanPham s : ListSP) {
-                if (s.getMaSP().endsWith(maSP)) {
-                    index = ListSP.indexOf(s);
-                    break;
-                }
-            }
-            for (SanPham s : ListSP) {
-                if (s.getMaSP().endsWith(maSP)) {
-                    index = ListSP.indexOf(s);
-                    break;
-                }
-            }
-            if (row < 0) {
-                JOptionPane.showMessageDialog(null, "Chọn sản phẩm cần cập nhật");
-            } else {
-                int slCapNhat = (int) jspSoLuong.getValue();
-                SanPham spConlai = sp_dao.laySanPhamBangMa(modelDonHang.getValueAt(row, 0).toString()); // Lấy sản phẩm cần cập nhật
-                int soLuongConLai = spConlai.getSoLuong();  // Số lượng còn lại của sản phầm cần cập nhật
-                for (SanPham sp : dstt) {
-                    if (slCapNhat > soLuongConLai) {
-                        JOptionPane.showMessageDialog(null, "Số lượng cập nhật không được lớn hơn số tồn");
-                        break;
-                    } else {
-                        if (slCapNhat <= 0) {
-                            JOptionPane.showMessageDialog(null, "Số lượng cập nhật lớn hơn 0");
-                            break;
-                        } else {
-                            modelDonHang.setValueAt(slCapNhat, row, 2);
-                            modelDonHang.setValueAt(df.format(spConlai.getGiaGoc() * slCapNhat), row, 4);
-                            int soLuongThayDoi = sp_dao.laySanPhamBangMa(maSP).getSoLuong() - slCapNhat;
-                            if (ListTimSP != null && !ListTimSP.isEmpty()) {
-                                System.out.println(ListTimSP);
-                                for (SanPham s : ListTimSP) {
-                                    if (s.getMaSP().endsWith(maSP)) {
-                                        index = ListTimSP.indexOf(s);
-                                        System.out.println(index);
-                                        break;
-                                    }
-                                }
-                                for (SanPham spCapNhat : ListTimSP) {
-                                    if (spCapNhat.getMaSP().equalsIgnoreCase(maSP)) {
-                                        System.out.println(spCapNhat.getMaSP());
-                                        modolSP.setValueAt(soLuongThayDoi, index, 2);
-                                        break;
-                                    }
-                                }
-                            } else {
-                                ListSP = sp_dao.getAllSP();
-//                                modolSP.setValueAt(soLuongThayDoi, index, 2);
-                            }
-//                        sp.setSoLuong(slCapNhat);
-                            tongTien();
-                            break;
-                        }
-                    }
-                }
-            }
-        }
+        capNhatSP(row);
+//        if (row < 0) {
+//            JOptionPane.showMessageDialog(null, "Chọn sản phẩm cần cập nhật");
+//        } else {
+//            String maSP = dstt.get(row).getMaSP();
+//            int index = -1;
+////            for (SanPham s : ListSP) {
+////                if (s.getMaSP().equals(maSP)) {
+////                    index = ListSP.indexOf(s);
+////                    break;
+////                }
+////            }
+////            for (SanPham s : ListSP) {
+////                if (s.getMaSP().endsWith(maSP)) {
+////                    index = ListSP.indexOf(s);
+////                    break;
+////                }
+////            }
+////            if (row < 0) {
+////                JOptionPane.showMessageDialog(null, "Chọn sản phẩm cần cập nhật");
+////            } else {
+//            int slCapNhat = (int) jspSoLuong.getValue();
+//            SanPham spConlai = sp_dao.laySanPhamBangMa(modelDonHang.getValueAt(row, 0).toString()); // Lấy sản phẩm cần cập nhật
+//            int soLuongConLai = spConlai.getSoLuong();  // Số lượng còn lại của sản phầm cần cập nhật
+//            for (SanPham sp : dstt) {
+//                if (slCapNhat > soLuongConLai) {
+//                    JOptionPane.showMessageDialog(null, "Số lượng cập nhật không được lớn hơn số tồn");
+//                    break;
+//                } else {
+//                    if (slCapNhat <= 0) {
+//                        JOptionPane.showMessageDialog(null, "Số lượng cập nhật lớn hơn 0");
+//                        break;
+//                    } else {
+//                        modelDonHang.setValueAt(slCapNhat, row, 2);
+//                        modelDonHang.setValueAt(df.format(spConlai.getGiaGoc() * slCapNhat), row, 4);
+//                        int soLuongThayDoi = sp_dao.laySanPhamBangMa(maSP).getSoLuong() - slCapNhat;
+////                            Tìm kiếm vị trí sản phẩm cần cập nhật số lượng
+//                        if (ListTimSP != null && !ListTimSP.isEmpty()) {
+//                            System.out.println(ListTimSP);
+//                            for (SanPham s : ListTimSP) {
+//                                if (s.getMaSP().endsWith(maSP)) {
+//                                    index = ListTimSP.indexOf(s);
+//                                    System.out.println(index);
+//                                    break;
+//                                }
+//                            }
+////                                Thay đổi số lượng  trên table
+//                            for (SanPham spCapNhat : ListTimSP) {
+//                                if (spCapNhat.getMaSP().equalsIgnoreCase(maSP)) {
+//                                    System.out.println(spCapNhat.getMaSP());
+//                                    jtbSanPham.setValueAt(soLuongThayDoi, index, 2);
+//                                    System.out.println(index);
+//                                    break;
+//                                }
+//                            }
+//                        } else {
+//                            ListSP = sp_dao.getAllSP();
+////                                modolSP.setValueAt(soLuongThayDoi, index, 2);
+//                            System.out.println(index);
+//                            tongThanhTien = 0;
+//                            for (SanPham spCTT : dstt) {
+////                                    Cập nhật số lượng sản phẩm khi kiếm được
+//                                if (spCTT.getMaSP().equals(tableDonHang.getValueAt(row, 0).toString())) {
+//                                    spCTT.setSoLuong(slCapNhat);
+//                                    if (kh.layKhachHangBangSDT(txtSDT).getLoaiKhachHang().getMaLoaiKH().equals("LKH001")) {
+//                                        for (SanPham s : dstt) {
+//                                            tongThanhTien += (s.getSoLuong() * s.getGiaGoc());
+//                                        }
+//                                        tongThanhTien = tongThanhTien - (tongThanhTien * 10 / 100) + tongThanhTien * 0.05;
+//                                        txtTongTien.setText(df.format(tongThanhTien));
+//                                    } else {
+//                                        for (SanPham s : dstt) {
+//                                            tongThanhTien += (s.getSoLuong() * s.getGiaGoc());
+//                                        }
+//                                        tongThanhTien += tongThanhTien * 0.05;
+//                                        txtTongTien.setText(df.format(tongThanhTien));
+//                                    }
+//                                    break;
+//                                }
+//                            }
+//
+////                                break;
+//                        }
+////                        sp.setSoLuong(slCapNhat);
+//                        tongTien();
+//                        break;
+//                    }
+//                    }
+//                }
+//            }
+//        }
 
     }//GEN-LAST:event_btnCapNhatActionPerformed
 
@@ -1167,6 +1265,7 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
             if (!"".equals(txtTienKhachDua.getText())) {
                 if (txtTienKhachDua.getText().matches("^\\d+")) {
                     double tien = Double.parseDouble(txtTienKhachDua.getText());
+//                    double tongTienTT = Double.parseDouble(txtTongTien.getText());
                     tienThoi = tien - tongThanhTien;
                     lblTienThoi.setText(df.format(tienThoi));
                 } else {
