@@ -48,7 +48,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
     DecimalFormat df = new DecimalFormat("#,##0 VND");
     private Thread thread = new Thread(this);
     private String maHD;
-    private int km;
+    private double km;
 
     public GD_TaoDonHangHoan(String _username) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
         thread.start();
@@ -104,15 +104,7 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
     }
 
     private void setTongThanhTien() {
-        HoaDon hd=hd_dao.layHoaDonTheoMa(maHD);
-        txtTTDonHang.setText(df.format(hd.getThanhTien()));
-        double tt=0;
-        for (int i=0;i<modelCanHoan.getRowCount();i++){
-            tt=tt+(double) modelDonHoan.getValueAt(i, 3);
-         
-        }
-        km= (int) ((tt+tt*0.05-hd.getThanhTien())/(tt));
-        lblKM.setText(""+km*100+"%");
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -1169,10 +1161,10 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
             moKhoaControls(true);
             List<ChiTietHoaDon> hdCanHoan = cthd_dao.layDSHDBangMa(tblDSHD.getValueAt(row, 0).toString());
             List<ChiTietHoaDon> ctHD = cthd_dao.layDSHDBangMa(tblDSHD.getValueAt(row, 0).toString());
-            
+            double tt=0;
             for (ChiTietHoaDon cthd : hdCanHoan) {
                 sl = cthd.getSoLuong();
-                
+                tt=tt+cthd.getSoLuong()*cthd.getSanPham().getGiaGoc();
 
 //                    dsctht = ctht_dao.layDSCTHTBangMa(dsHDHT.getMaHDHT());
 //                    for (ChiTietHoanTra ctht : dsctht) {
@@ -1191,7 +1183,15 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
                 });
             }
 
-            setTongThanhTien();
+
+        txtTTDonHang.setText(df.format(hd.getThanhTien()));
+        
+        
+        
+        
+        km= (double) ((tt+tt*0.05-hd.getThanhTien())/(tt));
+        System.out.print(km);
+        lblKM.setText(""+km*100+"%");
             btnThem.setEnabled(false);
         }
     }//GEN-LAST:event_btnThemActionPerformed

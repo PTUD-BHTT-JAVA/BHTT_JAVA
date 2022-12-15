@@ -58,10 +58,10 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
     private dao.DAO_KhachHang kh_dao = new DAO_KhachHang();
     private dao.DAO_NhanVien nv_dao = new DAO_NhanVien();
     private DefaultTableModel modelCTDonHoan;
-    private static int khuyenMai;
+    private static double khuyenMai;
 
 
-    public Form_HoaDonHoan(String HDH, String HD,double tienHoanTra, int km) {
+    public Form_HoaDonHoan(String HDH, String HD,double tienHoanTra, double km) {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         maHDH = HDH;
         maHD = HD;
