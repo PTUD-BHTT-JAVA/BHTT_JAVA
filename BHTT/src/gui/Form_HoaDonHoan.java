@@ -131,7 +131,7 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btnIn = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+       // setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         pnlHoaDon.setPreferredSize(new java.awt.Dimension(515, 790));
         pnlHoaDon.setLayout(new javax.swing.BoxLayout(pnlHoaDon, javax.swing.BoxLayout.Y_AXIS));
@@ -620,7 +620,7 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
          this.setVisible(false);
         PrintBienBan(pnlHoaDon);
          try{
-           File file =new File ("D:\\CodePTUD\\BHTT_JAVA\\BHTT\\BienBanHoanDon.pdf");
+           File file =new File ("C:\\Users\\bohie\\OneDrive\\Documents\\GitHub\\BHTT_JAVA\\BHTT\\BienBanHoanDon.pdf");
            if(file.exists()) {
                if(Desktop.isDesktopSupported()){
                    Desktop.getDesktop().open(file);

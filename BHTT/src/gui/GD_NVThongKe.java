@@ -967,17 +967,10 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
                 for (HoaDonHoanTra hdht : dsHDHT) {
                     dsCTHT = ctht_dao.layDSCTHTBangMa(hdht.getMaHDHT());
                     for (ChiTietHoanTra ctht : dsCTHT) {
-                        kh = kh_dao.getKHBangMa(hdht.getHoaDon().getKhachHang().getMaKH());
-                        if (kh.getLoaiKhachHang().getTenLoai().equalsIgnoreCase("VIP")) {
-                            tongThanhTienHoanVIP = tongThanhTienHoanVIP + ctht.getSoLuong() * ctht.getSanPham().getGiaGoc();
-                        } else {
-                            tongThanhTienHoanThuong = tongThanhTienHoanThuong + ctht.getSoLuong() * ctht.getSanPham().getGiaGoc();
-                        }
+                        tongThanhTienHoan = (long) (tongThanhTienHoan + ctht.tinhThanhTien());
                     }
                 }
-                tongThanhTienHoanVIP = tongThanhTienHoanVIP - tongThanhTienHoanVIP * 0.05;
-                tongThanhTienHoanThuong = tongThanhTienHoanThuong + tongThanhTienHoanThuong * 0.05;
-                tongThanhTienHoan = (long) tongThanhTienHoanVIP + (long) tongThanhTienHoanThuong;
+
                 tongTienHoann.setText(df.format(tongThanhTienHoan));
                 String s = "";
                 long thu = 0;
@@ -1032,17 +1025,10 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
         for (HoaDonHoanTra hdht : dsHDHT) {
             dsCTHT = ctht_dao.layDSCTHTBangMa(hdht.getMaHDHT());
             for (ChiTietHoanTra ctht : dsCTHT) {
-                kh = kh_dao.getKHBangMa(hdht.getHoaDon().getKhachHang().getMaKH());
-                if (kh.getLoaiKhachHang().getTenLoai().equalsIgnoreCase("VIP")) {
-                    tongThanhTienHoanVIP = tongThanhTienHoanVIP + ctht.getSoLuong() * ctht.getSanPham().getGiaGoc();
-                } else {
-                    tongThanhTienHoanThuong = tongThanhTienHoanThuong + ctht.getSoLuong() * ctht.getSanPham().getGiaGoc();
-                }
+                tongThanhTienHoan = (long) (tongThanhTienHoan + ctht.tinhThanhTien());
             }
         }
-        tongThanhTienHoanVIP = tongThanhTienHoanVIP - tongThanhTienHoanVIP * 0.05;
-        tongThanhTienHoanThuong = tongThanhTienHoanThuong + tongThanhTienHoanThuong * 0.05;
-        tongThanhTienHoan = (long) tongThanhTienHoanVIP + (long) tongThanhTienHoanThuong;
+
         tongTienHoann.setText(df.format(tongThanhTienHoan));
         String s = "";
         long thu = 0;
@@ -1096,17 +1082,10 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
         for (HoaDonHoanTra hdht : dsHDHT) {
             dsCTHT = ctht_dao.layDSCTHTBangMa(hdht.getMaHDHT());
             for (ChiTietHoanTra ctht : dsCTHT) {
-                kh = kh_dao.getKHBangMa(hdht.getHoaDon().getKhachHang().getMaKH());
-                if (kh.getLoaiKhachHang().getTenLoai().equalsIgnoreCase("VIP")) {
-                    tongThanhTienHoanVIP = tongThanhTienHoanVIP + ctht.getSoLuong() * ctht.getSanPham().getGiaGoc();
-                } else {
-                    tongThanhTienHoanThuong = tongThanhTienHoanThuong + ctht.getSoLuong() * ctht.getSanPham().getGiaGoc();
-                }
+                tongThanhTienHoan = (long) (tongThanhTienHoan + ctht.tinhThanhTien());
             }
         }
-        tongThanhTienHoanVIP = tongThanhTienHoanVIP - tongThanhTienHoanVIP * 0.05;
-        tongThanhTienHoanThuong = tongThanhTienHoanThuong + tongThanhTienHoanThuong * 0.05;
-        tongThanhTienHoan = (long) tongThanhTienHoanVIP + (long) tongThanhTienHoanThuong;
+
         tongTienHoann.setText(df.format(tongThanhTienHoan));
         String s = "";
         long thu = 0;
@@ -1161,17 +1140,10 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
         for (HoaDonHoanTra hdht : dsHDHT) {
             dsCTHT = ctht_dao.layDSCTHTBangMa(hdht.getMaHDHT());
             for (ChiTietHoanTra ctht : dsCTHT) {
-                kh = kh_dao.getKHBangMa(hdht.getHoaDon().getKhachHang().getMaKH());
-                if (kh.getLoaiKhachHang().getTenLoai().equalsIgnoreCase("VIP")) {
-                    tongThanhTienHoanVIP = tongThanhTienHoanVIP + ctht.getSoLuong() * ctht.getSanPham().getGiaGoc();
-                } else {
-                    tongThanhTienHoanThuong = tongThanhTienHoanThuong + ctht.getSoLuong() * ctht.getSanPham().getGiaGoc();
-                }
+                tongThanhTienHoan = (long) (tongThanhTienHoan + ctht.tinhThanhTien());
             }
         }
-        tongThanhTienHoanVIP = tongThanhTienHoanVIP - tongThanhTienHoanVIP * 0.05;
-        tongThanhTienHoanThuong = tongThanhTienHoanThuong + tongThanhTienHoanThuong * 0.05;
-        tongThanhTienHoan = (long) tongThanhTienHoanVIP + (long) tongThanhTienHoanThuong;
+
         tongTienHoann.setText(df.format(tongThanhTienHoan));
         String s = "";
         long thu = 0;
@@ -1226,17 +1198,10 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
         for (HoaDonHoanTra hdht : dsHDHT) {
             dsCTHT = ctht_dao.layDSCTHTBangMa(hdht.getMaHDHT());
             for (ChiTietHoanTra ctht : dsCTHT) {
-                kh = kh_dao.getKHBangMa(hdht.getHoaDon().getKhachHang().getMaKH());
-                if (kh.getLoaiKhachHang().getTenLoai().equalsIgnoreCase("VIP")) {
-                    tongThanhTienHoanVIP = tongThanhTienHoanVIP + ctht.getSoLuong() * ctht.getSanPham().getGiaGoc();
-                } else {
-                    tongThanhTienHoanThuong = tongThanhTienHoanThuong + ctht.getSoLuong() * ctht.getSanPham().getGiaGoc();
-                }
+                tongThanhTienHoan = (long) (tongThanhTienHoan + ctht.tinhThanhTien());
             }
         }
-        tongThanhTienHoanVIP = tongThanhTienHoanVIP - tongThanhTienHoanVIP * 0.05;
-        tongThanhTienHoanThuong = tongThanhTienHoanThuong + tongThanhTienHoanThuong * 0.05;
-        tongThanhTienHoan = (long) tongThanhTienHoanVIP + (long) tongThanhTienHoanThuong;
+
         tongTienHoann.setText(df.format(tongThanhTienHoan));
         String s = "";
         long thu = 0;
@@ -1290,17 +1255,10 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
         for (HoaDonHoanTra hdht : dsHDHT) {
             dsCTHT = ctht_dao.layDSCTHTBangMa(hdht.getMaHDHT());
             for (ChiTietHoanTra ctht : dsCTHT) {
-                kh = kh_dao.getKHBangMa(hdht.getHoaDon().getKhachHang().getMaKH());
-                if (kh.getLoaiKhachHang().getTenLoai().equalsIgnoreCase("VIP")) {
-                    tongThanhTienHoanVIP = tongThanhTienHoanVIP + ctht.getSoLuong() * ctht.getSanPham().getGiaGoc();
-                } else {
-                    tongThanhTienHoanThuong = tongThanhTienHoanThuong + ctht.getSoLuong() * ctht.getSanPham().getGiaGoc();
-                }
+                tongThanhTienHoan = (long) (tongThanhTienHoan + ctht.tinhThanhTien());
             }
         }
-        tongThanhTienHoanVIP = tongThanhTienHoanVIP - tongThanhTienHoanVIP * 0.05;
-        tongThanhTienHoanThuong = tongThanhTienHoanThuong + tongThanhTienHoanThuong * 0.05;
-        tongThanhTienHoan = (long) tongThanhTienHoanVIP + (long) tongThanhTienHoanThuong;
+
         tongTienHoann.setText(df.format(tongThanhTienHoan));
         String s = "";
         long thu = 0;
