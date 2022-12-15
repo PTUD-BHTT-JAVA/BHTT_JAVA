@@ -103,12 +103,8 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
     }
 
     private void setTongThanhTien() {
-        tongThanhTien = 0;
-        for (int i = 0; i < modelCanHoan.getRowCount(); i++) {
-            ChiTietHoaDon ct=cthd_dao.timCTHoaDonTheoHoaDonSanPham((String)modelDonHoan.getValueAt(i, 0), maHD);
-            tongThanhTien += ct.getTongTien();
-        }
-        txtTTDonHang.setText(df.format(tongThanhTien));
+        HoaDon hd=hd_dao.layHoaDonTheoMa(maHD);
+        txtTTDonHang.setText(df.format(hd.getThanhTien()));
     }
 
     @SuppressWarnings("unchecked")
@@ -985,7 +981,9 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
             ChiTietHoaDon ct=cthd_dao.timCTHoaDonTheoHoaDonSanPham((String)modelDonHoan.getValueAt(i, 0), maHD);
             tienHoanTra =tienHoanTra+ ct.getTongTien()/ct.getSoLuong()* (int)modelDonHoan.getValueAt(i, 2);
             
+            
         }
+//        ChiTietHoanTra ctht=new ChiTietHoanTra(row, maHDHT, sanPham, hDHT)
         txtTTDonHoan.setText(String.format("%,.1f", tienHoanTra) + " VND");
     }
 
