@@ -95,7 +95,7 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
                 soLuong= soLuong+ct.getSoLuong();
             modelDSHoaDon.addRow(new Object[]{
                 hd.getMaHD(), sdf.format(hd.getNgayLap()),
-                soLuong, df.format(thanhTien), hd.getKhachHang().getTenKH()
+                soLuong, df.format(hd.getThanhTien()), hd.getKhachHang().getTenKH()
             });
         }
     }

@@ -5,6 +5,7 @@
 package entity;
 
 import dao.DAO_ChiTietHoaDon;
+import dao.DAO_HoaDon;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -142,10 +143,17 @@ public class HoaDon {
     }
 
     public double getThanhTien(){
-        if (getKhachHang().getLoaiKhachHang().getMaLoaiKH().equals("LKH001"))
-            return thanhTienVIP();
-        else
-            return thanhTienThuong();
+//        if (getKhachHang().getLoaiKhachHang().getMaLoaiKH().equals("LKH001"))
+//            return thanhTienVIP();
+//        else
+//            return thanhTienThuong();
+        DAO_ChiTietHoaDon dao=new DAO_ChiTietHoaDon();
+        ArrayList<ChiTietHoaDon> ds= dao.layDSHDBangMa(getMaHD());
+        double tong=0;
+        for (ChiTietHoaDon ct:ds){
+            tong=tong+ ct.getTongTien();
+        }
+        return tong;
     }
     
 }
