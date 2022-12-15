@@ -296,8 +296,12 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
             for (SanPham sp : dstt) {
                 try {
                     cthd_dao = new DAO_ChiTietHoaDon();
-                    double km=  khTT.getLoaiKhachHang().getMaLoaiKH()=="LKH001"?0.1:0;
-                    ChiTietHoaDon cthd = new ChiTietHoaDon(sp.getSoLuong(), 0.05, sp.getGiaGoc() * sp.getSoLuong() + sp.getGiaGoc() * sp.getSoLuong()*0.05 - sp.getGiaGoc() * sp.getSoLuong()*km, tienThoi, hoaDonMoiThem, sp);
+                    double km;
+                    if(khTT.getLoaiKhachHang().getMaLoaiKH().equals("LKH001"))
+                        km=0.1;
+                    else
+                        km=0;
+                    ChiTietHoaDon cthd = new ChiTietHoaDon(sp.getSoLuong(), 0.05, sp.getGiaGoc() * sp.getSoLuong() + sp.getGiaGoc() * sp.getSoLuong()*0.05 - sp.getGiaGoc()* sp.getSoLuong()*km, tienThoi, hoaDonMoiThem, sp);
                     cthd_dao.themCTHD(cthd);
                 } catch (Exception e) {
                     return;
