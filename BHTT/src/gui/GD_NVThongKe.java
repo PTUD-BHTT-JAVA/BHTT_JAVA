@@ -950,18 +950,9 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
                 for (HoaDon hd : dsHD) {
                     dsCTHD = cthd_dao.layDSHDBangMa(hd.getMaHD());
                     for (ChiTietHoaDon cthd : dsCTHD) {
-                        if (hd.getKhachHang().getLoaiKhachHang().getTenLoai().equalsIgnoreCase("VIP")) {
-                            tongThanhTienVIP = tongThanhTienVIP + cthd.getTongTien();
-                        } else {
-                            tongThanhTienThuong = tongThanhTienThuong + cthd.getTongTien();
-                        }
-
+                        tongThanhTien = (long) (tongThanhTien + cthd.getTongTien());
                     }
-
                 }
-                tongThanhTienVIP = tongThanhTienVIP - tongThanhTienVIP * 0.05;
-                tongThanhTienThuong = tongThanhTienThuong + tongThanhTienThuong * 0.05;
-                tongThanhTien = (long) tongThanhTienVIP + (long) tongThanhTienThuong;
                 lblTongTienBanD.setText(df.format(tongThanhTien));
 
                 //Thống kê hoàn
@@ -1025,18 +1016,9 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
         for (HoaDon hd : dsHD) {
             dsCTHD = cthd_dao.layDSHDBangMa(hd.getMaHD());
             for (ChiTietHoaDon cthd : dsCTHD) {
-                if (hd.getKhachHang().getLoaiKhachHang().getTenLoai().equalsIgnoreCase("VIP")) {
-                    tongThanhTienVIP = tongThanhTienVIP + cthd.getTongTien();
-                } else {
-                    tongThanhTienThuong = tongThanhTienThuong + cthd.getTongTien();
-                }
-
+                tongThanhTien = (long) (tongThanhTien + cthd.getTongTien());
             }
-
         }
-        tongThanhTienVIP = tongThanhTienVIP - tongThanhTienVIP * 0.05;
-        tongThanhTienThuong = tongThanhTienThuong + tongThanhTienThuong * 0.05;
-        tongThanhTien = (long) tongThanhTienVIP + (long) tongThanhTienThuong;
         lblTongTienBanD.setText(df.format(tongThanhTien));
         //hoàn
         ArrayList<HoaDonHoanTra> dsHDHT = hdh_dao.thongKeHoanTraNV(b, c, username);
@@ -1098,18 +1080,9 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
         for (HoaDon hd : dsHD) {
             dsCTHD = cthd_dao.layDSHDBangMa(hd.getMaHD());
             for (ChiTietHoaDon cthd : dsCTHD) {
-                if (hd.getKhachHang().getLoaiKhachHang().getTenLoai().equalsIgnoreCase("VIP")) {
-                    tongThanhTienVIP = tongThanhTienVIP + cthd.getTongTien();
-                } else {
-                    tongThanhTienThuong = tongThanhTienThuong + cthd.getTongTien();
-                }
-
+                tongThanhTien = (long) (tongThanhTien + cthd.getTongTien());
             }
-
         }
-        tongThanhTienVIP = tongThanhTienVIP - tongThanhTienVIP * 0.05;
-        tongThanhTienThuong = tongThanhTienThuong + tongThanhTienThuong * 0.05;
-        tongThanhTien = (long) tongThanhTienVIP + (long) tongThanhTienThuong;
         lblTongTienBanD.setText(df.format(tongThanhTien));
         //hoàn
         ArrayList<HoaDonHoanTra> dsHDHT = hdh_dao.thongKeHoanTraNV(b, c, username);
@@ -1172,18 +1145,9 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
         for (HoaDon hd : dsHD) {
             dsCTHD = cthd_dao.layDSHDBangMa(hd.getMaHD());
             for (ChiTietHoaDon cthd : dsCTHD) {
-                if (hd.getKhachHang().getLoaiKhachHang().getTenLoai().equalsIgnoreCase("VIP")) {
-                    tongThanhTienVIP = tongThanhTienVIP + cthd.getTongTien();
-                } else {
-                    tongThanhTienThuong = tongThanhTienThuong + cthd.getTongTien();
-                }
-
+                tongThanhTien = (long) (tongThanhTien + cthd.getTongTien());
             }
-
         }
-        tongThanhTienVIP = tongThanhTienVIP - tongThanhTienVIP * 0.05;
-        tongThanhTienThuong = tongThanhTienThuong + tongThanhTienThuong * 0.05;
-        tongThanhTien = (long) tongThanhTienVIP + (long) tongThanhTienThuong;
         lblTongTienBanD.setText(df.format(tongThanhTien));
         //hoàn
         ArrayList<HoaDonHoanTra> dsHDHT = hdh_dao.thongKeHoanTraNV(b, c, username);
@@ -1246,18 +1210,9 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
         for (HoaDon hd : dsHD) {
             dsCTHD = cthd_dao.layDSHDBangMa(hd.getMaHD());
             for (ChiTietHoaDon cthd : dsCTHD) {
-                if (hd.getKhachHang().getLoaiKhachHang().getTenLoai().equalsIgnoreCase("VIP")) {
-                    tongThanhTienVIP = tongThanhTienVIP + cthd.getTongTien();
-                } else {
-                    tongThanhTienThuong = tongThanhTienThuong + cthd.getTongTien();
-                }
-
+                tongThanhTien = (long) (tongThanhTien + cthd.getTongTien());
             }
-
         }
-        tongThanhTienVIP = tongThanhTienVIP - tongThanhTienVIP * 0.05;
-        tongThanhTienThuong = tongThanhTienThuong + tongThanhTienThuong * 0.05;
-        tongThanhTien = (long) tongThanhTienVIP + (long) tongThanhTienThuong;
         lblTongTienBanD.setText(df.format(tongThanhTien));
         //hoàn
         ArrayList<HoaDonHoanTra> dsHDHT = hdh_dao.thongKeHoanTraNV(b, c, username);
@@ -1318,16 +1273,9 @@ public class GD_NVThongKe extends javax.swing.JInternalFrame {
         for (HoaDon hd : dsHD) {
             dsCTHD = cthd_dao.layDSHDBangMa(hd.getMaHD());
             for (ChiTietHoaDon cthd : dsCTHD) {
-                if (hd.getKhachHang().getLoaiKhachHang().getTenLoai().equalsIgnoreCase("VIP")) {
-                    tongThanhTienVIP = tongThanhTienVIP + cthd.getTongTien();
-                } else {
-                    tongThanhTienThuong = tongThanhTienThuong + cthd.getTongTien();
-                }
+                tongThanhTien = (long) (tongThanhTien + cthd.getTongTien());
             }
         }
-        tongThanhTienVIP = tongThanhTienVIP - tongThanhTienVIP * 0.05;
-        tongThanhTienThuong = tongThanhTienThuong + tongThanhTienThuong * 0.05;
-        tongThanhTien = (long) tongThanhTienVIP + (long) tongThanhTienThuong;
         lblTongTienBanD.setText(df.format(tongThanhTien));
 
         //Thống kê hoàn
