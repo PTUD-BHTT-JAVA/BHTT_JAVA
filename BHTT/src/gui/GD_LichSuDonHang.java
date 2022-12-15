@@ -793,7 +793,7 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
             HoaDon hd=hd_dao.layHoaDonTheoMa(hdht.getHoaDon().getMaHD().toString());
             modelDSDonHoan.addRow(new Object[]{
                 hdht.getMaHDHT(), hdht.getHoaDon().getMaHD(),sdf.format(hdht.getNgayHoanTra()),
-                hdht.getSoLuong(), df.format(hdht.tongTienHang()), hd.getKhachHang().getTenKH().toString()
+                hdht.getSoLuong(), df.format(hdht.tongTienHoan()), hd.getKhachHang().getTenKH().toString()
             });
         }
 
