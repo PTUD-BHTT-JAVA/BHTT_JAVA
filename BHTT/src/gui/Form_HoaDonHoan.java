@@ -4,6 +4,16 @@
  */
 package gui;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import dao.DAO_ChiTietHoanTra;
 import dao.DAO_HoaDon;
 import dao.DAO_HoaDonHoan;
@@ -17,9 +27,15 @@ import entity.KhachHang;
 import entity.LoaiKhachHang;
 import entity.NhanVien;
 import entity.SanPham;
+import static java.awt.Component.TOP_ALIGNMENT;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -113,9 +129,9 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
         pnlDuoi = new javax.swing.JPanel();
         btnHoanThanh = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btnIn = new javax.swing.JButton();
 
-        //setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         pnlHoaDon.setPreferredSize(new java.awt.Dimension(515, 790));
         pnlHoaDon.setLayout(new javax.swing.BoxLayout(pnlHoaDon, javax.swing.BoxLayout.Y_AXIS));
@@ -416,15 +432,15 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
 
         pnlDuoi.add(jPanel1);
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton1.setText("In biên bản");
-        jButton1.setMaximumSize(new java.awt.Dimension(103, 40));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnIn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnIn.setText("In biên bản");
+        btnIn.setMaximumSize(new java.awt.Dimension(103, 40));
+        btnIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnInActionPerformed(evt);
             }
         });
-        pnlDuoi.add(jButton1);
+        pnlDuoi.add(btnIn);
 
         pnlHoaDon.add(pnlDuoi);
 
@@ -454,9 +470,170 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnHoanThanhActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    public void PrintBienBan(JPanel c){
+         try {
+            Document document = new Document();
+            PdfWriter.getInstance(document, new FileOutputStream("BienBanHoanDon.pdf"));
+            document.open();
+            BaseFont bf = BaseFont.createFont("c:\\windows\\fonts\\times.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            Font font1 = new Font(bf, 16, Font.BOLD);
+            Font font2 = new Font(bf, 14, Font.NORMAL);
+            Paragraph tenCuaHang = new Paragraph("Cửa hàng thời trang BHTT", font1);
+            tenCuaHang.setAlignment(Element.ALIGN_CENTER);
+            Paragraph diaChi = new Paragraph("Địa chỉ 12 Nguyễn Văn Bảo, phường 4 \n Quận Gò Vấp, thành phố Hồ Chí mình \n Điện thoại: 08214851251", font2);
+            diaChi.setAlignment(Element.ALIGN_CENTER);
+            Paragraph tenHoaDon = new Paragraph("BIÊN BẢN HOÀN ĐƠN\n\n", font1);
+            tenHoaDon.setAlignment(Element.ALIGN_CENTER);
+            PdfPTable tableTop = new PdfPTable(4);
+            PdfPCell cell1 = new PdfPCell(new Phrase("Ngày:", font2));
+            cell1.setBorder(Rectangle.NO_BORDER);
+            tableTop.addCell(cell1);
+
+            PdfPCell cell2 = new PdfPCell(new Phrase(lblNgay.getText(), font2));
+            cell2.setBorder(Rectangle.NO_BORDER);
+            tableTop.addCell(cell2);
+
+            PdfPCell cell3 = new PdfPCell(new Phrase("Mã phiếu:", font2));
+            cell3.setBorder(Rectangle.NO_BORDER);
+            tableTop.addCell(cell3);
+
+            PdfPCell cell4 = new PdfPCell(new Phrase(lblMaPhieu.getText(), font2));
+            cell4.setBorder(Rectangle.NO_BORDER);
+            tableTop.addCell(cell4);
+
+            PdfPCell cell5 = new PdfPCell(new Phrase("Thu ngân:", font2));
+            cell5.setBorder(Rectangle.NO_BORDER);
+            tableTop.addCell(cell5);
+
+            PdfPCell cell6 = new PdfPCell(new Phrase(lblThuNgan.getText(), font2));
+            cell6.setBorder(Rectangle.NO_BORDER);
+            tableTop.addCell(cell6);
+
+            PdfPCell cell7 = new PdfPCell(new Phrase("Khách hàng:", font2));
+            cell7.setBorder(Rectangle.NO_BORDER);
+            tableTop.addCell(cell7);
+
+            PdfPCell cell8 = new PdfPCell(new Phrase(lblKH.getText(), font2));
+            cell8.setBorder(Rectangle.NO_BORDER);
+            tableTop.addCell(cell8);
+            
+             PdfPTable tableLKH = new PdfPTable(4);
+             PdfPCell cell9 = new PdfPCell(new Phrase("Loại khách hàng:", font2));
+             cell9.setBorder(Rectangle.NO_BORDER);
+             tableLKH.addCell(cell9);
+
+             PdfPCell cell10 = new PdfPCell(new Phrase(lblLoaiKH.getText(), font2));
+             cell10.setBorder(Rectangle.NO_BORDER);
+             tableLKH.addCell(cell10);
+             
+             PdfPCell cell11 = new PdfPCell(new Phrase("", font2));
+             cell11.setBorder(Rectangle.NO_BORDER);
+             tableLKH.addCell(cell11);
+
+             PdfPCell cell12 = new PdfPCell(new Phrase("" + "\n\n\n\n", font2));
+             cell12.setBorder(Rectangle.NO_BORDER);
+             tableLKH.addCell(cell12);
+
+            PdfPTable tableND = new PdfPTable(5);
+            tableND.setPaddingTop(TOP_ALIGNMENT);
+            PdfPCell cot1 = new PdfPCell(new Phrase("Sản phẩm", font2));
+            PdfPCell cot2 = new PdfPCell(new Phrase("Số lượng", font2));
+            PdfPCell cot3 = new PdfPCell(new Phrase("Giá", font2));
+            PdfPCell cot4 = new PdfPCell(new Phrase("Thành tiền", font2));
+            PdfPCell cot5 = new PdfPCell(new Phrase("Lý do hoàn", font2));
+            tableND.addCell(cot1);
+            tableND.addCell(cot2);
+            tableND.addCell(cot3);
+            tableND.addCell(cot4);
+            tableND.addCell(cot5);
+
+            for (int i = 0; i < tableXuatHoaDonHoan.getModel().getRowCount(); i++) {
+                tableND.addCell(new Phrase(tableXuatHoaDonHoan.getModel().getValueAt(i, 0).toString(), font2));
+                tableND.addCell(tableXuatHoaDonHoan.getModel().getValueAt(i, 1).toString());
+                tableND.addCell(tableXuatHoaDonHoan.getModel().getValueAt(i, 2).toString());
+                tableND.addCell(tableXuatHoaDonHoan.getModel().getValueAt(i, 3).toString());
+                tableND.addCell(new Phrase(tableXuatHoaDonHoan.getModel().getValueAt(i, 4).toString(),font2)+"\n\n\n");
+            }
+          
+            PdfPTable tableBot = new PdfPTable(2);
+            PdfPCell bot1 = new PdfPCell(new Phrase("Tổng số lượng: ", font2));
+            bot1.setBorder(Rectangle.NO_BORDER);
+            tableBot.addCell(bot1);
+            
+             PdfPCell bot2 = new PdfPCell(new Phrase(txtTongSoLuong.getText(), font2));
+            bot2.setBorder(Rectangle.NO_BORDER);
+            tableBot.addCell(bot2);
+            
+            PdfPCell bot3 = new PdfPCell(new Phrase("VAT của hóa đơn: ", font2));
+            bot3.setBorder(Rectangle.NO_BORDER);
+            tableBot.addCell(bot3);
+            
+            
+            PdfPCell bot4 = new PdfPCell(new Phrase(txtVAT.getText(), font2));
+            bot4.setBorder(Rectangle.NO_BORDER);
+            tableBot.addCell(bot4);
+            
+          
+            
+             PdfPCell bot5 = new PdfPCell(new Phrase("Khuyến mãi hóa đơn: ", font2));
+            bot5.setBorder(Rectangle.NO_BORDER);
+            tableBot.addCell(bot5);
+            
+            PdfPCell bot6 = new PdfPCell(new Phrase(txtKhuyenMai.getText(), font2));
+            bot6.setBorder(Rectangle.NO_BORDER);
+            tableBot.addCell(bot6);
+            
+        
+            
+//            PdfPCell bot7 = new PdfPCell(new Phrase("Tiền khách đưa: ", font2));
+//            bot7.setBorder(Rectangle.NO_BORDER);
+//            tableBot.addCell(bot7);
+//            
+//             PdfPCell bot8 = new PdfPCell(new Phrase(lplTienKhachDua.getText(), font2));
+//            bot8.setBorder(Rectangle.NO_BORDER);
+//            tableBot.addCell(bot8);
+//            
+//             PdfPCell bot9 = new PdfPCell(new Phrase("Tiền thối lại: ", font2));
+//            bot9.setBorder(Rectangle.NO_BORDER);
+//            tableBot.addCell(bot9);
+//            
+//            
+//             PdfPCell bot10 = new PdfPCell(new Phrase(lplTienThoi.getText(), font2));
+//            bot10.setBorder(Rectangle.NO_BORDER);
+//            tableBot.addCell(bot10);
+            
+            
+            document.add(tenCuaHang);
+            document.add(diaChi);
+            document.add(tenHoaDon);
+            document.add(tableTop);
+            document.add(tableLKH);
+            document.add(tableND);
+            document.add(tableBot);
+            document.close();
+        } catch (Exception e) {
+            //
+        }
+    }
+    private void btnInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInActionPerformed
+         JOptionPane.showMessageDialog(null, "In biên bản thành công");
+         this.setVisible(false);
+        PrintBienBan(pnlHoaDon);
+         try{
+           File file =new File ("D:\\CodePTUD\\BHTT_JAVA\\BHTT\\BienBanHoanDon.pdf");
+           if(file.exists()) {
+               if(Desktop.isDesktopSupported()){
+                   Desktop.getDesktop().open(file);
+               }else{
+                   JOptionPane.showMessageDialog(this, "Not Supported");
+               }
+           }else{
+               JOptionPane.showMessageDialog(this, "File Not Exist");
+           }
+       }catch(Exception e){
+           e.printStackTrace();
+       }
+    }//GEN-LAST:event_btnInActionPerformed
     private void DocDL() {
         HoaDon hd = hd_dao.layHoaDonTheoMa(maHD);
         NhanVien nv = nv_dao.layNhanVienBangMa(hd.getNhanVien().getMaNV());
@@ -529,7 +706,7 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHoanThanh;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnIn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

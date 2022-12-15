@@ -590,6 +590,8 @@ public class GD_KhachHang extends javax.swing.JInternalFrame {
         });
 
         btnLamMoi.setText("Làm mới dữ liệu");
+        btnLamMoi.setColor1(new java.awt.Color(51, 0, 255));
+        btnLamMoi.setColor2(new java.awt.Color(204, 0, 204));
         btnLamMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLamMoiActionPerformed(evt);
