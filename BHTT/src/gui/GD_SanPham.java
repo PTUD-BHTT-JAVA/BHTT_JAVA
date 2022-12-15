@@ -1201,8 +1201,8 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
             cell.setCellValue("Loại sản phẩm");
 
             SanPham sp;
-            for (int i = 0; i < modolSP.getRowCount(); i++) {
-                sp = sp_dao.laySanPhamBangMa(modolSP.getValueAt(i, 1).toString());
+            for (int i = 0; i < jtbSanPham.getRowCount(); i++) {
+                sp = sp_dao.laySanPhamBangMa(jtbSanPham.getValueAt(i, 1).toString());
                 row = sheet.createRow(4 + i);
                 cell = row.createCell(0, CellType.STRING);
                 cell.setCellValue(sp.getMaSP());
@@ -1240,7 +1240,7 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
             XSSFWorkbook excelImportToJTable = null;
             String defaultCurrentDirectoryPath = "C:\\Users\\bohie\\OneDrive\\Documents\\GitHub\\BHTT_JAVA\\BHTT\\Excell";
             JFileChooser excelFileChooser = new JFileChooser(defaultCurrentDirectoryPath);
-            excelFileChooser.setDialogTitle("Chọn file để import");
+            excelFileChooser.setDialogTitle("Chọn file để export");
             FileNameExtensionFilter fnef = new FileNameExtensionFilter("EXCEL FILE", "xls", "xlsx", "xlsm");
             excelFileChooser.setFileFilter(fnef);
             int excelChooser = excelFileChooser.showOpenDialog(null);
@@ -1258,7 +1258,7 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
         } catch (Exception e2) {
             e2.printStackTrace();
         }
-        
+
     }//GEN-LAST:event_btnEXActionPerformed
 
     private void btnIXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIXActionPerformed
@@ -1316,7 +1316,6 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
                     NhaCungCap ncc = ncc_dao.layNhaCungCapBangTen(excelNCC.toString());
                     LoaiSanPham lsp = lsp_dao.layLoaiSPBangTen(excelPL.toString());
                     ChatLieu cl = cl_dao.layKichThuocBangTen(excelCL.toString());
-                    System.out.println(excelNCC.toString());
                     SanPham sp = new SanPham(maTuSinh(),
                             excelTen.toString(),
                             Double.parseDouble(excelgia.toString()),
@@ -1328,10 +1327,10 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
                             new NhaCungCap(ncc.getMaNCC()), new ChatLieu(cl.getMaChatLieu()), new MauSac(m.getMaMau()), new KichThuoc(k.getMaKichThuoc()), new LoaiSanPham(lsp.getMaLoaiSP()));
                     sp_dao.themSP(sp);
                     JOptionPane.showMessageDialog(null, "Import thành công");
-                    XoaHetDLTrenTbale();
-                    DocDuLieuLenTable();
-                }
 
+                XoaHetDLTrenTbale();
+                DocDuLieuLenTable();
+                }
             } catch (IOException iOException) {
                 JOptionPane.showMessageDialog(null, iOException.getMessage());
             } catch (ParseException ex) {
@@ -1364,13 +1363,13 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtTimMouseClicked
 
     private void txtTimKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKeyReleased
-        String s=txtTim.getText();
+        String s = txtTim.getText();
         filter(s);
     }//GEN-LAST:event_txtTimKeyReleased
 
     private void cbxPLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxPLActionPerformed
 
-        if(!txtTim.getText().equals("")){
+        if (!txtTim.getText().equals("")) {
             txtTim.setText("");
             tr1 = new TableRowSorter<DefaultTableModel>(modolSP);
             jtbSanPham.setRowSorter(tr1);
@@ -1378,7 +1377,7 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cbxPLActionPerformed
 
     private void cbxMSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxMSActionPerformed
-        if(!txtTim.getText().equals("")){
+        if (!txtTim.getText().equals("")) {
             txtTim.setText("");
             tr1 = new TableRowSorter<DefaultTableModel>(modolSP);
             jtbSanPham.setRowSorter(tr1);
@@ -1386,7 +1385,7 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cbxMSActionPerformed
 
     private void cbxCLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCLActionPerformed
-        if(!txtTim.getText().equals("")){
+        if (!txtTim.getText().equals("")) {
             txtTim.setText("");
             tr1 = new TableRowSorter<DefaultTableModel>(modolSP);
             jtbSanPham.setRowSorter(tr1);
@@ -1394,7 +1393,7 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cbxCLActionPerformed
 
     private void cbxKTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxKTActionPerformed
-        if(!txtTim.getText().equals("")){
+        if (!txtTim.getText().equals("")) {
             txtTim.setText("");
             tr1 = new TableRowSorter<DefaultTableModel>(modolSP);
             jtbSanPham.setRowSorter(tr1);
@@ -1408,18 +1407,18 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
         //        ListTimSP = new ArrayList<SanPham>();
         //
         //        ListTimSP = sp_dao.timSanPhamNhieuTieuChi(cbxPL.getSelectedItem().toString(), cbxKT.getSelectedItem().toString(),
-            //                 cbxMS.getSelectedItem().toString(), cbxCL.getSelectedItem().toString());
+        //                 cbxMS.getSelectedItem().toString(), cbxCL.getSelectedItem().toString());
         //        if (!ListTimSP.isEmpty()) {
-            //            for (SanPham sp : ListTimSP) {
-                //                modolSP.addRow(new Object[]{
-                    //                    sp.getMaSP(), sp.getTenSP(), sp.getSoLuong(),
-                    //                    df.format(sp.getGiaGoc()),
-                    //                    sp.getLoaiSanPham().getTenLoaiSP(),
-                    //                    sp.getMauSac().getTenMau(),
-                    //                    sp.getChatLieu().getTenChatLieu(),
-                    //                    sp.getKichThuoc().getTenKichThuoc()
-                    //                });
-            //            }
+        //            for (SanPham sp : ListTimSP) {
+        //                modolSP.addRow(new Object[]{
+        //                    sp.getMaSP(), sp.getTenSP(), sp.getSoLuong(),
+        //                    df.format(sp.getGiaGoc()),
+        //                    sp.getLoaiSanPham().getTenLoaiSP(),
+        //                    sp.getMauSac().getTenMau(),
+        //                    sp.getChatLieu().getTenChatLieu(),
+        //                    sp.getKichThuoc().getTenKichThuoc()
+        //                });
+        //            }
         //        } else {
         //            JOptionPane.showMessageDialog(null, "Không có sản phẩm cần tìm");
         //            cbxCL.setSelectedIndex(0);
@@ -1431,30 +1430,34 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
 
         //Thu
         jtbSanPham.setRowSorter(tr1);
-        String fCL,fKT,fPL,fMS;
-        if(cbxCL.getSelectedItem().toString().equals("Tất cả"))
-        fCL="";
-        else
-        fCL=cbxCL.getSelectedItem().toString();
-        if(cbxMS.getSelectedItem().toString().equals("Tất cả"))
-        fMS="";
-        else
-        fMS=cbxMS.getSelectedItem().toString();
-        if(cbxKT.getSelectedItem().toString().equals("Tất cả"))
-        fKT="";
-        else
-        fKT=cbxKT.getSelectedItem().toString();
-        if(cbxPL.getSelectedItem().toString().equals("Tất cả"))
-        fPL="";
-        else
-        fPL=cbxPL.getSelectedItem().toString();
+        String fCL, fKT, fPL, fMS;
+        if (cbxCL.getSelectedItem().toString().equals("Tất cả")) {
+            fCL = "";
+        } else {
+            fCL = cbxCL.getSelectedItem().toString();
+        }
+        if (cbxMS.getSelectedItem().toString().equals("Tất cả")) {
+            fMS = "";
+        } else {
+            fMS = cbxMS.getSelectedItem().toString();
+        }
+        if (cbxKT.getSelectedItem().toString().equals("Tất cả")) {
+            fKT = "";
+        } else {
+            fKT = cbxKT.getSelectedItem().toString();
+        }
+        if (cbxPL.getSelectedItem().toString().equals("Tất cả")) {
+            fPL = "";
+        } else {
+            fPL = cbxPL.getSelectedItem().toString();
+        }
 
-        List<RowFilter<Object,Object>> filters = new ArrayList<RowFilter<Object,Object>>(4);
-        filters.add(RowFilter.regexFilter(fCL,8));
-        filters.add(RowFilter.regexFilter(fMS,7));
-        filters.add(RowFilter.regexFilter(fKT,9));
-        filters.add(RowFilter.regexFilter(fPL,5));
-        RowFilter<Object,Object> fooBarFilter = RowFilter.andFilter(filters);
+        List<RowFilter<Object, Object>> filters = new ArrayList<RowFilter<Object, Object>>(4);
+        filters.add(RowFilter.regexFilter(fCL, 8));
+        filters.add(RowFilter.regexFilter(fMS, 7));
+        filters.add(RowFilter.regexFilter(fKT, 9));
+        filters.add(RowFilter.regexFilter(fPL, 5));
+        RowFilter<Object, Object> fooBarFilter = RowFilter.andFilter(filters);
 
         TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(modolSP);
         jtbSanPham.setRowSorter(tr1);
@@ -1464,7 +1467,9 @@ public class GD_SanPham extends javax.swing.JInternalFrame {
     private void XoaHetDLTrenTbale(JTable table) {
         DefaultTableModel fm = (DefaultTableModel) table.getModel();
         fm.getDataVector().removeAllElements();
-    }    private String maTuSinh() {
+    }
+
+    private String maTuSinh() {
         String ma = "SP";
         int tachMa;
         int i = 0, j = 1;
