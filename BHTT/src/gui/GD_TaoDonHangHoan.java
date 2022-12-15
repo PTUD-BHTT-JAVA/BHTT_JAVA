@@ -106,6 +106,13 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
     private void setTongThanhTien() {
         HoaDon hd=hd_dao.layHoaDonTheoMa(maHD);
         txtTTDonHang.setText(df.format(hd.getThanhTien()));
+        double tt=0;
+        for (int i=0;i<modelCanHoan.getRowCount();i++){
+            tt=tt+(double) modelDonHoan.getValueAt(i, 3);
+         
+        }
+        km= (int) ((tt+tt*0.05-hd.getThanhTien())/(tt));
+        lblKM.setText(""+km*100+"%");
     }
 
     @SuppressWarnings("unchecked")
@@ -982,11 +989,10 @@ public class GD_TaoDonHangHoan extends javax.swing.JInternalFrame implements Run
         for (int i = 0; i < modelDonHoan.getRowCount(); i++) {
             ChiTietHoaDon ct=cthd_dao.timCTHoaDonTheoHoaDonSanPham((String)modelDonHoan.getValueAt(i, 0), maHD);
             tienHoanTra =tienHoanTra+ ct.getTongTien()/ct.getSoLuong()* (int)modelDonHoan.getValueAt(i, 2);
-            tt=tt+(double) modelDonHoan.getValueAt(i, 3);
+            
             
         }
-         km= (int) ((tt+tt*0.05-tienHoanTra)/(tt));
-        lblKM.setText(""+km*100+"%");
+        
         txtTTDonHoan.setText(String.format("%,.1f", tienHoanTra) + " VND");
     }
 
