@@ -66,7 +66,7 @@ public class Form_HoaDonHoan extends javax.swing.JFrame {
         maHDH = HDH;
         maHD = HD;
         tienHoan = tienHoanTra;
-        khuyenMai=km;
+        khuyenMai=km*100;
         initComponents();
         modelCTDonHoan = (DefaultTableModel) tableXuatHoaDonHoan.getModel();
         DocDL();
