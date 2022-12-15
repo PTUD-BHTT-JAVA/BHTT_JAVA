@@ -159,6 +159,7 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
         btnQuy3 = new swing.Button();
         btnQuy4 = new swing.Button();
         btnLamMoi = new swing.Button();
+        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblHoaDonBanHang = new javax.swing.JTable();
         pnlLichSuDonHoan = new javax.swing.JPanel();
@@ -184,6 +185,7 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
         btnQuy2Hoan = new swing.Button();
         btnQuy3Hoan = new swing.Button();
         btnQuy4Hoan = new swing.Button();
+        jPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblHoaDonHoan = new javax.swing.JTable();
 
@@ -241,7 +243,7 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(pnlThongTinCuaHangLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1394, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1381, Short.MAX_VALUE)
                 .addGap(1015, 1015, 1015))
         );
         pnlThongTinCuaHangLayout.setVerticalGroup(
@@ -256,7 +258,7 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
                 .addGroup(pnlThongTinCuaHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(lblTenNVTT))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         pnlDau.add(pnlThongTinCuaHang);
@@ -265,7 +267,7 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 149, Short.MAX_VALUE)
+            .addGap(0, 173, Short.MAX_VALUE)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -390,7 +392,7 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
                         .addComponent(btnQuy4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12)
                         .addComponent(jdcNgayMuonTim, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -448,6 +450,8 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
 
         pnlLichSuDonHang.add(jPanel4);
 
+        jPanel1.setLayout(new java.awt.BorderLayout());
+
         jScrollPane1.setMaximumSize(new java.awt.Dimension(32767, 300));
         jScrollPane1.setMinimumSize(new java.awt.Dimension(16, 100));
         jScrollPane1.setPreferredSize(new java.awt.Dimension(452, 200));
@@ -465,7 +469,9 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
             tblHoaDonBanHang.getColumnModel().getColumn(0).setResizable(false);
         }
 
-        pnlLichSuDonHang.add(jScrollPane1);
+        jPanel1.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        pnlLichSuDonHang.add(jPanel1);
 
         jTabbedPane1.addTab("Lịch sử đơn hàng", pnlLichSuDonHang);
 
@@ -514,7 +520,7 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(pnlThongTinCuaHang2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 1379, Short.MAX_VALUE)
+                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 1366, Short.MAX_VALUE)
                 .addGap(1015, 1015, 1015))
         );
         pnlThongTinCuaHang2Layout.setVerticalGroup(
@@ -529,7 +535,7 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
                 .addGroup(pnlThongTinCuaHang2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
                     .addComponent(lblTenNVHoan))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         pnlDau2.add(pnlThongTinCuaHang2);
@@ -538,7 +544,7 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 164, Short.MAX_VALUE)
+            .addGap(0, 188, Short.MAX_VALUE)
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -652,7 +658,7 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
                         .addComponent(btnQuy3Hoan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnQuy4Hoan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(57, 57, 57)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -667,7 +673,7 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                        .addGap(0, 2, Short.MAX_VALUE)
+                        .addGap(0, 6, Short.MAX_VALUE)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jdcNgayTimHoan, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -691,7 +697,7 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
                                 .addComponent(btnQuy4Hoan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(btnChiTietHoan, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(btnQuy1Hoan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(5, 5, 5)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -701,6 +707,8 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
         );
 
         pnlLichSuDonHoan.add(jPanel8);
+
+        jPanel2.setLayout(new java.awt.BorderLayout());
 
         jScrollPane3.setMaximumSize(new java.awt.Dimension(32767, 300));
         jScrollPane3.setMinimumSize(new java.awt.Dimension(16, 100));
@@ -719,7 +727,9 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
             tblHoaDonHoan.getColumnModel().getColumn(0).setResizable(false);
         }
 
-        pnlLichSuDonHoan.add(jScrollPane3);
+        jPanel2.add(jScrollPane3, java.awt.BorderLayout.CENTER);
+
+        pnlLichSuDonHoan.add(jPanel2);
 
         jTabbedPane1.addTab("Lịch sử đơn hoàn", pnlLichSuDonHoan);
 
@@ -1002,6 +1012,8 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
