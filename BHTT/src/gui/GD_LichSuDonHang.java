@@ -108,6 +108,8 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
                for (ChiTietHoanTra ct:chiTietHoanTra.layDSCTHTBangMa(hdht.getMaHDHT())){
                    soLuong=soLuong+ct.getSoLuong();
                }
+                       modelDSHoaDon.setRowCount(0);
+
                 modelDSDonHoan.addRow(new Object[]{
                     hdht.getMaHDHT(),
                     hdht.getHoaDon().getMaHD(),
@@ -120,12 +122,14 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
     }
     
     private void XoaHetDuLieuTrenTable(){
-        DefaultTableModel dm  = (DefaultTableModel) tblHoaDonBanHang.getModel();
-        dm.getDataVector().removeAllElements();
+//        DefaultTableModel dm  = (DefaultTableModel) tblHoaDonBanHang.getModel();
+//        dm.getDataVector().removeAllElements();
+        DefaultTableModel fm = (DefaultTableModel) tblHoaDonBanHang.getModel();
+        fm.setRowCount(0);
     }
     private void XoaDuLieuDonHoan(){
         DefaultTableModel dm  = (DefaultTableModel) tblHoaDonHoan.getModel();
-        dm.getDataVector().removeAllElements();
+        dm.setRowCount(0);
     }
    
 
@@ -781,6 +785,7 @@ public class GD_LichSuDonHang extends javax.swing.JInternalFrame implements Runn
     private void TimKiemTheoQuy(String dauQuy,String cuoiQuy){
         String maNV = username;
         ArrayList<ChiTietHoaDon> dsHoaDonTheoQuy = cthd_dao.layDSHoaDonTheoQuy(dauQuy, cuoiQuy, maNV);
+//         modelDSHoaDon.setRowCount(0);
         for (ChiTietHoaDon cthd : dsHoaDonTheoQuy) {
             modelDSHoaDon.addRow(new Object[]{
                 cthd.getHoaDon().getMaHD(), sdf.format(cthd.getHoaDon().getNgayLap()),
