@@ -1223,7 +1223,7 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
                         }
                     }
                 }
-                tongThanhTienHoanVIP = tongThanhTienHoanVIP + tongThanhTienHoanVIP * 0.15;
+                tongThanhTienHoanVIP = tongThanhTienHoanVIP - tongThanhTienHoanVIP * 0.05;
                 tongThanhTienHoanThuong = tongThanhTienHoanThuong + tongThanhTienHoanThuong * 0.05;
                 tongThanhTienHoan = (long) tongThanhTienHoanVIP + (long) tongThanhTienHoanThuong;
                 tongTienHoann.setText(df.format(tongThanhTienHoan));
@@ -1310,7 +1310,7 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
                 }
             }
         }
-        tongThanhTienHoanVIP = tongThanhTienHoanVIP + tongThanhTienHoanVIP * 0.15;
+        tongThanhTienHoanVIP = tongThanhTienHoanVIP - tongThanhTienHoanVIP * 0.05;
         tongThanhTienHoanThuong = tongThanhTienHoanThuong + tongThanhTienHoanThuong * 0.05;
         tongThanhTienHoan = (long) tongThanhTienHoanVIP + (long) tongThanhTienHoanThuong;
         tongTienHoann.setText(df.format(tongThanhTienHoan));
@@ -1403,7 +1403,7 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
                 }
             }
         }
-        tongThanhTienHoanVIP = tongThanhTienHoanVIP + tongThanhTienHoanVIP * 0.15;
+        tongThanhTienHoanVIP = tongThanhTienHoanVIP - tongThanhTienHoanVIP * 0.05;
         tongThanhTienHoanThuong = tongThanhTienHoanThuong + tongThanhTienHoanThuong * 0.05;
         tongThanhTienHoan = (long) tongThanhTienHoanVIP + (long) tongThanhTienHoanThuong;
         tongTienHoann.setText(df.format(tongThanhTienHoan));
@@ -1496,7 +1496,7 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
                 }
             }
         }
-        tongThanhTienHoanVIP = tongThanhTienHoanVIP + tongThanhTienHoanVIP * 0.15;
+        tongThanhTienHoanVIP = tongThanhTienHoanVIP - tongThanhTienHoanVIP * 0.05;
         tongThanhTienHoanThuong = tongThanhTienHoanThuong + tongThanhTienHoanThuong * 0.05;
         tongThanhTienHoan = (long) tongThanhTienHoanVIP + (long) tongThanhTienHoanThuong;
         tongTienHoann.setText(df.format(tongThanhTienHoan));
@@ -1589,7 +1589,7 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
                 }
             }
         }
-        tongThanhTienHoanVIP = tongThanhTienHoanVIP + tongThanhTienHoanVIP * 0.15;
+        tongThanhTienHoanVIP = tongThanhTienHoanVIP - tongThanhTienHoanVIP * 0.05;
         tongThanhTienHoanThuong = tongThanhTienHoanThuong + tongThanhTienHoanThuong * 0.05;
         tongThanhTienHoan = (long) tongThanhTienHoanVIP + (long) tongThanhTienHoanThuong;
         tongTienHoann.setText(df.format(tongThanhTienHoan));
@@ -1686,7 +1686,7 @@ public class GD_QLThongKe extends javax.swing.JInternalFrame {
                 }
             }
         }
-        tongThanhTienHoanVIP = tongThanhTienHoanVIP + tongThanhTienHoanVIP * 0.15;
+        tongThanhTienHoanVIP = tongThanhTienHoanVIP - tongThanhTienHoanVIP * 0.05;
         tongThanhTienHoanThuong = tongThanhTienHoanThuong + tongThanhTienHoanThuong * 0.05;
         tongThanhTienHoan = (long) tongThanhTienHoanVIP + (long) tongThanhTienHoanThuong;
         tongTienHoann.setText(df.format(tongThanhTienHoan));
