@@ -27,8 +27,10 @@ import dao.DAO_NhanVien;
 import entity.ChiTietHoaDon;
 import entity.KhachHang;
 import entity.NhanVien;
+import java.awt.Desktop;
 
 import java.awt.Graphics2D;
+import java.io.File;
 import java.io.FileOutputStream;
 
 import java.text.DecimalFormat;
@@ -299,8 +301,7 @@ public class Form_HoaDon extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(515, 790));
+        //setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         pnlHoaDon.setPreferredSize(new java.awt.Dimension(515, 790));
         pnlHoaDon.setLayout(new javax.swing.BoxLayout(pnlHoaDon, javax.swing.BoxLayout.Y_AXIS));
@@ -639,6 +640,21 @@ public class Form_HoaDon extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "In hóa đơn thành công");
         this.setVisible(false);
         PrintFrameToPDF(pnlHoaDon);
+         try{
+           File file =new File ("C:\\Users\\bohie\\OneDrive\\Documents\\GitHub\\BHTT_JAVA\\BHTT\\HoaDon.pdf");
+           if(file.exists()) {
+               if(Desktop.isDesktopSupported()){
+                   Desktop.getDesktop().open(file);
+               }else{
+                   JOptionPane.showMessageDialog(this, "Not Supported");
+               }
+           }else{
+               JOptionPane.showMessageDialog(this, "File Not Exist");
+           }
+       }catch(Exception e){
+           e.printStackTrace();
+       }
+
     }//GEN-LAST:event_btnInActionPerformed
 
     /**
