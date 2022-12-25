@@ -213,7 +213,7 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Chọn sản phẩm cần cập nhật");
         }else{
             String maSP = dstt.get(row).getMaSP();
-            int index = -1;
+//            int index = -1;
             int slCapNhat = (int) jspSoLuong.getValue();
             SanPham spConlai = sp_dao.laySanPhamBangMa(modelDonHang.getValueAt(row, 0).toString()); // Lấy sản phẩm cần cập nhật
              int soLuongConLai = spConlai.getSoLuong();
@@ -227,27 +227,27 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
                      modelDonHang.setValueAt(df.format(spConlai.getGiaGoc() * slCapNhat), row, 4);
                      int soLuongThayDoi = sp_dao.laySanPhamBangMa(maSP).getSoLuong() - slCapNhat;
                      if (ListTimSP != null && !ListTimSP.isEmpty()) {
-                            System.out.println(ListTimSP);
-                            for (SanPham s : ListTimSP) {
-                                if (s.getMaSP().endsWith(maSP)) {
-                                    index = ListTimSP.indexOf(s);
-                                    System.out.println(index);
-                                    break;
-                                }
-                            }
+//                            System.out.println(ListTimSP);
+//                            for (SanPham s : ListTimSP) {
+//                                if (s.getMaSP().endsWith(maSP)) {
+//                                    index = ListTimSP.indexOf(s);
+//                                    System.out.println(index);
+//                                    break;
+//                                }
+//                            }
 //                                Thay đổi số lượng  trên table
-                            for (SanPham spCapNhat : ListTimSP) {
-                                if (spCapNhat.getMaSP().equalsIgnoreCase(maSP)) {
-                                    System.out.println(spCapNhat.getMaSP());
-                                    jtbSanPham.setValueAt(soLuongThayDoi, index, 2);
-                                    System.out.println(index);
-                                    break;
-                                }
-                            }
+//                            for (SanPham spCapNhat : ListTimSP) {
+//                                if (spCapNhat.getMaSP().equalsIgnoreCase(maSP)) {
+//                                    System.out.println(spCapNhat.getMaSP());
+//                                    jtbSanPham.setValueAt(soLuongThayDoi, index, 2);
+//                                    System.out.println(index);
+//                                    break;
+//                                }
+//                            }
                         }else{
                          ListSP = sp_dao.getAllSP();
 //                                modolSP.setValueAt(soLuongThayDoi, index, 2);
-                            System.out.println(index);
+//                            System.out.println(index);
                             tongThanhTien = 0;
                             for (SanPham spCTT : dstt) {
 //                                    Cập nhật số lượng sản phẩm khi kiếm được
@@ -283,6 +283,9 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
         return i;
     }
 
+    
+    
+    
     public void thanhToan(String ma) {
         if (!dstt.isEmpty()) {
             KhachHang khTT = kh.layKhachHangBangSDT(txtSDT);
@@ -412,37 +415,37 @@ public class Panel_ChiTietHoaDon extends javax.swing.JPanel {
     }
 
     public void xoaSPTrongDH(int r) {
-        String maSP = dstt.get(r).getMaSP();
-        int index = -1;
-        for (SanPham s : ListSP) {
-            if (s.getMaSP().endsWith(maSP)) {
-                index = ListSP.indexOf(s);
-                break;
-            }
-        }
-        int soLuong = sp_dao.laySanPhamBangMa(maSP).getSoLuong();
-        if (ListTimSP != null && ListTimSP.size() > 0) {
-
-            System.out.println(ListTimSP);
-            for (SanPham s : ListTimSP) {
-                if (s.getMaSP().endsWith(maSP)) {
-                    index = ListTimSP.indexOf(s);
-                    System.out.println(index);
-                    break;
-                }
-            }
-            for (SanPham sp : ListTimSP) {
-                if (sp.getMaSP().equalsIgnoreCase(maSP)) {
-                    System.out.println(sp.getMaSP());
-                    modolSP.setValueAt(soLuong, index, 2);
-                    break;
-                }
-            }
-        } else {
-            ListSP = sp_dao.getAllSP();
-            modolSP.setValueAt(soLuong, index, 2);
-        }
-        System.out.println(index);
+//        String maSP = dstt.get(r).getMaSP();
+//        int index = -1;
+//        for (SanPham s : ListSP) {
+//            if (s.getMaSP().endsWith(maSP)) {
+//                index = ListSP.indexOf(s);
+//                break;
+//            }
+//        }
+//        int soLuong = sp_dao.laySanPhamBangMa(maSP).getSoLuong();
+//        if (ListTimSP != null && ListTimSP.size() > 0) {
+//
+//            System.out.println(ListTimSP);
+//            for (SanPham s : ListTimSP) {
+//                if (s.getMaSP().endsWith(maSP)) {
+//                    index = ListTimSP.indexOf(s);
+//                    System.out.println(index);
+//                    break;
+//                }
+//            }
+//            for (SanPham sp : ListTimSP) {
+//                if (sp.getMaSP().equalsIgnoreCase(maSP)) {
+//                    System.out.println(sp.getMaSP());
+//                    modolSP.setValueAt(soLuong, index, 2);
+//                    break;
+//                }
+//            }
+//        } else {
+//            ListSP = sp_dao.getAllSP();
+//            modolSP.setValueAt(soLuong, index, 2);
+//        }
+//        System.out.println(index);
         // xóa trên table model
         modelDonHang.removeRow(r);
         // xóa trên ArrayList
